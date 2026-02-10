@@ -1,0 +1,26 @@
+{
+  "name": "barrio-energy-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "^14.2.0",
+    "@tailwindcss/postcss": "^4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.3",
+    "tailwindcss": "^4.1.0",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16"
+  }
+}
