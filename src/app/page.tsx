@@ -4,247 +4,304 @@ export default function Home() {
   return (
     <>
       {/* Navigation */}
-      <nav className="bg-barrio-navy text-white py-4 sticky top-0 z-50 shadow-lg">
+      <nav className="bg-white text-gray-800 py-4 fixed top-0 w-full z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-barrio-blue rounded flex items-center justify-center">
-                <span className="text-white font-bold text-xl">B</span>
-              </div>
-              <span className="text-2xl font-bold">Barrio Energy</span>
+            <div className="flex items-center">
+              <Image 
+                src="/Asset-3@300x.png" 
+                alt="Barrio Energy" 
+                width={200} 
+                height={77}
+                className="h-12 w-auto"
+              />
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="#about" className="hover:text-barrio-blue transition font-medium">
-                About
+              <a href="#home" className="text-gray-700 hover:text-barrio-blue transition font-semibold">
+                Home
               </a>
-              <a href="#services" className="hover:text-barrio-blue transition font-medium">
-                Services
+              <a href="#services" className="text-gray-700 hover:text-barrio-blue transition font-semibold">
+                Data Centers
               </a>
-              <a href="#projects" className="hover:text-barrio-blue transition font-medium">
-                Projects
+              <a href="#advisory" className="text-gray-700 hover:text-barrio-blue transition font-semibold">
+                Energy Advisory
               </a>
-              <a href="#contact" className="hover:text-barrio-blue transition font-medium">
-                Contact
+              <a href="#contact" className="text-barrio-blue hover:text-blue-700 transition font-semibold">
+                Contact Us
               </a>
             </div>
           </div>
         </div>
       </nav>
 
+      {/* Hero Section with Video Background */}
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/WEBSITE-Video.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-barrio-navy/60"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 text-center text-white px-4 max-w-5xl">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 uppercase tracking-wide">
+            Unlocking Value in Energy
+          </h1>
+          <p className="text-2xl md:text-3xl mb-8 font-light">
+            Driven by Integrity, Transparency, and Trusted Partnerships
+          </p>
+        </div>
+
+        {/* Scroll Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg className="w-6 h-6 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+      </section>
+
       {/* Stats Banner */}
-      <section className="bg-gradient-to-r from-barrio-navy to-barrio-navy/90 text-white py-12">
+      <section className="bg-gradient-to-r from-barrio-blue to-blue-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="border-r border-white/20 last:border-r-0">
-              <div className="text-5xl font-bold text-barrio-blue mb-2">6</div>
-              <div className="text-lg uppercase tracking-wider text-gray-300">Facilities</div>
-            </div>
-            <div className="border-r border-white/20 last:border-r-0">
-              <div className="text-5xl font-bold text-barrio-blue mb-2">64 MW</div>
-              <div className="text-lg uppercase tracking-wider text-gray-300">Power Capacity</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div>
+              <div className="text-6xl font-bold mb-3">6</div>
+              <div className="text-xl uppercase tracking-wider font-semibold">Facilities</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-barrio-blue mb-2">24.2</div>
-              <div className="text-lg uppercase tracking-wider text-gray-300">Acres Site Capacity</div>
+              <div className="text-6xl font-bold mb-3">64 MW</div>
+              <div className="text-xl uppercase tracking-wider font-semibold">Power Capacity</div>
+            </div>
+            <div>
+              <div className="text-6xl font-bold mb-3">24.2</div>
+              <div className="text-xl uppercase tracking-wider font-semibold">Acres Site Capacity</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Welcome Section */}
-      <section id="about" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-barrio-navy mb-8 text-center">
-            Welcome to Barrio Energy
-          </h2>
-          <p className="text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto">
-            Barrio Energy is an innovative organization committed to the procurement of industrial scale 
-            energy properties and offering unparalleled advisory services to our clientele. Grounded in 
-            the principles of honesty and openness, our commitment is to generate value in diverse areas 
-            of the energy and real estate industries.
-          </p>
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="/pexels-pixabay-236060.jpg"
+                alt="Energy Infrastructure"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="text-5xl font-bold text-barrio-navy mb-8">
+                Welcome to<br />Barrio Energy
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                Barrio Energy is an innovative organization committed to the procurement of industrial 
+                scale energy properties and offering unparalleled advisory services to our clientele.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Grounded in the principles of honesty and openness, our commitment is to generate 
+                value in diverse areas of the energy and real estate industries.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Services Section - Data Centers */}
-      <section id="services" className="py-20 bg-gray-50">
+      {/* Services Section */}
+      <section id="services" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-barrio-blue uppercase tracking-wide font-semibold mb-2">
+          <div className="text-center mb-16">
+            <p className="text-barrio-blue uppercase tracking-widest font-bold text-sm mb-3">
               Services of Barrio Energy
             </p>
-            <h2 className="text-3xl font-bold text-barrio-navy">
+            <h2 className="text-5xl font-bold text-barrio-navy">
               BUILDING A BETTER TOMORROW
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-            {/* Data Centers */}
-            <div className="bg-white p-10 rounded-lg shadow-lg border-t-4 border-barrio-blue">
-              <h3 className="text-2xl font-bold text-barrio-navy mb-4">Data Centers</h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Barrio Energy specializes in acquiring, developing, and leasing industrial commercial 
-                properties that cater to large-scale energy users, including data centers, battery energy 
-                storage, and other industrial loads within the Texas ERCOT market.
-              </p>
-              <p className="text-gray-600 italic">
-                Number of different properties in our portfolio that meet the needs of most industrial 
-                energy users.
-              </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Data Centers Card */}
+            <div className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="relative h-80">
+                <Image
+                  src="/IMG_8190-scaled.jpg"
+                  alt="Data Center Infrastructure"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-barrio-navy via-barrio-navy/50 to-transparent"></div>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 className="text-3xl font-bold mb-4">Data Centers</h3>
+                <p className="text-lg leading-relaxed mb-2">
+                  Barrio Energy specializes in acquiring, developing, and leasing industrial commercial 
+                  properties that cater to large-scale energy users, including data centers, battery energy 
+                  storage, and other industrial loads within the Texas ERCOT market.
+                </p>
+                <p className="text-gray-200 italic">
+                  Number of different properties in our portfolio that meet the needs of most industrial 
+                  energy users.
+                </p>
+              </div>
             </div>
 
-            {/* Energy Advisory */}
-            <div className="bg-white p-10 rounded-lg shadow-lg border-t-4 border-barrio-blue">
-              <h3 className="text-2xl font-bold text-barrio-navy mb-4">Energy Advisory</h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                At Barrio Energy, we offer a wide range of services to support our clients' needs, from 
-                energy advisory, engineering consulting, data center development, and solar and battery 
-                energy storage projects.
-              </p>
-              <p className="text-gray-600 italic">
-                Barrio Energy can procure your power at the lowest possible rates to meet your 
-                organization's requirements.
-              </p>
+            {/* Energy Advisory Card */}
+            <div className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="relative h-80">
+                <Image
+                  src="/land.jpg"
+                  alt="Energy Advisory Services"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-barrio-navy via-barrio-navy/50 to-transparent"></div>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 className="text-3xl font-bold mb-4">Energy Advisory</h3>
+                <p className="text-lg leading-relaxed mb-2">
+                  At Barrio Energy, we offer a wide range of services to support our clients' needs, from 
+                  energy advisory, engineering consulting, data center development, and solar and battery 
+                  energy storage projects.
+                </p>
+                <p className="text-gray-200 italic">
+                  Barrio Energy can procure your power at the lowest possible rates to meet your 
+                  organization's requirements.
+                </p>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Data Enabled Energy Management */}
-          <div className="text-center mb-12">
-            <p className="text-barrio-blue uppercase tracking-wide font-semibold mb-2">
-              Services of Barrio Energy
-            </p>
-            <h2 className="text-3xl font-bold text-barrio-navy">
-              DATA ENABLED ENERGY MANAGEMENT
-            </h2>
-          </div>
-
-          <div className="bg-white p-12 rounded-lg shadow-lg max-w-4xl mx-auto text-center">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Through our partners, we provide 24/7 monitoring of different assets. We participate in 
-              various demand response programs to meet client needs.
+      {/* Data Enabled Energy Management */}
+      <section id="advisory" className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-barrio-blue uppercase tracking-widest font-bold text-sm mb-3">
+            Services of Barrio Energy
+          </p>
+          <h2 className="text-5xl font-bold text-barrio-navy mb-12">
+            DATA ENABLED ENERGY MANAGEMENT
+          </h2>
+          <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-12 rounded-3xl shadow-lg">
+            <p className="text-xl text-gray-700 leading-relaxed">
+              Through our partners, we provide <span className="font-bold text-barrio-navy">24/7 monitoring</span> of 
+              different assets. We participate in various demand response programs to meet client needs.
             </p>
           </div>
         </div>
       </section>
 
       {/* Case Studies Section */}
-      <section id="projects" className="py-20 bg-white">
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-barrio-blue uppercase tracking-wide font-semibold mb-2">
+          <div className="text-center mb-16">
+            <p className="text-barrio-blue uppercase tracking-widest font-bold text-sm mb-3">
               Recent Projects
             </p>
-            <h2 className="text-3xl font-bold text-barrio-navy">
+            <h2 className="text-5xl font-bold text-barrio-navy">
               Our Latest Case Studies
             </h2>
           </div>
 
-          <div className="bg-gray-50 p-12 rounded-lg text-center">
-            <p className="text-gray-600 italic">
-              Case studies coming soon. Contact us to learn about our recent projects.
-            </p>
+          <div className="relative h-96 rounded-3xl overflow-hidden shadow-2xl">
+            <Image
+              src="/IMG_8200-scaled.jpg"
+              alt="Project Case Study"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-barrio-navy/80 to-transparent flex items-center">
+              <div className="max-w-2xl p-12 text-white">
+                <h3 className="text-4xl font-bold mb-4">Featured Projects</h3>
+                <p className="text-xl mb-6">
+                  Explore our portfolio of successful energy infrastructure developments across Texas.
+                </p>
+                <button className="bg-barrio-blue hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition">
+                  View Case Studies
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact CTA Section */}
-      <section id="contact" className="bg-gradient-to-br from-barrio-navy to-barrio-navy/80 text-white py-20">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl font-bold mb-6">Contact Us</h2>
-          <p className="text-xl text-gray-300 mb-8">
+      <section id="contact" className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-barrio-navy via-blue-900 to-barrio-navy"></div>
+        <div className="relative max-w-4xl mx-auto text-center px-4 text-white">
+          <h2 className="text-5xl font-bold mb-6">Contact Us</h2>
+          <p className="text-2xl mb-12 font-light">
             Ready to discuss your energy infrastructure needs? Get in touch with our team.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href="mailto:info@barrioenergy.com"
-              className="bg-barrio-blue hover:bg-blue-600 text-white font-semibold py-4 px-10 rounded-lg transition inline-block"
+              className="bg-barrio-blue hover:bg-blue-600 text-white font-bold py-4 px-10 rounded-lg transition text-lg"
             >
               Email Us
             </a>
             <a
-              href="tel:+1234567890"
-              className="border-2 border-barrio-blue text-barrio-blue hover:bg-barrio-blue hover:text-white font-semibold py-4 px-10 rounded-lg transition inline-block"
+              href="#contact"
+              className="border-2 border-white text-white hover:bg-white hover:text-barrio-navy font-bold py-4 px-10 rounded-lg transition text-lg"
             >
-              Call Us
+              Schedule a Call
             </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-12">
+      <footer className="bg-gray-900 text-gray-400 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div>
-              <h3 className="text-white font-semibold mb-4 text-lg">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#about" className="hover:text-white transition">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#projects" className="hover:text-white transition">
-                    Projects
-                  </a>
-                </li>
+              <Image
+                src="/Asset-3@300x.png"
+                alt="Barrio Energy"
+                width={150}
+                height={58}
+                className="mb-6 brightness-0 invert opacity-60"
+              />
+              <p className="text-sm leading-relaxed">
+                Innovative energy solutions for the Texas ERCOT market.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold mb-4 text-lg">Company</h3>
+              <ul className="space-y-3">
+                <li><a href="#home" className="hover:text-white transition">About</a></li>
+                <li><a href="#services" className="hover:text-white transition">Services</a></li>
+                <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-4 text-lg">Services</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Data Centers
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Energy Advisory
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Energy Management
-                  </a>
-                </li>
+              <h3 className="text-white font-bold mb-4 text-lg">Services</h3>
+              <ul className="space-y-3">
+                <li><a href="#services" className="hover:text-white transition">Data Centers</a></li>
+                <li><a href="#advisory" className="hover:text-white transition">Energy Advisory</a></li>
+                <li><a href="#advisory" className="hover:text-white transition">Energy Management</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-4 text-lg">Resources</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#projects" className="hover:text-white transition">
-                    Case Studies
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    News
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="hover:text-white transition">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-lg">Contact</h3>
-              <ul className="space-y-2">
+              <h3 className="text-white font-bold mb-4 text-lg">Contact</h3>
+              <ul className="space-y-3">
                 <li>info@barrioenergy.com</li>
                 <li>Houston, Texas</li>
                 <li>ERCOT Market</li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 pt-8 text-center">
+          <div className="border-t border-gray-800 pt-8 text-center">
             <p>&copy; {new Date().getFullYear()} Barrio Energy. All rights reserved.</p>
           </div>
         </div>
