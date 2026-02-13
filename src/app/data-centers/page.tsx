@@ -471,7 +471,7 @@ export default function DataCentersPage() {
             <span className="text-gradient">Portfolio</span>
           </h1>
 
-          <p className="text-xl text-gray-400 max-w-2xl" style={{ margin: "0 auto", textAlign: "center" }}>
+          <p className="text-xl text-gray-400 max-w-2xl mb-12" style={{ margin: "0 auto", textAlign: "center" }}>
             Premium data center properties across Texas. Strategically positioned for maximum grid connectivity and growth potential.
           </p>
         </motion.div>
@@ -488,7 +488,7 @@ export default function DataCentersPage() {
               <span className="text-white">Property </span>
               <span className="text-cyan-400">Portfolio</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl" style={{ margin: "0 auto", textAlign: "center" }}>
+            <p className="text-gray-400 max-w-2xl mb-12" style={{ margin: "0 auto", textAlign: "center" }}>
               Explore our collection of data center-ready properties across Texas.
             </p>
           </AnimatedSection>

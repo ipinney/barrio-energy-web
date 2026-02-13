@@ -184,8 +184,8 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-xl text-gray-400 mb-12 max-w-2xl"
-          style={{ margin: '0 auto 3rem auto', textAlign: 'center' }}
+          className="text-xl text-gray-400 mb-8 max-w-2xl"
+          style={{ margin: '0 auto', textAlign: 'center' }}
         >
           Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads.
         </motion.p>
@@ -233,7 +233,7 @@ function Hero() {
 // About section
 function About() {
   return (
-    <section className="pt-32 pb-24 px-6">
+    <section className="pt-40 pb-32 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <AnimatedSection>
@@ -247,7 +247,7 @@ function About() {
               Barrio Energy is an innovative organization committed to the procurement of industrial 
               scale energy properties and offering unparalleled advisory services to our clientele.
             </p>
-            <p className="text-gray-400 leading-relaxed mt-4">
+            <p className="text-gray-400 leading-relaxed mt-6">
               Grounded in the principles of honesty and openness, our commitment is to generate 
               value in diverse areas of the energy and real estate industries.
             </p>
@@ -292,14 +292,14 @@ function Services() {
   ];
 
   return (
-    <section id="services" className="py-24 px-6 bg-zinc-900/30">
+    <section id="services" className="pt-32 pb-24 px-6 bg-zinc-900/30">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-white">Our </span>
             <span className="text-cyan-400">Services</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl" style={{ margin: '0 auto', textAlign: 'center' }}>
+          <p className="text-gray-400 max-w-2xl" style={{ margin: '0 auto 3rem auto', textAlign: 'center' }}>
             Comprehensive energy solutions tailored to your needs.
           </p>
         </AnimatedSection>
