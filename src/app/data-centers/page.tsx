@@ -8,11 +8,10 @@ type Property = {
   name: string;
   location: string;
   mw: string;
-  tenant: string;
   status: "Leased" | "Available" | "Option Pending";
   acreage: string;
-  rent: string;
-  description: string;
+  lat: number;
+  lng: number;
 };
 
 const properties: Property[] = [
@@ -20,71 +19,64 @@ const properties: Property[] = [
     name: "Monahans",
     location: "Monahans, TX",
     mw: "12 MW",
-    tenant: "Alteri Enterprise Inc.",
     status: "Leased",
     acreage: "10.0",
-    rent: "$6,000/mo",
-    description: "Prime location in the Permian Basin with established infrastructure.",
+    lat: 31.5945,
+    lng: -102.8930,
   },
   {
     name: "Lolita",
     location: "Lolita, TX",
     mw: "7.5 MW",
-    tenant: "Northern Immersion, LLC",
     status: "Leased",
     acreage: "5.0",
-    rent: "$7,500/mo",
-    description: "Strategic positioning near major transmission lines.",
+    lat: 28.8230,
+    lng: -96.9370,
   },
   {
     name: "George West",
     location: "George West, TX",
     mw: "TBD",
-    tenant: "Digital Energy Partners TX05",
     status: "Leased",
     acreage: "1.0",
-    rent: "$750/MW",
-    description: "Flexible site ready for custom development.",
+    lat: 28.3325,
+    lng: -98.1175,
   },
   {
     name: "Tyler",
     location: "Tyler, TX",
     mw: "12 MW",
-    tenant: "Exacore, LLC",
     status: "Leased",
     acreage: "0.561",
-    rent: "$900/MW",
-    description: "High-density urban location with excellent connectivity.",
+    lat: 32.3513,
+    lng: -95.3011,
   },
   {
     name: "Blackcat",
     location: "Bay City, TX",
     mw: "10 MW",
-    tenant: "Satokie Partners, LLC",
     status: "Leased",
     acreage: "4.051",
-    rent: "$2,000+/mo",
-    description: "Premium coastal location with robust grid infrastructure.",
+    lat: 28.9825,
+    lng: -95.9690,
   },
   {
     name: "Pavlov",
     location: "Bay City, TX",
     mw: "12 MW",
-    tenant: "Digital Energy Partners TX09",
     status: "Option Pending",
     acreage: "3.0",
-    rent: "$1,035/MW",
-    description: "Expansion opportunity in established energy corridor.",
+    lat: 28.9780,
+    lng: -95.9650,
   },
   {
     name: "Euler",
     location: "Goliad, TX",
     mw: "TBD",
-    tenant: "*Available*",
     status: "Available",
     acreage: "2.0",
-    rent: "Contact Us",
-    description: "Shovel-ready site in growing Texas market.",
+    lat: 28.6685,
+    lng: -97.3885,
   },
 ];
 
@@ -141,6 +133,7 @@ function Navbar() {
 function PropertyCard({ property, index }: { property: Property; index: number }) {
   const isAvailable = property.status === "Available";
   const isOptionPending = property.status === "Option Pending";
+  const mapUrl = `https://www.google.com/maps?q=${property.lat},${property.lng}`;
   
   return (
     <motion.div
@@ -175,7 +168,7 @@ function PropertyCard({ property, index }: { property: Property; index: number }
               ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
               : "bg-green-500/20 text-green-400 border border-green-500/30"
           }`}>
-            {property.status}
+            {property.status === "Leased" ? "Leased ✅" : property.status === "Available" ? "Available 🔵" : "Option Pending 🟡"}
           </span>
         </div>
       </div>
@@ -197,24 +190,16 @@ function PropertyCard({ property, index }: { property: Property; index: number }
           </div>
         </div>
         
-        {/* Tenant */}
-        <div className="mb-4">
-          <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Tenant</p>
-          <p className={`text-sm ${isAvailable ? "text-cyan-400 font-semibold" : "text-gray-300"}`}>
-            {property.tenant}
-          </p>
-        </div>
-        
-        {/* Rent */}
-        <div className="mb-4">
-          <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Monthly Rent</p>
-          <p className="text-white font-semibold">{property.rent}</p>
-        </div>
-        
-        {/* Description */}
-        <p className="text-gray-400 text-sm leading-relaxed border-t border-zinc-800 pt-4">
-          {property.description}
-        </p>
+        {/* Map Link */}
+        <a
+          href={mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors mb-4"
+        >
+          <span>📍</span>
+          <span>View on Map</span>
+        </a>
         
         {/* CTA for Available property */}
         {isAvailable && (
