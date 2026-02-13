@@ -440,7 +440,7 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ paddingTop: '200px', paddingBottom: '64px' }}>
+      <section className="relative overflow-hidden" style={{ paddingTop: '140px', paddingBottom: '64px' }}>
         {/* Dark gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-900 z-0" />
         
