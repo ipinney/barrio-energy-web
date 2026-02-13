@@ -440,14 +440,14 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-32 pb-16">
+      <section className="relative overflow-hidden" style={{ paddingTop: '200px', paddingBottom: '64px' }}>
         {/* Dark gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-900 z-0" />
         
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4zIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30 z-0" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-6" style={{ textAlign: 'center' }}>
           <AnimatedSection>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-white">Meet the </span>
