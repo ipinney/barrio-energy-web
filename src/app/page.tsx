@@ -66,7 +66,7 @@ function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
             <img 
-              src="/images/logo-main.jpg" 
+              src="/images/logo-transparent.png" 
               alt="Barrio Energy" 
               className="h-10 w-auto"
             />
@@ -289,7 +289,7 @@ function Services() {
       title: "Data Centers",
       description: "Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in Texas ERCOT.",
       icon: "🏢",
-      image: "/images/datacenter.jpg",
+      image: "/images/landscape-datacenter-2.jpg",
     },
     {
       title: "Energy Advisory",
@@ -301,7 +301,7 @@ function Services() {
       title: "24/7 Monitoring",
       description: "Data-enabled energy management with 24/7 monitoring of assets. We participate in various demand response programs.",
       icon: "📊",
-      image: "/images/industrial.jpg",
+      image: "/images/george-west-property.jpg",
     },
   ];
 
@@ -369,9 +369,12 @@ function Footer() {
     <footer className="py-12 px-6 border-t border-zinc-800">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-xl font-bold tracking-tight">
-            <span className="text-white">BARRIO</span>
-            <span className="text-cyan-400">ENERGY</span>
+          <div className="flex items-center">
+            <img 
+              src="/images/logo-transparent.png" 
+              alt="Barrio Energy" 
+              className="h-8 w-auto"
+            />
           </div>
           <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Barrio Energy. All rights reserved.</p>
         </div>

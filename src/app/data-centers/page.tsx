@@ -203,7 +203,7 @@ function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
             <img 
-              src="/images/logo-main.jpg" 
+              src="/images/logo-transparent.png" 
               alt="Barrio Energy" 
               className="h-10 w-auto"
             />
@@ -365,7 +365,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center">
             <img 
-              src="/images/logo-main.jpg" 
+              src="/images/logo-transparent.png" 
               alt="Barrio Energy" 
               className="h-8 w-auto"
             />

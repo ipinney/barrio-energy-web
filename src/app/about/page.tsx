@@ -114,7 +114,7 @@ function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
             <img 
-              src="/images/logo-main.jpg" 
+              src="/images/logo-transparent.png" 
               alt="Barrio Energy" 
               className="h-10 w-auto"
             />
@@ -194,7 +194,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center">
             <img 
-              src="/images/logo-main.jpg" 
+              src="/images/logo-transparent.png" 
               alt="Barrio Energy" 
               className="h-8 w-auto"
             />
@@ -234,6 +234,27 @@ export default function AboutPage() {
               <TeamCard key={member.name} member={member} index={index} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-16 px-6 bg-zinc-900/30">
+        <div className="max-w-4xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-white">Want to </span>
+              <span className="text-cyan-400">Connect?</span>
+            </h2>
+            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+              We'd love to hear from you. Reach out to discuss partnership opportunities, property inquiries, or just to say hello.
+            </p>
+            <a
+              href="mailto:info@barrioenergy.com"
+              className="inline-block px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-lg transition-colors"
+            >
+              Contact Us
+            </a>
+          </AnimatedSection>
         </div>
       </section>
 
