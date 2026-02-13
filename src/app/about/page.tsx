@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -108,6 +109,15 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
 
 // Navigation
 function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "/", label: "Home", active: false },
+    { href: "/data-centers", label: "Data Centers", active: false },
+    { href: "/about", label: "Team", active: true },
+    { href: "/#contact", label: "Contact", active: false },
+  ];
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
       <div className="max-w-6xl mx-auto px-6 py-3">
@@ -120,18 +130,56 @@ function Navbar() {
             />
           </Link>
           
-          <div className="flex items-center gap-8">
-            <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Home
-            </Link>
-            <Link href="/data-centers" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Data Centers
-            </Link>
-            <Link href="/about" className="text-sm text-cyan-400">
-              Team
-            </Link>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm transition-colors ${link.active ? "text-cyan-400" : "text-gray-400 hover:text-white"}`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-white p-2"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden py-4 border-t border-zinc-800 mt-4"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block py-2 transition-colors ${link.active ? "text-cyan-400" : "text-gray-400 hover:text-white"}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
