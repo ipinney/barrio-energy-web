@@ -2,18 +2,17 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 // Team member type
 type TeamMember = {
   name: string;
   role: string;
   emoji: string;
-  gradientFrom: string;
-  gradientTo: string;
   bio: string;
   initials: string;
   isHuman?: boolean;
-  image?: string;
+  image: string;
 };
 
 const teamMembers: TeamMember[] = [
@@ -21,8 +20,6 @@ const teamMembers: TeamMember[] = [
     name: "Ivan Pinney",
     role: "Managing Member",
     emoji: "👨‍💼",
-    gradientFrom: "from-amber-500",
-    gradientTo: "to-orange-600",
     bio: "Builder, energy entrepreneur, Bitcoin maximalist. Based in Houston, TX.",
     initials: "IP",
     isHuman: true,
@@ -32,73 +29,65 @@ const teamMembers: TeamMember[] = [
     name: "Jarvis",
     role: "Chief of Staff",
     emoji: "🤖",
-    gradientFrom: "from-cyan-400",
-    gradientTo: "to-blue-500",
     bio: "Primary AI assistant. Manages the team, delegates work, keeps everything running.",
     initials: "JV",
+    image: "/images/jarvis.png",
   },
   {
     name: "Dev",
     role: "Full-Stack Engineer",
     emoji: "💻",
-    gradientFrom: "from-green-500",
-    gradientTo: "to-emerald-600",
     bio: "Web development, infrastructure, API integrations. Fast, cheap, reliable.",
     initials: "DV",
+    image: "/images/dev.jpeg",
   },
   {
     name: "Gambit",
     role: "Trading & Market Analyst",
     emoji: "🎲",
-    gradientFrom: "from-purple-500",
-    gradientTo: "to-violet-600",
     bio: "Prediction markets, risk management, quantitative analysis. Runs 24/7 autonomous trading strategies on Polymarket.",
     initials: "GB",
+    image: "/images/gambit.jpg",
   },
   {
-    name: "Jim",
+    name: "Jim Adler",
     role: "Legal Counsel",
     emoji: "⚖️",
-    gradientFrom: "from-slate-600",
-    gradientTo: "to-slate-800",
     bio: "The family lawyer. Handles all legal work and document generation. Lease reports, legal documents, contract analysis.",
     initials: "JM",
+    image: "/images/jim-adler.png",
   },
   {
     name: "Andi",
     role: "Analytics & Business Intelligence",
     emoji: "📊",
-    gradientFrom: "from-orange-500",
-    gradientTo: "to-red-600",
     bio: "Data processing, financial analysis, reporting. Crunches the numbers and surfaces insights.",
     initials: "AN",
+    image: "/images/andi.png",
   },
   {
     name: "Mrs. Whitmore",
     role: "Home & Family Manager",
     emoji: "🏠",
-    gradientFrom: "from-rose-500",
-    gradientTo: "to-pink-600",
     bio: "Keeps the home running smoothly. Daily reminders and family logistics. Scheduling, kids' activities, household coordination.",
     initials: "MW",
+    image: "/images/mrs-whitmore.png",
   },
   {
     name: "Coach Prime",
     role: "Athletics Director",
     emoji: "🏀",
-    gradientFrom: "from-amber-500",
-    gradientTo: "to-yellow-600",
     bio: "Youth basketball coaching assistant and motivational presence. Basketball coaching, sports strategy, motivation.",
     initials: "CP",
+    image: "/images/coach-prime.png",
   },
   {
     name: "Joy",
     role: "Travel & Lifestyle",
     emoji: "✈️",
-    gradientFrom: "from-sky-400",
-    gradientTo: "to-blue-600",
     bio: "Travel booking, hotel research, lifestyle management. Makes sure life outside work is just as optimized.",
     initials: "JY",
+    image: "/images/joy.jpg",
   },
 ];
 
@@ -145,30 +134,16 @@ function Navbar() {
   );
 }
 
-// AI Agent Avatar - styled div with gradient background and emoji
-function AIAgentAvatar({ member }: { member: TeamMember }) {
+// Team avatar with circular crop using next/image
+function TeamAvatar({ member }: { member: TeamMember }) {
   return (
-    <div 
-      className={`w-28 h-28 rounded-full bg-gradient-to-br ${member.gradientFrom} ${member.gradientTo} flex items-center justify-center shadow-lg`}
-      style={{
-        boxShadow: `0 8px 32px -8px ${member.gradientFrom.replace('from-', 'rgba(').replace('-500', ', 0.4').replace('-400', ', 0.4').replace('-600', ', 0.4)')}`,
-      }}
-    >
-      <span className="text-5xl filter drop-shadow-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
-        {member.emoji}
-      </span>
-    </div>
-  );
-}
-
-// Human Avatar - uses actual photo
-function HumanAvatar({ member }: { member: TeamMember }) {
-  return (
-    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-zinc-800 shadow-lg">
-      <img 
-        src={member.image} 
+    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-zinc-800 shadow-lg relative">
+      <Image
+        src={member.image}
         alt={member.name}
-        className="w-full h-full object-cover"
+        fill
+        className="object-cover"
+        sizes="112px"
       />
     </div>
   );
@@ -188,11 +163,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
       {/* Avatar Section */}
       <div className="h-32 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/20" />
-        {member.isHuman ? (
-          <HumanAvatar member={member} />
-        ) : (
-          <AIAgentAvatar member={member} />
-        )}
+        <TeamAvatar member={member} />
       </div>
       
       {/* Info */}
