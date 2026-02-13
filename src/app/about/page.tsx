@@ -249,8 +249,8 @@ function TeamAvatar({ member, large = false, showVideo = false, onVideoToggle }:
           muted
           loop
           playsInline
-          preload="none"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${showVideo ? 'opacity-100' : 'opacity-0'}`}
+          preload="auto"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${showVideo ? 'opacity-100' : 'opacity-0'}`}
           onClick={(e) => {
             e.stopPropagation();
             onVideoToggle?.();
@@ -359,35 +359,18 @@ function BioModal({ member, onClose }: { member: TeamMember; onClose: () => void
 // Team card with live photo video support
 function TeamCard({ member, index, onClick }: { member: TeamMember; index: number; onClick: () => void }) {
   const [showVideo, setShowVideo] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const hasVideo = !!member.video;
 
-  // Detect mobile device
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Handle mouse events for desktop
+  // Handle mouse events for desktop — always allow hover
   const handleMouseEnter = () => {
-    if (!isMobile && hasVideo) {
+    if (hasVideo) {
       setShowVideo(true);
     }
   };
 
   const handleMouseLeave = () => {
-    if (!isMobile && hasVideo) {
+    if (hasVideo) {
       setShowVideo(false);
-    }
-  };
-
-  // Handle touch for mobile
-  const handleTouchEnd = () => {
-    if (isMobile && hasVideo) {
-      // Small delay to allow click to propagate for modal
-      setTimeout(() => setShowVideo(false), 300);
     }
   };
 
@@ -402,7 +385,6 @@ function TeamCard({ member, index, onClick }: { member: TeamMember; index: numbe
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onTouchEnd={handleTouchEnd}
     >
       {/* Avatar Section */}
       <div className="h-32 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center relative overflow-hidden">
