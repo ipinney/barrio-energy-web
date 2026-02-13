@@ -124,6 +124,9 @@ function Navbar() {
             <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">
               Home
             </Link>
+            <Link href="/data-centers" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Data Centers
+            </Link>
             <Link href="/about" className="text-sm text-cyan-400">
               Team
             </Link>

@@ -55,7 +55,7 @@ function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/#services", label: "Services" },
+    { href: "/data-centers", label: "Data Centers" },
     { href: "/about", label: "Team" },
     { href: "/#contact", label: "Contact" },
   ];
@@ -142,7 +142,7 @@ function Hero() {
         loop
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
-        poster="/images/solar-energy.jpg"
+        poster="/images/landscape-datacenter-1.jpg"
       >
         <source src="/images/hero-video.mp4" type="video/mp4" />
       </video>
@@ -295,7 +295,7 @@ function Services() {
       title: "Energy Advisory",
       description: "Power procurement, engineering consulting, solar and battery energy storage projects. We procure power at the lowest possible rates.",
       icon: "💡",
-      image: "/images/solar-energy.jpg",
+      image: "/images/landscape-datacenter-2.jpg",
     },
     {
       title: "24/7 Monitoring",
