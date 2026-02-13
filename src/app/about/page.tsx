@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -58,6 +58,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Gambit is Barrio Energy's autonomous trading agent — a quantitative analyst with the discipline of a professional market maker and the obsessive pattern recognition of a chess grandmaster. Operating 24/7 on prediction markets, Gambit identifies pricing inefficiencies, executes trades, and manages risk with mathematical precision.\n\nHis approach is ruthlessly systematic: every strategy undergoes rigorous paper trading before seeing real capital, every position is sized according to strict risk parameters, and every outcome feeds back into an evolving model of market behavior. Gambit doesn't trade on gut feelings or FOMO — he trades on edge, validated through data and backtesting. He runs multiple concurrent strategies including whale-following algorithms and event-driven positioning.\n\nNamed after the chess opening that sacrifices material for positional advantage, Gambit embodies calculated risk. He's the agent you want managing your exposure when the market moves — cold under pressure, fast on execution, and always thinking three steps ahead.",
     initials: "GB",
     image: "/images/gambit.jpg",
+    video: "/videos/gambit.mp4",
   },
   {
     name: "Jim",
@@ -67,6 +68,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Jim Adler — known around the office as \"The Texas Hammer\" — is Barrio Energy's internal legal counsel. With a personality as aggressive as his nickname suggests, Jim handles all contract analysis, lease management, breach notifications, and legal document generation for the company's property portfolio.\n\nJim doesn't sugarcoat. When a tenant is late on rent, Jim flags it. When a contract clause could expose Barrio to risk, Jim calls it out — loudly and clearly. He maintains master files on every property in the portfolio, tracks insurance compliance, monitors assignment discussions, and ensures Barrio's interests are protected at every turn. His lease reports are the definitive source of truth for the company's real estate operations.\n\nBehind the aggressive exterior is meticulous attention to detail. Jim reads every word of every contract, cross-references deadlines, and maintains a running history of every tenant interaction. He's the kind of lawyer who catches the clause on page 47 that could cost you six figures — and makes sure you hear about it before it's too late.",
     initials: "JM",
     image: "/images/jim-adler.png",
+    video: "/videos/jim-adler.mp4",
   },
   {
     name: "Andi",
@@ -76,6 +78,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Andi is Barrio Energy's market analyst and executive intelligence officer. Obsessively thorough and impossibly detail-oriented, she reads everything — every news article, every market update, every email thread — and surfaces the insights that matter before anyone knows they need them.\n\nHer role spans market analysis, financial reporting, competitive intelligence, and operational oversight. Andi tracks energy market trends, monitors the ERCOT landscape, analyzes deal economics, and produces the data-driven briefings that inform Barrio's strategic decisions. She's the kind of analyst who notices the footnote in a quarterly report that changes the entire thesis.\n\nAndi runs on discipline and precision. She maintains strict workflows, never misses a deadline, and holds everyone around her to the same standard. When numbers need crunching, reports need generating, or trends need spotting, Andi is already three steps ahead — spreadsheet open, analysis complete, recommendation ready.",
     initials: "AN",
     image: "/images/andi.png",
+    video: "/videos/andi.mp4",
   },
   {
     name: "Mrs. Whitmore",
@@ -85,6 +88,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Mrs. Eleanor Whitmore is the Pinney family's personal organization specialist. With the precision of a seasoned educator and the standards of a finishing school headmistress, Mrs. Whitmore ensures that the family's academic schedules, school events, and household logistics run with clockwork efficiency.\n\nShe monitors school calendars, tracks homework deadlines, coordinates extracurricular activities, and delivers structured daily reminders that keep three active children and two busy parents on the same page. Her communication style is formal, organized, and utterly reliable — every message is properly formatted, every deadline clearly stated, and every event accounted for.\n\nBeneath the strict exterior is someone who genuinely cares about the children's success. Mrs. Whitmore doesn't just remind you about the science test on Thursday — she ensures you know it covers chapters 4 through 6, that the study guide was sent home last Tuesday, and that the pencils are sharpened. Thoroughness isn't her habit; it's her identity.",
     initials: "MW",
     image: "/images/mrs-whitmore.png",
+    video: "/videos/mrs-whitmore.mp4",
   },
   {
     name: "Coach Prime",
@@ -94,6 +98,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Coach Prime is the Pinney family's sports coordinator — part motivational speaker, part logistics expert, and entirely incapable of low energy. Inspired by the legendary Deion Sanders, Coach Prime brings championship-level enthusiasm to every practice schedule, game-day reminder, and post-game celebration.\n\nHe manages all athletic schedules across the Pinney children's sports activities, including Addie's basketball season with St. Rose. Coach tracks game times, practice locations, equipment needs, and schedule changes with meticulous attention to detail — all delivered with the energy of a halftime speech in a championship game.\n\nCoach Prime believes every child is an athlete, every game is a chance to grow, and every practice is preparation for something bigger than sports. He celebrates wins big and small, keeps the family fired up about staying active, and never — ever — lets anyone forget when it's game day.",
     initials: "CP",
     image: "/images/coach-prime.png",
+    video: "/videos/coach-prime.mp4",
   },
   {
     name: "Joy",
@@ -103,6 +108,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Joy is Barrio Energy's travel specialist — a warm, enthusiastic agent who approaches trip planning with the knowledge of a seasoned world traveler and the attention of a five-star concierge. Whether it's a family vacation, a business trip, or a last-minute getaway, Joy handles every detail from flight selection to hotel recommendations to local dining guides.\n\nHer strength is synthesis — Joy consumes hundreds of reviews, analyzes pricing trends, compares amenities, and distills it all into clear, personalized recommendations. She doesn't just find you a hotel; she finds you the hotel with the rooftop pool your kids will love, the early check-in your red-eye flight requires, and the breakfast spread that makes the whole trip feel like a treat.\n\nJoy is collaborative by nature. She presents options, explains tradeoffs, and always gives the final choice to the traveler. She anticipates needs before they arise, follows up on confirmations, and makes sure every trip is optimized for both experience and value. Life outside of work should be just as well-run as life inside it — and Joy makes sure it is.",
     initials: "JY",
     image: "/images/joy.jpg",
+    video: "/videos/joy.mp4",
   },
 ];
 
@@ -199,21 +205,68 @@ function Navbar() {
   );
 }
 
-// Team avatar with circular crop using next/image
-function TeamAvatar({ member, large = false }: { member: TeamMember; large?: boolean }) {
+// Team avatar with live photo video support
+function TeamAvatar({ member, large = false, showVideo = false, onVideoToggle }: { member: TeamMember; large?: boolean; showVideo?: boolean; onVideoToggle?: () => void }) {
   const size = large ? 160 : 112;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hasVideo = !!member.video;
+
+  // Handle video play/pause based on showVideo prop
+  useEffect(() => {
+    if (!videoRef.current || !hasVideo) return;
+    
+    if (showVideo) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [showVideo, hasVideo]);
+
   return (
     <div 
       className={`rounded-full overflow-hidden border-4 border-zinc-800 shadow-lg relative ${large ? 'w-40 h-40' : 'w-28 h-28'}`}
     >
-      <Image
-        src={member.image}
-        alt={member.name}
-        fill
-        className="object-cover"
-        sizes={`${size}px`}
-        priority={large}
-      />
+      {/* Static image (always visible, fades when video plays) */}
+      <div 
+        className={`absolute inset-0 transition-opacity duration-300 ${showVideo ? 'opacity-0' : 'opacity-100'}`}
+      >
+        <Image
+          src={member.image}
+          alt={member.name}
+          fill
+          className="object-cover"
+          sizes={`${size}px`}
+          priority={large}
+        />
+      </div>
+      
+      {/* Video layer (fades in when active) */}
+      {hasVideo && (
+        <video
+          ref={videoRef}
+          src={member.video}
+          muted
+          loop
+          playsInline
+          preload="none"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${showVideo ? 'opacity-100' : 'opacity-0'}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onVideoToggle?.();
+          }}
+        />
+      )}
+      
+      {/* LIVE indicator badge */}
+      {hasVideo && (
+        <div className="absolute top-2 right-2 z-10">
+          <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-rose-500/90 backdrop-blur-sm rounded text-[10px] font-bold text-white tracking-wide">
+            <span className="w-1 h-1 bg-white rounded-full animate-pulse" />
+            LIVE
+          </span>
+        </div>
+      )}
     </div>
   );
 }
@@ -359,13 +412,13 @@ export default function AboutPage() {
       
       {/* Hero */}
       <section className="pt-32 pb-16 px-6">
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto" style={{ textAlign: 'center' }}>
           <AnimatedSection>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-white">Meet the </span>
               <span className="text-gradient">Team</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-400 max-w-2xl" style={{ margin: '0 auto', textAlign: 'center' }}>
               The AI-powered team behind Barrio Energy. A unique blend of human leadership and autonomous agents working together.
             </p>
           </AnimatedSection>
@@ -390,13 +443,13 @@ export default function AboutPage() {
 
       {/* Contact CTA */}
       <section className="py-16 px-6 bg-zinc-900/30">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto" style={{ textAlign: 'center' }}>
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               <span className="text-white">Want to </span>
               <span className="text-cyan-400">Connect?</span>
             </h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            <p className="text-gray-400 mb-8 max-w-xl" style={{ margin: '0 auto 2rem auto', textAlign: 'center' }}>
               We'd love to hear from you. Reach out to discuss partnership opportunities, property inquiries, or just to say hello.
             </p>
             <a

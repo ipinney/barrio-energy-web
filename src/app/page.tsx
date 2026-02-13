@@ -184,7 +184,8 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
+          className="text-xl text-gray-400 mb-12 max-w-2xl"
+          style={{ margin: '0 auto 3rem auto', textAlign: 'center' }}
         >
           Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads.
         </motion.p>
@@ -313,7 +314,7 @@ function Services() {
             <span className="text-white">Our </span>
             <span className="text-cyan-400">Services</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-2xl" style={{ margin: '0 auto', textAlign: 'center' }}>
             Comprehensive energy solutions tailored to your needs.
           </p>
         </AnimatedSection>
@@ -332,13 +333,13 @@ function Services() {
 function Contact() {
   return (
     <section id="contact" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-4xl mx-auto" style={{ textAlign: 'center' }}>
         <AnimatedSection>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             <span className="text-white">Ready to </span>
             <span className="text-cyan-400">Get Started?</span>
           </h2>
-          <p className="text-gray-400 mb-12 max-w-xl mx-auto">
+          <p className="text-gray-400 mb-12 max-w-xl" style={{ margin: '0 auto 3rem auto', textAlign: 'center' }}>
             Contact us to discuss your energy infrastructure needs. Our team is ready to help you find the right solution.
           </p>
 
