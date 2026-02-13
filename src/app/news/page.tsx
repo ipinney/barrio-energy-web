@@ -575,17 +575,8 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Subscribe */}
-      <section className="px-6" style={{ paddingTop: "48px" }}>
-        <div className="max-w-4xl mx-auto">
-          <AnimatedSection>
-            <SubscribeForm />
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* Featured Article */}
-      <section className="px-6" style={{ paddingTop: "0" }}>
+      <section className="px-6" style={{ paddingTop: "48px" }}>
         <div className="max-w-4xl mx-auto">
           <FeaturedArticle article={featured} />
         </div>
@@ -628,6 +619,15 @@ export default function NewsPage() {
           </div>
         </section>
       )}
+
+      {/* Subscribe */}
+      <section className="px-6" style={{ paddingTop: "16px", paddingBottom: "48px" }}>
+        <div className="max-w-4xl mx-auto">
+          <AnimatedSection>
+            <SubscribeForm />
+          </AnimatedSection>
+        </div>
+      </section>
 
       <Footer />
     </main>
