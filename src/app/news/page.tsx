@@ -415,6 +415,112 @@ function Footer() {
   );
 }
 
+// Subscribe Form
+function SubscribeForm() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("success");
+        setMessage(data.message || "Successfully subscribed!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Something went wrong. Please try again.");
+    }
+  };
+
+  return (
+    <div
+      style={{
+        background: "linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(24, 24, 27, 0.8) 100%)",
+        border: "1px solid rgba(6, 182, 212, 0.2)",
+        borderRadius: "16px",
+        padding: "40px 32px",
+        textAlign: "center",
+        marginBottom: "48px",
+      }}
+    >
+      <h2 style={{ fontSize: "28px", fontWeight: 700, color: "white", marginBottom: "8px" }}>
+        Stay Informed
+      </h2>
+      <p style={{ color: "rgb(161, 161, 170)", fontSize: "16px", marginBottom: "24px", maxWidth: "480px", margin: "0 auto 24px" }}>
+        Get weekly Texas power &amp; infrastructure analysis delivered to your inbox.
+      </p>
+      {status === "success" ? (
+        <p style={{ color: "#00d4ff", fontSize: "16px", fontWeight: 500 }}>{message}</p>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            gap: "12px",
+            maxWidth: "440px",
+            margin: "0 auto",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <input
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
+            required
+            style={{
+              flex: "1 1 240px",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              border: "1px solid rgb(63, 63, 70)",
+              background: "rgba(9, 9, 11, 0.8)",
+              color: "white",
+              fontSize: "15px",
+              outline: "none",
+              minWidth: "200px",
+            }}
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            style={{
+              padding: "12px 28px",
+              borderRadius: "8px",
+              border: "none",
+              background: status === "loading" ? "rgba(6, 182, 212, 0.4)" : "#00d4ff",
+              color: "#0a0a0b",
+              fontSize: "15px",
+              fontWeight: 600,
+              cursor: status === "loading" ? "not-allowed" : "pointer",
+              transition: "background 0.2s",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {status === "loading" ? "Subscribing..." : "Subscribe"}
+          </button>
+        </form>
+      )}
+      {status === "error" && (
+        <p style={{ color: "#ef4444", fontSize: "14px", marginTop: "12px" }}>{message}</p>
+      )}
+    </div>
+  );
+}
+
 // Main page
 export default function NewsPage() {
   const allArticles = getAllArticles();
@@ -469,8 +575,17 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Featured Article */}
+      {/* Subscribe */}
       <section className="px-6" style={{ paddingTop: "48px" }}>
+        <div className="max-w-4xl mx-auto">
+          <AnimatedSection>
+            <SubscribeForm />
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Featured Article */}
+      <section className="px-6" style={{ paddingTop: "0" }}>
         <div className="max-w-4xl mx-auto">
           <FeaturedArticle article={featured} />
         </div>

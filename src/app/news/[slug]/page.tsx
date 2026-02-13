@@ -155,6 +155,156 @@ function Footer() {
   );
 }
 
+// Subscribe CTA for article bottom
+function ArticleSubscribeCTA() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("success");
+        setMessage(data.message || "Successfully subscribed!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Something went wrong. Please try again.");
+    }
+  };
+
+  return (
+    <div
+      style={{
+        background: "linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(24, 24, 27, 0.8) 100%)",
+        border: "1px solid rgba(6, 182, 212, 0.2)",
+        borderRadius: "16px",
+        padding: "32px 28px",
+        textAlign: "center",
+        marginTop: "48px",
+      }}
+    >
+      <h3 style={{ fontSize: "22px", fontWeight: 700, color: "white", marginBottom: "8px" }}>
+        Enjoyed this analysis?
+      </h3>
+      <p style={{ color: "rgb(161, 161, 170)", fontSize: "15px", marginBottom: "20px", maxWidth: "400px", margin: "0 auto 20px" }}>
+        Get weekly Texas power &amp; infrastructure insights delivered to your inbox.
+      </p>
+      {status === "success" ? (
+        <p style={{ color: "#00d4ff", fontSize: "15px", fontWeight: 500 }}>{message}</p>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            gap: "12px",
+            maxWidth: "420px",
+            margin: "0 auto",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <input
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
+            required
+            style={{
+              flex: "1 1 220px",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              border: "1px solid rgb(63, 63, 70)",
+              background: "rgba(9, 9, 11, 0.8)",
+              color: "white",
+              fontSize: "15px",
+              outline: "none",
+              minWidth: "180px",
+            }}
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            style={{
+              padding: "12px 24px",
+              borderRadius: "8px",
+              border: "none",
+              background: status === "loading" ? "rgba(6, 182, 212, 0.4)" : "#00d4ff",
+              color: "#0a0a0b",
+              fontSize: "15px",
+              fontWeight: 600,
+              cursor: status === "loading" ? "not-allowed" : "pointer",
+              transition: "background 0.2s",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {status === "loading" ? "Subscribing..." : "Subscribe"}
+          </button>
+        </form>
+      )}
+      {status === "error" && (
+        <p style={{ color: "#ef4444", fontSize: "14px", marginTop: "12px" }}>{message}</p>
+      )}
+    </div>
+  );
+}
+
+// Author bio card
+function AuthorBioCard({ author }: { author: string }) {
+  if (author !== "Andi") return null;
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "20px",
+        padding: "28px",
+        borderRadius: "16px",
+        border: "1px solid rgb(39, 39, 42)",
+        background: "rgba(24, 24, 27, 0.5)",
+        marginTop: "32px",
+      }}
+    >
+      <img
+        src="/images/andi.png"
+        alt="Andi"
+        style={{
+          width: "72px",
+          height: "72px",
+          borderRadius: "9999px",
+          objectFit: "cover",
+          flexShrink: 0,
+          border: "2px solid rgba(6, 182, 212, 0.3)",
+        }}
+      />
+      <div>
+        <h4 style={{ fontSize: "17px", fontWeight: 700, color: "white", margin: "0 0 4px" }}>
+          Andi
+        </h4>
+        <p style={{ fontSize: "13px", color: "#00d4ff", margin: "0 0 10px", fontWeight: 500 }}>
+          Market Intelligence Analyst | Barrio Energy
+        </p>
+        <p style={{ fontSize: "14px", color: "rgb(161, 161, 170)", lineHeight: 1.6, margin: 0 }}>
+          Andi covers Texas power infrastructure, AI data center development, and digital energy markets. She tracks the intersection of compute demand and grid capacity across ERCOT and beyond.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // Article page
 export default function ArticlePage() {
   const params = useParams();
@@ -377,10 +527,16 @@ export default function ArticlePage() {
           className="article-body"
         />
 
+        {/* Author bio */}
+        <AuthorBioCard author={article.author} />
+
+        {/* Subscribe CTA */}
+        <ArticleSubscribeCTA />
+
         {/* Bottom nav */}
         <div
           style={{
-            marginTop: "64px",
+            marginTop: "48px",
             paddingTop: "32px",
             borderTop: "1px solid rgb(39, 39, 42)",
             textAlign: "center",
