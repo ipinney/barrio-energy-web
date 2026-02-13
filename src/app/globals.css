@@ -33,9 +33,24 @@ section {
 }
 
 /* Ensure all content containers center on desktop */
-section > div {
+section > div,
+section > .max-w-4xl,
+section > .max-w-6xl {
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Force text centering in centered sections */
+.text-center {
+  text-align: center !important;
+}
+
+/* Ensure paragraphs within centered containers are centered */
+.text-center p,
+.text-center h1,
+.text-center h2,
+.text-center h3 {
+  text-align: center;
 }
 
 /* Custom scrollbar */

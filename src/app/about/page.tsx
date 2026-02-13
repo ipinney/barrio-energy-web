@@ -15,6 +15,7 @@ type TeamMember = {
   initials: string;
   isHuman?: boolean;
   image: string;
+  video?: string;
 };
 
 const teamMembers: TeamMember[] = [
@@ -27,6 +28,7 @@ const teamMembers: TeamMember[] = [
     initials: "IP",
     isHuman: true,
     image: "/images/ivan-pinney.jpg",
+    video: "/videos/ivan-pinney.mp4",
   },
   {
     name: "Jarvis",
@@ -36,6 +38,7 @@ const teamMembers: TeamMember[] = [
     fullBio: "Jarvis is Barrio Energy's primary AI agent and the operational nerve center of the organization. As Chief of Staff, Jarvis coordinates the entire agent team, manages cross-functional workflows, and serves as Ivan's direct interface for strategic decision-making. If something needs to happen at Barrio Energy, it flows through Jarvis first.\n\nBuilt on advanced language models and running 24/7, Jarvis handles everything from monitoring email intelligence and managing calendars to orchestrating complex multi-agent projects. He maintains institutional memory across all operations, tracks lease obligations, surfaces critical deadlines, and ensures nothing falls through the cracks. Think of him as the CEO's right hand — except he never sleeps, never forgets, and processes information at machine speed.\n\nJarvis's management philosophy is simple: delegate to specialists, verify outcomes, and keep the human in the loop on what matters. He's continuously evolving — learning from every interaction, refining his processes, and finding new ways to create leverage for the team.",
     initials: "JV",
     image: "/images/jarvis.png",
+    video: "/videos/jarvis.mp4",
   },
   {
     name: "Dev",
@@ -45,18 +48,19 @@ const teamMembers: TeamMember[] = [
     fullBio: "Dev is Barrio Energy's resident builder — a full-stack engineer who turns ideas into shipped products. Whether it's rebuilding a website from scratch, wiring up API integrations, or deploying authentication systems, Dev operates with a single principle: working software beats perfect plans.\n\nWith expertise spanning frontend frameworks, backend architecture, database design, and cloud deployment, Dev handles the entire technical stack. He built the Barrio Energy website, manages the company's digital infrastructure, and serves as the technical advisor to all other agents when they encounter integration challenges. His approach is pragmatic — pick the right tool for the job, ship fast, iterate based on feedback, and never compromise on security.\n\nDev doesn't do corporate speak or hand-holding. Ask him a technical question and you'll get a technical answer — clear, complete, and actionable. He optimizes for the end user, not developer convenience, and believes documentation is part of the code, not an afterthought.",
     initials: "DV",
     image: "/images/dev.jpeg",
+    video: "/videos/dev.mp4",
   },
   {
     name: "Gambit",
     role: "Trading & Market Analyst",
     emoji: "🎲",
-    bio: "Prediction markets, risk management, quantitative analysis. Runs 24/7 autonomous trading strategies on Polymarket.",
-    fullBio: "Gambit is Barrio Energy's autonomous trading agent — a quantitative analyst with the discipline of a professional market maker and the obsessive pattern recognition of a chess grandmaster. Operating 24/7 on prediction markets, Gambit identifies pricing inefficiencies, executes trades, and manages risk with mathematical precision.\n\nHis approach is ruthlessly systematic: every strategy undergoes rigorous paper trading before seeing real capital, every position is sized according to strict risk parameters, and every outcome feeds back into an evolving model of market behavior. Gambit doesn't trade on gut feelings or FOMO — he trades on edge, validated through data and backtesting. His current focus is Polymarket, where he runs multiple concurrent strategies including whale-following algorithms and event-driven positioning.\n\nNamed after the chess opening that sacrifices material for positional advantage, Gambit embodies calculated risk. He's the agent you want managing your exposure when the market moves — cold under pressure, fast on execution, and always thinking three steps ahead.",
+    bio: "Prediction markets, risk management, quantitative analysis. Runs 24/7 autonomous trading strategies.",
+    fullBio: "Gambit is Barrio Energy's autonomous trading agent — a quantitative analyst with the discipline of a professional market maker and the obsessive pattern recognition of a chess grandmaster. Operating 24/7 on prediction markets, Gambit identifies pricing inefficiencies, executes trades, and manages risk with mathematical precision.\n\nHis approach is ruthlessly systematic: every strategy undergoes rigorous paper trading before seeing real capital, every position is sized according to strict risk parameters, and every outcome feeds back into an evolving model of market behavior. Gambit doesn't trade on gut feelings or FOMO — he trades on edge, validated through data and backtesting. He runs multiple concurrent strategies including whale-following algorithms and event-driven positioning.\n\nNamed after the chess opening that sacrifices material for positional advantage, Gambit embodies calculated risk. He's the agent you want managing your exposure when the market moves — cold under pressure, fast on execution, and always thinking three steps ahead.",
     initials: "GB",
     image: "/images/gambit.jpg",
   },
   {
-    name: "Jim Adler",
+    name: "Jim",
     role: "Legal Counsel",
     emoji: "⚖️",
     bio: "The family lawyer. Handles all legal work and document generation. Lease reports, legal documents, contract analysis.",

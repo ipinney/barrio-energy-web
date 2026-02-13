@@ -289,19 +289,19 @@ function Services() {
       title: "Data Centers",
       description: "Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in Texas ERCOT.",
       icon: "🏢",
-      image: "/images/landscape-datacenter-2.jpg",
+      image: "/images/tyler-property.jpg",
     },
     {
       title: "Energy Advisory",
       description: "Power procurement, engineering consulting, solar and battery energy storage projects. We procure power at the lowest possible rates.",
       icon: "💡",
-      image: "/images/landscape-datacenter-2.jpg",
+      image: "/images/monahans-property-5.jpg",
     },
     {
       title: "24/7 Monitoring",
       description: "Data-enabled energy management with 24/7 monitoring of assets. We participate in various demand response programs.",
       icon: "📊",
-      image: "/images/george-west-property.jpg",
+      image: "/images/lolita-property.jpg",
     },
   ];
 
