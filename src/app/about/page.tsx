@@ -340,8 +340,41 @@ function BioModal({ member, onClose }: { member: TeamMember; onClose: () => void
   );
 }
 
-// Team card
+// Team card with live photo video support
 function TeamCard({ member, index, onClick }: { member: TeamMember; index: number; onClick: () => void }) {
+  const [showVideo, setShowVideo] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const hasVideo = !!member.video;
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Handle mouse events for desktop
+  const handleMouseEnter = () => {
+    if (!isMobile && hasVideo) {
+      setShowVideo(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobile && hasVideo) {
+      setShowVideo(false);
+    }
+  };
+
+  // Handle touch for mobile
+  const handleTouchEnd = () => {
+    if (isMobile && hasVideo) {
+      // Small delay to allow click to propagate for modal
+      setTimeout(() => setShowVideo(false), 300);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -351,11 +384,18 @@ function TeamCard({ member, index, onClick }: { member: TeamMember; index: numbe
       whileHover={{ y: -8 }}
       className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-all cursor-pointer"
       onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Avatar Section */}
       <div className="h-32 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/20" />
-        <TeamAvatar member={member} />
+        <TeamAvatar 
+          member={member} 
+          showVideo={showVideo}
+          onVideoToggle={() => setShowVideo(!showVideo)}
+        />
       </div>
       
       {/* Info */}

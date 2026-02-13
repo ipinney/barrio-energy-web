@@ -249,11 +249,11 @@ function About() {
               <br />
               <span className="text-white">of Tomorrow</span>
             </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
+            <p className="text-gray-400 leading-relaxed mb-8">
               Barrio Energy is an innovative organization committed to the procurement of industrial 
               scale energy properties and offering unparalleled advisory services to our clientele.
             </p>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-gray-400 leading-relaxed mt-4">
               Grounded in the principles of honesty and openness, our commitment is to generate 
               value in diverse areas of the energy and real estate industries.
             </p>
