@@ -330,12 +330,16 @@ function BioModal({ member, onClose }: { member: TeamMember; onClose: () => void
         </div>
 
         {/* Bio content */}
-        <div className="p-8 pt-6">
+        <div className="p-8 pt-6" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
           <div className="prose prose-invert prose-lg max-w-none">
             {paragraphs.map((paragraph, index) => (
               <p 
                 key={index} 
                 className="text-gray-300 leading-relaxed mb-6 last:mb-0"
+                style={{ 
+                  marginBottom: '20px',
+                  textIndent: index === 0 ? '2em' : undefined
+                }}
               >
                 {paragraph}
               </p>

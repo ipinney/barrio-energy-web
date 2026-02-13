@@ -233,7 +233,7 @@ function Hero() {
 // About section
 function About() {
   return (
-    <section className="pt-40 pb-32 px-6">
+    <section className="pb-32 px-6" style={{ paddingTop: '80px' }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <AnimatedSection>
@@ -243,11 +243,11 @@ function About() {
               <br />
               <span className="text-white">of Tomorrow</span>
             </h2>
-            <p className="text-gray-400 leading-relaxed mb-8">
+            <p className="text-gray-400 leading-relaxed" style={{ marginBottom: '24px' }}>
               Barrio Energy is an innovative organization committed to the procurement of industrial 
               scale energy properties and offering unparalleled advisory services to our clientele.
             </p>
-            <p className="text-gray-400 leading-relaxed mt-6">
+            <p className="text-gray-400 leading-relaxed" style={{ marginTop: '16px' }}>
               Grounded in the principles of honesty and openness, our commitment is to generate 
               value in diverse areas of the energy and real estate industries.
             </p>
@@ -292,14 +292,14 @@ function Services() {
   ];
 
   return (
-    <section id="services" className="pt-32 pb-24 px-6 bg-zinc-900/30">
+    <section id="services" className="pb-24 px-6 bg-zinc-900/30" style={{ paddingTop: '96px' }}>
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-white">Our </span>
             <span className="text-cyan-400">Services</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl" style={{ margin: '0 auto 3rem auto', textAlign: 'center' }}>
+          <p className="text-gray-400 max-w-2xl" style={{ margin: '0 auto 3rem auto', textAlign: 'center', marginBottom: '48px' }}>
             Comprehensive energy solutions tailored to your needs.
           </p>
         </AnimatedSection>
@@ -317,7 +317,7 @@ function Services() {
 // Contact section
 function Contact() {
   return (
-    <section id="contact" className="py-24 px-6">
+    <section id="contact" className="py-24 px-6" style={{ paddingTop: '96px' }}>
       <div className="max-w-4xl mx-auto" style={{ textAlign: 'center' }}>
         <AnimatedSection>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
