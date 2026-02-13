@@ -271,10 +271,21 @@ function TeamAvatar({ member, large = false, showVideo = false, onVideoToggle }:
   );
 }
 
-// Bio Modal
+// Bio Modal with live video support
 function BioModal({ member, onClose }: { member: TeamMember; onClose: () => void }) {
+  const [showVideo, setShowVideo] = useState(false);
+  const hasVideo = !!member.video;
+  
   // Split fullBio into paragraphs
   const paragraphs = member.fullBio.split('\n\n').filter(p => p.trim());
+
+  // Auto-play video when modal opens
+  useEffect(() => {
+    if (hasVideo) {
+      setShowVideo(true);
+    }
+    return () => setShowVideo(false);
+  }, [hasVideo]);
 
   return (
     <motion.div
@@ -306,10 +317,15 @@ function BioModal({ member, onClose }: { member: TeamMember; onClose: () => void
           </svg>
         </button>
 
-        {/* Header with avatar */}
+        {/* Header with avatar - show video in modal */}
         <div className="bg-gradient-to-br from-zinc-800 to-zinc-900 p-8 pb-0">
           <div className="flex flex-col items-center">
-            <TeamAvatar member={member} large />
+            <TeamAvatar 
+              member={member} 
+              large 
+              showVideo={showVideo}
+              onVideoToggle={() => setShowVideo(!showVideo)}
+            />
             <div className="mt-4 text-center">
               <h2 className="text-2xl font-bold text-white">{member.name}</h2>
               <p className="text-cyan-400 font-medium">{member.role}</p>
