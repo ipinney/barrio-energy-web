@@ -45,7 +45,7 @@ const properties: Property[] = [
   {
     name: "George West",
     location: "George West, TX",
-    mw: "TBD",
+    mw: "13 MW",
     status: "Leased",
     acreage: "1.0",
     lat: 28.3325,
