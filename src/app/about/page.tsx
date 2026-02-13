@@ -440,7 +440,7 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-40 pb-16 px-6">
+      <section className="pt-52 pb-16 px-6">
         <div className="max-w-6xl mx-auto" style={{ textAlign: 'center' }}>
           <AnimatedSection>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
