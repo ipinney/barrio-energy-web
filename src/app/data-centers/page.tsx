@@ -50,7 +50,7 @@ const properties: Property[] = [
     acreage: "1.0",
     lat: 28.3325,
     lng: -98.1175,
-    photos: ["/images/george-west-property.jpg"],
+    photos: ["/images/george-west-property.jpg", "/images/george-west-property-2.jpg"],
   },
   {
     name: "Tyler",
