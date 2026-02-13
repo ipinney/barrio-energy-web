@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { Open_Sans, Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const openSans = Open_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Barrio Energy",
-  description: "Energy infrastructure and data center solutions",
+  title: "Barrio Energy | Data Centers & Energy Infrastructure",
+  description: "Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in Texas ERCOT.",
+  keywords: "energy, data centers, ERCOT, Texas, battery storage, solar, energy advisory",
+  openGraph: {
+    title: "Barrio Energy",
+    description: "Data Centers & Energy Infrastructure in Texas ERCOT",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${openSans.variable} ${roboto.variable}`}>
-      <body className="font-body bg-white text-gray-900">{children}</body>
+    <html lang="en" className={inter.variable}>
+      <body className="bg-[#0a0a0a] text-white antialiased">{children}</body>
     </html>
   );
 }

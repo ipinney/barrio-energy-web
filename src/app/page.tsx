@@ -1,312 +1,373 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+
+// Animated section wrapper
+function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <>
-      {/* Navigation */}
-      <nav className="bg-white text-gray-800 py-4 fixed top-0 w-full z-50 shadow-sm">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <Image 
-                src="/Asset-3@300x.png" 
-                alt="Barrio Energy" 
-                width={200} 
-                height={77}
-                className="h-12 w-auto"
-              />
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <a href="#home" className="font-heading text-sm font-semibold text-gray-700 hover:text-barrio-blue transition uppercase tracking-wide">
-                Home
-              </a>
-              <a href="#services" className="font-heading text-sm font-semibold text-gray-700 hover:text-barrio-blue transition uppercase tracking-wide">
-                Data Centers
-              </a>
-              <a href="#advisory" className="font-heading text-sm font-semibold text-gray-700 hover:text-barrio-blue transition uppercase tracking-wide">
-                Energy Advisory
-              </a>
-              <a href="#contact" className="font-heading text-sm font-semibold text-barrio-blue hover:text-blue-700 transition uppercase tracking-wide">
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-      {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Hero Background Image */}
-        <Image
-          src="/hero-background.jpg"
-          alt="Energy Infrastructure"
-          fill
-          priority
-          className="object-cover"
-          quality={90}
-        />
+// Stats component
+function Stats() {
+  const stats = [
+    { value: "6", label: "Facilities" },
+    { value: "64", unit: "MW", label: "Power Capacity" },
+    { value: "24.2", unit: "Acres", label: "Site Capacity" },
+  ];
+
+  return (
+    <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+      {stats.map((stat, i) => (
+        <motion.div
+          key={stat.label}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.1, duration: 0.5 }}
+          className="text-center"
+        >
+          <div className="text-4xl md:text-5xl font-bold text-white mb-1">
+            {stat.value}
+            {stat.unit && <span className="text-cyan-400 text-2xl ml-1">{stat.unit}</span>}
+          </div>
+          <div className="text-sm text-gray-400 uppercase tracking-widest">{stat.label}</div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+// Service card
+function ServiceCard({ title, description, icon, delay }: { title: string; description: string; icon: string; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.5 }}
+      whileHover={{ y: -5 }}
+      className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 hover:border-cyan-500/30 transition-colors"
+    >
+      <div className="text-4xl mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">{title}</h3>
+      <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+    </motion.div>
+  );
+}
+
+// Navigation
+function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/#services", label: "Services" },
+    { href: "/about", label: "Team" },
+    { href: "/#contact", label: "Contact" },
+  ];
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="text-xl font-bold tracking-tight">
+            <span className="text-white">BARRIO</span>
+            <span className="text-cyan-400">ENERGY</span>
+          </Link>
+          
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-white p-2"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden py-4 border-t border-zinc-800 mt-4"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-gray-400 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </nav>
+  );
+}
+
+// Hero section
+function Hero() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background grid */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4zIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
+      
+      {/* Gradient orbs */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+
+      <motion.div style={{ y, opacity }} className="relative z-10 text-center px-6 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-6"
+        >
+          <span className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs tracking-widest uppercase">
+            Texas ERCOT Market
+          </span>
+        </motion.div>
         
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl">
-          <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 uppercase tracking-wider">
-            Unlocking Value in Energy
-          </h1>
-          <p className="font-body text-xl md:text-2xl font-light tracking-wide">
-            Driven by Integrity, Transparency, and Trusted Partnerships
-          </p>
-        </div>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
+        >
+          <span className="text-white">Powering the</span>
+          <br />
+          <span className="text-gradient">Future of Energy</span>
+        </motion.h1>
 
-        {/* Scroll Arrow */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
-      </section>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
+        >
+          Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads.
+        </motion.p>
 
-      {/* Stats Banner */}
-      <section className="bg-barrio-blue text-white py-16">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div>
-              <div className="font-heading text-6xl font-bold mb-3">6</div>
-              <div className="font-heading text-lg uppercase tracking-widest font-semibold">Facilities</div>
-            </div>
-            <div>
-              <div className="font-heading text-6xl font-bold mb-3">64 MW</div>
-              <div className="font-heading text-lg uppercase tracking-widest font-semibold">Power Capacity</div>
-            </div>
-            <div>
-              <div className="font-heading text-6xl font-bold mb-3">24.2</div>
-              <div className="font-heading text-lg uppercase tracking-widest font-semibold">Acres Site Capacity</div>
-            </div>
-          </div>
-        </div>
-      </section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <a
+            href="#services"
+            className="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-lg transition-colors"
+          >
+            Our Services
+          </a>
+          <a
+            href="#contact"
+            className="px-8 py-3 border border-zinc-700 hover:border-zinc-500 text-white font-semibold rounded-lg transition-colors"
+          >
+            Contact Us
+          </a>
+        </motion.div>
+      </motion.div>
 
-      {/* Welcome Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl">
-              <Image
-                src="/pexels-pixabay-236060.jpg"
-                alt="Energy Infrastructure"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h2 className="font-heading text-5xl font-bold text-barrio-navy mb-8 leading-tight">
-                Welcome to<br />Barrio Energy
-              </h2>
-              <div className="space-y-5">
-                <p className="font-body text-lg text-gray-700 leading-relaxed">
-                  Barrio Energy is an innovative organization committed to the procurement of industrial 
-                  scale energy properties and offering unparalleled advisory services to our clientele.
-                </p>
-                <p className="font-body text-lg text-gray-700 leading-relaxed">
-                  Grounded in the principles of honesty and openness, our commitment is to generate 
-                  value in diverse areas of the energy and real estate industries.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="w-6 h-10 border-2 border-zinc-700 rounded-full flex justify-center pt-2"
+        >
+          <div className="w-1 h-2 bg-zinc-500 rounded-full" />
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
 
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-barrio-light">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="font-heading text-barrio-blue uppercase tracking-widest font-bold text-xs mb-3 letter-spacing-2">
-              Services of Barrio Energy
-            </p>
-            <h2 className="font-heading text-5xl font-bold text-barrio-navy uppercase tracking-wide">
-              Building a Better Tomorrow
+// About section
+function About() {
+  return (
+    <section className="py-24 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-white">Building the </span>
+              <span className="text-cyan-400">Foundation</span>
+              <br />
+              <span className="text-white">of Tomorrow</span>
             </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Data Centers Card */}
-            <div className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="relative h-96">
-                <Image
-                  src="/IMG_8190-scaled.jpg"
-                  alt="Data Center Infrastructure"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <h3 className="font-heading text-3xl font-bold mb-4">Data Centers</h3>
-                <p className="font-body text-base leading-relaxed mb-2 text-gray-100">
-                  Barrio Energy specializes in acquiring, developing, and leasing industrial commercial 
-                  properties that cater to large-scale energy users, including data centers, battery energy 
-                  storage, and other industrial loads within the Texas ERCOT market.
-                </p>
-                <p className="font-body text-sm text-gray-300 italic">
-                  Number of different properties in our portfolio that meet the needs of most industrial 
-                  energy users.
-                </p>
-              </div>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              Barrio Energy is an innovative organization committed to the procurement of industrial 
+              scale energy properties and offering unparalleled advisory services to our clientele.
+            </p>
+            <p className="text-gray-400 leading-relaxed">
+              Grounded in the principles of honesty and openness, our commitment is to generate 
+              value in diverse areas of the energy and real estate industries.
+            </p>
+          </AnimatedSection>
+          
+          <AnimatedSection className="relative">
+            <div className="aspect-square rounded-2xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-800 p-8 glow-cyan">
+              <Stats />
             </div>
-
-            {/* Energy Advisory Card */}
-            <div className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="relative h-96">
-                <Image
-                  src="/land.jpg"
-                  alt="Energy Advisory Services"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <h3 className="font-heading text-3xl font-bold mb-4">Energy Advisory</h3>
-                <p className="font-body text-base leading-relaxed mb-2 text-gray-100">
-                  At Barrio Energy, we offer a wide range of services to support our clients' needs, from 
-                  energy advisory, engineering consulting, data center development, and solar and battery 
-                  energy storage projects.
-                </p>
-                <p className="font-body text-sm text-gray-300 italic">
-                  Barrio Energy can procure your power at the lowest possible rates to meet your 
-                  organization's requirements.
-                </p>
-              </div>
-            </div>
-          </div>
+          </AnimatedSection>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Data Enabled Energy Management */}
-      <section id="advisory" className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="font-heading text-barrio-blue uppercase tracking-widest font-bold text-xs mb-3">
-            Services of Barrio Energy
-          </p>
-          <h2 className="font-heading text-5xl font-bold text-barrio-navy mb-12 uppercase tracking-wide">
-            Data Enabled Energy Management
+// Services section
+function Services() {
+  const services = [
+    {
+      title: "Data Centers",
+      description: "Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in Texas ERCOT.",
+      icon: "🏢",
+    },
+    {
+      title: "Energy Advisory",
+      description: "Power procurement, engineering consulting, solar and battery energy storage projects. We procure power at the lowest possible rates.",
+      icon: "💡",
+    },
+    {
+      title: "24/7 Monitoring",
+      description: "Data-enabled energy management with 24/7 monitoring of assets. We participate in various demand response programs.",
+      icon: "📊",
+    },
+  ];
+
+  return (
+    <section id="services" className="py-24 px-6 bg-zinc-900/30">
+      <div className="max-w-6xl mx-auto">
+        <AnimatedSection className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="text-white">Our </span>
+            <span className="text-cyan-400">Services</span>
           </h2>
-          <div className="bg-barrio-light p-12 rounded-lg shadow-sm">
-            <p className="font-body text-xl text-gray-700 leading-relaxed">
-              Through our partners, we provide <span className="font-bold text-barrio-navy">24/7 monitoring</span> of 
-              different assets. We participate in various demand response programs to meet client needs.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies Section */}
-      <section className="py-20 bg-barrio-light">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="font-heading text-barrio-blue uppercase tracking-widest font-bold text-xs mb-3">
-              Recent Projects
-            </p>
-            <h2 className="font-heading text-5xl font-bold text-barrio-navy uppercase tracking-wide">
-              Our Latest Case Studies
-            </h2>
-          </div>
-
-          <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-            <Image
-              src="/IMG_8200-scaled.jpg"
-              alt="Project Case Study"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-barrio-navy/90 to-transparent flex items-center">
-              <div className="max-w-2xl p-12 text-white">
-                <h3 className="font-heading text-4xl font-bold mb-4">Featured Projects</h3>
-                <p className="font-body text-xl mb-6">
-                  Explore our portfolio of successful energy infrastructure developments across Texas.
-                </p>
-                <button className="font-heading bg-barrio-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded transition uppercase text-sm tracking-wide">
-                  View Case Studies
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact CTA Section */}
-      <section id="contact" className="relative py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-barrio-navy"></div>
-        <div className="relative max-w-4xl mx-auto text-center px-4 text-white">
-          <h2 className="font-heading text-5xl font-bold mb-6 uppercase tracking-wide">Contact Us</h2>
-          <p className="font-body text-xl mb-12 font-light">
-            Ready to discuss your energy infrastructure needs? Get in touch with our team.
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Comprehensive energy solutions tailored to your needs.
           </p>
+        </AnimatedSection>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {services.map((service, i) => (
+            <ServiceCard key={service.title} {...service} delay={i * 0.1} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Contact section
+function Contact() {
+  return (
+    <section id="contact" className="py-24 px-6">
+      <div className="max-w-4xl mx-auto text-center">
+        <AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="text-white">Ready to </span>
+            <span className="text-cyan-400">Get Started?</span>
+          </h2>
+          <p className="text-gray-400 mb-12 max-w-xl mx-auto">
+            Contact us to discuss your energy infrastructure needs. Our team is ready to help you find the right solution.
+          </p>
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href="mailto:info@barrioenergy.com"
-              className="font-heading bg-barrio-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded transition text-sm uppercase tracking-wide"
+              className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-lg transition-colors"
             >
               Email Us
             </a>
-            <a
-              href="#contact"
-              className="font-heading border-2 border-white text-white hover:bg-white hover:text-barrio-navy font-bold py-4 px-10 rounded transition text-sm uppercase tracking-wide"
-            >
-              Schedule a Call
-            </a>
+            <div className="px-8 py-4 border border-zinc-800 rounded-lg text-gray-400">
+              Houston, Texas
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-16">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <Image
-                src="/Asset-3@300x.png"
-                alt="Barrio Energy"
-                width={150}
-                height={58}
-                className="mb-6 brightness-0 invert opacity-60"
-              />
-              <p className="font-body text-sm leading-relaxed">
-                Innovative energy solutions for the Texas ERCOT market.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-heading text-white font-bold mb-4 text-base uppercase tracking-wide">Company</h3>
-              <ul className="font-body space-y-3 text-sm">
-                <li><a href="#home" className="hover:text-white transition">About</a></li>
-                <li><a href="#services" className="hover:text-white transition">Services</a></li>
-                <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-heading text-white font-bold mb-4 text-base uppercase tracking-wide">Services</h3>
-              <ul className="font-body space-y-3 text-sm">
-                <li><a href="#services" className="hover:text-white transition">Data Centers</a></li>
-                <li><a href="#advisory" className="hover:text-white transition">Energy Advisory</a></li>
-                <li><a href="#advisory" className="hover:text-white transition">Energy Management</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-heading text-white font-bold mb-4 text-base uppercase tracking-wide">Contact</h3>
-              <ul className="font-body space-y-3 text-sm">
-                <li>info@barrioenergy.com</li>
-                <li>Houston, Texas</li>
-                <li>ERCOT Market</li>
-              </ul>
-            </div>
+          <div className="mt-12 pt-8 border-t border-zinc-800">
+            <p className="text-cyan-400 font-semibold">info@barrioenergy.com</p>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="font-body text-sm">&copy; {new Date().getFullYear()} Barrio Energy. All rights reserved.</p>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
+// Footer
+function Footer() {
+  return (
+    <footer className="py-12 px-6 border-t border-zinc-800">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-xl font-bold tracking-tight">
+            <span className="text-white">BARRIO</span>
+            <span className="text-cyan-400">ENERGY</span>
           </div>
+          <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Barrio Energy. All rights reserved.</p>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
+  );
+}
+
+// Main page
+export default function Home() {
+  return (
+    <main>
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Contact />
+      <Footer />
+    </main>
   );
 }
