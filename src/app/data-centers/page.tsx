@@ -25,7 +25,7 @@ const properties: Property[] = [
     acreage: "10.0",
     lat: 31.5945,
     lng: -102.8930,
-    photos: ["/images/landscape-datacenter-1.jpg", "/images/landscape-datacenter-2.jpg"],
+    photos: ["/images/monahans-property.jpg", "/images/monahans-property-2.jpg", "/images/monahans-property-3.jpg"],
   },
   {
     name: "Lolita",
@@ -50,7 +50,7 @@ const properties: Property[] = [
     acreage: "1.0",
     lat: 28.3325,
     lng: -98.1175,
-    photos: ["/images/george-west-property.jpg", "/images/george-west-property-2.jpg"],
+    photos: ["/images/george-west-property.jpg", "/images/george-west-property-2.jpg", "/images/george-west-property-3.jpg", "/images/george-west-property-4.jpg", "/images/george-west-property-5.jpg"],
   },
   {
     name: "Tyler",
@@ -70,7 +70,7 @@ const properties: Property[] = [
     acreage: "4.051",
     lat: 28.9825,
     lng: -95.9690,
-    photos: ["/images/landscape-datacenter-2.jpg", "/images/landscape-datacenter-3.jpg"],
+    photos: ["/images/baycity-property.jpg", "/images/baycity-property-2.jpg", "/images/baycity-property-3.jpg"],
   },
   {
     name: "Pavlov",
@@ -80,7 +80,7 @@ const properties: Property[] = [
     acreage: "3.0",
     lat: 28.9780,
     lng: -95.9650,
-    photos: ["/images/landscape-datacenter-1.jpg", "/images/landscape-datacenter-2.jpg"],
+    photos: ["/images/baycity-property.jpg", "/images/baycity-property-2.jpg", "/images/baycity-property-3.jpg"],
   },
   {
     name: "Euler",
