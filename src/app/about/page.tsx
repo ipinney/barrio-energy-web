@@ -258,15 +258,6 @@ function TeamAvatar({ member, large = false, showVideo = false, onVideoToggle }:
         />
       )}
       
-      {/* LIVE indicator badge */}
-      {hasVideo && (
-        <div className="absolute top-2 right-2 z-10">
-          <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-rose-500/90 backdrop-blur-sm rounded text-[10px] font-bold text-white tracking-wide">
-            <span className="w-1 h-1 bg-white rounded-full animate-pulse" />
-            LIVE
-          </span>
-        </div>
-      )}
     </div>
   );
 }
