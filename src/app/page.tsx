@@ -157,7 +157,7 @@ function Hero() {
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl z-10" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl z-10" />
 
-      <motion.div style={{ y, opacity }} className="relative z-20 text-center px-6 max-w-4xl">
+      <motion.div style={{ y, opacity }} className="relative z-20 text-center px-6 max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
