@@ -25,7 +25,7 @@ const properties: Property[] = [
     acreage: "10.0",
     lat: 31.5945,
     lng: -102.8930,
-    photos: ["/images/monahans-property.jpg", "/images/monahans-property-2.jpg", "/images/monahans-property-3.jpg"],
+    photos: ["/images/monahans-property.jpg", "/images/monahans-property-2.jpg", "/images/monahans-property-3.jpg", "/images/monahans-property-4.jpg"],
   },
   {
     name: "Lolita",
