@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 // Property data
@@ -12,6 +13,7 @@ type Property = {
   acreage: string;
   lat: number;
   lng: number;
+  photos: string[];
 };
 
 const properties: Property[] = [
@@ -23,6 +25,7 @@ const properties: Property[] = [
     acreage: "10.0",
     lat: 31.5945,
     lng: -102.8930,
+    photos: ["/images/landscape-datacenter-1.jpg", "/images/landscape-datacenter-2.jpg"],
   },
   {
     name: "Lolita",
@@ -32,6 +35,12 @@ const properties: Property[] = [
     acreage: "5.0",
     lat: 28.8230,
     lng: -96.9370,
+    photos: [
+      "/images/lolita-property.jpg",
+      "/images/lolita-property-2.jpg",
+      "/images/lolita-property-3.jpg",
+      "/images/lolita-property-4.jpg",
+    ],
   },
   {
     name: "George West",
@@ -41,6 +50,7 @@ const properties: Property[] = [
     acreage: "1.0",
     lat: 28.3325,
     lng: -98.1175,
+    photos: ["/images/landscape-datacenter-3.jpg", "/images/landscape-datacenter-1.jpg"],
   },
   {
     name: "Tyler",
@@ -50,6 +60,7 @@ const properties: Property[] = [
     acreage: "0.561",
     lat: 32.3513,
     lng: -95.3011,
+    photos: ["/images/tyler-property.jpg", "/images/tyler-property-2.jpg"],
   },
   {
     name: "Blackcat",
@@ -59,6 +70,7 @@ const properties: Property[] = [
     acreage: "4.051",
     lat: 28.9825,
     lng: -95.9690,
+    photos: ["/images/landscape-datacenter-2.jpg", "/images/landscape-datacenter-3.jpg"],
   },
   {
     name: "Pavlov",
@@ -68,6 +80,7 @@ const properties: Property[] = [
     acreage: "3.0",
     lat: 28.9780,
     lng: -95.9650,
+    photos: ["/images/landscape-datacenter-1.jpg", "/images/landscape-datacenter-2.jpg"],
   },
   {
     name: "Euler",
@@ -77,8 +90,95 @@ const properties: Property[] = [
     acreage: "2.0",
     lat: 28.6685,
     lng: -97.3885,
+    photos: ["/images/landscape-datacenter-3.jpg", "/images/landscape-datacenter-1.jpg"],
   },
 ];
+
+// Lightbox component
+function Lightbox({
+  photos,
+  propertyName,
+  onClose,
+}: {
+  photos: string[];
+  propertyName: string;
+  onClose: () => void;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
+  };
+
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+      onClick={onClose}
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-white/70 hover:text-white z-10 p-2"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      {/* Counter */}
+      <div className="absolute top-4 left-4 text-white/70 text-sm">
+        {currentIndex + 1} / {photos.length}
+      </div>
+
+      {/* Main image */}
+      <motion.div
+        key={currentIndex}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.2 }}
+        className="relative max-w-5xl max-h-[80vh] w-full px-16"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={photos[currentIndex]}
+          alt={`${propertyName} - Photo ${currentIndex + 1}`}
+          className="w-full h-full object-contain max-h-[80vh] rounded-lg"
+        />
+      </motion.div>
+
+      {/* Navigation arrows */}
+      {photos.length > 1 && (
+        <>
+          <button
+            onClick={goToPrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
+    </motion.div>
+  );
+}
 
 // Animated section wrapper
 function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -130,7 +230,7 @@ function Navbar() {
 }
 
 // Property Card
-function PropertyCard({ property, index }: { property: Property; index: number }) {
+function PropertyCard({ property, index, onPhotoClick }: { property: Property; index: number; onPhotoClick: (photos: string[], name: string) => void }) {
   const isAvailable = property.status === "Available";
   const isOptionPending = property.status === "Option Pending";
   const mapUrl = `https://www.google.com/maps?q=${property.lat},${property.lng}`;
@@ -150,14 +250,24 @@ function PropertyCard({ property, index }: { property: Property; index: number }
           : "border-zinc-800 hover:border-zinc-700"
       }`}
     >
-      {/* Background Image */}
-      <div className="h-48 overflow-hidden relative">
+      {/* Background Image - Clickable for gallery */}
+      <div 
+        className="h-48 overflow-hidden relative cursor-pointer"
+        onClick={() => onPhotoClick(property.photos, property.name)}
+      >
         <img 
-          src={index % 2 === 0 ? "/images/landscape-datacenter-2.jpg" : "/images/landscape-datacenter-3.jpg"} 
+          src={property.photos[0]} 
           alt={property.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent" />
+        
+        {/* Gallery overlay hint */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 text-white text-sm px-3 py-1 rounded-full">
+            View Photos
+          </span>
+        </div>
         
         {/* Status Badge */}
         <div className="absolute top-4 right-4">
@@ -268,6 +378,16 @@ function Footer() {
 }
 
 export default function DataCentersPage() {
+  const [lightbox, setLightbox] = useState<{ photos: string[]; name: string } | null>(null);
+
+  const handlePhotoClick = (photos: string[], name: string) => {
+    setLightbox({ photos, name });
+  };
+
+  const closeLightbox = () => {
+    setLightbox(null);
+  };
+
   return (
     <main>
       <Navbar />
@@ -326,7 +446,7 @@ export default function DataCentersPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {properties.map((property, index) => (
-              <PropertyCard key={property.name} property={property} index={index} />
+              <PropertyCard key={property.name} property={property} index={index} onPhotoClick={handlePhotoClick} />
             ))}
           </div>
         </div>
@@ -355,6 +475,17 @@ export default function DataCentersPage() {
       </section>
 
       <Footer />
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <Lightbox
+            photos={lightbox.photos}
+            propertyName={lightbox.name}
+            onClose={closeLightbox}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }
