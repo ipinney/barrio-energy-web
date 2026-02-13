@@ -232,14 +232,8 @@ function Hero() {
 
 // About section
 function About() {
-  const sitePhotos = [
-    "/images/site-photo-1.jpg",
-    "/images/site-photo-2.jpg", 
-    "/images/site-photo-3.jpg",
-  ];
-
   return (
-    <section className="py-24 px-6">
+    <section className="pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <AnimatedSection>
@@ -260,21 +254,12 @@ function About() {
           </AnimatedSection>
           
           <AnimatedSection className="relative">
-            <div className="grid grid-cols-2 gap-3">
-              {sitePhotos.map((photo, i) => (
-                <div 
-                  key={i} 
-                  className={`aspect-square rounded-xl overflow-hidden border border-zinc-800 ${
-                    i === 0 ? "row-span-2" : ""
-                  }`}
-                >
-                  <img 
-                    src={photo} 
-                    alt={`Barrio Energy facility ${i + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              ))}
+            <div className="rounded-2xl overflow-hidden border border-zinc-800">
+              <img 
+                src="/images/datacenter-west-texas.jpg" 
+                alt="Barrio Energy West Texas Data Center"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
             </div>
           </AnimatedSection>
         </div>
