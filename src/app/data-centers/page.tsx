@@ -14,6 +14,7 @@ type Property = {
   lat: number;
   lng: number;
   photos: string[];
+  hideMap?: boolean;
 };
 
 const properties: Property[] = [
@@ -23,8 +24,8 @@ const properties: Property[] = [
     mw: "12 MW",
     status: "Leased",
     acreage: "10.0",
-    lat: 31.5945,
-    lng: -102.8930,
+    lat: 31.5891,
+    lng: -102.8862,
     photos: ["/images/monahans-property.jpg", "/images/monahans-property-2.jpg", "/images/monahans-property-3.jpg", "/images/monahans-property-4.jpg", "/images/monahans-property-5.jpg"],
   },
   {
@@ -33,8 +34,8 @@ const properties: Property[] = [
     mw: "7.5 MW",
     status: "Leased",
     acreage: "5.0",
-    lat: 28.8230,
-    lng: -96.9370,
+    lat: 28.8378,
+    lng: -96.5433,
     photos: [
       "/images/lolita-property.jpg",
       "/images/lolita-property-2.jpg",
@@ -48,8 +49,8 @@ const properties: Property[] = [
     mw: "13 MW",
     status: "Leased",
     acreage: "1.0",
-    lat: 28.3325,
-    lng: -98.1175,
+    lat: 28.3318,
+    lng: -98.1172,
     photos: ["/images/george-west-property.jpg", "/images/george-west-property-2.jpg", "/images/george-west-property-3.jpg", "/images/george-west-property-4.jpg", "/images/george-west-property-5.jpg"],
   },
   {
@@ -58,8 +59,8 @@ const properties: Property[] = [
     mw: "12 MW",
     status: "Leased",
     acreage: "1.923",
-    lat: 32.3513,
-    lng: -95.3011,
+    lat: 32.3508,
+    lng: -95.3125,
     photos: ["/images/tyler-property.jpg", "/images/tyler-property-2.jpg"],
   },
   {
@@ -68,8 +69,8 @@ const properties: Property[] = [
     mw: "10 MW",
     status: "Leased",
     acreage: "4.051",
-    lat: 28.9825,
-    lng: -95.9690,
+    lat: 28.9828,
+    lng: -95.9694,
     photos: ["/images/baycity-property.jpg", "/images/baycity-property-2.jpg", "/images/baycity-property-3.jpg"],
   },
   {
@@ -78,8 +79,9 @@ const properties: Property[] = [
     mw: "12 MW",
     status: "Option Pending",
     acreage: "3.0",
-    lat: 28.9780,
-    lng: -95.9650,
+    lat: 28.9828,
+    lng: -95.9694,
+    hideMap: true,
     photos: ["/images/baycity-property.jpg", "/images/baycity-property-2.jpg", "/images/baycity-property-3.jpg"],
   },
   {
@@ -88,8 +90,9 @@ const properties: Property[] = [
     mw: "TBD",
     status: "Available",
     acreage: "2.0",
-    lat: 28.6685,
-    lng: -97.3885,
+    lat: 28.6468,
+    lng: -97.4380,
+    hideMap: true,
     photos: ["/images/landscape-datacenter-3.jpg", "/images/landscape-datacenter-1.jpg"],
   },
 ];
@@ -345,15 +348,17 @@ function PropertyCard({ property, index, onPhotoClick }: { property: Property; i
         </div>
         
         {/* Map Link */}
-        <a
-          href={mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors mb-4"
-        >
-          <span>📍</span>
-          <span>View on Map</span>
-        </a>
+        {!property.hideMap && (
+          <a
+            href={mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors mb-4"
+          >
+            <span>📍</span>
+            <span>View on Map</span>
+          </a>
+        )}
         
         {/* CTA for Available property */}
         {isAvailable && (
@@ -380,8 +385,8 @@ function StatsBar() {
 
   return (
     <div className="bg-zinc-900/50 border-y border-zinc-800">
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="max-w-6xl px-6 py-8" style={{ margin: '0 auto', textAlign: 'center' }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" style={{ margin: '0 auto' }}>
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
