@@ -481,17 +481,19 @@ export default function DataCentersPage() {
       <StatsBar />
 
       {/* Properties Grid */}
-      <section className="py-24 px-6">
+      <section className="px-6" style={{ paddingTop: '80px', paddingBottom: '96px' }}>
         <div className="max-w-6xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-white">Property </span>
-              <span className="text-cyan-400">Portfolio</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mb-12" style={{ margin: "0 auto", textAlign: "center" }}>
-              Explore our collection of data center-ready properties across Texas.
-            </p>
-          </AnimatedSection>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <AnimatedSection>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-white">Property </span>
+                <span className="text-cyan-400">Portfolio</span>
+              </h2>
+              <p className="text-gray-400 max-w-2xl" style={{ margin: "0 auto", paddingBottom: "48px", textAlign: "center" }}>
+                Explore our collection of data center-ready properties across Texas.
+              </p>
+            </AnimatedSection>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {properties.map((property, index) => (

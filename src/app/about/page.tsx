@@ -444,7 +444,7 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ paddingTop: '140px', paddingBottom: '64px' }}>
+      <section className="relative overflow-hidden" style={{ paddingTop: '80px', paddingBottom: '24px' }}>
         {/* Dark gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-900 z-0" />
         
@@ -465,7 +465,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Grid */}
-      <section className="px-6 pb-24">
+      <section className="px-6 pb-24" style={{ paddingTop: '48px' }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.map((member, index) => (
