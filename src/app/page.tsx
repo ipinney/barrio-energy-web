@@ -19,38 +19,8 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
   );
 }
 
-// Stats component
-function Stats() {
-  const stats = [
-    { value: "6", label: "Facilities" },
-    { value: "64", unit: "MW", label: "Power Capacity" },
-    { value: "24.2", unit: "Acres", label: "Site Capacity" },
-  ];
-
-  return (
-    <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
-      {stats.map((stat, i) => (
-        <motion.div
-          key={stat.label}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.1, duration: 0.5 }}
-          className="text-center"
-        >
-          <div className="text-4xl md:text-5xl font-bold text-white mb-1">
-            {stat.value}
-            {stat.unit && <span className="text-cyan-400 text-2xl ml-1">{stat.unit}</span>}
-          </div>
-          <div className="text-sm text-gray-400 uppercase tracking-widest">{stat.label}</div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
 // Service card
-function ServiceCard({ title, description, icon, delay }: { title: string; description: string; icon: string; delay: number }) {
+function ServiceCard({ title, description, icon, delay, image }: { title: string; description: string; icon: string; delay: number; image?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -58,11 +28,23 @@ function ServiceCard({ title, description, icon, delay }: { title: string; descr
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5 }}
       whileHover={{ y: -5 }}
-      className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 hover:border-cyan-500/30 transition-colors"
+      className="group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-cyan-500/30 transition-colors"
     >
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">{title}</h3>
-      <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+      {/* Background Image */}
+      {image && (
+        <div className="h-48 overflow-hidden">
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+      )}
+      <div className="p-8">
+        <div className="text-4xl mb-4">{icon}</div>
+        <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">{title}</h3>
+        <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+      </div>
     </motion.div>
   );
 }
@@ -80,11 +62,14 @@ function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
-      <div className="max-w-6xl mx-auto px-6 py-4">
+      <div className="max-w-6xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            <span className="text-white">BARRIO</span>
-            <span className="text-cyan-400">ENERGY</span>
+          <Link href="/" className="flex items-center">
+            <img 
+              src="/images/logo-main.jpg" 
+              alt="Barrio Energy" 
+              className="h-10 w-auto"
+            />
           </Link>
           
           {/* Desktop Nav */}
@@ -150,14 +135,29 @@ function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        poster="/images/solar-energy.jpg"
+      >
+        <source src="/images/hero-video.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/60 z-10" />
+      
       {/* Background grid */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4zIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4zIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30 z-10" />
       
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl z-10" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl z-10" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 text-center px-6 max-w-4xl">
+      <motion.div style={{ y, opacity }} className="relative z-20 text-center px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -231,6 +231,12 @@ function Hero() {
 
 // About section
 function About() {
+  const sitePhotos = [
+    "/images/site-photo-1.jpg",
+    "/images/site-photo-2.jpg", 
+    "/images/site-photo-3.jpg",
+  ];
+
   return (
     <section className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -253,8 +259,21 @@ function About() {
           </AnimatedSection>
           
           <AnimatedSection className="relative">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-800 p-8 glow-cyan">
-              <Stats />
+            <div className="grid grid-cols-2 gap-3">
+              {sitePhotos.map((photo, i) => (
+                <div 
+                  key={i} 
+                  className={`aspect-square rounded-xl overflow-hidden border border-zinc-800 ${
+                    i === 0 ? "row-span-2" : ""
+                  }`}
+                >
+                  <img 
+                    src={photo} 
+                    alt={`Barrio Energy facility ${i + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ))}
             </div>
           </AnimatedSection>
         </div>
@@ -270,16 +289,19 @@ function Services() {
       title: "Data Centers",
       description: "Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in Texas ERCOT.",
       icon: "🏢",
+      image: "/images/datacenter.jpg",
     },
     {
       title: "Energy Advisory",
       description: "Power procurement, engineering consulting, solar and battery energy storage projects. We procure power at the lowest possible rates.",
       icon: "💡",
+      image: "/images/solar-energy.jpg",
     },
     {
       title: "24/7 Monitoring",
       description: "Data-enabled energy management with 24/7 monitoring of assets. We participate in various demand response programs.",
       icon: "📊",
+      image: "/images/industrial.jpg",
     },
   ];
 

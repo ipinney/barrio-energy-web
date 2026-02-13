@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     description: "Data Centers & Energy Infrastructure in Texas ERCOT",
     type: "website",
   },
+  icons: {
+    icon: [{ url: "/images/asset-1.png" }],
+  },
 };
 
 export default function RootLayout({
