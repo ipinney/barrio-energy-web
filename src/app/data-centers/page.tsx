@@ -206,6 +206,7 @@ function Navbar() {
     { href: "/", label: "Home", active: false },
     { href: "/data-centers", label: "Data Centers", active: true },
     { href: "/about", label: "Team", active: false },
+    { href: "/news", label: "News", active: false },
     { href: "/#contact", label: "Contact", active: false },
   ];
 

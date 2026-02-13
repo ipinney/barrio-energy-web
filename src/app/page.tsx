@@ -57,6 +57,7 @@ function Navbar() {
     { href: "/", label: "Home" },
     { href: "/data-centers", label: "Data Centers" },
     { href: "/about", label: "Team" },
+    { href: "/news", label: "News" },
     { href: "/#contact", label: "Contact" },
   ];
 
