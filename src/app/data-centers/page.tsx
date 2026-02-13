@@ -57,7 +57,7 @@ const properties: Property[] = [
     location: "Tyler, TX",
     mw: "12 MW",
     status: "Leased",
-    acreage: "0.561",
+    acreage: "1.923",
     lat: 32.3513,
     lng: -95.3011,
     photos: ["/images/tyler-property.jpg", "/images/tyler-property-2.jpg"],
@@ -330,7 +330,7 @@ function StatsBar() {
   const stats = [
     { value: "7", label: "Properties" },
     { value: "64+", label: "MW Capacity" },
-    { value: "24.2", label: "Acres" },
+    { value: "25.6", label: "Acres" },
     { value: "Texas ERCOT", label: "Market" },
   ];
 
