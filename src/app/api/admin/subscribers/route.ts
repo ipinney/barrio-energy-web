@@ -8,8 +8,16 @@ export async function GET() {
   try {
     const data = fs.readFileSync(SUBSCRIBERS_FILE, "utf-8");
     const parsed = JSON.parse(data);
-    return NextResponse.json(parsed);
+    // Return only confirmed emails
+    const confirmed = parsed.subscribers
+      .filter((s: any) => s.status === "confirmed")
+      .map((s: any) => s.email);
+    return NextResponse.json({ 
+      subscribers: parsed.subscribers,
+      emails: confirmed,
+      count: confirmed.length 
+    });
   } catch {
-    return NextResponse.json({ subscribers: [] });
+    return NextResponse.json({ subscribers: [], emails: [], count: 0 });
   }
 }
