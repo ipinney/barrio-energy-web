@@ -9,17 +9,7 @@ export type Article = {
   image?: string;
 };
 
-export const articles: Article[
-  {
-    slug: "test-article-from-admin",
-    title: "Test Article from Admin",
-    date: "2026-02-15",
-    author: "Andi",
-    excerpt: "Testing the new admin publishing system",
-    readingTime: "1 min read",
-    body: "<p>This is a test article to verify the publishing system works.</p>",
-  },
-] = [
+export const articles: Article[] = [
   {
     slug: "we-are-no-longer-just-studying-this",
     title: '"We Are No Longer Just Studying This" — ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks',
