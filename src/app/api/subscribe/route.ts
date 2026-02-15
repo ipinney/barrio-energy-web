@@ -4,7 +4,7 @@ import path from "path";
 import crypto from "crypto";
 
 const SUBSCRIBERS_FILE = path.join(process.cwd(), "data", "subscribers.json");
-
+const RESEND_API_KEY = "re_E8jrtiuT_4hSEj47coq5AZPkEiKWArmaP";
 const BASE_URL = "https://barrioenergy.com";
 
 interface Subscriber {
@@ -41,27 +41,99 @@ function generateToken(): string {
   return crypto.randomBytes(32).toString("hex");
 }
 
-// Generate branded confirmation email content
-function generateConfirmationEmail(email: string, token: string): string {
+async function sendEmail(to: string, subject: string, html: string) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${RESEND_API_KEY}`,
+    },
+    body: JSON.stringify({
+      from: "Barrio Energy <news@barrioenergy.com>",
+      to: to,
+      subject: subject,
+      html: html,
+    }),
+  });
+  
+  if (!response.ok) {
+    const error = await response.text();
+    console.error("Resend error:", error);
+    return false;
+  }
+  return true;
+}
+
+function generateConfirmationEmailHtml(email: string, token: string): string {
   const confirmLink = `${BASE_URL}/api/subscribe?token=${token}&action=confirm`;
   const unsubscribeLink = `${BASE_URL}/api/subscribe?token=${token}&action=unsubscribe`;
 
-  return `Subject: Confirm your Barrio Energy subscription
-
-Hi there!
-
-Thanks for subscribing to the Barrio Energy newsletter.
-
-Click the link below to confirm your subscription:
-${confirmLink}
-
-If you didn't subscribe, you can ignore this email.
-
----
-Barrio Energy
-Texas Energy & Infrastructure Updates
-
-Manage your subscription: ${unsubscribeLink}`;
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 500px; background-color: #18181b; border-radius: 16px; border: 1px solid #27272a;">
+          <!-- Header -->
+          <tr>
+            <td style="padding: 32px 32px 16px; text-align: center;">
+              <h1 style="margin: 0; color: #22d3ee; font-size: 24px; font-weight: 700;">
+                Welcome to Barrio Energy
+              </h1>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding: 16px 32px 32px;">
+              <p style="margin: 0 0 16px; color: #e4e4e7; font-size: 16px; line-height: 1.6;">
+                Thanks for subscribing to our Texas energy and infrastructure newsletter!
+              </p>
+              <p style="margin: 0 0 24px; color: #a1a1aa; font-size: 14px; line-height: 1.6;">
+                Click the button below to confirm your subscription.
+              </p>
+              
+              <!-- CTA Button -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <a href="${confirmLink}" style="display: inline-block; padding: 14px 32px; background-color: #22d3ee; color: #0a0a0a; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                      Confirm Subscription
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              
+              <p style="margin: 24px 0 0; color: #71717a; font-size: 12px; line-height: 1.6;">
+                If you didn't subscribe, you can safely ignore this email.
+              </p>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; border-top: 1px solid #27272a; text-align: center;">
+              <p style="margin: 0; color: #52525b; font-size: 12px;">
+                © ${new Date().getFullYear()} Barrio Energy. All rights reserved.
+              </p>
+              <p style="margin: 8px 0 0; color: #52525b; font-size: 12px;">
+                <a href="${unsubscribeLink}" style="color: #22d3ee; text-decoration: underline;">Unsubscribe</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`;
 }
 
 // GET - confirm subscription or unsubscribe
@@ -122,6 +194,11 @@ export async function POST(request: NextRequest) {
         existing.status = "pending";
         existing.confirmToken = generateToken();
         writeSubscribers(data);
+        
+        // Send confirmation email
+        const html = generateConfirmationEmailHtml(existing.email, existing.confirmToken);
+        await sendEmail(existing.email, "Confirm your Barrio Energy subscription", html);
+        
         return NextResponse.json({
           message: "Check your email to confirm your subscription!",
           pending: true
@@ -142,52 +219,16 @@ export async function POST(request: NextRequest) {
     });
     writeSubscribers(data);
 
+    // Send confirmation email automatically
+    const html = generateConfirmationEmailHtml(trimmedEmail, token);
+    await sendEmail(trimmedEmail, "Confirm your Barrio Energy subscription", html);
+
     return NextResponse.json({
       message: "Check your email to confirm your subscription!",
-      pending: true,
-      token: token // Return token for admin to generate confirmation email
+      pending: true
     }, { status: 201 });
   } catch (error) {
     console.error("Subscribe error:", error);
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
-  }
-}
-
-// PUT - generate confirmation email for admin to send
-export async function PUT(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { email } = body;
-
-    if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
-    }
-
-    const data = readSubscribers();
-    const subscriber = data.subscribers.find((s) => s.email === email.toLowerCase());
-
-    if (!subscriber) {
-      return NextResponse.json({ error: "Subscriber not found" }, { status: 404 });
-    }
-
-    if (!subscriber.confirmToken) {
-      subscriber.confirmToken = generateToken();
-      writeSubscribers(data);
-    }
-
-    const emailContent = generateConfirmationEmail(subscriber.email, subscriber.confirmToken);
-    
-    // Generate mailto link for admin to send
-    const mailto = `mailto:${subscriber.email}?subject=${encodeURIComponent("Confirm your Barrio Energy subscription")}&body=${encodeURIComponent(emailContent)}`;
-
-    return NextResponse.json({
-      success: true,
-      email: subscriber.email,
-      mailto: mailto,
-      status: subscriber.status
-    });
-  } catch (error) {
-    console.error("Generate confirmation error:", error);
-    return NextResponse.json({ error: "Failed to generate confirmation email" }, { status: 500 });
   }
 }
