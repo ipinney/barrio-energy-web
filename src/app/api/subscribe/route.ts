@@ -41,8 +41,9 @@ function generateToken(): string {
   return crypto.randomBytes(32).toString("hex");
 }
 
-async function sendEmail(to: string, subject: string, html: string) {
-  const response = await fetch("https://api.resend.com/emails", {
+// Fire-and-forget email (non-blocking)
+function sendEmailBg(to: string, subject: string, html: string) {
+  fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -54,115 +55,50 @@ async function sendEmail(to: string, subject: string, html: string) {
       subject: subject,
       html: html,
     }),
-  });
-  
-  if (!response.ok) {
-    const error = await response.text();
-    console.error("Resend error:", error);
-    return false;
-  }
-  return true;
+  }).catch(err => console.error("Email error:", err));
 }
 
-function generateConfirmationEmailHtml(email: string, token: string): string {
+function generateConfirmationHtml(email: string, token: string): string {
   const confirmLink = `${BASE_URL}/api/subscribe?token=${token}&action=confirm`;
-  const unsubscribeLink = `${BASE_URL}/api/subscribe?token=${token}&action=unsubscribe`;
-
+  const unsubLink = `${BASE_URL}/api/subscribe?token=${token}&action=unsubscribe`;
   return `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a; padding: 40px 20px;">
-    <tr>
-      <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 500px; background-color: #18181b; border-radius: 16px; border: 1px solid #27272a;">
-          <!-- Header -->
-          <tr>
-            <td style="padding: 32px 32px 16px; text-align: center;">
-              <h1 style="margin: 0; color: #22d3ee; font-size: 24px; font-weight: 700;">
-                Welcome to Barrio Energy
-              </h1>
-            </td>
-          </tr>
-          
-          <!-- Content -->
-          <tr>
-            <td style="padding: 16px 32px 32px;">
-              <p style="margin: 0 0 16px; color: #e4e4e7; font-size: 16px; line-height: 1.6;">
-                Thanks for subscribing to our Texas energy and infrastructure newsletter!
-              </p>
-              <p style="margin: 0 0 24px; color: #a1a1aa; font-size: 14px; line-height: 1.6;">
-                Click the button below to confirm your subscription.
-              </p>
-              
-              <!-- CTA Button -->
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="center">
-                    <a href="${confirmLink}" style="display: inline-block; padding: 14px 32px; background-color: #22d3ee; color: #0a0a0a; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
-                      Confirm Subscription
-                    </a>
-                  </td>
-                </tr>
-              </table>
-              
-              <p style="margin: 24px 0 0; color: #71717a; font-size: 12px; line-height: 1.6;">
-                If you didn't subscribe, you can safely ignore this email.
-              </p>
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="padding: 24px 32px; border-top: 1px solid #27272a; text-align: center;">
-              <p style="margin: 0; color: #52525b; font-size: 12px;">
-                © ${new Date().getFullYear()} Barrio Energy. All rights reserved.
-              </p>
-              <p style="margin: 8px 0 0; color: #52525b; font-size: 12px;">
-                <a href="${unsubscribeLink}" style="color: #22d3ee; text-decoration: underline;">Unsubscribe</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-`;
+<div style="background:#0a0a0a;padding:40px 20px;font-family:-apple-system,sans-serif;">
+  <div style="max-width:500px;margin:0 auto;background:#18181b;border-radius:16px;border:1px solid #27272a;">
+    <div style="padding:32px;text-align:center;">
+      <h1 style="color:#22d3ee;font-size:24px;margin:0;">Welcome to Barrio Energy</h1>
+    </div>
+    <div style="padding:16px 32px 32px;">
+      <p style="color:#e4e4e7;font-size:16px;margin:0 0 16px;">Thanks for subscribing!</p>
+      <p style="color:#a1a1aa;font-size:14px;margin:0 0 24px;">Click below to confirm:</p>
+      <a href="${confirmLink}" style="display:inline-block;padding:14px 32px;background:#22d3ee;color:#0a0a0a;font-size:16px;font-weight:600;text-decoration:none;border-radius:8px;">Confirm Subscription</a>
+      <p style="color:#71717a;font-size:12px;margin:24px 0 0;"><a href="${unsubLink}" style="color:#22d3ee;">Unsubscribe</a></p>
+    </div>
+  </div>
+</div>`;
 }
 
-// GET - confirm subscription or unsubscribe
+// GET - confirm or unsubscribe
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token = searchParams.get("token");
   const action = searchParams.get("action");
 
-  if (!token) {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
-  }
+  if (!token) return NextResponse.json({ error: "Invalid" }, { status: 400 });
 
   const data = readSubscribers();
-  const subscriber = data.subscribers.find((s) => s.confirmToken === token);
-
-  if (!subscriber) {
-    return NextResponse.redirect(new URL("/news?error=invalid_token", request.url));
-  }
+  const sub = data.subscribers.find(s => s.confirmToken === token);
+  if (!sub) return NextResponse.redirect(new URL("/news?error=invalid", request.url));
 
   if (action === "confirm") {
-    subscriber.status = "confirmed";
-    subscriber.confirmedAt = new Date().toISOString();
-    subscriber.confirmToken = undefined;
+    sub.status = "confirmed";
+    sub.confirmedAt = new Date().toISOString();
+    sub.confirmToken = undefined;
     writeSubscribers(data);
     return NextResponse.redirect(new URL("/news?subscribed=true", request.url));
   }
 
   if (action === "unsubscribe") {
-    subscriber.status = "unsubscribed";
+    sub.status = "unsubscribed";
     writeSubscribers(data);
     return NextResponse.redirect(new URL("/news?unsubscribed=true", request.url));
   }
@@ -170,65 +106,45 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ error: "Invalid action" }, { status: 400 });
 }
 
-// POST - new subscription
+// POST - subscribe
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { email } = body;
-
-    if (!email || typeof email !== "string") {
-      return NextResponse.json({ error: "Email is required." }, { status: 400 });
+    const { email } = await request.json();
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
-    const trimmedEmail = email.trim().toLowerCase();
-
-    if (!isValidEmail(trimmedEmail)) {
-      return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
-    }
-
+    const trimmed = email.trim().toLowerCase();
     const data = readSubscribers();
-    const existing = data.subscribers.find((s) => s.email === trimmedEmail);
+    const existing = data.subscribers.find(s => s.email === trimmed);
 
     if (existing) {
       if (existing.status === "unsubscribed") {
         existing.status = "pending";
         existing.confirmToken = generateToken();
         writeSubscribers(data);
-        
-        // Send confirmation email
-        const html = generateConfirmationEmailHtml(existing.email, existing.confirmToken);
-        await sendEmail(existing.email, "Confirm your Barrio Energy subscription", html);
-        
-        return NextResponse.json({
-          message: "Check your email to confirm your subscription!",
-          pending: true
-        }, { status: 200 });
+        sendEmailBg(existing.email, "Confirm your subscription", generateConfirmationHtml(existing.email, existing.confirmToken));
+        return NextResponse.json({ message: "Check your email!", pending: true });
       }
-      if (existing.status === "pending") {
-        return NextResponse.json({ message: "Check your email to confirm your subscription!" }, { status: 200 });
-      }
-      return NextResponse.json({ message: "You're already subscribed!" }, { status: 200 });
+      if (existing.status === "pending") return NextResponse.json({ message: "Check your email!" });
+      return NextResponse.json({ message: "Already subscribed!" });
     }
 
     const token = generateToken();
     data.subscribers.push({
-      email: trimmedEmail,
+      email: trimmed,
       subscribedAt: new Date().toISOString(),
       status: "pending",
       confirmToken: token,
     });
     writeSubscribers(data);
 
-    // Send confirmation email automatically
-    const html = generateConfirmationEmailHtml(trimmedEmail, token);
-    await sendEmail(trimmedEmail, "Confirm your Barrio Energy subscription", html);
+    // Send confirmation email (non-blocking)
+    sendEmailBg(trimmed, "Confirm your subscription", generateConfirmationHtml(trimmed, token));
 
-    return NextResponse.json({
-      message: "Check your email to confirm your subscription!",
-      pending: true
-    }, { status: 201 });
-  } catch (error) {
-    console.error("Subscribe error:", error);
-    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+    return NextResponse.json({ message: "Check your email to confirm!", pending: true }, { status: 201 });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }

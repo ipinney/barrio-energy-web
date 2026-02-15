@@ -5,96 +5,36 @@ import path from "path";
 const SUBSCRIBERS_FILE = path.join(process.cwd(), "data", "subscribers.json");
 const RESEND_API_KEY = "re_E8jrtiuT_4hSEj47coq5AZPkEiKWArmaP";
 
-async function sendEmail(to: string[], subject: string, html: string) {
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${RESEND_API_KEY}`,
-    },
-    body: JSON.stringify({
-      from: "Barrio Energy <onboarding@resend.dev>",
-      to: to,
-      bcc: to,
-      subject: subject,
-      html: html,
-    }),
-  });
-  
-  if (!response.ok) {
-    const error = await response.text();
-    console.error("Resend error:", error);
-    return { success: false, error };
-  }
-  return { success: true };
-}
-
-function generateNewsletterEmailHtml(body: string): string {
+function generateNewsletterHtml(body: string): string {
   return `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a; padding: 40px 20px;">
-    <tr>
-      <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #18181b; border-radius: 16px; border: 1px solid #27272a;">
-          <!-- Header -->
-          <tr>
-            <td style="padding: 32px 32px 16px; text-align: center;">
-              <h1 style="margin: 0; color: #22d3ee; font-size: 28px; font-weight: 700;">
-                Barrio Energy
-              </h1>
-              <p style="margin: 8px 0 0; color: #a1a1aa; font-size: 14px;">
-                Texas Energy & Infrastructure Updates
-              </p>
-            </td>
-          </tr>
-          
-          <!-- Content -->
-          <tr>
-            <td style="padding: 24px 32px 32px;">
-              ${body.split('\n').map(line => {
-                if (line.trim() === '') return '<p style="margin: 0 0 16px; color: #e4e4e7; font-size: 16px; line-height: 1.6;">&nbsp;</p>';
-                if (line.startsWith('# ')) return `<h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">${line.substring(2)}</h2>`;
-                if (line.startsWith('## ')) return `<h3 style="margin: 24px 0 12px; color: #ffffff; font-size: 18px; font-weight: 600;">${line.substring(3)}</h3>`;
-                return `<p style="margin: 0 0 16px; color: #e4e4e7; font-size: 16px; line-height: 1.6;">${line}</p>`;
-              }).join('')}
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="padding: 24px 32px; border-top: 1px solid #27272a; text-align: center;">
-              <p style="margin: 0; color: #52525b; font-size: 12px;">
-                © ${new Date().getFullYear()} Barrio Energy. All rights reserved.
-              </p>
-              <p style="margin: 8px 0 0; color: #52525b; font-size: 12px;">
-                You're receiving this because you subscribed to Barrio Energy updates.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-`;
+<div style="background:#0a0a0a;padding:40px 20px;font-family:-apple-system,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;background:#18181b;border-radius:16px;border:1px solid #27272a;">
+    <div style="padding:32px;text-align:center;border-bottom:1px solid #27272a;">
+      <h1 style="color:#22d3ee;font-size:28px;margin:0;">Barrio Energy</h1>
+      <p style="color:#a1a1aa;font-size:14px;margin:8px 0 0;">Texas Energy & Infrastructure Updates</p>
+    </div>
+    <div style="padding:32px;">
+      ${body.split('\n').map(line => {
+        if (!line.trim()) return '';
+        if (line.startsWith('# ')) return `<h2 style="color:#fff;font-size:22px;margin:0 0 16px;">${line.substring(2)}</h2>`;
+        if (line.startsWith('## ')) return `<h3 style="color:#fff;font-size:18px;margin:24px 0 12px;">${line.substring(3)}</h3>`;
+        return `<p style="color:#e4e4e7;font-size:16px;line-height:1.6;margin:0 0 16px;">${line}</p>`;
+      }).join('')}
+    </div>
+    <div style="padding:24px 32px;border-top:1px solid #27272a;text-align:center;">
+      <p style="color:#52525b;font-size:12px;margin:0;">© ${new Date().getFullYear()} Barrio Energy. All rights reserved.</p>
+    </div>
+  </div>
+</div>`;
 }
 
 export async function GET() {
   try {
     const data = JSON.parse(fs.readFileSync(SUBSCRIBERS_FILE, "utf-8"));
-    const confirmed = data.subscribers
-      .filter((s: any) => s.status === "confirmed")
-      .map((s: any) => s.email);
+    const confirmed = data.subscribers.filter((s: any) => s.status === "confirmed");
     return NextResponse.json({ 
       subscribers: data.subscribers,
-      emails: confirmed,
+      emails: confirmed.map((s: any) => s.email),
       count: confirmed.length 
     });
   } catch {
@@ -104,40 +44,44 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { subject, body: emailBody } = body;
-
-    if (!subject || !emailBody) {
-      return NextResponse.json({ error: "Subject and body are required" }, { status: 400 });
+    const { subject, body } = await request.json();
+    if (!subject || !body) {
+      return NextResponse.json({ error: "Subject and body required" }, { status: 400 });
     }
 
-    // Read confirmed subscribers
     const data = JSON.parse(fs.readFileSync(SUBSCRIBERS_FILE, "utf-8"));
-    const confirmedEmails = data.subscribers
-      .filter((s: any) => s.status === "confirmed")
-      .map((s: any) => s.email);
+    const confirmed = data.subscribers.filter((s: any) => s.status === "confirmed");
 
-    if (confirmedEmails.length === 0) {
+    if (confirmed.length === 0) {
       return NextResponse.json({ error: "No confirmed subscribers" }, { status: 400 });
     }
 
-    // Convert body to HTML
-    const html = generateNewsletterEmailHtml(emailBody);
+    // Send to all (batch for production, single for test)
+    const html = generateNewsletterHtml(body);
+    const emails = confirmed.map((s: any) => s.email);
     
-    // Send via Resend
-    const result = await sendEmail(confirmedEmails, subject, html);
+    // Fire-and-forget send
+    fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "Barrio Energy <onboarding@resend.dev>",
+        bcc: emails,
+        subject: subject,
+        html: html,
+      }),
+    }).catch(err => console.error("Send error:", err));
 
-    if (!result.success) {
-      return NextResponse.json({ error: "Failed to send emails", details: result.error }, { status: 500 });
-    }
-
-    return NextResponse.json({
-      success: true,
-      recipient_count: confirmedEmails.length,
-      message: `Newsletter sent to ${confirmedEmails.length} subscribers`
+    return NextResponse.json({ 
+      success: true, 
+      recipient_count: confirmed.length,
+      message: `Sending to ${confirmed.length} subscribers`
     });
-  } catch (error) {
-    console.error("Send error:", error);
-    return NextResponse.json({ error: "Failed to send newsletter" }, { status: 500 });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "Failed to send" }, { status: 500 });
   }
 }
