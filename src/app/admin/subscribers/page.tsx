@@ -34,6 +34,22 @@ export default function AdminSubscribersPage() {
     }
   };
 
+  const sendConfirmation = async (email: string) => {
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (data.mailto) {
+        window.location.href = data.mailto;
+      }
+    } catch (err) {
+      console.error("Error sending confirmation:", err);
+    }
+  };
+
   const handleCopyEmails = () => {
     const confirmed = subscribers
       .filter((s: any) => s.status === "confirmed")
@@ -52,8 +68,12 @@ export default function AdminSubscribersPage() {
       return;
     }
 
-    const subject = encodeURIComponent("Barrio Energy Newsletter Test");
-    const body = encodeURIComponent("Hi there!\n\nThis is a test email from Barrio Energy.\n\n- The Barrio Energy Team");
+    const subject = encodeURIComponent("Barrio Energy Newsletter");
+    const body = encodeURIComponent(`Hi there!
+
+Here is the latest from Barrio Energy.
+
+- The Barrio Energy Team`);
     
     window.location.href = `mailto:?bcc=${confirmedEmails.join(",")}&subject=${subject}&body=${body}`;
   };
@@ -92,7 +112,7 @@ export default function AdminSubscribersPage() {
 
   return (
     <main className="min-h-screen bg-zinc-950 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <a href="/news" className="text-cyan-400 hover:text-cyan-300 text-sm">
@@ -139,6 +159,31 @@ export default function AdminSubscribersPage() {
             Email Subscribers
           </button>
         </div>
+
+        {/* Pending Section - Send Confirmations */}
+        {pendingCount > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-yellow-400 mb-4">Pending Confirmations</h2>
+            <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4">
+              <p className="text-yellow-200 text-sm mb-4">
+                These subscribers need to confirm their email. Click "Send Confirmation" to email them directly.
+              </p>
+              <div className="space-y-2">
+                {subscribers.filter((s: any) => s.status === "pending").map((sub: any, i: number) => (
+                  <div key={i} className="flex items-center justify-between bg-zinc-900/50 rounded-lg px-4 py-2">
+                    <span className="text-white">{sub.email}</span>
+                    <button
+                      onClick={() => sendConfirmation(sub.email)}
+                      className="px-4 py-1 bg-yellow-600 hover:bg-yellow-500 text-white text-sm font-medium rounded transition-colors"
+                    >
+                      Send Confirmation
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Email list output */}
         {emailList && (

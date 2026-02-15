@@ -5,6 +5,8 @@ import crypto from "crypto";
 
 const SUBSCRIBERS_FILE = path.join(process.cwd(), "data", "subscribers.json");
 
+const BASE_URL = "https://barrioenergy.com";
+
 interface Subscriber {
   email: string;
   subscribedAt: string;
@@ -13,11 +15,7 @@ interface Subscriber {
   confirmedAt?: string;
 }
 
-interface SubscribersData {
-  subscribers: Subscriber[];
-}
-
-function readSubscribers(): SubscribersData {
+function readSubscribers(): { subscribers: Subscriber[] } {
   try {
     const data = fs.readFileSync(SUBSCRIBERS_FILE, "utf-8");
     return JSON.parse(data);
@@ -26,7 +24,7 @@ function readSubscribers(): SubscribersData {
   }
 }
 
-function writeSubscribers(data: SubscribersData) {
+function writeSubscribers(data: { subscribers: Subscriber[] }) {
   const dir = path.dirname(SUBSCRIBERS_FILE);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -41,6 +39,29 @@ function isValidEmail(email: string): boolean {
 
 function generateToken(): string {
   return crypto.randomBytes(32).toString("hex");
+}
+
+// Generate branded confirmation email content
+function generateConfirmationEmail(email: string, token: string): string {
+  const confirmLink = `${BASE_URL}/api/subscribe?token=${token}&action=confirm`;
+  const unsubscribeLink = `${BASE_URL}/api/subscribe?token=${token}&action=unsubscribe`;
+
+  return `Subject: Confirm your Barrio Energy subscription
+
+Hi there!
+
+Thanks for subscribing to the Barrio Energy newsletter.
+
+Click the link below to confirm your subscription:
+${confirmLink}
+
+If you didn't subscribe, you can ignore this email.
+
+---
+Barrio Energy
+Texas Energy & Infrastructure Updates
+
+Manage your subscription: ${unsubscribeLink}`;
 }
 
 // GET - confirm subscription or unsubscribe
@@ -63,7 +84,7 @@ export async function GET(request: NextRequest) {
   if (action === "confirm") {
     subscriber.status = "confirmed";
     subscriber.confirmedAt = new Date().toISOString();
-    subscriber.confirmToken = undefined; // Clear token after use
+    subscriber.confirmToken = undefined;
     writeSubscribers(data);
     return NextResponse.redirect(new URL("/news?subscribed=true", request.url));
   }
@@ -98,7 +119,6 @@ export async function POST(request: NextRequest) {
 
     if (existing) {
       if (existing.status === "unsubscribed") {
-        // Re-subscribe
         existing.status = "pending";
         existing.confirmToken = generateToken();
         writeSubscribers(data);
@@ -113,7 +133,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "You're already subscribed!" }, { status: 200 });
     }
 
-    // Create new pending subscriber
     const token = generateToken();
     data.subscribers.push({
       email: trimmedEmail,
@@ -123,16 +142,52 @@ export async function POST(request: NextRequest) {
     });
     writeSubscribers(data);
 
-    // TODO: Send confirmation email (integrate with Resend/SendGrid/Postmark)
-    // For now, auto-confirm for testing
-    console.log(`[SUBSCRIBE] ${trimmedEmail} - token: ${token}`);
-
     return NextResponse.json({
       message: "Check your email to confirm your subscription!",
-      pending: true
+      pending: true,
+      token: token // Return token for admin to generate confirmation email
     }, { status: 201 });
   } catch (error) {
     console.error("Subscribe error:", error);
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+  }
+}
+
+// PUT - generate confirmation email for admin to send
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { email } = body;
+
+    if (!email) {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
+    const data = readSubscribers();
+    const subscriber = data.subscribers.find((s) => s.email === email.toLowerCase());
+
+    if (!subscriber) {
+      return NextResponse.json({ error: "Subscriber not found" }, { status: 404 });
+    }
+
+    if (!subscriber.confirmToken) {
+      subscriber.confirmToken = generateToken();
+      writeSubscribers(data);
+    }
+
+    const emailContent = generateConfirmationEmail(subscriber.email, subscriber.confirmToken);
+    
+    // Generate mailto link for admin to send
+    const mailto = `mailto:${subscriber.email}?subject=${encodeURIComponent("Confirm your Barrio Energy subscription")}&body=${encodeURIComponent(emailContent)}`;
+
+    return NextResponse.json({
+      success: true,
+      email: subscriber.email,
+      mailto: mailto,
+      status: subscriber.status
+    });
+  } catch (error) {
+    console.error("Generate confirmation error:", error);
+    return NextResponse.json({ error: "Failed to generate confirmation email" }, { status: 500 });
   }
 }
