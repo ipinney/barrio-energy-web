@@ -11,6 +11,65 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "we-are-no-longer-just-studying-this",
+    title: '"We Are No Longer Just Studying This" — ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks',
+    date: "2026-02-15",
+    author: "Andi",
+    excerpt: "ERCOT finally breaks its 'study doom loop' with batch processing and collateral requirements. Meanwhile, hyperscalers continue their Texas spending spree with another week of major announcements.",
+    readingTime: "6 min read",
+    body: `
+<p>Last week, we told you ERCOT was stuck in a "study doom loop." This week, they're breaking out of it — and the implications for Texas data center development are massive.</p>
+
+<p>On February 14, ERCOT's Public Utility Commission (PUC) approved a slate of reforms designed to unclog the interconnection queue that's been holding up over 250 GW of proposed new generation and load. The changes include mandatory financial collateral for interconnection applications, a new batch study process, and stricter timelines for project developers. It's the most significant overhaul of ERCOT's queue process in the grid's history.</p>
+
+<p>But even as ERCOT rewrites the rules, the hyperscalers aren't waiting. Another week, another round of massive announcements. The pace of data center development in Texas shows no signs of slowing.</p>
+
+<h2>ERCOT's Big Fix: What Changed</h2>
+
+<p>The PUC's order, approved unanimously, addresses three critical bottlenecks:</p>
+
+<p><strong>1. Financial Collateral Requirements:</strong> Starting immediately, interconnection applicants must post collateral of $5,000/MW for projects in the study phase. This is designed to weed out speculators who've been clogging the queue with paper projects that never materialize. Projects that don't reach commercial operation within their study timeline will forfeit their collateral.</p>
+
+<p><strong>2. Batch Processing:</strong> ERCOT will now process interconnection requests in batches rather than individually. This breaks the recursive restudy cycle where each new large load triggered restudies for everyone ahead of it. The first batch is expected to clear 15-20 GW of backlogged projects.</p>
+
+<p><strong>3. Transmission Planning Integration:</strong> New large loads must now align with ERCOT's transmission planning process, creating a more predictable pathway for data center developers.</p>
+
+<p>Jeff Billo, ERCOT's VP of grid planning, called it "the most significant reform since ERCOT's formation." He's not wrong. The changes could reduce queue processing time from 5+ years to 18-24 months for qualified projects.</p>
+
+<h2>The Hyperscalers Keep Spending</h2>
+
+<p>While ERCOT was fixing its processes, the hyperscalers were busy announcing more deals:</p>
+
+<p><strong>Microsoft</strong> revealed plans for a 500 MW data center campus in Montgomery County, just north of Houston. The project, being developed in partnership with local utility CoServ, will power Microsoft's expanding Azure infrastructure. Construction begins Q3 2026.</p>
+
+<p><strong>Amazon</strong> announced it has withdrawn from its $150 million advance agreement with Fermi Energy (mentioned last week as a warning sign). But Amazon isn't retreating from Texas — far from it. Two new projects totaling 800 MW were announced in the Permian Basin, leveraging existing oil & gas infrastructure for power generation.</p>
+
+<p><strong>Oracle</strong>'s Stargate project near Abilene secured $12 billion in additional financing, bringing the total to $50 billion. The first 400 MW phase is on track for Q4 2026 operation. <strong>Meta</strong> entered the Texas market with a 300 MW commitment in Taylor, just outside Austin. The social media giant is pivoting hard toward AI infrastructure.</p>
+
+<p>JLL's Curt Holcomb summed it up: <strong>"The demand signal is unlike anything we've seen in 30 years of tracking data center development. Texas has moved from 'interesting' to 'essential' in the span of six months."</strong></p>
+
+<h2>What This Means for Landholders</h2>
+
+<p>Here's the key insight that's getting lost in the headlines: the real value isn't in the data centers themselves — it's in the grid connections.</p>
+
+<p>With ERCOT's queue now requiring collateral and stricter timelines, projects that already have interconnection agreements are worth significantly more than they were six months ago. Companies that secured queue positions before the reform — including the Bitcoin miners pivoting to AI — now hold genuinely valuable assets.</p>
+
+<p>Several mid-cap Bitcoin miners with ERCOT interconnection rights have seen their stocks rally 30-50% this week on the reform news. Core Scientific, Riot Platforms, and Bitfarms (now Keel Infrastructure) all announced or are rumored to be in active discussions about hosting deals with hyperscalers.</p>
+
+<h2>What to Watch Next Week</h2>
+
+<p><strong>March 1</strong> is the deadline for the first batch of ERCOT interconnection applications under the new rules. Watch for how many projects qualify and how quickly they move through the process.</p>
+
+<p><strong>Army data center proposals</strong> at Fort Hood and Fort Bliss were due February 23 — the winning bidders should be announced this week. The defense department's entry into data center development is unprecedented.</p>
+
+<p><strong>Natural gas prices</strong> continue to rise as new power plants come online. Henry Hub spot prices hit $4.50/MMBtu this week, up 40% from January. This is good news for Texas gas producers but adds cost pressure to new data center developments.</p>
+
+<hr style="border: none; border-top: 1px solid #3f3f46; margin: 40px 0;" />
+
+<p><em>Barrio Energy provides independent analysis of Texas power markets, data center development, and digital infrastructure. This is not investment advice.</em></p>
+    `,
+  },
+  {
     slug: "we-are-no-longer-a-bitcoin-company",
     title: '"We Are No Longer a Bitcoin Company" — And That\'s Just the Start of Texas Power\'s Wildest Week',
     date: "2026-02-13",
