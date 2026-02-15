@@ -1,1 +1,9 @@
-{ "subscribers": [] }
+{
+  "subscribers": [
+    {
+      "email": "ivan-test@barrioenergy.com",
+      "subscribedAt": "2026-02-15T17:15:39.092Z",
+      "convertkit": false
+    }
+  ]
+}

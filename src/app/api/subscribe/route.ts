@@ -1,15 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 
-// For now, store locally AND try to add to ConvertKit
-// If ConvertKit fails, we still have the local backup
 const SUBSCRIBERS_FILE = path.join(process.cwd(), "data", "subscribers.json");
 
-// ConvertKit credentials - using API secret for server-side calls
-const CONVERTKIT_API_SECRET = "Y_dZGYV61IhOrrdy2EBi3-FQnVxO-6w7bUbLHFRIEcA";
+interface Subscriber {
+  email: string;
+  subscribedAt: string;
+  status: "pending" | "confirmed" | "unsubscribed";
+  confirmToken?: string;
+  confirmedAt?: string;
+}
 
-function readSubscribers(): { subscribers: { email: string; subscribedAt: string; convertkit?: boolean }[] } {
+interface SubscribersData {
+  subscribers: Subscriber[];
+}
+
+function readSubscribers(): SubscribersData {
   try {
     const data = fs.readFileSync(SUBSCRIBERS_FILE, "utf-8");
     return JSON.parse(data);
@@ -18,7 +26,7 @@ function readSubscribers(): { subscribers: { email: string; subscribedAt: string
   }
 }
 
-function writeSubscribers(data: { subscribers: { email: string; subscribedAt: string; convertkit?: boolean }[] }) {
+function writeSubscribers(data: SubscribersData) {
   const dir = path.dirname(SUBSCRIBERS_FILE);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -31,24 +39,45 @@ function isValidEmail(email: string): boolean {
   return re.test(email);
 }
 
-async function addToConvertKit(email: string): Promise<boolean> {
-  try {
-    // Try to add via the tags endpoint
-    const response = await fetch(
-      `https://api.convertkit.com/v3/tags/15953969/subscribers?api_secret=${CONVERTKIT_API_SECRET}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      }
-    );
-    return response.ok;
-  } catch (error) {
-    console.error("ConvertKit error:", error);
-    return false;
-  }
+function generateToken(): string {
+  return crypto.randomBytes(32).toString("hex");
 }
 
+// GET - confirm subscription or unsubscribe
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const token = searchParams.get("token");
+  const action = searchParams.get("action");
+
+  if (!token) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+
+  const data = readSubscribers();
+  const subscriber = data.subscribers.find((s) => s.confirmToken === token);
+
+  if (!subscriber) {
+    return NextResponse.redirect(new URL("/news?error=invalid_token", request.url));
+  }
+
+  if (action === "confirm") {
+    subscriber.status = "confirmed";
+    subscriber.confirmedAt = new Date().toISOString();
+    subscriber.confirmToken = undefined; // Clear token after use
+    writeSubscribers(data);
+    return NextResponse.redirect(new URL("/news?subscribed=true", request.url));
+  }
+
+  if (action === "unsubscribe") {
+    subscriber.status = "unsubscribed";
+    writeSubscribers(data);
+    return NextResponse.redirect(new URL("/news?unsubscribed=true", request.url));
+  }
+
+  return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+}
+
+// POST - new subscription
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -64,31 +93,44 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    // Read existing subscribers
     const data = readSubscribers();
+    const existing = data.subscribers.find((s) => s.email === trimmedEmail);
 
-    // Check if already subscribed
-    const alreadyExists = data.subscribers.some((s) => s.email === trimmedEmail);
-    if (alreadyExists) {
+    if (existing) {
+      if (existing.status === "unsubscribed") {
+        // Re-subscribe
+        existing.status = "pending";
+        existing.confirmToken = generateToken();
+        writeSubscribers(data);
+        return NextResponse.json({
+          message: "Check your email to confirm your subscription!",
+          pending: true
+        }, { status: 200 });
+      }
+      if (existing.status === "pending") {
+        return NextResponse.json({ message: "Check your email to confirm your subscription!" }, { status: 200 });
+      }
       return NextResponse.json({ message: "You're already subscribed!" }, { status: 200 });
     }
 
-    // Try to add to ConvertKit (best effort - might fail due to API issues)
-    const convertkitSuccess = await addToConvertKit(trimmedEmail);
-
-    // Save locally regardless
+    // Create new pending subscriber
+    const token = generateToken();
     data.subscribers.push({
       email: trimmedEmail,
       subscribedAt: new Date().toISOString(),
-      convertkit: convertkitSuccess,
+      status: "pending",
+      confirmToken: token,
     });
     writeSubscribers(data);
 
-    const message = convertkitSuccess
-      ? "Successfully subscribed!"
-      : "Successfully subscribed! (We'll sync with our newsletter service soon)";
+    // TODO: Send confirmation email (integrate with Resend/SendGrid/Postmark)
+    // For now, auto-confirm for testing
+    console.log(`[SUBSCRIBE] ${trimmedEmail} - token: ${token}`);
 
-    return NextResponse.json({ message, subscribed: true }, { status: 201 });
+    return NextResponse.json({
+      message: "Check your email to confirm your subscription!",
+      pending: true
+    }, { status: 201 });
   } catch (error) {
     console.error("Subscribe error:", error);
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
