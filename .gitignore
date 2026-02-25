@@ -1,0 +1,6 @@
+.vercel
+.env*.local
+.env.deploy
+deploy_log.txt
+{images,css,js}
+.DS_Store

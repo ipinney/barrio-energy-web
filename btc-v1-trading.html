@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V1 BTC Trading - Performance Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    body { background: #0a0a0a; color: #e5e5e5; font-family: system-ui, -apple-system, sans-serif; }
+    .metric-card { background: #1a1a1a; border: 1px solid #2a2a2a; transition: all 0.2s; }
+    .metric-card:hover { border-color: #3a3a3a; }
+    .stat-positive { color: #10b981; }
+    .stat-negative { color: #ef4444; }
+    .stat-neutral { color: #6b7280; }
+  </style>
+</head>
+<body class="p-6">
+  
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-3xl font-bold flex items-center gap-3">
+          📊 V1 TRADING DASHBOARD
+        </h1>
+        <p class="text-zinc-500 mt-1">Paper Trading · Performance Analytics · Last Updated: <span id="last-update">--</span></p>
+      </div>
+      <div class="flex gap-3">
+        <a href="/gambit.html" class="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-white rounded transition">
+          ← Live Dashboard
+        </a>
+        <a href="https://mission.barrioenergy.com" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition">
+          ← Back to Mission Control
+        </a>
+      </div>
+    </div>
+
+    <!-- Summary Stats -->
+    <div class="grid grid-cols-5 gap-4 mb-6">
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Total Rounds</div>
+        <div class="text-3xl font-bold" id="total-rounds">--</div>
+      </div>
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Win Rate</div>
+        <div class="text-3xl font-bold" id="win-rate">--%</div>
+      </div>
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Total P&L</div>
+        <div class="text-3xl font-bold" id="total-pnl">$--</div>
+      </div>
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Avg Win</div>
+        <div class="text-3xl font-bold stat-positive" id="avg-win">$--</div>
+      </div>
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Avg Loss</div>
+        <div class="text-3xl font-bold stat-negative" id="avg-loss">$--</div>
+      </div>
+    </div>
+
+    <!-- Performance Chart -->
+    <div class="metric-card rounded-lg p-6 mb-6">
+      <h2 class="text-lg font-semibold mb-4">📈 Cumulative P&L</h2>
+      <div style="height: 300px; position: relative;">
+        <canvas id="pnlChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Trade History -->
+    <div class="metric-card rounded-lg p-6">
+      <h2 class="text-lg font-semibold mb-4">📋 Recent Trades (Last 50)</h2>
+      <div class="overflow-x-auto" style="max-height: 600px; overflow-y: auto;">
+        <table class="w-full text-sm font-mono">
+          <thead class="text-zinc-500 border-b border-zinc-800 sticky top-0 bg-zinc-900">
+            <tr>
+              <th class="text-left pb-2 px-2">Time</th>
+              <th class="text-left pb-2 px-2">Signal</th>
+              <th class="text-right pb-2 px-2">Confidence</th>
+              <th class="text-right pb-2 px-2">BTC Δ%</th>
+              <th class="text-center pb-2 px-2">Result</th>
+              <th class="text-right pb-2 px-2">P&L</th>
+            </tr>
+          </thead>
+          <tbody id="trade-history" class="text-zinc-300">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const API_BASE = 'http://192.168.1.185:5001';
+    let pnlChart = null;
+
+    async function fetchData() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/session-stats`);
+        const data = await res.json();
+        
+        updateSummary(data);
+        updateChart(data);
+        updateHistory(data);
+        
+        document.getElementById('last-update').textContent = new Date().toLocaleTimeString();
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+      }
+    }
+
+    function updateSummary(data) {
+      const summary = data.summary || {};
+      
+      document.getElementById('total-rounds').textContent = summary.total_rounds || 0;
+      
+      const winRate = summary.win_rate || 0;
+      document.getElementById('win-rate').textContent = winRate.toFixed(1) + '%';
+      
+      const totalPnl = summary.total_pnl || 0;
+      const pnlEl = document.getElementById('total-pnl');
+      pnlEl.textContent = '$' + totalPnl.toFixed(2);
+      pnlEl.className = 'text-3xl font-bold ' + (totalPnl >= 0 ? 'stat-positive' : 'stat-negative');
+      
+      const avgWin = summary.avg_win || 0;
+      document.getElementById('avg-win').textContent = '$' + avgWin.toFixed(2);
+      
+      const avgLoss = summary.avg_loss || 0;
+      document.getElementById('avg-loss').textContent = '$' + Math.abs(avgLoss).toFixed(2);
+    }
+
+    function updateChart(data) {
+      const trades = data.last_10 || [];
+      
+      // Calculate cumulative P&L
+      let cumulative = 0;
+      const pnlData = trades.reverse().map(t => {
+        cumulative += (t.pnl || 0);
+        return cumulative;
+      });
+      
+      const labels = trades.map(t => t.time);
+      
+      const ctx = document.getElementById('pnlChart').getContext('2d');
+      
+      if (pnlChart) {
+        pnlChart.destroy();
+      }
+      
+      pnlChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Cumulative P&L ($)',
+            data: pnlData,
+            borderColor: pnlData[pnlData.length - 1] >= 0 ? '#10b981' : '#ef4444',
+            backgroundColor: pnlData[pnlData.length - 1] >= 0 ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+            borderWidth: 2,
+            tension: 0.1,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { color: '#222' },
+              ticks: { color: '#666' }
+            },
+            y: {
+              grid: { color: '#222' },
+              ticks: { 
+                color: '#666',
+                callback: (value) => '$' + value.toFixed(2)
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateHistory(data) {
+      const trades = data.last_10 || [];
+      const tbody = document.getElementById('trade-history');
+      tbody.innerHTML = '';
+      
+      trades.forEach(trade => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-zinc-900 hover:bg-zinc-800';
+        
+        const signalClass = trade.signal === 'SKIP' ? 'text-zinc-500' : 
+                           trade.signal === 'BUY_UP' ? 'text-green-400' : 'text-red-400';
+        
+        const resultIcon = trade.correct === 1 ? '✓' : 
+                          trade.correct === 0 ? '✗' : '—';
+        const resultClass = trade.correct === 1 ? 'stat-positive' : 
+                           trade.correct === 0 ? 'stat-negative' : 'stat-neutral';
+        
+        const pnlClass = trade.pnl > 0 ? 'stat-positive' : 
+                        trade.pnl < 0 ? 'stat-negative' : 'stat-neutral';
+        
+        tr.innerHTML = `
+          <td class="py-2 px-2">${trade.time}</td>
+          <td class="py-2 px-2 ${signalClass}">${trade.signal}</td>
+          <td class="py-2 px-2 text-right">${(trade.confidence * 100).toFixed(0)}%</td>
+          <td class="py-2 px-2 text-right ${trade.btc_change >= 0 ? 'stat-positive' : 'stat-negative'}">
+            ${trade.btc_change >= 0 ? '+' : ''}${trade.btc_change.toFixed(3)}%
+          </td>
+          <td class="py-2 px-2 text-center ${resultClass}">${resultIcon}</td>
+          <td class="py-2 px-2 text-right ${pnlClass}">
+            ${trade.pnl !== 0 ? '$' + trade.pnl.toFixed(2) : '—'}
+          </td>
+        `;
+        
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Initialize
+    fetchData();
+    setInterval(fetchData, 10000); // Refresh every 10 seconds
+  </script>
+
+</body>
+</html>

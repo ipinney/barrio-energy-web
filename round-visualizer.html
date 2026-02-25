@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Round Price Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>body{background:#0a0a0a;color:#e5e5e5}</style>
+</head>
+<body class="p-6">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">📊 Round Price Visualizer</h1>
+    
+    <div class="flex gap-4 mb-4">
+      <button onclick="loadData()" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">Load Data</button>
+      <select id="roundSelect" class="bg-zinc-800 px-4 py-2 rounded" onchange="plotRound()">
+        <option value="">Select a round...</option>
+      </select>
+      <label class="flex items-center gap-2">
+        <input type="checkbox" id="filterWinners" onchange="plotRound()" checked>
+        <span>Filter: Show winning side only</span>
+      </label>
+    </div>
+    
+    <div class="flex gap-6 mb-4 text-sm">
+      <span><span class="inline-block w-3 h-3 bg-zinc-600 mr-1"></span>OBSERVE (0-60s)</span>
+      <span><span class="inline-block w-3 h-3 bg-amber-600 mr-1"></span>BUILD (60-180s)</span>
+      <span><span class="inline-block w-3 h-3 bg-emerald-600 mr-1"></span>EXECUTE (180-270s)</span>
+      <span><span class="inline-block w-3 h-3 bg-red-600 mr-1"></span>COOLDOWN (270-300s)</span>
+    </div>
+    
+    <div class="bg-zinc-900 p-4 rounded-lg mb-4">
+      <canvas id="chart" height="120"></canvas>
+    </div>
+    
+    <div id="stats" class="grid grid-cols-4 gap-4"></div>
+  </div>
+
+  <script>
+    let allData = [];
+    let chart = null;
+    
+    async function loadData() {
+      try {
+        const res = await fetch('/rounds-full.json');
+        allData = await res.json();
+        
+        const roundIds = [...new Set(allData.map(d => d.round_id))];
+        const select = document.getElementById('roundSelect');
+        select.innerHTML = '<option value="">Select a round...</option>';
+        
+        roundIds.forEach(rid => {
+          const outcome = allData.find(d => d.round_id === rid)?.outcome;
+          const opt = document.createElement('option');
+          opt.value = rid;
+          opt.textContent = rid + ' → ' + (outcome || '?');
+          select.appendChild(opt);
+        });
+        
+        alert('Loaded ' + roundIds.length + ' rounds');
+      } catch(e) {
+        alert('Error: ' + e.message);
+      }
+    }
+    
+    function plotRound() {
+      const rid = document.getElementById('roundSelect').value;
+      const filterWinners = document.getElementById('filterWinners').checked;
+      if (!rid || !allData.length) return;
+      
+      let data = allData.filter(d => d.round_id === rid).sort((a,b) => a.seconds_into_round - b.seconds_into_round);
+      if (!data.length) return;
+      
+      const outcome = data[0].outcome || 'UNKNOWN';
+      
+      // Filter to winning side only
+      if (filterWinners) {
+        if (outcome === 'UP') {
+          data = data.filter(d => d.yes_ask !== null);
+        } else if (outcome === 'DOWN') {
+          data = data.filter(d => d.no_ask !== null);
+        }
+      }
+      
+      const ctx = document.getElementById('chart').getContext('2d');
+      if (chart) chart.destroy();
+      
+      const labels = data.map(d => d.seconds_into_round + 's');
+      
+      const yesData = data.map(d => d.yes_ask ? d.yes_ask * 100 : null);
+      const noData = data.map(d => d.no_ask ? d.no_ask * 100 : null);
+      const confData = data.map(d => d.confidence ? d.confidence * 100 : null);
+      
+      const color = outcome === 'UP' ? '#10b981' : outcome === 'DOWN' ? '#ef4444' : '#666';
+      
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: outcome === 'UP' ? 'WINNING: YES %' : outcome === 'DOWN' ? 'WINNING: NO %' : 'YES %',
+              data: outcome === 'UP' ? yesData : noData,
+              borderColor: color,
+              backgroundColor: color + '20',
+              borderWidth: 3,
+              tension: 0.3,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Confidence %',
+              data: confData,
+              borderColor: '#3b82f6',
+              borderDash: [5,5],
+              borderWidth: 2,
+              tension: 0.3,
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            y: { min: 0, max: 100, title: { display: true, text: 'Price %' } },
+            y1: { min: 0, max: 100, position: 'right', grid: { drawOnChartArea: false } }
+          }
+        }
+      });
+      
+      document.getElementById('stats').innerHTML = `
+        <div class="bg-zinc-800 p-4 rounded"><div class="text-zinc-400">Round</div><div class="text-xl">${rid}</div></div>
+        <div class="bg-zinc-800 p-4 rounded"><div class="text-zinc-400">Outcome</div><div class="text-xl ${color}">${outcome}</div></div>
+        <div class="bg-zinc-800 p-4 rounded"><div class="text-zinc-400">Points</div><div class="text-xl">${data.length}</div></div>
+        <div class="bg-zinc-800 p-4 rounded"><div class="text-zinc-400">Max Conf</div><div class="text-xl">${(Math.max(...data.map(d=>d.confidence||0))*100.toFixed(0)}%</div></div>
+      `;
+    }
+    
+    loadData();
+  </script>
+</body>
+</html>

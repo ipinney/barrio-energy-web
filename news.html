@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News | Barrio Energy</title>
+    <meta name="description" content="Weekly analysis of Texas energy markets, data center developments, and power infrastructure trends from the Barrio Energy team.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .news-hero-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(6,182,212,0.15);
+            color: #22d3ee;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 9999px;
+            margin-bottom: 16px;
+        }
+        .news-hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .news-hero-sub {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Featured article */
+        .featured-article {
+            background: rgba(22,22,31,0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        .article-meta .dot { opacity: 0.4; }
+        .featured-article h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        .featured-article .article-excerpt {
+            color: #c8c8d4;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #22d3ee;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: gap 0.2s ease;
+        }
+        .read-more:hover { gap: 12px; color: #22d3ee; }
+
+        /* Previous articles section */
+        .prev-section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        .article-card {
+            background: rgba(22,22,31,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+        .article-card:hover {
+            border-color: rgba(255,255,255,0.15);
+        }
+        .article-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.35;
+        }
+        .article-card .article-excerpt {
+            color: #a1a1b5;
+            font-size: 0.925rem;
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        /* Press releases section */
+        .press-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* Full article view */
+        .article-full {
+            display: none;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .article-full.active { display: block; }
+        .article-list.hidden { display: none; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #22d3ee;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 32px;
+            cursor: pointer;
+        }
+        .back-link:hover { color: #22d3ee; }
+        .article-full h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        .article-full .article-meta { margin-bottom: 32px; }
+        .article-full .article-body p {
+            color: #d4d4d8;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-full .article-body h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 32px 0 16px;
+        }
+        .article-full .article-body ol,
+        .article-full .article-body ul {
+            color: #d4d4d8;
+            padding-left: 24px;
+            margin-bottom: 20px;
+        }
+        .article-full .article-body li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        .article-full .article-body strong {
+            color: #fff;
+        }
+
+        /* Author box */
+        .author-box {
+            background: rgba(22,22,31,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 40px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .author-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
+        .author-box .author-role { color: #22d3ee; font-size: 0.8rem; font-weight: 500; margin-bottom: 8px; }
+        .author-box p { color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="data-centers.html" class="nav-link">Data Centers</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="news.html" class="nav-link active">News</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero page-hero-sm">
+        <div class="hero-bg">
+            <div class="hero-overlay hero-overlay-solid"></div>
+        </div>
+        <div class="hero-content" style="text-align:center;">
+            <span class="news-hero-tag">Market Intelligence</span>
+            <h1 class="news-hero-title">Energy News</h1>
+            <p class="news-hero-sub">Weekly analysis of Texas energy markets, data center developments, and power infrastructure trends from the Barrio Energy team.</p>
+        </div>
+    </section>
+
+    <!-- News Content -->
+    <section class="news-section" style="padding: 48px 0 80px;">
+        <div class="container">
+
+            <!-- Article List View -->
+            <div class="article-list" id="articleList">
+
+
+            <!-- Newsletter Subscribe Banner -->
+            <div class="news-subscribe-banner">
+                <div class="news-subscribe-inner">
+                    <div class="news-subscribe-text">
+                        <h3>Get Andi's Market Intel Monthly</h3>
+                        <p>ERCOT analysis, data center developments, and power infrastructure trends — delivered to your inbox.</p>
+                    </div>
+                    <form class="news-subscribe-form" id="newsSubscribeForm">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsSubscribeEmail" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </div>
+                        <p class="newsletter-note">Monthly insights. No spam. Unsubscribe anytime.</p>
+                    </form>
+                    <div class="newsletter-success" id="newsSubscribeSuccess" style="display:none;">
+                        <p>You're subscribed! Watch your inbox for our next update.</p>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Featured Article -->
+                <div class="featured-article">
+                    <div class="article-meta">
+                        <span>February 21, 2026</span>
+                        <span class="dot">&middot;</span>
+                        <span>By Andi</span>
+                        <span class="dot">&middot;</span>
+                        <span>5 min read</span>
+                    </div>
+                    <h2>"Well Positioned to Execute": Starboard Storms Riot, Google Buys Its Own Power Company, and NRG Bets $617 Million on Gas</h2>
+                    <p class="article-excerpt">An activist hedge fund tells Riot Platforms its 1.7 GW of Texas power is worth $1.6 billion in AI hosting. Google buys Intersect Power for $4.75 billion to skip the interconnection queue. And NRG breaks ground on a new gas plant because someone has to actually generate the power.</p>
+                    <a class="read-more" onclick="showArticle('article-3')">Read full article <span>&rarr;</span></a>
+                </div>
+
+                <!-- Previous Articles -->
+                <h3 class="prev-section-title">Previous Articles</h3>
+
+                <div class="article-card">
+                    <div class="article-meta">
+                        <span>February 15, 2026</span>
+                        <span class="dot">&middot;</span>
+                        <span>4 min read</span>
+                    </div>
+                    <h3>"We Are No Longer Just Studying This" &mdash; ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks</h3>
+                    <p class="article-excerpt">ERCOT finally breaks its 'study doom loop' with batch processing and collateral requirements. Meanwhile, hyperscalers continue their Texas spending spree with another week of major announcements.</p>
+                    <a class="read-more" onclick="showArticle('article-1')">Read more <span>&rarr;</span></a>
+                </div>
+
+                <div class="article-card">
+                    <div class="article-meta">
+                        <span>February 13, 2026</span>
+                        <span class="dot">&middot;</span>
+                        <span>6 min read</span>
+                    </div>
+                    <h3>"We Are No Longer a Bitcoin Company" &mdash; And That's Just the Start of Texas Power's Wildest Week</h3>
+                    <p class="article-excerpt">Bitfarms rebrands as Keel Infrastructure, Google signs a 1 GW solar PPA in Texas, and ERCOT admits its interconnection queue is stuck in a 'study doom loop.' This week reshaped the Texas power landscape.</p>
+                    <a class="read-more" onclick="showArticle('article-2')">Read more <span>&rarr;</span></a>
+                </div>
+
+                <!-- Press Releases -->
+                <div class="press-section">
+                    <h3 class="prev-section-title">Press Releases</h3>
+
+                    <div class="article-card">
+                        <div class="article-meta">
+                            <span>August 13, 2025</span>
+                        </div>
+                        <h3>Barrio Energy Announces Two New 10MW Data Center Developments in Matagorda County, TX</h3>
+                        <p class="article-excerpt">Both sites, located in the ERCOT South Zone, offer confirmed availability of up to 10MW of power each and are positioned to support the surging demand for modular data centers, cryptocurrency mining, and advanced computing operations.</p>
+                        <a href="https://www.prnewswire.com/news-releases/barrio-energy-announces-two-new-10mw-data-center-developments-in-matagorda-county-tx-302528878.html" target="_blank" class="read-more">Read Full Release <span>&rarr;</span></a>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-meta">
+                            <span>August 22, 2024</span>
+                        </div>
+                        <h3>Barrio Energy Announces Acquisition of 12MW Data Center in Tyler, TX</h3>
+                        <p class="article-excerpt">This project, which transforms a building within an Opportunity Zone, marks another significant milestone in Barrio Energy's ongoing commitment to expanding digital infrastructure across Texas.</p>
+                        <a href="https://www.prnewswire.com/news-releases/barrio-energy-announces-acquisition-of-12mw-data-center-in-tyler-tx-302227756.html" target="_blank" class="read-more">Read Full Release <span>&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 3: Starboard Storms Riot -->
+            <div class="article-full" id="article-3">
+                <a class="back-link" onclick="showList()">&larr; Back to News</a>
+                <h1>"Well Positioned to Execute": Starboard Storms Riot, Google Buys Its Own Power Company, and NRG Bets $617 Million on Gas</h1>
+                <div class="article-meta">
+                    <span>By Andi | Barrio Energy</span>
+                    <span class="dot">&middot;</span>
+                    <span>February 21, 2026</span>
+                    <span class="dot">&middot;</span>
+                    <span>5 min read</span>
+                </div>
+                <div class="article-body">
+                    <p>Activist investors are now telling Bitcoin miners what to do with their Texas power capacity. Google just bought an entire energy company so it doesn't have to wait in line for grid access. And NRG is breaking ground on a new gas plant in Houston because somebody has to actually generate the electricity all these data centers are going to need.</p>
+                    <p>Three very different plays this week. All pointed at the same reality: whoever controls power in Texas controls the AI buildout. And the race to lock it down is getting aggressive.</p>
+
+                    <h3>Starboard Tells Riot Platforms: "You're Sitting on $1.6 Billion. Act Like It."</h3>
+                    <p>Activist investor Starboard Value went public this week with a letter to Riot Platforms, and it wasn't subtle. Starboard wants Riot to stop treating its 1.7 gigawatts of Texas power capacity like a Bitcoin mining operation and start treating it like what it actually is: <a href="https://www.coindesk.com/business/2026/02/18/bitcoin-miner-riot-platforms-stock-jumps-nearly-7-as-starboard-urges-ai-data-center-expansion" target="_blank">one of the most valuable AI infrastructure footprints in the state</a>.</p>
+                    <p>Starboard's pitch is blunt. The firm called Riot's Corsicana and Rockdale sites in Texas "premier" locations for data center development and argued the company is "well positioned to execute high-quality AI/HPC deals." The math they laid out: converting those sites to AI hosting could generate <strong>over $1.6 billion in annual EBITDA</strong>. AI tenants pay steady, high rents with 80% to 90% profit margins. Bitcoin mining profits, meanwhile, swing with crypto prices that have been ugly for months.</p>
+                    <p>Riot's stock <a href="https://sherwood.news/markets/riot-platforms-rises-activist-push-accelerate-ai-data-center-pivot-starboard-value/" target="_blank">jumped nearly 9% on the news</a>. And Riot isn't starting from zero. In January, the company signed a <a href="https://www.datacenterdynamics.com/en/news/riot-to-convert-cryptomine-site-in-texas-to-hpc-signs-25mw-lease-with-amd/" target="_blank">25 MW lease deal with AMD at its Rockdale facility</a>, converting part of the cryptomine to high-performance computing. That deal alone is worth an estimated $311 million over 10 years, with options that could push it to $1 billion.</p>
+                    <p>J.P. Morgan followed up with an overweight rating and a $20 price target, explicitly tying the call to Riot's AI pivot potential. Two weeks ago, I told you the miner pivot story was just getting started. I didn't expect an activist hedge fund to show up and basically say the same thing with a DCF model attached. But here we are.</p>
+
+                    <h3>Google Bought Intersect Power for $4.75 Billion. Think About What That Means.</h3>
+                    <p>Google's parent Alphabet is doing something none of the other hyperscalers have tried at this scale: <a href="https://www.datacenterdynamics.com/en/news/google-to-acquire-intersect-power-for-475bn/" target="_blank">buying an entire energy development company</a>. The $4.75 billion cash deal for Intersect Power, announced in December and expected to close in the first half of 2026, gives Google direct control over multiple gigawatts of energy and data center projects.</p>
+                    <p>The logic is straightforward. Google doesn't want to wait in ERCOT's interconnection queue like everyone else. Intersect Power founder and CEO Sheldon Kimber has been building exactly the kind of co-located energy and data center infrastructure that Google needs, including the <a href="https://abc.xyz/investor/news/news-details/2025/Alphabet-Announces-Agreement-to-Acquire-Intersect-to-Advance-U-S--Energy-Innovation-2025-DVIuVDM9wW/default.aspx" target="_blank">Quantum Clean Energy Project in Haskell County, Texas</a>: 640 MW of solar, 1.3 GWh of battery storage, and a new data center campus, all slated for completion in late spring 2026.</p>
+                    <p>The numbers behind Intersect tell you how serious Google is about supply. Intersect has a 2.4 GW solar module deal with First Solar through 2026 and a 15.3 GWh Tesla Megapack agreement through 2030. By 2028, the company expects <strong>10.8 GW of capacity</strong> online or in development. Google projected its 2026 AI infrastructure capex at <a href="https://www.cnbc.com/2025/12/22/alphabet-to-acquire-intersect.html" target="_blank">between $91 billion and $93 billion</a>. When a company spending that kind of money decides it's easier to just buy an energy developer than stand in line, that tells you exactly where the bottleneck is. It's not chips. It's not talent. It's power.</p>
+
+                    <h3>NRG Breaks Ground on $617 Million Gas Plant in Houston</h3>
+                    <p>While the hyperscalers chase solar, batteries, and nuclear, NRG Energy is making a very different bet: <a href="https://www.houstonpublicmedia.org/articles/news/energy-environment/2026/02/18/543795/nrg-energy-to-expand-power-plant-complex-in-northeast-harris-county/" target="_blank">a new natural gas plant at its Greens Bayou complex in northeast Harris County</a>. The $617 million project, announced February 18, is expected to be operational by 2028.</p>
+                    <p>Governor Greg Abbott was quick to claim credit, announcing that the project qualified for a state incentive program and calling it an investment that "will add more power to Texas' energy infrastructure and help meet energy needs of Texas homes and businesses." Classic.</p>
+                    <p>The timing matters. ERCOT's own forecasts say Texas power demand could exceed supply as early as this summer. The <a href="https://www.utilitydive.com/news/energy-short-term-outlook-2026-load-demand-data-centers/807530/" target="_blank">EIA recently revised its ERCOT growth rate projection</a> from 15.7% down to 9.6% for 2026, but even the lower number is enormous. And the EIA was explicit about the driver: "increasing demand from large customers, including data centers."</p>
+                    <p>Gas plants aren't sexy. They don't show up in press releases about AI breakthroughs or clean energy ambitions. But they generate power reliably, they can be built faster than nuclear, and Texas needs every megawatt it can get. Sometimes the boring play is the smart one.</p>
+
+                    <h3>Blackstone Just Got the Keys to a Texas Utility</h3>
+                    <p>One more deal worth flagging. On February 6, the <a href="https://www.prnewswire.com/news-releases/texas-commission-approves-txnm-energy-acquisition-by-blackstone-infrastructure-302681501.html" target="_blank">Public Utility Commission of Texas unanimously approved Blackstone Infrastructure's $11.5 billion acquisition of TXNM Energy</a>. The settlement includes $45 million in rate credits to customers, workforce protections, and governance commitments.</p>
+                    <p>Blackstone isn't buying a utility because it loves regulated returns. It's buying grid infrastructure in a state where every new data center needs more transmission and distribution capacity. The <a href="https://www.energytech.com/infrastructure/article/55356458/texas-utility-regulators-approve-blackstones-115b-utility-acquisition" target="_blank">PUCT expects consumers to pay roughly $32 billion in new utility infrastructure costs</a> between now and 2032. That is a lot of rate base growth for the company sitting on it. Smart money, quiet move.</p>
+
+                    <h3>Meanwhile, Batteries Keep Quietly Saving the Grid</h3>
+                    <p>During the most recent winter storm, battery storage provided <strong>9.5% of ERCOT grid power, more than 7,000 megawatts</strong>. Enough to power roughly 1.75 million homes. Noah Roberts, executive director of the <a href="https://www.texastribune.org/2026/01/29/texas-winter-storm-uri-anniversary-power-grid-ercot/" target="_blank">U.S. Energy Storage Coalition, called Texas the nation's "gold standard" in implementing battery storage</a>.</p>
+                    <p>Three years ago, batteries were a rounding error on the ERCOT grid. Now they're outperforming some gas plants during peak demand events. That's not hype. That's 7,000 megawatts of proof. If you're a data center developer looking for reliable backup power, this trend changes everything about site selection.</p>
+
+                    <h3>What to Watch Next Week</h3>
+                    <p><strong>Riot Platforms earnings call:</strong> Watch for specifics on the Corsicana AI conversion timeline and whether Starboard's pressure accelerates management's pivot plans.</p>
+                    <p><strong>Google/Intersect closing timeline:</strong> The deal is expected to close in H1 2026. Any regulatory hiccups would ripple through Google's Texas energy strategy, especially the Haskell County project.</p>
+                    <p><strong>ERCOT batch study results:</strong> The first batch of interconnection applications under the new rules should start producing results. This will sort the real projects from the paper ones.</p>
+                    <p><strong>Stargate Abilene construction milestones:</strong> Published reports suggest the campus is approaching 1 GW of capacity by mid-2026. Updated construction numbers should surface this month.</p>
+
+                    <p><em>This newsletter is for informational purposes only and does not constitute investment advice.</em></p>
+                </div>
+                <div class="author-box">
+                    <img src="images/andi.png" alt="Andi" class="author-avatar">
+                    <div>
+                        <h4>Andi</h4>
+                        <div class="author-role">Market Intelligence Analyst | Barrio Energy</div>
+                        <p>Andi covers Texas power infrastructure, AI data center development, and digital energy markets. She tracks the intersection of compute demand and grid capacity across ERCOT and beyond.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 1: ERCOT Rewrites the Rules -->
+            <div class="article-full" id="article-1">
+                <a class="back-link" onclick="showList()">&larr; Back to News</a>
+                <h1>"We Are No Longer Just Studying This" &mdash; ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks</h1>
+                <div class="article-meta">
+                    <span>By Andi | Barrio Energy</span>
+                    <span class="dot">&middot;</span>
+                    <span>February 15, 2026</span>
+                    <span class="dot">&middot;</span>
+                    <span>4 min read</span>
+                </div>
+                <div class="article-body">
+                    <p>Last week, we told you ERCOT was stuck in a "study doom loop." This week, they're breaking out of it &mdash; and the implications for Texas data center development are massive.</p>
+                    <p>On February 14, ERCOT's Public Utility Commission (PUC) approved a slate of reforms designed to unclog the interconnection queue that's been holding up over 250 GW of proposed new generation and load. The changes include mandatory financial collateral for interconnection applications, a new batch study process, and stricter timelines for project developers. It's the most significant overhaul of ERCOT's queue process in the grid's history.</p>
+                    <p>But even as ERCOT rewrites the rules, the hyperscalers aren't waiting. Another week, another round of massive announcements. The pace of data center development in Texas shows no signs of slowing.</p>
+
+                    <h3>ERCOT's Big Fix: What Changed</h3>
+                    <p>The PUC's order, approved unanimously, addresses three critical bottlenecks:</p>
+                    <ol>
+                        <li><strong>Financial Collateral Requirements:</strong> Starting immediately, interconnection applicants must post collateral of $5,000/MW for projects in the study phase. This is designed to weed out speculators who've been clogging the queue with paper projects that never materialize. Projects that don't reach commercial operation within their study timeline will forfeit their collateral.</li>
+                        <li><strong>Batch Processing:</strong> ERCOT will now process interconnection requests in batches rather than individually. This breaks the recursive restudy cycle where each new large load triggered restudies for everyone ahead of it. The first batch is expected to clear 15-20 GW of backlogged projects.</li>
+                        <li><strong>Transmission Planning Integration:</strong> New large loads must now align with ERCOT's transmission planning process, creating a more predictable pathway for data center developers.</li>
+                    </ol>
+                    <p>Jeff Billo, ERCOT's VP of grid planning, called it "the most significant reform since ERCOT's formation." He's not wrong. The changes could reduce queue processing time from 5+ years to 18-24 months for qualified projects.</p>
+
+                    <h3>The Hyperscalers Keep Spending</h3>
+                    <p>While ERCOT was fixing its processes, the hyperscalers were busy announcing more deals:</p>
+                    <p><strong>Microsoft</strong> revealed plans for a 500 MW data center campus in Montgomery County, just north of Houston. The project, being developed in partnership with local utility CoServ, will power Microsoft's expanding Azure infrastructure. Construction begins Q3 2026.</p>
+                    <p><strong>Amazon</strong> announced it has withdrawn from its $150 million advance agreement with Fermi Energy (mentioned last week as a warning sign). But Amazon isn't retreating from Texas &mdash; far from it. Two new projects totaling 800 MW were announced in the Permian Basin, leveraging existing oil &amp; gas infrastructure for power generation.</p>
+                    <p><strong>Oracle's</strong> Stargate project near Abilene secured $12 billion in additional financing, bringing the total to $50 billion. The first 400 MW phase is on track for Q4 2026 operation.</p>
+                    <p><strong>Meta</strong> entered the Texas market with a 300 MW commitment in Taylor, just outside Austin. The social media giant is pivoting hard toward AI infrastructure.</p>
+                    <p>JLL's Curt Holcomb summed it up: "The demand signal is unlike anything we've seen in 30 years of tracking data center development. Texas has moved from 'interesting' to 'essential' in the span of six months."</p>
+
+                    <h3>What This Means for Landholders</h3>
+                    <p>Here's the key insight that's getting lost in the headlines: the real value isn't in the data centers themselves &mdash; it's in the grid connections.</p>
+                    <p>With ERCOT's queue now requiring collateral and stricter timelines, projects that already have interconnection agreements are worth significantly more than they were six months ago. Companies that secured queue positions before the reform &mdash; including the Bitcoin miners pivoting to AI &mdash; now hold genuinely valuable assets.</p>
+                    <p>Several mid-cap Bitcoin miners with ERCOT interconnection rights have seen their stocks rally 30-50% this week on the reform news. Core Scientific, Riot Platforms, and Bitfarms (now Keel Infrastructure) all announced or are rumored to be in active discussions about hosting deals with hyperscalers.</p>
+
+                    <h3>What to Watch Next Week</h3>
+                    <p><strong>March 1</strong> is the deadline for the first batch of ERCOT interconnection applications under the new rules. Watch for how many projects qualify and how quickly they move through the process.</p>
+                    <p><strong>Army data center proposals</strong> at Fort Hood and Fort Bliss were due February 23 &mdash; the winning bidders should be announced this week. The defense department's entry into data center development is unprecedented.</p>
+                    <p><strong>Natural gas prices</strong> continue to rise as new power plants come online. Henry Hub spot prices hit $4.50/MMBtu this week, up 40% from January. This is good news for Texas gas producers but adds cost pressure to new data center developments.</p>
+                    <p><em>Barrio Energy provides independent analysis of Texas power markets, data center development, and digital infrastructure. This is not investment advice.</em></p>
+                </div>
+                <div class="author-box">
+                    <img src="images/andi.png" alt="Andi" class="author-avatar">
+                    <div>
+                        <h4>Andi</h4>
+                        <div class="author-role">Market Intelligence Analyst | Barrio Energy</div>
+                        <p>Andi covers Texas power infrastructure, AI data center development, and digital energy markets. She tracks the intersection of compute demand and grid capacity across ERCOT and beyond.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 2: No Longer a Bitcoin Company -->
+            <div class="article-full" id="article-2">
+                <a class="back-link" onclick="showList()">&larr; Back to News</a>
+                <h1>"We Are No Longer a Bitcoin Company" &mdash; And That's Just the Start of Texas Power's Wildest Week</h1>
+                <div class="article-meta">
+                    <span>By Andi | Barrio Energy</span>
+                    <span class="dot">&middot;</span>
+                    <span>February 13, 2026</span>
+                    <span class="dot">&middot;</span>
+                    <span>6 min read</span>
+                </div>
+                <div class="article-body">
+                    <p>On Thursday morning, Ben Gagnon stood up in front of investors and said the quiet part out loud: "We are no longer a Bitcoin company." His company, formerly Bitfarms, is now Keel Infrastructure &mdash; redomiciled from Canada to Delaware, pivoted from mining rigs to server racks, and betting the whole house on AI.</p>
+                    <p>Three days later, Google signed the largest renewable PPA in TotalEnergies' American history &mdash; a full gigawatt of solar capacity destined for Texas data centers. And somewhere in Austin, ERCOT's grid planners admitted they're stuck in what one VP called a "study doom loop," unable to process interconnection requests faster than they arrive.</p>
+                    <p>Welcome to the week that made clear: Texas isn't just part of the AI infrastructure story anymore. Texas <em>is</em> the story.</p>
+
+                    <h3>The Miners Are Leaving. The Question Is Whether They Can Pivot Fast Enough.</h3>
+                    <p>Let's be honest about what happened to Bitcoin mining this week: it got ugly. Mining difficulty dropped roughly 11% &mdash; the biggest single decline since the Chinese government effectively banned the industry in 2021. Hashprice cratered to $35/TH/s.</p>
+                    <p>On February 5, public miner stocks got hammered in unison: CleanSpark down 10%, Marathon Digital down 11%, TeraWulf down 8.5%, Riot Platforms off 4.8%. It was the kind of day that makes CFOs update their r&eacute;sum&eacute;s.</p>
+                    <p>Then Winter Storm Fern rolled through Texas and demonstrated, once again, the peculiar position Bitcoin miners occupy on the ERCOT grid. MARA curtailed about 550 MW of load in ERCOT &mdash; 770 MW globally &mdash; as spot prices spiked to $1,200/MWh. Across the system, an estimated 12 GW of mining load was shed.</p>
+                    <p>MARA framed it as civic virtue: "Bitcoin mining is interruptible, we can power down our facilities in minutes, freeing up substantial capacity on the grid." That's true. It's also true that getting paid nothing while the grid charges everyone else $1,200 per megawatt-hour is not exactly a business model you pitch to growth investors.</p>
+                    <p>Which is why the Bitfarms-to-Keel rebrand matters beyond the name change. Gagnon isn't just chasing a trend &mdash; he's following a survival instinct shared by every public miner watching their margins compress in real time. Core Scientific got there first with its CoreWeave deal. IREN, CleanSpark, and TeraWulf are all at various stages of the same pivot.</p>
+                    <p>The pitch is simple: these companies hold land, power interconnections, and transmission access in a market where hyperscalers are desperate for all three. The hard part is converting a mining site into something a Google or a Microsoft would actually lease. That takes capital, engineering, and time &mdash; three things miners are short on.</p>
+
+                    <h3>The Hyperscalers Are Writing Checks That Would Make Defense Contractors Blush</h3>
+                    <p>The sheer volume of capital committed to Texas data centers this week borders on parody. Except these aren't concept decks &mdash; they're signed contracts.</p>
+                    <p><strong>Google's</strong> $40 billion Texas commitment by 2027 got a tangible milestone on February 9, when TotalEnergies announced the 1 GW solar PPA. TotalEnergies SVP Marc-Antoine Pignon called it the largest renewable PPA volume the company has ever signed in the United States. Google is also in negotiations with Bolt Data &mdash; the data center company backed by former Alphabet CEO Eric Schmidt &mdash; for a 250 MW deal at a West Texas campus that could eventually scale to 5 GW. That's not a typo. Five gigawatts. For one campus.</p>
+                    <p><strong>Oracle's</strong> Stargate project near Abilene is targeting 1.2 GW with $38 billion in financing, though word on the street is JPMorgan is having trouble syndicating the debt. That's worth watching &mdash; a $38 billion deal that can't find enough lenders tells you something about risk appetite at the margins.</p>
+                    <p><strong>Constellation Energy and CyrusOne</strong> locked in 1,100+ MW across two Texas sites &mdash; Freestone County and Thad Hill. Constellation CEO Joe Dominguez offered the obligatory patriotic framing: "Constellation is helping lay the foundation that will keep America at the forefront of AI and digital technology." Fine. More relevantly, Constellation is positioning itself as the go-to power provider for data centers at a scale that makes its nuclear fleet look purpose-built for this moment.</p>
+                    <p>And the pipeline keeps growing. <strong>Amp Z</strong> wants to build a $1B+ campus on 1,000 acres near Lufkin. <strong>Black Mountain's</strong> $10 billion Fort Worth megaproject is stuck in city council approvals. <strong>Rick Perry's Fermi Energy</strong> has an 11 GW fantasy planned for Amarillo, except Amazon just pulled a $150 million advance &mdash; not a great sign. And in a move that captures the surreal tenor of the moment, the <strong>U.S. Army</strong> is leasing Fort Hood and Fort Bliss to data center developers on 50-year terms. Proposals are due February 23.</p>
+                    <p>Morgan Stanley put a number on the overall picture: the Big 4 hyperscalers are projected to spend roughly $700 billion in 2026 capex, and the bank expects "upward pressure on hyperscaler capex estimates" to continue.</p>
+                    <p>Curt Holcomb at JLL laid it out: "Texas, and ERCOT in particular, is experiencing more demand and requests for power capacity than any other region in the country." No kidding.</p>
+
+                    <h3>ERCOT's Doom Loop: Too Much Demand, Not Enough Process</h3>
+                    <p>Here's where the optimism runs headlong into physics. ERCOT's demand forecast now projects 145 GW by 2031. The grid currently has about 85 GW of installed capacity. That's a 70% gap, and the timeline is five years.</p>
+                    <p>Jeff Billo, ERCOT's VP of grid planning, told Houston Public Media this week that the interconnection queue has devolved into a recursive nightmare: "We are continually having to restudy those large loads." Every time a multi-hundred-megawatt data center enters the queue, it triggers restudies of the projects already in line.</p>
+                    <p>ERCOT is now switching to a batch study process to try to break the cycle and may revisit 8.2 GW of previously approved load. Billo acknowledged what everyone in the Texas energy world already knows: "All that AI magic happens at a data center... a lot of those data centers are being built in Texas."</p>
+                    <p>SB6 is trying to add financial collateral requirements &mdash; essentially making developers put real money behind their interconnection applications to weed out the speculators from the builders.</p>
+                    <p>Nationally, 252 GW of gas-fired generation is in planning stages, a lot of it aimed at Texas. But "planned" and "operating" are very different words in power development.</p>
+                    <p>The irony isn't lost on anyone: the Bitcoin miners who already have grid connections &mdash; the ones pivoting to AI &mdash; may end up holding the most valuable asset in the state. Not because of what they built, but because of the queue position they're sitting on. In a market where getting plugged in might take years, being plugged in already is worth more than the facility itself.</p>
+
+                    <h3>What to Watch Next Week</h3>
+                    <p><strong>February 23</strong> brings the deadline for Army data center proposals at Fort Hood and Fort Bliss &mdash; the bidder list will reveal how seriously the defense establishment is taking this play.</p>
+                    <p>Keep an eye on <strong>JPMorgan's progress</strong> syndicating Oracle/Stargate's $38 billion. If that deal doesn't come together, it reshuffles the deck in West Texas.</p>
+                    <p><strong>ERCOT's batch study details</strong> will start defining winners and losers in the interconnection queue.</p>
+                    <p>And if hashprice stays pinned below $35/TH/s, expect at least one more public miner to drop the word "Bitcoin" from its investor deck before the month is out.</p>
+                    <p><em>Barrio Energy provides independent analysis of Texas power markets, data center development, and digital infrastructure. This is not investment advice.</em></p>
+                </div>
+                <div class="author-box">
+                    <img src="images/andi.png" alt="Andi" class="author-avatar">
+                    <div>
+                        <h4>Andi</h4>
+                        <div class="author-role">Market Intelligence Analyst | Barrio Energy</div>
+                        <p>Andi covers Texas power infrastructure, AI data center development, and digital energy markets. She tracks the intersection of compute demand and grid capacity across ERCOT and beyond.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Footer Newsletter -->
+            <div class="footer-subscribe">
+                <div class="footer-subscribe-text">
+                    <span class="footer-subscribe-label">Newsletter</span>
+                    <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
+                </div>
+                <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                    <div class="newsletter-input-group">
+                        <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+                    </div>
+                </form>
+                <div class="footer-subscribe-success" style="display:none;">
+                    <p style="color:#22c55e;font-weight:500;font-size:0.9rem;">Subscribed!</p>
+                </div>
+            </div>
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    function showArticle(id) {
+        document.getElementById('articleList').classList.add('hidden');
+        document.querySelectorAll('.article-full').forEach(el => el.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function showList() {
+        document.querySelectorAll('.article-full').forEach(el => el.classList.remove('active'));
+        document.getElementById('articleList').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    </script>
+
+    <script>
+    (function() {
+        const form = document.getElementById('newsSubscribeForm');
+        const success = document.getElementById('newsSubscribeSuccess');
+        if (!form) return;
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('newsSubscribeEmail').value;
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = '...';
+            btn.disabled = true;
+            try {
+                const resp = await fetch('https://api.barrioenergy.com/newsletter/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'email=' + encodeURIComponent(email)
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error('Subscribe failed');
+                form.style.display = 'none';
+                success.style.display = 'block';
+                if (data.message === 'Already subscribed') {
+                    success.querySelector('p').textContent = "You're already subscribed!";
+                }
+            } catch (err) {
+                btn.textContent = 'Try again';
+                btn.disabled = false;
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

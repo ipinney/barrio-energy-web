@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambit - Latency Arbitrage Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+  <style>
+    body { background: #0a0a0a; color: #e5e5e5; font-family: system-ui, -apple-system, sans-serif; }
+    .metric-card { background: #1a1a1a; border: 1px solid #2a2a2a; transition: all 0.2s; }
+    .metric-card:hover { border-color: #3a3a3a; }
+    .price-source { font-size: 0.75rem; color: #888; }
+    .latency-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    .latency-low { background: #10b981; color: white; }
+    .latency-med { background: #f59e0b; color: white; }
+    .latency-high { background: #ef4444; color: white; }
+    
+    /* Volatility meter with zones */
+    .vol-meter { height: 12px; background: linear-gradient(90deg, 
+      #ef4444 0%, #ef4444 20%,        /* Dead: 0-0.03% (red) */
+      #f59e0b 20%, #f59e0b 46.67%,    /* Low: 0.03-0.07% (orange) */
+      #10b981 46.67%, #10b981 100%,   /* Medium: 0.07-0.15% (green) */
+      #3b82f6 100%                    /* High: 0.15%+ (blue) */
+    ); border-radius: 4px; overflow: hidden; margin-top: 8px; position: relative; }
+    
+    .vol-needle { position: absolute; top: -2px; width: 3px; height: 16px; background: white; 
+                  box-shadow: 0 0 4px rgba(255,255,255,0.8); transition: left 0.3s; }
+    
+    .vol-zones { display: flex; justify-content: space-between; margin-top: 4px; font-size: 0.65rem; color: #666; }
+    .vol-zone-label { flex: 1; text-align: center; }
+    .vol-sweet-spot { color: #10b981; font-weight: 600; }
+  </style>
+</head>
+<body class="p-6">
+  
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-3xl font-bold flex items-center gap-3">
+          🎯 V1 BTC-5MIN TRADING DASHBOARD
+        </h1>
+        <p class="text-zinc-500 mt-1">BTC 5-Min Markets · Automated Trading · <strong style="color: #10b981;">Build: Feb 16, 2026 6:35 PM CST</strong></p>
+      </div>
+      <div class="text-right">
+        <a href="/btc-v1-trading.html" class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded transition mb-2">
+          📊 View Full Trading Analytics →
+        </a>
+        <div class="text-sm">
+          <div class="text-zinc-400">Status: <span id="daemon-status" class="text-green-500 font-semibold">Running</span></div>
+          <div class="text-zinc-600 text-xs mt-1" id="last-update">--</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-Source Price Comparison -->
+    <div class="grid grid-cols-3 gap-4 mb-6">
+      
+      <!-- Binance Price -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="flex justify-between items-start mb-2">
+          <div class="price-source">BINANCE (Primary)</div>
+          <span id="binance-latency" class="latency-badge latency-low">--ms</span>
+        </div>
+        <div class="text-3xl font-bold" id="binance-price">$--</div>
+        <div class="text-xs text-zinc-600 mt-1">
+          Lead: <span id="binance-lead" class="text-green-400">--</span>
+        </div>
+      </div>
+
+      <!-- Coinbase Price -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="flex justify-between items-start mb-2">
+          <div class="price-source">COINBASE (Fallback)</div>
+          <span id="coinbase-latency" class="latency-badge latency-med">--ms</span>
+        </div>
+        <div class="text-3xl font-bold" id="coinbase-price">$--</div>
+        <div class="text-xs text-zinc-600 mt-1">
+          Lag: <span id="coinbase-lag" class="text-orange-400">--</span>
+        </div>
+      </div>
+
+      <!-- Polymarket Oracle (Chainlink) -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="flex justify-between items-start mb-2">
+          <div class="price-source">POLYMARKET ORACLE</div>
+          <span id="oracle-latency" class="latency-badge latency-high">~5min</span>
+        </div>
+        <div class="text-3xl font-bold" id="oracle-price">$--</div>
+        <div class="text-xs text-zinc-600 mt-1">
+          Settlement price (5-min delayed)
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Volatility Metrics -->
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      
+      <!-- Current Price (Binance) -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Current Price</div>
+        <div class="text-2xl font-bold text-blue-400" id="current-price">$--</div>
+        <div class="text-xs text-zinc-600 mt-1">Binance (live)</div>
+      </div>
+
+      <!-- 1hr Volatility -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">1hr Volatility</div>
+        <div class="text-2xl font-bold" id="vol-1hr">--%</div>
+        <div class="text-xs mt-1" id="vol-1hr-label">--</div>
+      </div>
+
+      <!-- 5min Volatility -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">5min Volatility</div>
+        <div class="text-2xl font-bold" id="vol-5min">--%</div>
+        <div class="text-xs mt-1" id="vol-5min-label">--</div>
+      </div>
+
+      <!-- Volatility Meter -->
+      <div class="metric-card rounded-lg p-5">
+        <div class="text-zinc-500 text-sm mb-1">Volatility Meter</div>
+        <div class="text-2xl font-bold" id="vol-meter-zone">--</div>
+        <div class="vol-meter">
+          <div class="vol-needle" id="vol-needle" style="left: 0%"></div>
+        </div>
+        <div class="vol-zones">
+          <div class="vol-zone-label" style="color: #ef4444;">Dead</div>
+          <div class="vol-zone-label" style="color: #f59e0b;">Low</div>
+          <div class="vol-zone-label vol-sweet-spot">Medium ★</div>
+          <div class="vol-zone-label" style="color: #3b82f6;">High</div>
+        </div>
+        <div class="text-xs text-zinc-600 mt-2" id="vol-recommendation">--</div>
+      </div>
+
+    </div>
+
+    <!-- Price Chart (1hr history with multiple sources) -->
+    <div class="metric-card rounded-lg p-6 mb-6">
+      <h2 class="text-lg font-semibold mb-4">📊 BTC Price - Last 1 Hour (Multi-Source)</h2>
+      <div style="height: 300px; position: relative;">
+        <canvas id="priceChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Portfolio & Session Stats -->
+    <div class="grid grid-cols-2 gap-6">
+      
+      <!-- Bankroll & Sizing -->
+      <div class="metric-card rounded-lg p-6">
+        <h2 class="text-lg font-semibold mb-4">💰 BANKROLL & SIZING</h2>
+        
+        <!-- Top line: Wallet, Position Value, Total Value, 1/12 -->
+        <div class="text-sm mb-4 p-3 bg-zinc-950 rounded border border-zinc-800 font-mono">
+          <span class="text-zinc-400">Wallet:</span> <span id="wallet-balance" class="text-white">$--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Positions:</span> <span id="position-value-top" class="text-white">$--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Total:</span> <span id="total-value-top" class="text-white">$--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">1/12:</span> <span id="max-trade" class="text-blue-400">$--</span>
+        </div>
+        
+        <!-- Bottom line: Position, Daily P&L, Exposure -->
+        <div class="text-sm p-3 bg-zinc-950 rounded border border-zinc-800 font-mono">
+          <span class="text-zinc-400">Position:</span> <span id="open-positions-text" class="text-white">--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Daily P&L:</span> <span id="daily-pnl" class="text-green-400">$--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Exposure:</span> <span id="exposure-pct" class="text-white">--%</span>
+        </div>
+        
+        <div class="mt-4 space-y-1">
+          <a href="https://polymarket.com/profile/0x712f29301b5f671E084BF7Cf02eb00d93Dbcbcd9" 
+             target="_blank" 
+             class="text-blue-500 text-sm hover:underline block">
+            View on Polymarket →
+          </a>
+          <a href="https://polygonscan.com/address/0x712f29301b5f671E084BF7Cf02eb00d93Dbcbcd9" 
+             target="_blank" 
+             class="text-purple-500 text-sm hover:underline block">
+            View Wallet on Polygonscan →
+          </a>
+        </div>
+      </div>
+
+      <!-- Current Round -->
+      <div class="metric-card rounded-lg p-6">
+        <h2 class="text-lg font-semibold mb-4">🎯 CURRENT ROUND</h2>
+        
+        <!-- Round time and phase -->
+        <div class="text-sm mb-4 p-3 bg-zinc-950 rounded border border-zinc-800 font-mono">
+          <span id="round-time" class="text-white">--:--:-- PM ET</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Window:</span> <span id="window-time" class="text-white">--s</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Phase:</span> <span id="round-phase" class="text-blue-400">--</span>
+        </div>
+        
+        <!-- Price movement -->
+        <div class="text-sm mb-4 p-3 bg-zinc-950 rounded border border-zinc-800 font-mono">
+          <span class="text-zinc-400">Open:</span> <span id="round-open" class="text-white">$--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Now:</span> <span id="round-now" class="text-white">$--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Δ:</span> <span id="round-delta" class="text-green-400">--%</span>
+        </div>
+        
+        <!-- Signal and confidence -->
+        <div class="text-sm mb-3">
+          <div class="flex justify-between mb-2">
+            <span class="text-zinc-500">Signal:</span>
+            <span id="signal-type" class="font-mono font-semibold">--</span>
+          </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-zinc-500">Confidence:</span>
+            <span id="signal-conf" class="font-mono">--%</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-zinc-500">Threshold:</span>
+            <span id="signal-threshold" class="font-mono">--%</span>
+          </div>
+        </div>
+        
+        <!-- Confidence bar -->
+        <div class="relative h-6 bg-zinc-800 rounded overflow-hidden mb-4">
+          <div id="conf-bar" class="h-full bg-blue-500 transition-all" style="width: 0%"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-xs font-mono text-white">
+            <span id="conf-bar-text">--</span>
+          </div>
+        </div>
+        
+        <!-- 5-Minute Timeline Chart -->
+        <div style="height: 120px; position: relative;">
+          <canvas id="roundChart"></canvas>
+        </div>
+        <div class="text-xs text-center text-zinc-600 mt-1">
+          Phase windows (5-min round)
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Row: Session Stats + Future Container -->
+    <div class="grid grid-cols-2 gap-6 mt-6">
+      
+      <!-- Session Stats (Compressed) -->
+      <div class="metric-card rounded-lg p-6">
+        <h2 class="text-lg font-semibold mb-4">📊 SESSION STATS</h2>
+        
+        <div class="font-mono text-xs space-y-0.5 mb-4" style="max-height: 240px; overflow-y: auto;">
+          <div id="rounds-list-compact">
+            <!-- Rounds will be populated here -->
+          </div>
+        </div>
+        
+        <div class="text-sm p-3 bg-zinc-950 rounded border border-zinc-800 font-mono">
+          <span class="text-zinc-400">Streak:</span> <span id="win-streak" class="text-green-400">0</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">L10:</span> <span id="last-10-record" class="text-white">--</span>
+          <span class="text-zinc-600 mx-2">·</span>
+          <span class="text-zinc-400">Hit:</span> <span id="hit-rate" class="text-white">--%</span>
+        </div>
+      </div>
+      
+      <!-- Last 10 Verified Rounds -->
+      <div class="metric-card rounded-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold">✅ LAST 10 VERIFIED ROUNDS</h2>
+          <button 
+            id="refresh-verified-btn"
+            onclick="refreshVerifiedData()"
+            class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded transition-colors"
+          >
+            🔄 Refresh
+          </button>
+        </div>
+        
+        <div class="overflow-x-auto" style="max-height: 280px;">
+          <table class="w-full text-xs font-mono">
+            <thead class="text-zinc-500 border-b border-zinc-800">
+              <tr>
+                <th class="text-left pb-2">Time</th>
+                <th class="text-left pb-2">Action</th>
+                <th class="text-left pb-2">Signal</th>
+                <th class="text-right pb-2">Conf%</th>
+                <th class="text-right pb-2">Bet$</th>
+                <th class="text-right pb-2">BTC Δ%</th>
+                <th class="text-center pb-2">Result</th>
+                <th class="text-right pb-2">P&L</th>
+              </tr>
+            </thead>
+            <tbody id="verified-rounds-list" class="text-zinc-300">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="mt-3 pt-3 border-t border-zinc-800 text-xs">
+          <a href="/btc5-analytics.html" class="text-blue-400 hover:text-blue-300 font-semibold">
+            📊 View Full BTC-5 Analytics →
+          </a>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <script>
+    // Configuration
+    const API_BASE = 'http://209.250.250.75:8081';
+    const REFRESH_INTERVAL = 5000; // 5 seconds for price data
+    
+    let priceChart = null;
+    let roundChart = null;
+    let confidenceHistory = [];
+    let yesAskHistory = [];
+    let noAskHistory = [];
+    let lastRoundData = null;  // Store latest round data for real-time updates
+    
+    // Initialize
+    // Fetch Gambit config (threshold, etc.)
+    async function fetchConfig() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/config`);
+        const config = await res.json();
+        
+        if (config.min_confidence_pct) {
+          document.getElementById('signal-threshold').textContent = config.min_confidence_pct + '%';
+          
+          // Store for chart threshold line
+          window.gambitThreshold = config.min_confidence;
+        }
+      } catch (err) {
+        console.error('Config fetch error:', err);
+      }
+    }
+    
+    async function init() {
+      await fetchConfig();  // Fetch threshold first
+      await fetchDashboard();
+      await fetchPriceHistory();
+      await fetchPrices();
+      await fetchVolatility();
+      await fetchCurrentRound();
+      await fetchSessionStats();
+      await fetchVerifiedRounds();
+      
+      setInterval(async () => {
+        await fetchDashboard();
+        await fetchPrices();
+        await fetchVolatility();
+        await fetchCurrentRound();
+        await fetchSessionStats();
+        await fetchVerifiedRounds();
+      }, REFRESH_INTERVAL);
+      
+      setInterval(async () => {
+        await fetchPriceHistory();
+      }, 60000); // Refresh chart every 60 seconds
+      
+      // Real-time countdown (updates every second)
+      setInterval(updateCountdown, 1000);
+    }
+    
+    // Fetch volatility metrics
+    async function fetchVolatility() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/volatility`);
+        const data = await res.json();
+        
+        // 1hr volatility
+        if (data.volatility_1hr) {
+          const vol1hr = data.volatility_1hr.value;
+          document.getElementById('vol-1hr').textContent = vol1hr.toFixed(3) + '%';
+          document.getElementById('vol-1hr-label').textContent = data.volatility_1hr.label;
+          document.getElementById('vol-1hr-label').style.color = getVolColor(data.volatility_1hr.label);
+        }
+        
+        // 5min volatility
+        if (data.volatility_5min) {
+          const vol5min = data.volatility_5min.value;
+          document.getElementById('vol-5min').textContent = vol5min.toFixed(3) + '%';
+          document.getElementById('vol-5min-label').textContent = data.volatility_5min.label;
+          document.getElementById('vol-5min-label').style.color = getVolColor(data.volatility_5min.label);
+        }
+        
+        // Volatility meter
+        if (data.volatility_meter) {
+          const meter = data.volatility_meter;
+          document.getElementById('vol-meter-zone').textContent = meter.zone.name;
+          document.getElementById('vol-meter-zone').style.color = meter.zone.color;
+          
+          // Position needle (scale: 0-0.15% maps to 0-100%)
+          const needlePos = Math.min(100, (meter.value / 0.15) * 100);
+          document.getElementById('vol-needle').style.left = needlePos + '%';
+          
+          document.getElementById('vol-recommendation').textContent = meter.trade_recommendation;
+        }
+        
+      } catch (err) {
+        console.error('Volatility fetch error:', err);
+      }
+    }
+    
+    function getVolColor(label) {
+      const colors = {
+        'Dead': '#ef4444',
+        'Low': '#f59e0b',
+        'Medium': '#10b981',
+        'High': '#3b82f6'
+      };
+      return colors[label] || '#666';
+    }
+    
+    // Fetch current round info
+    async function fetchCurrentRound() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/current-round`);
+        const data = await res.json();
+        
+        // Round time (convert to ET)
+        const startTime = new Date(data.start_time);
+        const timeStr = startTime.toLocaleTimeString('en-US', { 
+          hour: 'numeric', 
+          minute: '2-digit',
+          hour12: true,
+          timeZone: 'America/New_York'
+        });
+        document.getElementById('round-time').textContent = timeStr + ' ET';
+        
+        // Window and phase
+        document.getElementById('window-time').textContent = data.window_remaining + 's';
+        document.getElementById('round-phase').textContent = data.phase;
+        
+        // Color code phase
+        const phaseColors = {
+          'OBSERVE': '#666',
+          'BUILD': '#f59e0b',
+          'EXECUTE': '#10b981',
+          'COOLDOWN': '#ef4444'
+        };
+        document.getElementById('round-phase').style.color = phaseColors[data.phase] || '#666';
+        
+        // Price movement
+        document.getElementById('round-open').textContent = 
+          '$' + (data.btc_open || 0).toLocaleString('en-US', {maximumFractionDigits: 2});
+        document.getElementById('round-now').textContent = 
+          '$' + (data.btc_now || 0).toLocaleString('en-US', {maximumFractionDigits: 2});
+        
+        const deltaColor = data.btc_change_pct >= 0 ? '#10b981' : '#ef4444';
+        const deltaSign = data.btc_change_pct >= 0 ? '+' : '';
+        document.getElementById('round-delta').textContent = 
+          deltaSign + data.btc_change_pct.toFixed(2) + '%';
+        document.getElementById('round-delta').style.color = deltaColor;
+        
+        // Signal
+        document.getElementById('signal-type').textContent = data.signal;
+        const signalColors = {
+          'BUY_YES': '#10b981',   // Green - trading YES
+          'BUY_NO': '#10b981',    // Green - trading NO (also a trade!)
+          'SKIP': '#666'          // Gray - no trade
+        };
+        document.getElementById('signal-type').style.color = signalColors[data.signal] || '#666';
+        
+        // Confidence
+        const confPct = (data.confidence * 100).toFixed(0);
+        document.getElementById('signal-conf').textContent = confPct + '%';
+        document.getElementById('signal-threshold').textContent = 
+          (data.threshold * 100).toFixed(0) + '%';
+        
+        // Confidence bar
+        const barWidth = Math.min(100, data.confidence * 100);
+        document.getElementById('conf-bar').style.width = barWidth + '%';
+        document.getElementById('conf-bar-text').textContent = confPct + '%';
+        
+        // Color based on threshold
+        if (data.confidence >= data.threshold) {
+          document.getElementById('conf-bar').style.backgroundColor = '#10b981';
+        } else {
+          document.getElementById('conf-bar').style.backgroundColor = '#ef4444';
+        }
+        
+        // Store data for real-time countdown
+        lastRoundData = {
+          start_time: new Date(data.start_time),
+          threshold: data.threshold,
+          confidence: data.confidence
+        };
+        
+        // Update confidence history for chart
+        updateRoundChart(data.elapsed_seconds, data.confidence, data.threshold, data.round_id);
+        
+      } catch (err) {
+        console.error('Current round fetch error:', err);
+      }
+    }
+    
+    // Real-time countdown updater (runs every second)
+    function updateCountdown() {
+      if (!lastRoundData) return;
+      
+      const now = new Date();
+      const elapsed = (now - lastRoundData.start_time) / 1000;  // seconds
+      const remaining = Math.max(0, 300 - elapsed);
+      
+      // Update window countdown
+      document.getElementById('window-time').textContent = Math.floor(remaining) + 's';
+      
+      // Update phase color in real-time
+      let phase = 'COOLDOWN';
+      if (elapsed < 30) phase = 'OBSERVE';
+      else if (elapsed < 180) phase = 'BUILD';
+      else if (elapsed < 280) phase = 'EXECUTE';
+      
+      const phaseColors = {
+        'OBSERVE': '#666',
+        'BUILD': '#f59e0b',
+        'EXECUTE': '#10b981',
+        'COOLDOWN': '#ef4444'
+      };
+      document.getElementById('round-phase').style.color = phaseColors[phase];
+      
+      // Update chart's "Now" marker position
+      if (roundChart && roundChart.options.plugins.annotation) {
+        roundChart.options.plugins.annotation.annotations.currentPos.xMin = elapsed / 30;
+        roundChart.options.plugins.annotation.annotations.currentPos.xMax = elapsed / 30;
+        roundChart.update('none');  // Update without animation for smooth movement
+      }
+    }
+    
+    // Update 5-minute round timeline chart
+    function updateRoundChart(elapsedSeconds, confidence, threshold, roundId) {
+      const ctx = document.getElementById('roundChart').getContext('2d');
+      
+      // Fetch YES/NO prices from Polymarket
+      if (roundId) {
+        fetch(`https://gamma-api.polymarket.com/markets?slug=${roundId}`)
+          .then(r => r.json())
+          .then(data => {
+            if (data && data[0]) {
+              const tokenIds = JSON.parse(data[0].clobTokenIds || '[]');
+              if (tokenIds[0]) {
+                return fetch(`https://clob.polymarket.com/book?token_id=${tokenIds[0]}`);
+              }
+            }
+          })
+          .then(r => r ? r.json() : null)
+          .then(book => {
+            if (book && book.asks && book.asks[0]) {
+              const yesAsk = parseFloat(book.asks[0].price);
+              const noAsk = 1 - yesAsk;
+              yesAskHistory.push({time: elapsedSeconds, price: yesAsk});
+              noAskHistory.push({time: elapsedSeconds, price: noAsk});
+              if (yesAskHistory.length > 60) yesAskHistory.shift();
+              if (noAskHistory.length > 60) noAskHistory.shift();
+            }
+          })
+          .catch(() => {});
+      }
+      
+      // Add current confidence to history
+      confidenceHistory.push({
+        time: elapsedSeconds,
+        confidence: confidence
+      });
+      
+      // Keep only last 60 data points (5 minutes at 5-second intervals)
+      if (confidenceHistory.length > 60) {
+        confidenceHistory.shift();
+      }
+      
+      // Reset history if we're in a new round (elapsed < previous)
+      if (confidenceHistory.length > 1 && elapsedSeconds < confidenceHistory[confidenceHistory.length - 2].time) {
+        confidenceHistory = [{time: elapsedSeconds, confidence: confidence}];
+      }
+      
+      if (roundChart) {
+        roundChart.destroy();
+      }
+      
+      // Create time labels (0-300 seconds)
+      const timeLabels = [];
+      for (let i = 0; i <= 300; i += 30) {
+        timeLabels.push(i + 's');
+      }
+      
+      // Map confidence history to chart data
+      const confData = new Array(11).fill(null); // 11 points (0, 30, 60, ..., 300)
+      confidenceHistory.forEach(point => {
+        const index = Math.floor(point.time / 30);
+        if (index < 11) {
+          confData[index] = point.confidence * 100;
+        }
+      });
+      
+      // Map YES/N0 ask history
+      const yesData = new Array(11).fill(null);
+      const noData = new Array(11).fill(null);
+      yesAskHistory.forEach(point => {
+        const idx = Math.floor(point.time / 30);
+        if (idx < 11) yesData[idx] = point.price * 100;
+      });
+      noAskHistory.forEach(point => {
+        const idx = Math.floor(point.time / 30);
+        if (idx < 11) noData[idx] = point.price * 100;
+      });
+
+      roundChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeLabels,
+          datasets: [
+            {
+              label: 'Confidence %',
+              data: confData,
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              pointRadius: 3,
+              pointBackgroundColor: '#3b82f6',
+              fill: true,
+              yAxisID: 'y'
+            },
+            {
+              label: 'YES Ask %',
+              data: yesData,
+              borderColor: '#10b981',
+              backgroundColor: 'transparent',
+              borderWidth: 2,
+              tension: 0.3,
+              pointRadius: 2,
+              pointBackgroundColor: '#10b981',
+              yAxisID: 'y1'
+            },
+            {
+              label: 'NO Ask %',
+              data: noData,
+              borderColor: '#ef4444',
+              backgroundColor: 'transparent',
+              borderWidth: 2,
+              tension: 0.3,
+              pointRadius: 2,
+              pointBackgroundColor: '#ef4444',
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { 
+              display: true,
+              labels: { color: '#ccc' }
+            },
+            scales: {
+              y: {
+                type: 'linear',
+                position: 'left',
+                min: 0,
+                max: 100,
+                title: { display: true, text: 'Confidence %', color: '#3b82f6' },
+                grid: { color: 'rgba(255,255,255,0.1)' },
+                ticks: { color: '#999' }
+              },
+              y1: {
+                type: 'linear',
+                position: 'right',
+                min: 0,
+                max: 100,
+                title: { display: true, text: 'Price %', color: '#10b981' },
+                grid: { drawOnChartArea: false },
+                ticks: { color: '#999' }
+              }
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              callbacks: {
+                label: (context) => {
+                  if (context.dataset.label === 'Confidence %') {
+                    return 'Confidence: ' + (context.parsed.y || 0).toFixed(1) + '%';
+                  }
+                  return context.dataset.label + ': ' + (context.parsed.y || 0).toFixed(1) + '%';
+                }
+              }
+            },
+            annotation: {
+              annotations: {
+                // OBSERVE phase (0-30s) - gray
+                observe: {
+                  type: 'box',
+                  xMin: 0,
+                  xMax: 1,
+                  yMin: 0,
+                  yMax: 100,
+                  backgroundColor: 'rgba(100, 100, 100, 0.1)',
+                  borderWidth: 0
+                },
+                // BUILD phase (30s-3min) - orange
+                build: {
+                  type: 'box',
+                  xMin: 1,
+                  xMax: 6,
+                  yMin: 0,
+                  yMax: 100,
+                  backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                  borderWidth: 0
+                },
+                // EXECUTE phase (3min-4m40s) - green
+                execute: {
+                  type: 'box',
+                  xMin: 6,
+                  xMax: 9.33,
+                  yMin: 0,
+                  yMax: 100,
+                  backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                  borderWidth: 0
+                },
+                // COOLDOWN phase (4m40s-5min) - red
+                cooldown: {
+                  type: 'box',
+                  xMin: 9.33,
+                  xMax: 10,
+                  yMin: 0,
+                  yMax: 100,
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  borderWidth: 0
+                },
+                // Threshold line (dynamic from config)
+                threshold: {
+                  type: 'line',
+                  yMin: (window.gambitThreshold || threshold) * 100,
+                  yMax: (window.gambitThreshold || threshold) * 100,
+                  borderColor: '#ef4444',
+                  borderWidth: 1,
+                  borderDash: [5, 5],
+                  label: {
+                    content: 'Threshold',
+                    enabled: true,
+                    position: 'end'
+                  }
+                },
+                // Current position marker
+                currentPos: {
+                  type: 'line',
+                  xMin: elapsedSeconds / 30,
+                  xMax: elapsedSeconds / 30,
+                  borderColor: '#ffffff',
+                  borderWidth: 2,
+                  label: {
+                    content: 'Now',
+                    enabled: true,
+                    position: 'start'
+                  }
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: '#333' },
+              ticks: { color: '#666', font: { size: 9 } },
+              title: { display: false }
+            },
+            y: {
+              min: 0,
+              max: 100,
+              grid: { color: '#333' },
+              ticks: { 
+                color: '#666',
+                font: { size: 9 },
+                callback: (value) => value + '%'
+              },
+              title: { display: false }
+            }
+          },
+          interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+          }
+        },
+        plugins: [{
+          id: 'chartAreaBorder',
+          beforeDraw: (chart) => {
+            const ctx = chart.ctx;
+            const chartArea = chart.chartArea;
+            
+            // Draw phase labels at bottom
+            ctx.save();
+            ctx.font = '9px monospace';
+            ctx.textAlign = 'center';
+            
+            // OBSERVE
+            ctx.fillStyle = '#666';
+            ctx.fillText('OBSERVE', chartArea.left + (chartArea.width / 10 * 0.5), chartArea.bottom + 12);
+            
+            // BUILD
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillText('BUILD', chartArea.left + (chartArea.width / 10 * 3.5), chartArea.bottom + 12);
+            
+            // EXECUTE
+            ctx.fillStyle = '#10b981';
+            ctx.fillText('EXECUTE', chartArea.left + (chartArea.width / 10 * 7.5), chartArea.bottom + 12);
+            
+            // COOLDOWN
+            ctx.fillStyle = '#ef4444';
+            ctx.fillText('COOL', chartArea.left + (chartArea.width / 10 * 9.5), chartArea.bottom + 12);
+            
+            ctx.restore();
+          }
+        }]
+      });
+    }
+    
+    // Fetch verified rounds (last 10)
+    // Refresh verified data (trigger consolidation)
+    async function refreshVerifiedData() {
+      const btn = document.getElementById('refresh-verified-btn');
+      const originalText = btn.textContent;
+      
+      try {
+        btn.textContent = '⏳ Refreshing...';
+        btn.disabled = true;
+        
+        const res = await fetch(`${API_BASE}/verified/refresh`, {
+          method: 'POST'
+        });
+        
+        const result = await res.json();
+        
+        if (result.success) {
+          btn.textContent = '✓ Updated!';
+          // Reload verified rounds
+          await fetchVerifiedRounds();
+          
+          // Reset button after 2 seconds
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+          }, 2000);
+        } else {
+          btn.textContent = '✗ Failed';
+          console.error('Refresh error:', result.error);
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+          }, 2000);
+        }
+        
+      } catch (err) {
+        console.error('Refresh error:', err);
+        btn.textContent = '✗ Error';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+        }, 2000);
+      }
+    }
+    
+    async function fetchVerifiedRounds() {
+      try {
+        const res = await fetch(`${API_BASE}/verified/session-stats`);
+        const data = await res.json();
+        
+        const tbody = document.getElementById('verified-rounds-list');
+        tbody.innerHTML = '';
+        
+        const rounds = (data.rounds || []).slice(0, 10);
+        
+        rounds.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-zinc-900';
+          
+          // Skip badge or action
+          let actionDisplay = '';
+          if (r.action === 'SKIP') {
+            const skipClass = r.skip_reason === 'FLAT_MARKET' ? 'bg-zinc-700' : 'bg-orange-600';
+            const skipText = r.skip_reason === 'FLAT_MARKET' ? 'Flat' : 'Low';
+            actionDisplay = `<span class="px-1 py-0.5 rounded text-xs ${skipClass}">SKIP</span>`;
+          } else {
+            const actionColor = r.action === 'BUY_UP' ? 'text-green-400' : 'text-red-400';
+            actionDisplay = `<span class="${actionColor}">${r.action === 'BUY_UP' ? 'UP' : 'DN'}</span>`;
+          }
+          
+          // Outcome icon
+          let outcome = '—';
+          let outcomeColor = 'text-zinc-600';
+          if (r.correct === 1) {
+            outcome = '✓';
+            outcomeColor = 'text-green-400';
+          } else if (r.correct === 0) {
+            outcome = '✗';
+            outcomeColor = 'text-red-400';
+          }
+          
+          // P&L color
+          const pnlColor = r.pnl > 0 ? 'text-green-400' : (r.pnl < 0 ? 'text-red-400' : 'text-zinc-600');
+          const pnlText = r.pnl !== 0 ? '$' + r.pnl.toFixed(2) : '—';
+          
+          // Confidence color
+          const confPct = Math.round(r.confidence * 100);
+          const confColor = confPct >= 60 ? 'text-green-400' : (confPct >= 40 ? 'text-yellow-400' : 'text-red-400');
+          
+          // BTC change color
+          const btcColor = r.btc_change_pct >= 0 ? 'text-green-400' : 'text-red-400';
+          const btcText = r.btc_change_pct ? r.btc_change_pct.toFixed(3) + '%' : '—';
+          
+          tr.innerHTML = `
+            <td class="py-1 text-zinc-500">${r.time}</td>
+            <td class="py-1">${actionDisplay}</td>
+            <td class="py-1 text-zinc-400">${r.signal_type || '—'}</td>
+            <td class="py-1 text-right ${confColor}">${confPct}%</td>
+            <td class="py-1 text-right text-cyan-400">${r.bet_amount ? '$' + r.bet_amount.toFixed(0) : '—'}</td>
+            <td class="py-1 text-right ${btcColor}">${btcText}</td>
+            <td class="py-1 text-center ${outcomeColor} font-bold">${outcome}</td>
+            <td class="py-1 text-right ${pnlColor}">${pnlText}</td>
+          `;
+          
+          tbody.appendChild(tr);
+        });
+        
+      } catch (err) {
+        console.error('Verified rounds fetch error:', err);
+      }
+    }
+    
+    // Fetch session stats (last 10 rounds)
+    async function fetchSessionStats() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/session-stats`);
+        const data = await res.json();
+        
+        // Build compact rounds list
+        const roundsList = document.getElementById('rounds-list-compact');
+        roundsList.innerHTML = '';
+        
+        data.last_10.forEach(round => {
+          // Determine icon and color
+          let icon = '⬜';
+          let resultColor = '#666';
+          let displayText = '';
+          
+          if (round.signal === 'SKIP') {
+            icon = '⬜';
+            resultColor = '#666';
+            displayText = `${round.time} ${icon} SKIP ${round.why}`;
+          } else {
+            if (round.pnl > 0) {
+              icon = '✅';
+              resultColor = '#10b981';
+            } else if (round.pnl < 0) {
+              icon = '❌';
+              resultColor = '#ef4444';
+            }
+            
+            const confPct = (round.confidence * 100).toFixed(0);
+            const pnlSign = round.pnl >= 0 ? '+' : '';
+            displayText = `${round.time} ${icon} ${round.signal} ${confPct}% → ${pnlSign}$${round.pnl.toFixed(2)}`;
+          }
+          
+          const roundDiv = document.createElement('div');
+          roundDiv.style.color = resultColor;
+          roundDiv.className = 'leading-tight';
+          roundDiv.textContent = displayText;
+          
+          roundsList.appendChild(roundDiv);
+        });
+        
+        // Update summary
+        const summary = data.summary;
+        document.getElementById('win-streak').textContent = summary.win_streak;
+        document.getElementById('last-10-record').textContent = 
+          `${summary.wins}W/${summary.losses}L/${summary.skips}S`;
+        document.getElementById('hit-rate').textContent = 
+          summary.hit_rate.toFixed(0) + '%';
+        
+      } catch (err) {
+        console.error('Session stats fetch error:', err);
+      }
+    }
+    
+    // Fetch multi-source prices (Binance, Coinbase)
+    async function fetchPrices() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/prices`);
+        const data = await res.json();
+        
+        // Binance
+        if (data.binance && data.binance.price) {
+          document.getElementById('binance-price').textContent = 
+            '$' + data.binance.price.toLocaleString('en-US', {maximumFractionDigits: 2});
+          document.getElementById('binance-latency').textContent = 
+            data.binance.latency_ms + 'ms';
+          document.getElementById('binance-latency').className = 
+            'latency-badge ' + (data.binance.latency_ms < 100 ? 'latency-low' : 'latency-med');
+          document.getElementById('current-price').textContent = 
+            '$' + data.binance.price.toLocaleString('en-US', {maximumFractionDigits: 2});
+        }
+        
+        // Coinbase
+        if (data.coinbase && data.coinbase.price) {
+          document.getElementById('coinbase-price').textContent = 
+            '$' + data.coinbase.price.toLocaleString('en-US', {maximumFractionDigits: 2});
+          document.getElementById('coinbase-latency').textContent = 
+            data.coinbase.latency_ms + 'ms';
+          document.getElementById('coinbase-latency').className = 
+            'latency-badge ' + (data.coinbase.latency_ms < 150 ? 'latency-med' : 'latency-high');
+        }
+        
+        // Spread
+        if (data.spread) {
+          const leadText = data.spread.leading_exchange === 'Binance' ? 
+            `+$${data.spread.amount_usd.toFixed(2)} ahead` : 
+            `$${Math.abs(data.spread.amount_usd).toFixed(2)} behind`;
+          document.getElementById('binance-lead').textContent = leadText;
+          
+          const lagText = data.spread.leading_exchange === 'Coinbase' ? 
+            `+$${Math.abs(data.spread.amount_usd).toFixed(2)} ahead` : 
+            `-$${Math.abs(data.spread.amount_usd).toFixed(2)} behind`;
+          document.getElementById('coinbase-lag').textContent = lagText;
+        }
+        
+      } catch (err) {
+        console.error('Multi-price fetch error:', err);
+      }
+    }
+    
+    // Fetch dashboard data
+    async function fetchDashboard() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/dashboard`);
+        const data = await res.json();
+        
+        // Oracle price (from current round - use btc_price as the opening reference)
+        const oraclePrice = data.current_round?.btc_price || 0;
+        document.getElementById('oracle-price').textContent = 
+          '$' + oraclePrice.toLocaleString('en-US', {maximumFractionDigits: 2});
+        
+        // Bankroll & Sizing
+        const portfolio = data.portfolio || {};
+        const walletBalance = portfolio.wallet_balance || 0;
+        const positionValue = portfolio.position_value || 0;
+        const totalValue = walletBalance + positionValue;
+        
+        document.getElementById('wallet-balance').textContent = 
+          '$' + walletBalance.toFixed(2);
+        document.getElementById('position-value-top').textContent = 
+          '$' + positionValue.toFixed(2);
+        document.getElementById('total-value-top').textContent = 
+          '$' + totalValue.toFixed(2);
+        document.getElementById('max-trade').textContent = 
+          '$' + (portfolio.max_trade || 0).toFixed(2);
+        
+        document.getElementById('open-positions-text').textContent = 
+          portfolio.open_positions > 0 ? portfolio.open_positions + ' open' : 'NONE';
+        document.getElementById('exposure-pct').textContent = 
+          (portfolio.exposure_pct || 0).toFixed(1) + '%';
+        
+        // Daily P&L (from performance)
+        const perf = data.performance?.verified_metrics || {};
+        document.getElementById('daily-pnl').textContent = 
+          '$' + (perf.realized_pnl || 0).toFixed(2);
+        
+        // Strategy stats
+        const stats = data.performance?.round_stats || {};
+        document.getElementById('win-rate').textContent = 
+          (stats.win_rate || 0).toFixed(1) + '%';
+        document.getElementById('total-rounds').textContent = 
+          stats.total_rounds || 0;
+        
+        document.getElementById('last-update').textContent = 
+          'Updated ' + new Date().toLocaleTimeString();
+        
+      } catch (err) {
+        console.error('Dashboard fetch error:', err);
+        document.getElementById('daemon-status').textContent = 'Error loading data';
+      }
+    }
+    
+    // Fetch and render 1hr price history
+    async function fetchPriceHistory() {
+      try {
+        const res = await fetch(`${API_BASE}/metrics/price-history`);
+        const data = await res.json();
+        
+        // Get last 1 hour (12 rounds at 5min each)
+        const rounds = (data.history || []).slice(-12);
+        
+        updateChart(rounds);
+      } catch (err) {
+        console.error('Price history fetch error:', err);
+      }
+    }
+    
+    // Update price chart (1hr multi-source)
+    function updateChart(rounds) {
+      if (!rounds || rounds.length === 0) return;
+      
+      const ctx = document.getElementById('priceChart').getContext('2d');
+      
+      // Parse timestamps and prices
+      const timeLabels = rounds.map(r => {
+        const d = new Date(r.time);
+        return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      });
+      const binancePrices = rounds.map(r => r.btc_open);
+      const oraclePrices = rounds.map(r => r.btc_close);
+      
+      // Coinbase estimate (Binance - $35 based on observed spread)
+      const coinbasePrices = binancePrices.map(p => p - 35);
+      
+      if (priceChart) {
+        priceChart.destroy();
+      }
+      
+      priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeLabels,
+          datasets: [
+            {
+              label: 'Binance (Primary)',
+              data: binancePrices,
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              borderWidth: 2,
+              tension: 0.1,
+              pointRadius: 0
+            },
+            {
+              label: 'Coinbase (Fallback)',
+              data: coinbasePrices,
+              borderColor: '#f59e0b',
+              backgroundColor: 'rgba(245, 158, 11, 0.1)',
+              borderWidth: 2,
+              tension: 0.1,
+              pointRadius: 0,
+              borderDash: [5, 5]
+            },
+            {
+              label: 'Polymarket Oracle (Settlement)',
+              data: oraclePrices,
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              borderWidth: 2,
+              tension: 0.1,
+              pointRadius: 0,
+              borderDash: [2, 2]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: { color: '#888', font: { size: 11 } }
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              titleColor: '#fff',
+              bodyColor: '#ccc',
+              borderColor: '#444',
+              borderWidth: 1
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: '#222' },
+              ticks: { color: '#666', font: { size: 10 } },
+              title: { display: true, text: 'Time (1-hour window)', color: '#888' }
+            },
+            y: {
+              grid: { color: '#222' },
+              ticks: { 
+                color: '#666',
+                font: { size: 10 },
+                callback: (value) => '$' + value.toLocaleString('en-US')
+              },
+              title: { display: true, text: 'BTC Price (USD)', color: '#888' }
+            }
+          },
+          interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+          }
+        }
+      });
+    }
+    
+    // Start
+    init();
+  </script>
+
+</body>
+</html>

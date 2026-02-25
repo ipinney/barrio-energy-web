@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barrio Energy | Data Centers & Energy Infrastructure</title>
+    <meta name="description" content="Barrio Energy - Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in the Texas ERCOT market.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="data-centers.html" class="nav-link">Data Centers</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="images/landscape-datacenter-1.jpg" alt="Data Center Landscape" class="hero-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <span class="hero-tag">Texas ERCOT Market</span>
+            <h1>Powering the Future<br>of Energy</h1>
+            <p class="hero-sub">Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads.</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="#contact" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Building the Foundation of Tomorrow</h2>
+                    <p>Barrio Energy is an innovative organization committed to the procurement of industrial scale energy properties and offering unparalleled advisory services to our clientele.</p>
+                    <p>Grounded in the principles of honesty and openness, our commitment is to generate value in diverse areas of the energy and real estate industries.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/datacenter-west-texas.jpg" alt="Barrio Energy West Texas Data Center">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Comprehensive energy solutions tailored to your needs.</p>
+            <div class="services-grid">
+                <a href="data-centers.html" class="service-card" style="text-decoration:none;color:inherit;">
+                    <div class="service-img-wrap">
+                        <img src="images/tyler-property.jpg" alt="Data Centers">
+                    </div>
+                    <div class="service-icon">🏢</div>
+                    <h3>Data Centers</h3>
+                    <p>Acquiring, developing, and leasing industrial commercial properties for data centers, battery storage, and industrial loads in Texas ERCOT.</p>
+                </a>
+                <a href="energy-advisory.html" class="service-card" style="text-decoration:none;color:inherit;">
+                    <div class="service-img-wrap">
+                        <img src="images/monahans-property-5.jpg" alt="Energy Advisory">
+                    </div>
+                    <div class="service-icon">💡</div>
+                    <h3>Energy Advisory</h3>
+                    <p>Power procurement, engineering consulting, solar and battery energy storage projects. We procure power at the lowest possible rates.</p>
+                </a>
+                <div class="service-card">
+                    <div class="service-img-wrap">
+                        <img src="images/lolita-property.jpg" alt="24/7 Monitoring">
+                    </div>
+                    <div class="service-icon">📊</div>
+                    <h3>24/7 Monitoring</h3>
+                    <p>Data-enabled energy management with 24/7 monitoring of assets. We participate in various demand response programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us to discuss your energy infrastructure needs. Our team is ready to help you find the right solution.</p>
+            <a href="mailto:info@barrioenergy.com" class="btn btn-primary btn-lg">Email Us</a>
+            <div class="cta-details">
+                <span>📍 Houston, Texas</span>
+                <span>✉️ <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+        <footer class="footer">
+        <div class="container">
+            <!-- Footer Newsletter -->
+            <div class="footer-subscribe">
+                <div class="footer-subscribe-text">
+                    <span class="footer-subscribe-label">Newsletter</span>
+                    <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
+                </div>
+                <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                    <div class="newsletter-input-group">
+                        <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+                    </div>
+                </form>
+                <div class="footer-subscribe-success" style="display:none;">
+                    <p style="color:#22c55e;font-weight:500;font-size:0.9rem;">Subscribed!</p>
+                </div>
+            </div>
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

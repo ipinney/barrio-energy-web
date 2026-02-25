@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Advisory | Barrio Energy</title>
+    <meta name="description" content="Upload your energy bill and get a free, no-obligation quote from Barrio Energy. We help businesses reduce energy costs through expert advisory services in the Texas ERCOT market.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link">Home</a>
+                <a href="data-centers.html" class="nav-link">Data Centers</a>
+                <a href="energy-advisory.html" class="nav-link active">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="hero-bg">
+            <div class="hero-overlay hero-overlay-solid"></div>
+        </div>
+        <div class="hero-content">
+            <span class="hero-tag">Free No-Obligation Quote</span>
+            <h1>Energy Advisory<br>Services</h1>
+            <p class="hero-sub">Upload your energy bill and let our experts find you the lowest possible rates. Power procurement, engineering consulting, and energy storage solutions.</p>
+            <div class="hero-btns">
+                <a href="#upload" class="btn btn-primary btn-lg">Upload Your Bill</a>
+                <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="advisory-upload-section" id="upload">
+        <div class="container">
+            <h2 class="section-title">Upload Your Energy Bill</h2>
+            <p class="section-subtitle">Get a free analysis and quote — no strings attached. We accept PDF, Word docs, and images.</p>
+
+            <div class="upload-form-wrapper">
+                <form id="advisoryForm" class="advisory-form" enctype="multipart/form-data">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Area -->
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text">Drag & drop your energy bill here</p>
+                        <p class="upload-subtext">or click to browse files</p>
+                        <p class="upload-formats">PDF, DOC, DOCX, JPG, PNG — Max 10MB</p>
+                        <input type="file" id="fileInput" name="energyBill" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
+                    </div>
+
+                    <!-- File Preview -->
+                    <div class="file-preview" id="filePreview" style="display: none;">
+                        <div class="file-preview-info">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            <span id="fileName"></span>
+                            <span id="fileSize"></span>
+                        </div>
+                        <button type="button" class="file-remove" id="fileRemove" aria-label="Remove file">&times;</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-full" id="submitBtn">
+                        Submit for Free Quote
+                    </button>
+
+                    <!-- Success Message -->
+                    <div class="form-success" id="formSuccess" style="display: none;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>Thank you!</h3>
+                        <p>We've received your energy bill. Our team will review it and get back to you within 1-2 business days with a free, no-obligation quote.</p>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="form-error" id="formError" style="display: none;">
+                        <p id="errorMessage">Something went wrong. Please try again or email us directly at info@barrioenergy.com.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="advisory-how-section" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Three simple steps to lower energy costs.</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Upload Your Bill</h3>
+                    <p>Share your current energy bill — PDF, document, or just snap a photo from your phone. It takes 30 seconds.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>We Analyze It</h3>
+                    <p>Our energy experts review your usage patterns, rate structure, and identify opportunities to reduce your costs.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Your Quote</h3>
+                    <p>Receive a free, no-obligation quote with a clear breakdown of potential savings and recommended next steps.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Detail -->
+    <section class="advisory-services-section">
+        <div class="container">
+            <h2 class="section-title">What We Offer</h2>
+            <p class="section-subtitle">Comprehensive energy advisory for businesses of all sizes.</p>
+            <div class="advisory-grid">
+                <div class="advisory-card">
+                    <div class="advisory-card-icon">&#9889;</div>
+                    <h3>Power Procurement</h3>
+                    <p>We leverage deep relationships in the Texas ERCOT market to negotiate the lowest possible rates for your business. Our team monitors the market around the clock to find the right contract at the right time.</p>
+                </div>
+                <div class="advisory-card">
+                    <div class="advisory-card-icon">&#9881;</div>
+                    <h3>Engineering Consulting</h3>
+                    <p>From load analysis to infrastructure design, our engineering team provides consulting services that optimize your energy consumption and reduce waste across your operations.</p>
+                </div>
+                <div class="advisory-card">
+                    <div class="advisory-card-icon">&#9728;</div>
+                    <h3>Solar &amp; Battery Storage</h3>
+                    <p>Explore renewable energy options including solar installations and battery energy storage systems. We handle feasibility, design, and project management from start to finish.</p>
+                </div>
+                <div class="advisory-card">
+                    <div class="advisory-card-icon">&#128202;</div>
+                    <h3>24/7 Energy Monitoring</h3>
+                    <p>Data-enabled energy management with real-time monitoring of your assets. We participate in demand response programs to turn your flexibility into revenue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="advisory-newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-card">
+                <div class="newsletter-content">
+                    <h2>Stay Ahead of Energy Markets</h2>
+                    <p>Subscribe to our Energy Advisory newsletter for weekly insights on ERCOT market trends, rate changes, and strategies to lower your energy costs.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </div>
+                        <p class="newsletter-note">Free weekly insights. Unsubscribe anytime.</p>
+                    </form>
+                    <div class="newsletter-success" id="newsletterSuccess" style="display: none;">
+                        <p>You're subscribed! Watch your inbox for our next update.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Questions? Let's Talk.</h2>
+            <p>Our team is ready to help you find the right energy solution. Reach out anytime — we typically respond within a few hours.</p>
+            <a href="mailto:info@barrioenergy.com" class="btn btn-primary btn-lg">Email Us</a>
+            <div class="cta-details">
+                <span>&#128205; Houston, Texas</span>
+                <span>&#9993;&#65039; <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Footer Newsletter -->
+            <div class="footer-subscribe">
+                <div class="footer-subscribe-text">
+                    <span class="footer-subscribe-label">Newsletter</span>
+                    <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
+                </div>
+                <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                    <div class="newsletter-input-group">
+                        <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+                    </div>
+                </form>
+                <div class="footer-subscribe-success" style="display:none;">
+                    <p style="color:#22c55e;font-weight:500;font-size:0.9rem;">Subscribed!</p>
+                </div>
+            </div>
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    /* ================================================
+       Energy Advisory Page - Upload & Form Logic
+       ================================================ */
+    (function() {
+        const form = document.getElementById('advisoryForm');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const fileRemove = document.getElementById('fileRemove');
+        const submitBtn = document.getElementById('submitBtn');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterSuccess = document.getElementById('newsletterSuccess');
+
+        let selectedFile = null;
+        const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+        const ALLOWED_TYPES = [
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'image/jpeg',
+            'image/png'
+        ];
+
+        // --- Upload Area Interactions ---
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+
+        fileRemove.addEventListener('click', () => {
+            selectedFile = null;
+            fileInput.value = '';
+            filePreview.style.display = 'none';
+            uploadArea.style.display = '';
+        });
+
+        function handleFile(file) {
+            // Validate type
+            if (!ALLOWED_TYPES.includes(file.type)) {
+                alert('Please upload a PDF, Word document, JPG, or PNG file.');
+                return;
+            }
+            // Validate size
+            if (file.size > MAX_FILE_SIZE) {
+                alert('File is too large. Maximum size is 10MB.');
+                return;
+            }
+            selectedFile = file;
+            fileName.textContent = file.name;
+            fileSize.textContent = formatBytes(file.size);
+            filePreview.style.display = 'flex';
+            uploadArea.style.display = 'none';
+        }
+
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+
+        // --- Form Submit ---
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!selectedFile) {
+                alert('Please upload your energy bill before submitting.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = new FormData();
+            formData.append('fullName', document.getElementById('fullName').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('energyBill', selectedFile);
+
+            try {
+                const response = await fetch('https://api.barrioenergy.com/advisory/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) throw new Error('Upload failed');
+
+                // Show success
+                form.querySelectorAll('.form-grid, .upload-area, .file-preview, .btn-full').forEach(el => {
+                    el.style.display = 'none';
+                });
+                formError.style.display = 'none';
+                formSuccess.style.display = 'flex';
+
+            } catch (err) {
+                formError.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit for Free Quote';
+            }
+        });
+
+        // --- Newsletter Submit ---
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailVal = document.getElementById('newsletterEmail').value;
+
+            try {
+                const formData = new FormData();
+                formData.append('email', emailVal);
+                const resp = await fetch('https://api.barrioenergy.com/newsletter/subscribe', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!resp.ok) throw new Error('Subscribe failed');
+
+                newsletterForm.style.display = 'none';
+                newsletterSuccess.style.display = 'block';
+
+            } catch (err) {
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
