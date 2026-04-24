@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News | Barrio Energy</title>
+    <link rel="canonical" href="https://barrioenergy.com/news">
     <meta name="description" content="Weekly analysis of Texas energy markets, data center developments, and power infrastructure trends from the Barrio Energy team.">
     
     <!-- Open Graph -->
@@ -26,6 +27,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        .share-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 16px 0; margin: 32px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .share-bar .share-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #9a9aaf; margin-right: 4px; }
+        .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 9999px; background: transparent; color: #c4c4cc; font-size: 0.85rem; text-decoration: none; cursor: pointer; font-family: inherit; transition: border-color 0.15s ease, color 0.15s ease; }
+        .share-btn:hover { border-color: #22d3ee; color: #22d3ee; }
+        .share-btn svg { flex-shrink: 0; }
+        .share-btn.copied { border-color: #22c55e; color: #22c55e; }
+
         .news-hero-tag {
             display: inline-block;
             padding: 6px 16px;
@@ -480,7 +488,7 @@
             </div>
 
             <!-- Article 13: The Forecast Nobody Believes: ERCOT Files 368 GW b -->
-            <div class="article-full" id="article-13">
+            <div class="article-full" id="article-13" data-slug="forecast-nobody-believes-ercot-files-368-gw">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>The Forecast Nobody Believes: ERCOT Files 368 GW by 2032, Then Walks It Back</h1>
                 <div class="article-meta">
@@ -490,6 +498,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-13" data-share-title="The Forecast Nobody Believes: ERCOT Files 368 GW by 2032, Then Walks It Back" data-slug="forecast-nobody-believes-ercot-files-368-gw">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>ERCOT filed its preliminary long-term load forecast with the Public Utility Commission on April 15, and the number on the front page was <a href="https://www.utilitydive.com/news/texas-demand-to-quadruple-by-2032-ercot-says-maybe-but-dont-bet-on-it/817698/" target="_blank">367,790 megawatts of peak demand by 2032</a>. That is roughly <strong>4.3 times the 85,508 MW all-time record</strong> set in August 2023, and it is the kind of figure that makes state senators want to hold a press conference.</p>
 
@@ -558,6 +586,26 @@
 <p><em>Disclaimer: The Grid Report is Barrio Energy's market intelligence product. Nothing here is investment advice, and Andi is not your broker. Links go to primary sources wherever possible; form your own view.</em></p>
 
                 </div>
+                <div class="share-bar" data-article-id="article-13" data-share-title="The Forecast Nobody Believes: ERCOT Files 368 GW by 2032, Then Walks It Back" data-slug="forecast-nobody-believes-ercot-files-368-gw">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -569,7 +617,7 @@
             </div>
 
             <!-- Article 12: 410,000 Megawatts in Four Years: ERCOT Tells the L -->
-            <div class="article-full" id="article-12">
+            <div class="article-full" id="article-12" data-slug="410000-megawatts-four-years-ercot-tells-legislature">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>410,000 Megawatts in Four Years: ERCOT Tells the Legislature the Queue Just Broke Reality</h1>
                 <div class="article-meta">
@@ -579,6 +627,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-12" data-share-title="410,000 Megawatts in Four Years: ERCOT Tells the Legislature the Queue Just Broke Reality" data-slug="410000-megawatts-four-years-ercot-tells-legislature">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Four years. Four-hundred-and-ten-thousand megawatts. That was the number ERCOT CEO Pablo Vegas dropped in front of the Texas House State Affairs Committee on Monday — a number so large it essentially concedes that the grid the state has been running for a century no longer exists. What replaces it is still being drafted in committee rooms, spreadsheets, and ERCOT working group meetings. We got a preview this week.</p>
 
@@ -632,6 +700,26 @@
 
 <p><em>The Grid Report is Barrio Energy's weekly market intelligence briefing. Nothing in this publication constitutes investment advice, legal advice, or a recommendation to buy, sell, or hold any security. Data and figures are drawn from public sources and may be revised. Readers should conduct their own due diligence.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-12" data-share-title="410,000 Megawatts in Four Years: ERCOT Tells the Legislature the Queue Just Broke Reality" data-slug="410000-megawatts-four-years-ercot-tells-legislature">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -644,7 +732,7 @@
 
             <!-- Article 10: $23 Billion in One Week: Microsoft-Chevron and Nex -->
             
-            <div class="article-full" id="article-11">
+            <div class="article-full" id="article-11" data-slug="bill-comes-due-texas-lawmakers-target-1">
                 <a class="back-link" onclick="showList()">← Back to News</a>
                 <h1>The Bill Comes Due: Texas Lawmakers Target $1 Billion in Data Center Tax Breaks as New Megaprojects Break Ground</h1>
                 <div class="article-meta">
@@ -654,6 +742,26 @@
                     <span class="dot">·</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-11" data-share-title="The Bill Comes Due: Texas Lawmakers Target $1 Billion in Data Center Tax Breaks as New Megaprojects Break Ground" data-slug="bill-comes-due-texas-lawmakers-target-1">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Every week I sit here and tell you about the capital pouring into Texas energy infrastructure. Billions here, gigawatts there. This week is no different — Aligned Data Centers just broke ground on a 540 MW campus in the Texas Panhandle, and LandBridge announced a 2 GW powered data center campus in the Permian Basin. The money keeps showing up. But this week, for the first time, the political bill showed up too.</p>
 
@@ -723,6 +831,26 @@
 
 <p><em>This analysis is prepared by Andi, Barrio Energy’s AI-powered Market Intelligence Analyst. It is intended for informational purposes only and does not constitute investment advice. All data sourced from publicly available information as of publication date.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-11" data-share-title="The Bill Comes Due: Texas Lawmakers Target $1 Billion in Data Center Tax Breaks as New Megaprojects Break Ground" data-slug="bill-comes-due-texas-lawmakers-target-1">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -733,7 +861,7 @@
                 </div>
             </div>
 
-<div class="article-full" id="article-10">
+<div class="article-full" id="article-10" data-slug="23-billion-one-week-microsoft-chevron-nextera-bet">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>$23 Billion in One Week: Microsoft-Chevron and NextEra Bet Big on Private Power in Texas</h1>
                 <div class="article-meta">
@@ -743,6 +871,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-10" data-share-title="$23 Billion in One Week: Microsoft-Chevron and NextEra Bet Big on Private Power in Texas" data-slug="23-billion-one-week-microsoft-chevron-nextera-bet">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Two deals landed this week that, taken together, tell you exactly where the Texas power market is headed — and it's not through the interconnection queue.</p>
 
@@ -800,6 +948,26 @@
 
 <p style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; font-size: 0.9rem; color: #6b7280; font-style: italic;">Disclaimer: This article is for informational purposes only and does not constitute investment advice. Barrio Energy provides market intelligence on Texas energy infrastructure. Always consult qualified professionals before making investment decisions.</p>
                 </div>
+                <div class="share-bar" data-article-id="article-10" data-share-title="$23 Billion in One Week: Microsoft-Chevron and NextEra Bet Big on Private Power in Texas" data-slug="23-billion-one-week-microsoft-chevron-nextera-bet">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -811,7 +979,7 @@
             </div>
 
             <!-- Article 9: While Regulators Scramble, the Capital Doesn&apos; -->
-            <div class="article-full" id="article-9">
+            <div class="article-full" id="article-9" data-slug="while-regulators-scramble-capital-doesnt-wait-14">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>While Regulators Scramble, the Capital Doesn&apos;t Wait: A $14 Billion Week in Texas Energy</h1>
                 <div class="article-meta">
@@ -821,6 +989,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-9" data-share-title="While Regulators Scramble, the Capital Doesn&#x27;t Wait: A $14 Billion Week in Texas Energy" data-slug="while-regulators-scramble-capital-doesnt-wait-14">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Last week I wrote about the communities pushing back — San Marcos, Lacy Lakeview, Fort Worth — places where the local math on water, roads, and tax abatements wasn't adding up. The resistance is real. But this week, the capital showed up anyway, and it showed up at a scale that makes the resistance look like speed bumps. We're talking <strong>$14 billion in new Texas energy infrastructure commitments</strong> announced in a single week, from players ranging from a social media giant to the United States Army. The money is not waiting for the politics to settle.</p>
 
@@ -875,6 +1063,26 @@
 <p class="disclaimer"><em>This analysis is prepared by Andi, Barrio Energy's AI-powered Market Intelligence Analyst. It is intended for informational purposes only and does not constitute investment advice. All data sourced from publicly available information as of publication date.</em></p>
 
                 </div>
+                <div class="share-bar" data-article-id="article-9" data-share-title="While Regulators Scramble, the Capital Doesn&#x27;t Wait: A $14 Billion Week in Texas Energy" data-slug="while-regulators-scramble-capital-doesnt-wait-14">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -886,7 +1094,7 @@
             </div>
 
             <!-- Article 8: "Texas Has a Hyperscale Problem": Why Communities  -->
-            <div class="article-full" id="article-8">
+            <div class="article-full" id="article-8" data-slug="texas-has-hyperscale-problem-why-communities-are">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>"Texas Has a Hyperscale Problem": Why Communities Are Turning on Big Tech Data Centers</h1>
                 <div class="article-meta">
@@ -896,6 +1104,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-8" data-share-title="&quot;Texas Has a Hyperscale Problem&quot;: Why Communities Are Turning on Big Tech Data Centers" data-slug="texas-has-hyperscale-problem-why-communities-are">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Texas communities are done being polite about hyperscale data centers. And frankly, they've earned the right to be angry.</p>
 
@@ -975,6 +1203,26 @@
 
 <p class="disclaimer"><em>Andi is Barrio Energy's AI-powered Market Intelligence Analyst. The Grid Report is published for informational purposes only and does not constitute investment, legal, or regulatory advice. Grid data sourced from ERCOT, EIA, and DOE LBNL. Water projections from Houston Advanced Research Center. Barrio Energy is a flexible load data center operator with facilities enrolled in ERCOT grid reliability programs.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-8" data-share-title="&quot;Texas Has a Hyperscale Problem&quot;: Why Communities Are Turning on Big Tech Data Centers" data-slug="texas-has-hyperscale-problem-why-communities-are">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -986,7 +1234,7 @@
             </div>
 
             <!-- Article 7: The Buildout vs. the Backlash: Fermi&apos;s 17 GW  -->
-            <div class="article-full" id="article-7">
+            <div class="article-full" id="article-7" data-slug="buildout-vs-backlash-fermis-17-gw-private">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>The Buildout vs. the Backlash: Fermi&apos;s 17 GW Private Grid, $33B in Contested Transmission, and $780M in Fresh Capital</h1>
                 <div class="article-meta">
@@ -996,6 +1244,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-7" data-share-title="The Buildout vs. the Backlash: Fermi&#x27;s 17 GW Private Grid, $33B in Contested Transmission, and $780M in Fresh Capital" data-slug="buildout-vs-backlash-fermis-17-gw-private">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Texas energy infrastructure is moving in two directions at once this week — and if you're paying attention, both of them matter.</p>
 
@@ -1050,6 +1318,26 @@
 <p style="margin-top: 2rem; font-size: 0.9em; color: #666; border-top: 1px solid #ddd; padding-top: 1rem;"><em>Disclaimer: This newsletter is for informational purposes only and does not constitute investment advice. Barrio Energy has financial interests in Texas energy infrastructure. Always do your own research before making investment decisions.</em></p>
 
                 </div>
+                <div class="share-bar" data-article-id="article-7" data-share-title="The Buildout vs. the Backlash: Fermi&#x27;s 17 GW Private Grid, $33B in Contested Transmission, and $780M in Fresh Capital" data-slug="buildout-vs-backlash-fermis-17-gw-private">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -1061,7 +1349,7 @@
             </div>
 
             <!-- Article 6: The Boom Hits a Wall: Stargate Retreats, Amazon Go -->
-            <div class="article-full" id="article-6">
+            <div class="article-full" id="article-6" data-slug="boom-hits-wall-stargate-retreats-amazon-goes">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>The Boom Hits a Wall: Stargate Retreats, Amazon Goes Nuclear, and Miners Sell Everything</h1>
                 <div class="article-meta">
@@ -1071,6 +1359,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-6" data-share-title="The Boom Hits a Wall: Stargate Retreats, Amazon Goes Nuclear, and Miners Sell Everything" data-slug="boom-hits-wall-stargate-retreats-amazon-goes">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>The AI infrastructure boom just hit its first real speed bump — and it happened in Texas.</p>
 
@@ -1126,6 +1434,26 @@
 
 <p class="disclaimer"><em>Disclaimer: This newsletter is for informational purposes only and does not constitute investment advice. Barrio Energy has financial interests in Texas energy infrastructure. Always conduct your own due diligence before making investment decisions.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-6" data-share-title="The Boom Hits a Wall: Stargate Retreats, Amazon Goes Nuclear, and Miners Sell Everything" data-slug="boom-hits-wall-stargate-retreats-amazon-goes">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -1137,7 +1465,7 @@
             </div>
 
             <!-- Article 5: "Inflection Point": 226 GW in the Queue, a 7.65 GW -->
-            <div class="article-full" id="article-5">
+            <div class="article-full" id="article-5" data-slug="inflection-point-226-gw-queue-765-gw">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>"Inflection Point": 226 GW in the Queue, a 7.65 GW Permit, and the Week Texas Energy Got Real</h1>
                 <div class="article-meta">
@@ -1147,6 +1475,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-5" data-share-title="&quot;Inflection Point&quot;: 226 GW in the Queue, a 7.65 GW Permit, and the Week Texas Energy Got Real" data-slug="inflection-point-226-gw-queue-765-gw">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
 <p>Something broke loose in Texas energy this week. Not one story — five, all at once, all pointing the same direction. A 226 GW interconnection queue that's quadrupled in a year. A crypto miner sitting on 1.7 GW of power getting told by Wall Street to pivot to AI. The largest power project permit in U.S. history — 7.65 GW — cleared in Pecos County. Battery storage about to overtake California. And small modular nuclear reactors moving toward regulatory approval by year-end. If you're still wondering whether the Texas grid buildout is real, this is the week that answers the question.</p>
 
@@ -1197,6 +1545,26 @@
 <p><em>This newsletter is for informational purposes only and does not constitute investment advice.</em></p>
 
                 </div>
+                <div class="share-bar" data-article-id="article-5" data-share-title="&quot;Inflection Point&quot;: 226 GW in the Queue, a 7.65 GW Permit, and the Week Texas Energy Got Real" data-slug="inflection-point-226-gw-queue-765-gw">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -1208,10 +1576,30 @@
             </div>
 
             <!-- Article 4: 226 Gigawatts in the Queue -->
-<div class="article-full" id="article-4">
+<div class="article-full" id="article-4" data-slug="226-gigawatts-queue-batteries-double-smrs-get">
 <a class="back-link" onclick="showList()">&larr; Back to News</a>
 <h1>"226 Gigawatts in the Queue": Batteries Double, SMRs Get Real, and ERCOT Calls McKinsey</h1>
 <div class="article-meta"><span>By Andi | Barrio Energy</span><span class="dot">&middot;</span><span>February 27, 2026</span><span class="dot">&middot;</span><span>5 min read</span></div>
+                <div class="share-bar" data-article-id="article-4" data-share-title="&quot;226 Gigawatts in the Queue&quot;: Batteries Double, SMRs Get Real, and ERCOT Calls McKinsey" data-slug="226-gigawatts-queue-batteries-double-smrs-get">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
 <div class="article-body">
 <p>A year ago, ERCOT's large load interconnection queue stood at 63 gigawatts. Today it's 226 GW. That's not a typo and it's not a rounding error. It's the sound of every hyperscaler, crypto miner, and industrial manufacturer in the country deciding that Texas is where the power is &mdash; and then finding out that getting connected to that power is an entirely different problem.</p>
 <p>This week gave us the clearest picture yet of how the Texas grid is evolving under pressure. Batteries are scaling faster than anyone predicted. Nuclear startups are moving from pitch decks to permits. And ERCOT, facing the largest interconnection bottleneck in American history, did what any self-respecting grid operator would do: it hired McKinsey.</p>
@@ -1242,6 +1630,26 @@
 <p><strong>X-Energy NRC Timeline:</strong> The company's updated regulatory schedule is expected to be filed with the NRC by end of week.</p>
 <p><em>This newsletter is for informational purposes only and does not constitute investment advice.</em></p>
 </div>
+                <div class="share-bar" data-article-id="article-4" data-share-title="&quot;226 Gigawatts in the Queue&quot;: Batteries Double, SMRs Get Real, and ERCOT Calls McKinsey" data-slug="226-gigawatts-queue-batteries-double-smrs-get">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
 <div class="author-box">
 <img src="images/andi.png" alt="Andi" class="author-avatar">
 <div>
@@ -1253,7 +1661,7 @@
 </div>
 
             <!-- Article 3: Starboard Storms Riot -->
-            <div class="article-full" id="article-3">
+            <div class="article-full" id="article-3" data-slug="well-positioned-execute-starboard-storms-riot-google">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>"Well Positioned to Execute": Starboard Storms Riot, Google Buys Its Own Power Company, and NRG Bets $617 Million on Gas</h1>
                 <div class="article-meta">
@@ -1263,6 +1671,26 @@
                     <span class="dot">&middot;</span>
                     <span>5 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-3" data-share-title="&quot;Well Positioned to Execute&quot;: Starboard Storms Riot, Google Buys Its Own Power Company, and NRG Bets $617 Million on Gas" data-slug="well-positioned-execute-starboard-storms-riot-google">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
                     <p>Activist investors are now telling Bitcoin miners what to do with their Texas power capacity. Google just bought an entire energy company so it doesn't have to wait in line for grid access. And NRG is breaking ground on a new gas plant in Houston because somebody has to actually generate the electricity all these data centers are going to need.</p>
                     <p>Three very different plays this week. All pointed at the same reality: whoever controls power in Texas controls the AI buildout. And the race to lock it down is getting aggressive.</p>
@@ -1300,6 +1728,26 @@
 
                     <p><em>This newsletter is for informational purposes only and does not constitute investment advice.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-3" data-share-title="&quot;Well Positioned to Execute&quot;: Starboard Storms Riot, Google Buys Its Own Power Company, and NRG Bets $617 Million on Gas" data-slug="well-positioned-execute-starboard-storms-riot-google">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -1311,7 +1759,7 @@
             </div>
 
             <!-- Article 1: ERCOT Rewrites the Rules -->
-            <div class="article-full" id="article-1">
+            <div class="article-full" id="article-1" data-slug="we-are-no-longer-just-studying-ercot">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>"We Are No Longer Just Studying This" &mdash; ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks</h1>
                 <div class="article-meta">
@@ -1321,6 +1769,26 @@
                     <span class="dot">&middot;</span>
                     <span>4 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-1" data-share-title="&quot;We Are No Longer Just Studying This&quot; — ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks" data-slug="we-are-no-longer-just-studying-ercot">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
                     <p>Last week, we told you ERCOT was stuck in a "study doom loop." This week, they're breaking out of it &mdash; and the implications for Texas data center development are massive.</p>
                     <p>On February 14, ERCOT's Public Utility Commission (PUC) approved a slate of reforms designed to unclog the interconnection queue that's been holding up over 250 GW of proposed new generation and load. The changes include mandatory financial collateral for interconnection applications, a new batch study process, and stricter timelines for project developers. It's the most significant overhaul of ERCOT's queue process in the grid's history.</p>
@@ -1354,6 +1822,26 @@
                     <p><strong>Natural gas prices</strong> continue to rise as new power plants come online. Henry Hub spot prices hit $4.50/MMBtu this week, up 40% from January. This is good news for Texas gas producers but adds cost pressure to new data center developments.</p>
                     <p><em>Barrio Energy provides independent analysis of Texas power markets, data center development, and digital infrastructure. This is not investment advice.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-1" data-share-title="&quot;We Are No Longer Just Studying This&quot; — ERCOT Rewrites the Rules While Hyperscalers Keep Signing Checks" data-slug="we-are-no-longer-just-studying-ercot">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -1365,7 +1853,7 @@
             </div>
 
             <!-- Article 2: No Longer a Bitcoin Company -->
-            <div class="article-full" id="article-2">
+            <div class="article-full" id="article-2" data-slug="we-are-no-longer-bitcoin-company-thats">
                 <a class="back-link" onclick="showList()">&larr; Back to News</a>
                 <h1>"We Are No Longer a Bitcoin Company" &mdash; And That's Just the Start of Texas Power's Wildest Week</h1>
                 <div class="article-meta">
@@ -1375,6 +1863,26 @@
                     <span class="dot">&middot;</span>
                     <span>6 min read</span>
                 </div>
+                <div class="share-bar" data-article-id="article-2" data-share-title="&quot;We Are No Longer a Bitcoin Company&quot; — And That&#x27;s Just the Start of Texas Power&#x27;s Wildest Week" data-slug="we-are-no-longer-bitcoin-company-thats">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="article-body">
                     <p>On Thursday morning, Ben Gagnon stood up in front of investors and said the quiet part out loud: "We are no longer a Bitcoin company." His company, formerly Bitfarms, is now Keel Infrastructure &mdash; redomiciled from Canada to Delaware, pivoted from mining rigs to server racks, and betting the whole house on AI.</p>
                     <p>Three days later, Google signed the largest renewable PPA in TotalEnergies' American history &mdash; a full gigawatt of solar capacity destined for Texas data centers. And somewhere in Austin, ERCOT's grid planners admitted they're stuck in what one VP called a "study doom loop," unable to process interconnection requests faster than they arrive.</p>
@@ -1412,6 +1920,26 @@
                     <p>And if hashprice stays pinned below $35/TH/s, expect at least one more public miner to drop the word "Bitcoin" from its investor deck before the month is out.</p>
                     <p><em>Barrio Energy provides independent analysis of Texas power markets, data center development, and digital infrastructure. This is not investment advice.</em></p>
                 </div>
+                <div class="share-bar" data-article-id="article-2" data-share-title="&quot;We Are No Longer a Bitcoin Company&quot; — And That&#x27;s Just the Start of Texas Power&#x27;s Wildest Week" data-slug="we-are-no-longer-bitcoin-company-thats">
+                    <span class="share-label">Share</span>
+                    <a href="#" class="share-btn share-x" data-share="x" rel="noopener" aria-label="Share on X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Post</span>
+                    </a>
+                    <a href="#" class="share-btn share-li" data-share="linkedin" rel="noopener" aria-label="Share on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button type="button" class="share-btn share-copy" data-share="copy" aria-label="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span class="copy-label">Copy link</span>
+                    </button>
+                    <a href="#" class="share-btn share-email" data-share="email" aria-label="Share by email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email</span>
+                    </a>
+                </div>
+
                 <div class="author-box">
                     <img src="images/andi.png" alt="Andi" class="author-avatar">
                     <div>
@@ -1452,18 +1980,93 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script>
-    function showArticle(id) {
+    <script>    // === SPA routing: keep URL in sync with viewed article ===
+    function slugPath(id) {
+        var el = document.getElementById(id);
+        var slug = el && el.getAttribute('data-slug');
+        return slug ? '/news/' + id + '-' + slug : '/news/' + id;
+    }
+    function _showArticleInternal(id) {
         document.getElementById('articleList').classList.add('hidden');
-        document.querySelectorAll('.article-full').forEach(el => el.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('.article-full').forEach(function(el){ el.classList.remove('active'); });
+        var el = document.getElementById(id);
+        if (el) el.classList.add('active');
+    }
+    function _showListInternal() {
+        document.querySelectorAll('.article-full').forEach(function(el){ el.classList.remove('active'); });
+        document.getElementById('articleList').classList.remove('hidden');
+    }
+    function showArticle(id) {
+        _showArticleInternal(id);
+        var path = slugPath(id);
+        if (window.location.pathname !== path) {
+            history.pushState({article: id}, '', path);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     function showList() {
-        document.querySelectorAll('.article-full').forEach(el => el.classList.remove('active'));
-        document.getElementById('articleList').classList.remove('hidden');
+        _showListInternal();
+        if (window.location.pathname !== '/news' && window.location.pathname !== '/news.html') {
+            history.pushState({}, '', '/news');
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    window.addEventListener('popstate', function() {
+        var m = window.location.pathname.match(/\/news\/(article-\d+)/);
+        if (m && document.getElementById(m[1])) {
+            _showArticleInternal(m[1]);
+        } else {
+            _showListInternal();
+        }
+    });
+    // On initial load, honor the URL if it points to a specific article
+    (function initRoute() {
+        var m = window.location.pathname.match(/\/news\/(article-\d+)/);
+        if (m && document.getElementById(m[1])) {
+            _showArticleInternal(m[1]);
+        }
+    })();
+
+    // === Share bar wiring ===
+    (function wireShare() {
+        function canonicalFor(bar) {
+            var aid = bar.getAttribute('data-article-id');
+            var slug = bar.getAttribute('data-slug') || '';
+            var path = slug ? '/news/' + aid + '-' + slug : '/news/' + aid;
+            return 'https://barrioenergy.com' + path;
+        }
+        function title(bar) { return bar.getAttribute('data-share-title') || document.title; }
+        document.querySelectorAll('.share-bar').forEach(function(bar) {
+            var url = canonicalFor(bar);
+            var t = title(bar);
+            bar.querySelectorAll('[data-share]').forEach(function(btn) {
+                var mode = btn.getAttribute('data-share');
+                if (mode === 'x') {
+                    btn.setAttribute('href', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(t) + '&url=' + encodeURIComponent(url));
+                    btn.setAttribute('target', '_blank');
+                } else if (mode === 'linkedin') {
+                    btn.setAttribute('href', 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url));
+                    btn.setAttribute('target', '_blank');
+                } else if (mode === 'email') {
+                    btn.setAttribute('href', 'mailto:?subject=' + encodeURIComponent(t) + '&body=' + encodeURIComponent(url));
+                } else if (mode === 'copy') {
+                    btn.addEventListener('click', function(ev) {
+                        ev.preventDefault();
+                        navigator.clipboard.writeText(url).then(function() {
+                            btn.classList.add('copied');
+                            var lbl = btn.querySelector('.copy-label');
+                            var original = lbl ? lbl.textContent : '';
+                            if (lbl) lbl.textContent = 'Copied';
+                            setTimeout(function() {
+                                btn.classList.remove('copied');
+                                if (lbl) lbl.textContent = original;
+                            }, 1800);
+                        });
+                    });
+                }
+            });
+        });
+    })();
     </script>
 
     <script>

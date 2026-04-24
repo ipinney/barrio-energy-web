@@ -2,5 +2,19 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.barrioenergy.com" }],
+      "destination": "https://barrioenergy.com/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/news/article-:id(\\d+)-:slug*",
+      "destination": "/news/article-:id"
+    }
+  ]
 }
