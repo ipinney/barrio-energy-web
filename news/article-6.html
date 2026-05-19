@@ -228,17 +228,28 @@
     </main>
 
     <script>
+    function _resolveShareUrl(btn) {
+        var url = btn.getAttribute('data-copy-url');
+        if (url) return url;
+        var bar = btn.closest('.share-bar');
+        if (bar) {
+            var barUrl = bar.getAttribute('data-share-url');
+            if (barUrl) return barUrl;
+        }
+        // strip any URL fragment so SPA-routed share bars copy the clean canonical URL
+        return window.location.href.split('#')[0];
+    }
     document.querySelectorAll('.share-copy').forEach(function(btn) {
         btn.addEventListener('click', function() {
-            var url = btn.getAttribute('data-copy-url');
+            var url = _resolveShareUrl(btn);
             var label = btn.querySelector('.copy-label');
-            var original = label.textContent;
+            var original = label ? label.textContent : '';
             navigator.clipboard.writeText(url).then(function() {
                 btn.classList.add('copied');
-                label.textContent = 'Copied';
+                if (label) label.textContent = 'Copied';
                 setTimeout(function() {
                     btn.classList.remove('copied');
-                    label.textContent = original;
+                    if (label) label.textContent = original;
                 }, 1800);
             });
         });
