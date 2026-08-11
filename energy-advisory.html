@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>window.__blTs=Date.now();</script>
 </head>
 <body>
     <!-- Navigation -->
@@ -185,6 +186,7 @@
                     <h2>Stay Ahead of Energy Markets</h2>
                     <p>Subscribe to our Energy Advisory newsletter for weekly insights on ERCOT market trends, rate changes, and strategies to lower your energy costs.</p>
                     <form class="newsletter-form" id="newsletterForm">
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                         <div class="newsletter-input-group">
                             <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
                             <button type="submit" class="btn btn-primary">Subscribe</button>
@@ -222,6 +224,7 @@
                     <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
                 </div>
                 <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                     <div class="newsletter-input-group">
                         <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
                         <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
@@ -371,6 +374,8 @@
             try {
                 const formData = new FormData();
                 formData.append('email', emailVal);
+                formData.append('website', (newsletterForm.querySelector('[name="website"]')||{}).value || '');
+                formData.append('ts', window.__blTs || '');
                 const resp = await fetch('https://api.barrioenergy.com/newsletter/subscribe', {
                     method: 'POST',
                     body: formData

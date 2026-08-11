@@ -88,14 +88,18 @@ function handleFooterSubscribe(e) {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: 'email=' + encodeURIComponent(email)
+            + '&website=' + encodeURIComponent((form.querySelector('[name="website"]')||{}).value || '')
+            + '&ts=' + (window.__blTs || '')
     })
     .then(res => res.json())
     .then(data => {
         form.style.display = 'none';
         if (successMsg) {
             successMsg.style.display = 'block';
-            if (data.message === 'Already subscribed') {
+            if (data.status === 'exists') {
                 successMsg.querySelector('p').textContent = "You're already subscribed!";
+            } else if (data.message) {
+                successMsg.querySelector('p').textContent = data.message;
             }
         }
     })

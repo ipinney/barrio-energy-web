@@ -222,6 +222,7 @@
         .author-box .author-role { color: #22d3ee; font-size: 0.8rem; font-weight: 500; margin-bottom: 8px; }
         .author-box p { color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.6; }
     </style>
+  <script>window.__blTs=Date.now();</script>
 </head>
 <body>
     <!-- Navigation -->
@@ -273,6 +274,7 @@
                         <p>ERCOT analysis, data center developments, and power infrastructure trends — delivered to your inbox.</p>
                     </div>
                     <form class="news-subscribe-form" id="newsSubscribeForm">
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                         <div class="newsletter-input-group">
                             <input type="email" id="newsSubscribeEmail" placeholder="Enter your email" required>
                             <button type="submit" class="btn btn-primary">Subscribe</button>
@@ -5264,6 +5266,7 @@
                     <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
                 </div>
                 <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                     <div class="newsletter-input-group">
                         <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
                         <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
@@ -5387,13 +5390,17 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: 'email=' + encodeURIComponent(email)
+                        + '&website=' + encodeURIComponent((form.querySelector('[name="website"]')||{}).value || '')
+                        + '&ts=' + (window.__blTs || '')
                 });
                 const data = await resp.json();
                 if (!resp.ok) throw new Error('Subscribe failed');
                 form.style.display = 'none';
                 success.style.display = 'block';
-                if (data.message === 'Already subscribed') {
+                if (data.status === 'exists') {
                     success.querySelector('p').textContent = "You're already subscribed!";
+                } else if (data.message) {
+                    success.querySelector('p').textContent = data.message;
                 }
             } catch (err) {
                 btn.textContent = 'Try again';
