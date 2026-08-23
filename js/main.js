@@ -66,6 +66,57 @@ document.addEventListener('DOMContentLoaded', () => {
     style.textContent = '.visible { opacity: 1 !important; transform: translateY(0) !important; }';
     document.head.appendChild(style);
 
+    // Joy — AI travel agent, with the other agent cards (not leadership)
+    const teamGrid = document.getElementById('teamGrid');
+    if (teamGrid && ![...teamGrid.querySelectorAll('.team-card-name h3')].some(h => h.textContent.trim() === 'Joy')) {
+        const member = {
+            name: 'Joy',
+            role: 'Travel Agent',
+            bio: 'Finds deals, books trips, watches calendars, and learns how Ivan actually likes to travel.',
+            fullBio: 'Joy is Barrio Energy\u2019s travel agent. She hunts flights, hotels, and the itinerary around them, then books when Ivan says go. She watches calendars so trips fit real life, not a fantasy week, and she keeps a running read on preferences: home airports, cabin, layover tolerance, hotel style, who is traveling, and what \u201cgood enough\u201d looks like on a given trip. She is the one who shows two or three real options with the tradeoffs attached, not a pile of tabs. Tech and site work she hands to Dev or CMO.',
+            image: 'images/joy.png'
+        };
+        const card = document.createElement('div');
+        card.className = 'team-card';
+        card.innerHTML = `
+                <div class="team-card-header">
+                    <div class="avatar-wrap">
+                        <img src="${member.image}" alt="${member.name}" loading="lazy">
+                    </div>
+                </div>
+                <div class="team-card-body">
+                    <div class="team-card-name">
+                        <h3>${member.name}</h3>
+                        <span class="ai-badge">AI</span>
+                    </div>
+                    <div class="team-card-role">${member.role}</div>
+                    <p class="team-card-bio">${member.bio}</p>
+                    <div class="team-card-cta">
+                        <span>Read full bio</span>
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </div>
+                </div>
+            `;
+        card.addEventListener('click', () => {
+            const modal = document.getElementById('bioModal');
+            const avatar = document.getElementById('modalAvatar');
+            const info = document.getElementById('modalInfo');
+            const body = document.getElementById('modalBody');
+            if (!modal || !avatar || !info || !body) return;
+            avatar.innerHTML = `<img src="${member.image}" alt="${member.name}">`;
+            info.innerHTML = `
+                <h2>${member.name}</h2>
+                <p class="modal-role">${member.role}</p>
+                <span class="modal-agent-badge">AI Agent</span>
+            `;
+            body.innerHTML = member.fullBio.split('\n\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        teamGrid.appendChild(card);
+        observer.observe(card);
+    }
+
 });
 
 // --- Newsletter Subscribe Handler ---
