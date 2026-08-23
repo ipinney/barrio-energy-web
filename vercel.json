@@ -7,6 +7,14 @@
     {
       "source": "/news/article-:id(\\d+)-:slug*",
       "destination": "/news/article-:id"
+    },
+    {
+      "source": "/team",
+      "destination": "/about"
+    },
+    {
+      "source": "/team.html",
+      "destination": "/about"
     }
   ]
 }
