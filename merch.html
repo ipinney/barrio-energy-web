@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merch | Barrio Energy</title>
+    <meta name="description" content="Barrio Energy merch. Printed to order in the US, paid over Lightning.">
+    <meta property="og:title" content="Merch | Barrio Energy">
+    <meta property="og:description" content="Printed to order in the US, paid over Lightning.">
+    <meta property="og:image" content="https://barrioenergy.com/images/merch/cati-front.jpg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>window.__blTs=Date.now();</script>
+<style>
+/* Merch — page-scoped, so the shared stylesheet stays untouched. */
+.merch-hero { padding: 160px 0 48px; }
+.merch-hero h1 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; }
+.merch-hero p { color: var(--color-text-muted); max-width: 56ch; margin-top: 14px; }
+
+.merch-grid { display: grid; gap: 28px; padding-bottom: 40px; }
+@media (min-width: 900px) { .merch-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); } }
+
+.item {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+}
+.item-media { position: relative; background: #f4f4f6; }
+.item-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.item-views {
+    position: absolute; left: 12px; bottom: 12px;
+    display: flex; gap: 6px;
+}
+.view-btn {
+    font: 500 11.5px/1 var(--font-body);
+    letter-spacing: .04em; text-transform: uppercase;
+    padding: 7px 11px; border-radius: 99px; cursor: pointer;
+    background: rgba(10,10,15,.72); color: #e8e8ec;
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(6px);
+    transition: background var(--transition), color var(--transition);
+}
+.view-btn[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+
+.item-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.item-name { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; }
+.item-blurb { color: var(--color-text-muted); font-size: .935rem; margin-top: 8px; }
+
+.item-price { margin-top: 18px; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; }
+.item-price span { font-family: var(--font-body); font-size: .85rem; font-weight: 400; color: var(--color-text-muted); margin-left: 8px; }
+
+.spec { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: .875rem; }
+.spec dt { color: var(--color-text-muted); }
+.spec dd { color: var(--color-text); }
+
+.swatches { display: flex; gap: 7px; align-items: center; }
+.sw { width: 17px; height: 17px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28); }
+
+.item-cta { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.item-note { font-size: .8rem; color: var(--color-text-muted); margin-top: 14px; }
+
+.merch-foot {
+    border-top: 1px solid var(--color-border);
+    margin-top: 8px; padding: 30px 0 70px;
+    color: var(--color-text-muted); font-size: .9rem;
+}
+.merch-foot strong { color: var(--color-text); font-weight: 600; }
+</style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="data-centers.html" class="nav-link">Data Centers</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="merch.html" class="nav-link active">Merch</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="https://barrio-geointel.vercel.app/login" class="nav-link nav-login">Login</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="merch-hero">
+        <div class="container">
+            <h1>Merch</h1>
+            <p>Printed to order and shipped from the US. Checkout runs on Lightning over at
+               the Gambit shop &mdash; nothing is warehoused, so each one is made after you buy it.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="merch-grid" id="merchGrid"></div>
+        </div>
+
+        <div class="container">
+            <div class="merch-foot">
+                <p><strong>How it works.</strong> Pick a size and colour on the shop page, enter a US
+                   shipping address, and pay the Lightning invoice. The shirt is printed after the
+                   invoice settles, so allow time for production on top of shipping.</p>
+                <p style="margin-top:10px;">Questions about an order &mdash;
+                   <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    /* One item today. The catalogue is a data array rather than hand-written
+       markup so the second item is an edit here, not a layout rewrite.
+       Checkout deliberately stays on the Gambit shop: it already handles the
+       Lightning invoice, the US-only shipping rules and print-to-order. This
+       page is the shop window, not the till. */
+    var MERCH = [
+      {
+        sku: "come-and-take-it-dc",
+        name: "Come and Take It",
+        blurb: "Bella+Canvas 3001. Front design printed DTG, Barrio Energy mark on the back.",
+        priceFrom: "$48.99",
+        priceNote: "S–XL · 2XL $52.99 · 3XL $56.99",
+        colors: [
+          { name: "White", hex: "#f7f7f7" },
+          { name: "Black", hex: "#141414" },
+          { name: "Navy",  hex: "#1e2a44" }
+        ],
+        sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+        views: [
+          { label: "Front", webp: "images/merch/cati-front.webp", jpg: "images/merch/cati-front.jpg",
+            alt: "Come and Take It shirt, front" },
+          { label: "Back",  webp: "images/merch/cati-back.webp",  jpg: "images/merch/cati-back.jpg",
+            alt: "Come and Take It shirt, back with Barrio Energy mark" }
+        ],
+        buy: "https://gambit.barrioenergy.com/shirt"
+      }
+    ];
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    function card(item, i) {
+      var v = item.views;
+      var el = document.createElement("article");
+      el.className = "item";
+      el.innerHTML =
+        '<div class="item-media">' +
+          '<picture>' +
+            '<source srcset="' + esc(v[0].webp) + '" type="image/webp">' +
+            '<img id="img' + i + '" src="' + esc(v[0].jpg) + '" alt="' + esc(v[0].alt) + '" loading="lazy" width="1200" height="800">' +
+          '</picture>' +
+          (v.length > 1 ? '<div class="item-views" role="group" aria-label="Views">' +
+            v.map(function (view, n) {
+              return '<button class="view-btn" type="button" data-i="' + i + '" data-n="' + n + '" ' +
+                     'aria-pressed="' + (n === 0) + '">' + esc(view.label) + '</button>';
+            }).join("") + '</div>' : "") +
+        '</div>' +
+        '<div class="item-body">' +
+          '<h2 class="item-name">' + esc(item.name) + '</h2>' +
+          '<p class="item-blurb">' + esc(item.blurb) + '</p>' +
+          '<div class="item-price">' + esc(item.priceFrom) + '<span>' + esc(item.priceNote) + '</span></div>' +
+          '<dl class="spec">' +
+            '<dt>Colours</dt><dd><span class="swatches">' +
+              item.colors.map(function (c) {
+                return '<i class="sw" style="background:' + esc(c.hex) + '" title="' + esc(c.name) + '"></i>';
+              }).join("") + '</span></dd>' +
+            '<dt>Sizes</dt><dd>' + item.sizes.map(esc).join(" · ") + '</dd>' +
+            '<dt>Shipping</dt><dd>US only</dd>' +
+          '</dl>' +
+          '<div class="item-cta">' +
+            '<a class="btn btn-primary" href="' + esc(item.buy) + '" rel="noopener">Buy on Gambit</a>' +
+          '</div>' +
+          '<p class="item-note">Opens the Gambit shop, where you pick size and colour and pay the Lightning invoice.</p>' +
+        '</div>';
+      return el;
+    }
+
+    (function () {
+      var grid = document.getElementById("merchGrid");
+      if (!grid) return;
+      MERCH.forEach(function (item, i) { grid.appendChild(card(item, i)); });
+
+      grid.addEventListener("click", function (e) {
+        var b = e.target.closest(".view-btn");
+        if (!b) return;
+        var i = +b.dataset.i, n = +b.dataset.n;
+        var view = MERCH[i].views[n];
+        var img = document.getElementById("img" + i);
+        var src = img.parentNode.querySelector("source");
+        if (src) src.srcset = view.webp;
+        img.src = view.jpg;
+        img.alt = view.alt;
+        b.parentNode.querySelectorAll(".view-btn").forEach(function (o) {
+          o.setAttribute("aria-pressed", String(o === b));
+        });
+      });
+    })();
+    </script>
+</body>
+</html>
