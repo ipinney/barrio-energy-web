@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Connector | Barrio Energy</title>
+    <meta name="description" content="Texas power grid siting data for AI agents and developers: nearest substations, transmission, ERCOT queue, powered land and utility lookup. MCP server and REST API from Barrio Energy.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+    <style>
+        .g-wrap { max-width: 960px; margin: 0 auto; padding: 120px 20px 60px; }
+        .g-wrap h1 { font-family: var(--font-heading); font-size: 2.4rem; margin-bottom: 12px; }
+        .g-wrap h2 { font-family: var(--font-heading); font-size: 1.35rem; margin: 44px 0 12px; }
+        .g-wrap p, .g-wrap li { color: var(--color-text-muted); line-height: 1.65; }
+        .g-wrap ul { padding-left: 20px; }
+        .g-lead { font-size: 1.08rem; color: var(--color-text) !important; }
+        .g-code { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 12px 14px; font-family: Consolas, Menlo, monospace; font-size: 0.88rem; color: var(--color-text); overflow-x: auto; white-space: pre; margin: 10px 0; }
+        .g-inline { font-family: Consolas, Menlo, monospace; font-size: 0.9em; color: var(--color-text); background: var(--color-bg-card); padding: 1px 6px; border-radius: 4px; }
+        .g-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.92rem; }
+        .g-table th, .g-table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+        .g-table th { color: var(--color-text); font-weight: 600; }
+        .g-table td { color: var(--color-text-muted); }
+        .g-table td:first-child { color: var(--color-text); white-space: nowrap; }
+        .g-try { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 18px; margin-top: 12px; }
+        .g-try form { display: flex; gap: 8px; flex-wrap: wrap; }
+        .g-try input { flex: 1 1 260px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text); padding: 10px 12px; font-size: 0.95rem; }
+        .g-out { margin-top: 14px; font-size: 0.92rem; }
+        .g-out .row { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
+        .g-out .muted { color: var(--color-text-muted); }
+        .g-scroll { overflow-x: auto; }
+        @media (max-width: 640px) { .g-wrap h1 { font-size: 1.8rem; } .g-table td:first-child { white-space: normal; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img"></a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="data-centers.html" class="nav-link">Data Centers</a>
+                <a href="grid.html" class="nav-link active">Grid API</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <main class="g-wrap">
+        <h1>Barrio Grid Connector</h1>
+        <p class="g-lead">Texas power grid siting data for AI agents and developers. Ask where the nearest substation is, what utility serves a site, what is in the ERCOT queue nearby, or which parcels sit next to high-voltage power.</p>
+        <p>One MCP server and a matching REST API. Works with Claude, ChatGPT, Muse and any agent that can call a URL.</p>
+
+        <h2>Try it</h2>
+        <div class="g-try">
+            <form id="tryForm">
+                <input id="tryAddr" type="text" placeholder="Texas address, city or county, e.g. Edna, TX" required>
+                <button class="btn btn-primary btn-sm" type="submit">Nearest substations</button>
+            </form>
+            <div class="g-out" id="tryOut"></div>
+        </div>
+
+        <h2>Connect</h2>
+        <p><strong>MCP server</strong> (streamable HTTP, no sign-in on the free tier):</p>
+        <div class="g-code">https://grid.barrioenergy.com/mcp</div>
+        <ul>
+            <li><strong>Claude:</strong> Settings, Connectors, Add custom connector, paste the URL, leave the OAuth fields blank.</li>
+            <li><strong>ChatGPT:</strong> Settings, Apps and Connectors, Create, paste the URL, authentication None.</li>
+            <li><strong>Muse or any other agent:</strong> give it the URL above or this page and it can build the skill itself. A ready-made skill file is at <a href="/grid/skill.md">/grid/skill.md</a>.</li>
+        </ul>
+        <p><strong>REST</strong>, same tools, GET with query parameters or POST JSON:</p>
+        <div class="g-code">curl "https://grid.barrioenergy.com/v1/nearest_substation?address=Edna,%20TX&amp;min_kv=138"
+curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&amp;min_acres=50&amp;max_sub_mi=1"
+curl "https://grid.barrioenergy.com/v1/tools"</div>
+
+        <h2>Tools</h2>
+        <div class="g-scroll">
+        <table class="g-table">
+            <tr><th>Tool</th><th>What it answers</th></tr>
+            <tr><td>grid_context</td><td>Everything around one site: county, likely serving utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned transmission upgrades within 25 miles.</td></tr>
+            <tr><td>nearest_substation</td><td>Closest substations to an address or coordinate, with voltage, owner and distance in miles. Filter by minimum kV.</td></tr>
+            <tr><td>find_powered_land</td><td>Parcels near a qualifying substation, by county or point and radius, with acreage and distance to the substation.</td></tr>
+            <tr><td>ercot_queue</td><td>ERCOT generation and storage interconnection projects near a site or in a county: fuel, MW, study status.</td></tr>
+            <tr><td>barrio_sites</td><td>Powered Texas sites Barrio Energy offers for lease. Free and unmetered.</td></tr>
+            <tr><td>request_power</td><td>Send a request for MW or a powered site to Barrio Energy. Free and unmetered.</td></tr>
+        </table>
+        </div>
+        <p>Inputs take a street address, a Texas city or county name, or <span class="g-inline">lat</span> + <span class="g-inline">lng</span>. Distances are in miles. Texas only.</p>
+
+        <h2>Pricing</h2>
+        <div class="g-scroll">
+        <table class="g-table">
+            <tr><th>Tier</th><th>Limits</th><th>Price</th></tr>
+            <tr><td>Free</td><td>60 calls a day per session, 25 parcels per search, 25 mile radius. No key needed.</td><td>0</td></tr>
+            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://grid.barrioenergy.com/pro">subscribe</a></td></tr>
+            <tr><td>Enterprise</td><td>Custom limits and data.</td><td><a href="mailto:ivan@barrioenergy.com">Ask for a quote</a></td></tr>
+        </table>
+        </div>
+
+        <h2>Data</h2>
+        <ul>
+            <li>Substations and transmission: HIFLD, with owners enriched by Barrio.</li>
+            <li>Generation and storage queue: ERCOT GIS reports.</li>
+            <li>Planned transmission and substations: Barrio research from ERCOT RPG and PUCT filings.</li>
+            <li>Parcels: TNRIS StratMap. Coverage today: Austin, Bee, Colorado, Jackson, Lavaca, Live Oak, Matagorda, San Patricio and Wharton counties.</li>
+        </ul>
+        <p>Screening data. Confirm capacity and interconnection with the utility before relying on it. Questions: <a href="mailto:ivan@barrioenergy.com">ivan@barrioenergy.com</a>.</p>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    (function () {
+        var form = document.getElementById('tryForm');
+        var out = document.getElementById('tryOut');
+        function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var a = document.getElementById('tryAddr').value.trim();
+            if (!a) return;
+            out.innerHTML = '<div class="muted">Looking up...</div>';
+            fetch('https://grid.barrioenergy.com/v1/nearest_substation?limit=5&address=' + encodeURIComponent(a))
+                .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+                .then(function (x) {
+                    if (!x.ok) { out.innerHTML = '<div class="muted">' + esc(x.j.error || 'Lookup failed') + '</div>'; return; }
+                    var loc = x.j.location || {};
+                    var h = '<div class="muted" style="margin-bottom:6px">' + esc(loc.matched || (loc.lat + ', ' + loc.lng)) + (loc.county ? ' &middot; ' + esc(loc.county) : '') + '</div>';
+                    (x.j.substations || []).forEach(function (s) {
+                        h += '<div class="row"><span>' + esc(s.name || 'Unnamed substation') + ' <span class="muted">' + esc(s.max_kv) + ' kV, ' + esc(s.owner || 'owner unknown') + '</span></span><span>' + esc(s.distance_mi) + ' mi</span></div>';
+                    });
+                    out.innerHTML = h;
+                })
+                .catch(function () { out.innerHTML = '<div class="muted">Lookup failed. Try again.</div>'; });
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Barrio Energy
+
+> Barrio Energy (Houston) develops and leases powered industrial sites in Texas for data centers, bitcoin mining and battery storage. It also runs the Barrio Grid Connector, a public MCP server and REST API with Texas power grid siting data.
+
+## Barrio Grid Connector
+
+Texas grid siting data for agents: nearest substations, transmission lines, likely serving utility, ERCOT generation and storage queue, planned transmission upgrades, and parcels near high-voltage substations (powered land).
+
+- MCP server (streamable HTTP, no auth on the free tier): https://grid.barrioenergy.com/mcp
+- REST base: https://grid.barrioenergy.com/v1/ (tool list and schemas: https://grid.barrioenergy.com/v1/tools)
+- Human docs: https://barrioenergy.com/grid
+- Agent skill file: https://barrioenergy.com/grid/skill.md
+
+### Tools
+
+- grid_context: county, likely utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned upgrades around a Texas site.
+  curl "https://grid.barrioenergy.com/v1/grid_context?address=Edna,%20TX&radius_mi=5"
+- nearest_substation: closest substations with voltage, owner and distance in miles.
+  curl "https://grid.barrioenergy.com/v1/nearest_substation?lat=28.9&lng=-96.6&min_kv=138&limit=5"
+- find_powered_land: parcels within a set distance of a qualifying substation, by county or point and radius.
+  curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&min_acres=50&max_sub_mi=1&min_kv=138"
+- ercot_queue: ERCOT generation and storage interconnection projects near a site or in a county.
+  curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
+- barrio_sites: powered sites Barrio Energy offers for lease. Free, unmetered.
+  curl "https://grid.barrioenergy.com/v1/barrio_sites"
+- request_power: send a request for MW or a powered site to Barrio Energy (POST JSON: contact_name, email, company, mw, use_case, address or site_name, timeline, notes). Free, unmetered. Only submit with the user's consent.
+
+Locations: a street address, a Texas city or county name, or lat + lng. Texas only. Distances in miles.
+
+### Pricing
+
+- Free: 60 calls a day per session or IP, 25 parcels per search. No key.
+- Pro: 249 USD a month, 5,000 calls a month, 200 parcels per search. Header: Authorization: Bearer grid_... Subscribe: https://grid.barrioenergy.com/pro
+- Enterprise: quote, ivan@barrioenergy.com
+
+### Data
+
+HIFLD substations and transmission (owners enriched by Barrio), ERCOT GIS generation queue, Barrio research on planned ERCOT/PUCT transmission projects, TNRIS StratMap parcels (9 Gulf Coast and South Texas counties today). Screening data; confirm with the utility. Cite "Barrio Energy GeoIntel".
+
+## Company
+
+- Site: https://barrioenergy.com
+- Data centers: https://barrioenergy.com/data-centers
+- Contact: ivan@barrioenergy.com

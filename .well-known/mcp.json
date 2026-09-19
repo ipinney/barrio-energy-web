@@ -1,0 +1,19 @@
+{
+  "name": "Barrio Grid Connector",
+  "description": "Texas power grid siting data: nearest substations, transmission, likely utility, ERCOT generation queue, planned upgrades, powered land parcels, and powered-site requests to Barrio Energy.",
+  "publisher": { "name": "Barrio Energy", "url": "https://barrioenergy.com", "contact": "ivan@barrioenergy.com" },
+  "servers": [
+    {
+      "name": "barrio-grid",
+      "url": "https://grid.barrioenergy.com/mcp",
+      "transport": "streamable-http",
+      "authentication": "none",
+      "tools": ["grid_context", "nearest_substation", "find_powered_land", "ercot_queue", "barrio_sites", "request_power"]
+    }
+  ],
+  "rest": "https://grid.barrioenergy.com/v1/tools",
+  "documentation": "https://barrioenergy.com/grid",
+  "llms_txt": "https://barrioenergy.com/llms.txt",
+  "skill": "https://barrioenergy.com/grid/skill.md",
+  "pricing": "https://barrioenergy.com/grid#pricing"
+}
