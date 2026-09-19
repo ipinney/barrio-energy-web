@@ -23,6 +23,8 @@ Texas grid siting data for agents: nearest substations, transmission lines, like
   curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
 - barrio_sites: powered sites Barrio Energy offers for lease. Free, unmetered.
   curl "https://grid.barrioenergy.com/v1/barrio_sites"
+- upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
+  curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
 - request_power: send a request for MW or a powered site to Barrio Energy (POST JSON: contact_name, email, company, mw, use_case, address or site_name, timeline, notes). Free, unmetered. Only submit with the user's consent.
 
 Locations: a street address, a Texas city or county name, or lat + lng. Texas only. Distances in miles.

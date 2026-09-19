@@ -22,6 +22,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | find_powered_land | "Find land near a 138 kV substation in X county" | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138) |
 | ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
 | barrio_sites | "Where can I lease a powered site / get MW in Texas?" | none |
+| upgrade_to_pro | "I need more calls" or the free limit is hit | email (optional) |
 | request_power | The user wants Barrio to contact them about MW or a site | contact_name, email, mw, use_case (required); company, phone, address or site_name, timeline, notes |
 
 Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad County"), or lat + lng. Texas only.
