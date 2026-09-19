@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Barrio Energy</title>
+    <meta name="description" content="Terms of service for barrioenergy.com and the Barrio Grid Connector.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .l-wrap { max-width: 820px; margin: 0 auto; padding: 120px 20px 60px; }
+        .l-wrap h1 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 6px; }
+        .l-wrap h2 { font-family: var(--font-heading); font-size: 1.15rem; margin: 30px 0 8px; }
+        .l-wrap p, .l-wrap li { color: var(--color-text-muted); line-height: 1.65; margin-bottom: 8px; }
+        .l-wrap ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img"></a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="data-centers.html" class="nav-link">Data Centers</a>
+                <a href="grid.html" class="nav-link">Grid API</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <main class="l-wrap">
+        <h1>Terms of Service</h1>
+        <p>Effective September 19, 2026. These terms are between you and Barrio Resources LLC, doing business as Barrio Energy ("Barrio", "we"), and cover barrioenergy.com and the Barrio Grid Connector (grid.barrioenergy.com), including its MCP server, REST API and any API keys (the "Service").</p>
+        <h2>Use of the Service</h2>
+        <ul>
+            <li>You may use the Service, directly or through an AI assistant, to look up Texas power grid siting information for your own business purposes.</li>
+            <li>Do not resell, redistribute in bulk, scrape, or build a competing dataset from the Service. Do not try to exceed rate limits, share keys, or disrupt the Service.</li>
+            <li>Keep your API key private. You are responsible for use of your key.</li>
+        </ul>
+        <h2>Data and accuracy</h2>
+        <p>The Service combines public data (HIFLD, ERCOT, EIA, TNRIS StratMap, US Census) with Barrio research. It is screening information only. It is provided as is, may be incomplete, out of date or wrong, and is not engineering, legal or investment advice. Utility names are estimates. Confirm capacity, interconnection and land details with the utility and the relevant authorities before relying on them. Third-party data remains subject to its source's terms.</p>
+        <h2>Plans and billing</h2>
+        <ul>
+            <li>Free use is subject to the daily limits published at <a href="/grid">barrioenergy.com/grid</a>, which we may change.</li>
+            <li>Pro is billed monthly in advance through Stripe and renews until cancelled. Cancellation takes effect at the end of the paid period and the key is then revoked. Fees are non-refundable except where required by law. Applicable taxes may be added.</li>
+            <li>We may change prices with 30 days' notice to paying customers.</li>
+        </ul>
+        <h2>Power requests</h2>
+        <p>A request sent through request_power is an inquiry, not an offer or a reservation of capacity or land. Any deal requires a separate signed agreement.</p>
+        <h2>Suspension</h2>
+        <p>We may suspend or end access for misuse, non-payment, or to protect the Service, and may change or discontinue features.</p>
+        <h2>Disclaimer and liability</h2>
+        <p>To the fullest extent permitted by law, the Service is provided without warranties of any kind, and Barrio's total liability for any claim relating to the Service is limited to the amount you paid Barrio for the Service in the 12 months before the claim. Barrio is not liable for indirect, incidental, special or consequential damages, or lost profits.</p>
+        <h2>Governing law</h2>
+        <p>Texas law governs these terms. Venue is the state and federal courts in Harris County, Texas.</p>
+        <h2>Changes</h2>
+        <p>We will post changes here with a new effective date. Continued use after a change means you accept it.</p>
+        <h2>Contact</h2>
+        <p>Barrio Energy, 1129 E 6th 1/2 St, Houston, TX 77009. <a href="mailto:ivan@barrioenergy.com">ivan@barrioenergy.com</a>.</p>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved. <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
