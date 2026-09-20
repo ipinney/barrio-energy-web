@@ -4,7 +4,7 @@
 
 ## Barrio Grid Connector
 
-Texas grid siting data for agents: nearest substations, transmission lines, likely serving utility, ERCOT generation and storage queue, planned transmission upgrades, and parcels near high-voltage substations (powered land).
+Texas grid siting data for agents: nearest substations, transmission lines, likely serving utility, jurisdiction (city limits, ETJ, school and groundwater districts), gas pipelines, industrial neighbors and air permits, ERCOT generation and battery queue, planned transmission upgrades, ERCOT nodal, real-time and ancillary prices, and parcels near high-voltage substations (powered land).
 
 Accounts, keys, Pro and the map: https://map.barrioenergy.com
 
@@ -23,31 +23,43 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&min_acres=50&max_sub_mi=1&min_kv=138"
 - ercot_queue: ERCOT generation and storage interconnection projects near a site or in a county.
   curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
+- battery_queue: ERCOT GIS battery projects by site, county or POI substation: developer, MW, stage (screening, fis_started, fis_complete, ia_signed, energized), COD; totals.
+  curl "https://grid.barrioenergy.com/v1/battery_queue?county=Jackson&status=ia"
+- jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility.
+  curl "https://grid.barrioenergy.com/v1/jurisdiction?address=Edna,%20TX"
+- pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate.
+  curl "https://grid.barrioenergy.com/v1/pipelines_near?address=Edna,%20TX&radius_mi=5"
+- industrial_neighbors: TCEQ emissions-inventory sites and recent air permit applications (data-center flag) near a site.
+  curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
+- site_screen (Pro): one-call screen for use=data_center|battery|generation|industrial: flags plus a 0-100 score with stated weights.
+  curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/site_screen?address=Edna,%20TX&use=battery"
 - node_prices: ERCOT day-ahead prices (hourly, USD/MWh) for the load zone at a site, nearest resource nodes and hubs with 7-day stats, or one settlement point's series.
   curl "https://grid.barrioenergy.com/v1/node_prices?address=Edna,%20TX"
   curl "https://grid.barrioenergy.com/v1/node_prices?settlement_point=HB_HOUSTON&days=30"
-- volatile_nodes: rank nodes for storage and solar: tb4 (default), tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg.
+- volatile_nodes: rank nodes for storage and solar: tb4 (default), tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart. Each node carries queued_storage_10mi.
   curl "https://grid.barrioenergy.com/v1/volatile_nodes?metric=tb4&load_zone=LZ_WEST&limit=10"
+- ancillary_prices: ERCOT DAM ancillary service clearing prices (RegUp, RegDown, RRS, ECRS, Non-Spin), battery AS stack, monthly history back to 2024. System-wide.
+  curl "https://grid.barrioenergy.com/v1/ancillary_prices?days=30&monthly_history=true"
 - grid_news: latest or keyword-matched articles from The Grid Report (Texas grid, ERCOT, Batch Zero, large loads, transmission). Full text with article_id. Unmetered.
   curl "https://grid.barrioenergy.com/v1/grid_news?query=batch%20zero&limit=5"
 - upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
   curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
 
-Locations: a street address, a Texas city or county name, or lat + lng. Texas only. Distances in miles.
+Locations: a street address, a Texas city or county name, or lat + lng. Texas only. Distances in miles. Answers with a location include map_url, a link to that spot on the web map (Pro); share it with the user.
 
 ### Pricing
 
 - No key: 25 calls a day per session or IP.
 - Free key (sign up at https://map.barrioenergy.com): 100 calls a day, 25 parcels per search.
-- Pro: 249 USD a month, 5,000 calls a month, 200 parcels per search, plus the web map. Header: Authorization: Bearer grid_... Subscribe: https://map.barrioenergy.com/pricing
+- Pro: 249 USD a month, 5,000 calls a month, 200 parcels per search, 120 days of prices, site_screen, plus the web map. Header: Authorization: Bearer grid_... Subscribe: https://map.barrioenergy.com/pricing
 - Enterprise: quote, ivan@barrioenergy.com
 
 ### Data
 
-HIFLD substations and transmission (owners enriched by Barrio), ERCOT GIS generation queue, Barrio research on planned ERCOT/PUCT transmission projects, TNRIS StratMap parcels (9 Gulf Coast and South Texas counties today). Screening data; confirm with the utility. Cite "Barrio Energy GeoIntel".
+HIFLD substations and transmission (owners enriched by Barrio), ERCOT GIS generation and battery queue, ERCOT public API prices, Barrio research on planned ERCOT/PUCT transmission projects, TxDOT/StratMap/Census/TWDB boundaries, RRC pipeline permits, TCEQ emissions inventory and air permits, TNRIS StratMap 2025 parcels with owner and value (statewide load in progress). Screening data; confirm with the utility. Cite "Barrio Energy GeoIntel".
 
 ## Company
 
 - Site: https://barrioenergy.com
-- Data centers: https://barrioenergy.com/data-centers
+- Powered land: https://barrioenergy.com/powered-land
 - Contact: ivan@barrioenergy.com

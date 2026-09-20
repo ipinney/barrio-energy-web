@@ -1,6 +1,6 @@
 {
   "name": "Barrio Grid Connector",
-  "description": "Texas power grid siting data: nearest substations, transmission, likely utility, ERCOT generation queue, planned upgrades, powered land parcels.",
+  "description": "Texas power grid siting data: substations, transmission, likely utility, jurisdiction, gas pipelines, industrial neighbors, ERCOT generation and battery queue, planned upgrades, nodal and ancillary prices, powered land parcels.",
   "publisher": {
     "name": "Barrio Energy",
     "url": "https://barrioenergy.com",
@@ -16,9 +16,15 @@
         "grid_context",
         "nearest_substation",
         "find_powered_land",
+        "jurisdiction",
+        "pipelines_near",
+        "industrial_neighbors",
+        "site_screen",
         "ercot_queue",
+        "battery_queue",
         "node_prices",
         "volatile_nodes",
+        "ancillary_prices",
         "grid_news",
         "upgrade_to_pro"
       ]

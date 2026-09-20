@@ -66,9 +66,9 @@
 
     <main class="g-wrap">
         <h1>Barrio Grid Connector</h1>
-        <p class="g-lead">Texas power grid siting data for AI agents and developers. Ask where the nearest substation is, what utility serves a site, what is in the ERCOT queue nearby, or which parcels sit next to high-voltage power.</p>
+        <p class="g-lead">Texas power grid siting data for AI agents and developers. Ask where the nearest substation is, what utility serves a site, whether it is inside city limits, which gas pipelines run nearby, what is in the ERCOT queue, what power sells for at the node, or which parcels sit next to high-voltage power.</p>
         <picture><source srcset="images/grid/grid-wide.webp" type="image/webp"><img src="images/grid/grid-wide.jpg" alt="Texas transmission lines and substations on the Barrio Grid map" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--color-border);margin:14px 0 8px"></picture>
-        <p style="font-size:.92rem">4,939 substations &middot; 7,033 transmission lines &middot; 1,874 ERCOT queue projects &middot; 664 planned upgrades &middot; 213,000 parcels</p>
+        <p style="font-size:.92rem">4,939 substations &middot; 7,033 transmission lines &middot; 1,874 ERCOT queue projects &middot; 664 planned upgrades &middot; 1,123 pricing nodes &middot; 908 battery projects &middot; 488,000 pipeline segments &middot; parcels statewide</p>
         <p><a class="btn btn-primary btn-sm" href="https://map.barrioenergy.com">See the map and plans</a> <a class="btn btn-sm" style="margin-left:6px;border:1px solid var(--color-border);color:var(--color-text)" href="https://map.barrioenergy.com/login">Get a free key</a></p>
         <p>One MCP server and a matching REST API. Works with Claude, ChatGPT, Muse and any agent that can call a URL.</p>
 
@@ -100,22 +100,28 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
             <tr><th>Tool</th><th>What it answers</th></tr>
             <tr><td>grid_context</td><td>Everything around one site: county, likely serving utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned transmission upgrades within 25 miles.</td></tr>
             <tr><td>nearest_substation</td><td>Closest substations to an address or coordinate, with voltage, owner and distance in miles. Filter by minimum kV.</td></tr>
-            <tr><td>find_powered_land</td><td>Parcels near a qualifying substation, by county or point and radius, with acreage and distance to the substation.</td></tr>
+            <tr><td>find_powered_land</td><td>Parcels near a qualifying substation, by county or point and radius, with acreage, owner, situs address, legal description, appraised values and distance to the substation.</td></tr>
+            <tr><td>jurisdiction</td><td>Who governs a site: county, inside city limits (which city), estimated ETJ, nearest city, school district, groundwater district or rule of capture, load zone and likely utility.</td></tr>
+            <tr><td>pipelines_near</td><td>Gas pipelines near a site from Railroad Commission permits: operator, system, nominal diameter, interstate or intrastate, distance, miles of line in the radius. Nearest 12-inch-plus and nearest interstate line.</td></tr>
+            <tr><td>industrial_neighbors</td><td>Heavy industry already operating nearby (TCEQ emissions inventory) and recent TCEQ air permit applications, including data centers and gas plants before they reach the ERCOT queue.</td></tr>
+            <tr><td>site_screen</td><td>Pro. One-call screen for a data center, battery, generator or industrial load: grid, prices, queue crowding, gas, jurisdiction and neighbors, with a flags list and a 0-100 score using stated weights.</td></tr>
             <tr><td>ercot_queue</td><td>ERCOT generation and storage interconnection projects near a site or in a county: fuel, MW, study status.</td></tr>
+            <tr><td>battery_queue</td><td>Battery storage projects in the ERCOT GIS report by site, county or point of interconnection: developer, MW, POI substation, study stage, signed IA, projected COD.</td></tr>
             <tr><td>node_prices</td><td>ERCOT day-ahead prices in $/MWh, hourly, for the load zone at a site, the nearest resource nodes and the trading hubs, with 7-day averages, peak and off-peak, spikes and negative hours. Or one settlement point's full series.</td></tr>
-            <tr><td>volatile_nodes</td><td>Nodes ranked for storage and solar: TB2 and TB4 spreads, annualized arbitrage per MW, volatility, evening peak, solar capture price, node-versus-zone basis. Statewide, by load zone, or within a radius of a site.</td></tr>
+            <tr><td>volatile_nodes</td><td>Nodes ranked for storage and solar: TB2 and TB4 spreads, annualized arbitrage per MW, volatility, evening peak, solar capture price, node-versus-zone basis, real-time TB4, DART, and queued storage within 10 miles of each node. Statewide, by load zone, or within a radius of a site.</td></tr>
+            <tr><td>ancillary_prices</td><td>ERCOT ancillary service clearing prices (RegUp, RegDown, RRS, ECRS, Non-Spin) with a battery AS stack and monthly history back to 2024.</td></tr>
             <tr><td>grid_news</td><td>Latest articles from The Grid Report, searchable: ERCOT, Batch Zero and large loads, PUCT dockets, transmission, data center and battery development. Full text by article id. Free and unmetered.</td></tr>
             <tr><td>upgrade_to_pro</td><td>Pro checkout link. Muse and other agents can buy Pro for a user with Link after the user approves.</td></tr>
         </table>
         </div>
-        <p>Inputs take a street address, a Texas city or county name, or <span class="g-inline">lat</span> + <span class="g-inline">lng</span>. Distances are in miles. Texas only.</p>
+        <p>Inputs take a street address, a Texas city or county name, or <span class="g-inline">lat</span> + <span class="g-inline">lng</span>. Distances are in miles. Texas only. Answers with a location include <span class="g-inline">map_url</span>, a link to that spot on the map.</p>
 
         <h2>Pricing</h2>
         <div class="g-scroll">
         <table class="g-table">
             <tr><th>Tier</th><th>Limits</th><th>Price</th></tr>
             <tr><td>Free</td><td>No key: 25 calls a day. Free key: 100 calls a day, 25 parcels per search.</td><td>0</td></tr>
-            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, and the web map. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
+            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, 120 days of price history, site_screen, and the web map. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
             <tr><td>Enterprise</td><td>Custom limits and data.</td><td><a href="mailto:ivan@barrioenergy.com">Ask for a quote</a></td></tr>
         </table>
         </div>
@@ -125,7 +131,11 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
             <li>Substations and transmission: HIFLD, with owners enriched by Barrio.</li>
             <li>Generation and storage queue: ERCOT GIS reports.</li>
             <li>Planned transmission and substations: Barrio research from ERCOT RPG and PUCT filings.</li>
-            <li>Parcels: TNRIS StratMap. Coverage today: Austin, Bee, Colorado, Jackson, Lavaca, Live Oak, Matagorda, San Patricio and Wharton counties.</li>
+            <li>Prices: ERCOT public API day-ahead and real-time settlement point prices and ancillary service clearing prices, refreshed hourly.</li>
+            <li>Battery queue: ERCOT GIS report, monthly.</li>
+            <li>Jurisdiction: TxDOT and StratMap city limits, Census school districts, TWDB groundwater districts. ETJ is an estimate from the statutory distance.</li>
+            <li>Pipelines: Railroad Commission of Texas T-4 permits. Industrial neighbors: TCEQ emissions inventory and air permits.</li>
+            <li>Parcels: TNRIS StratMap 2025 with appraisal district owner and value fields. Statewide load in progress; each answer lists the counties covered.</li>
         </ul>
         <p>Screening data. Confirm capacity and interconnection with the utility before relying on it. Questions: <a href="mailto:ivan@barrioenergy.com">ivan@barrioenergy.com</a>.</p>
     </main>
