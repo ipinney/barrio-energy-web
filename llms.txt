@@ -25,6 +25,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
 - battery_queue: ERCOT GIS battery projects by site, county or POI substation: developer, MW, stage (screening, fis_started, fis_complete, ia_signed, energized), COD; totals.
   curl "https://grid.barrioenergy.com/v1/battery_queue?county=Jackson&status=ia"
+- parcel_owner: who owns land at an address, around a named substation (e.g. Hillje) or by property ID: property ID, acres, situs address, legal description, appraisal values. Owner name and mailing address on Pro.
+  curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/parcel_owner?substation=Hillje&radius_mi=1&min_acres=20"
 - jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility.
   curl "https://grid.barrioenergy.com/v1/jurisdiction?address=Edna,%20TX"
 - pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate.

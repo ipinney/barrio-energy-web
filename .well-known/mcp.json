@@ -17,6 +17,7 @@
         "grid_context",
         "nearest_substation",
         "find_powered_land",
+        "parcel_owner",
         "jurisdiction",
         "pipelines_near",
         "industrial_neighbors",
