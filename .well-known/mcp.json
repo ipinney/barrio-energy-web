@@ -22,6 +22,7 @@
         "site_screen",
         "ercot_queue",
         "battery_queue",
+        "large_loads",
         "node_prices",
         "volatile_nodes",
         "ancillary_prices",

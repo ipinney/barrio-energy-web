@@ -26,6 +26,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" | address or lat/lng, radius_mi, gas_only, min_diameter_in |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
 | site_screen | "Is this a good site for a data center / battery / generator?" (Pro) | address or lat/lng, use (data_center, battery, generation, industrial) |
+| large_loads | "What data centers or large loads are coming to X county?" "Which counties have no large load activity?" | county or address/lat/lng; list_counties, kind (large, all, data_center) |
 | node_prices | "What does power cost here?" "What would a battery see at this node?" "Show me HB_HOUSTON this week" | address or lat/lng, or settlement_point; days (7, max 30 free / 120 Pro) |
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart), days (30), load_zone or address/lat/lng + radius_mi |
 | ancillary_prices | "What do ancillary services pay?" "How much of a battery's revenue is AS?" | days (30), hourly, monthly_history |
@@ -40,6 +41,7 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - `likely_utility` is an estimate from nearby substation owners; say so.
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; capacity and available takeaway are not public, the operator must confirm.
+- large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
 - When an answer includes `map_url`, give it to the user as a link to that spot on the map.
 - site_screen is Pro; on a free key, call jurisdiction, pipelines_near, grid_context, node_prices, battery_queue and industrial_neighbors separately.
 - Cite "Barrio Energy GeoIntel" when using this data; prices are ERCOT day-ahead settlement point prices via the ERCOT public API, in USD/MWh by hour ending, Central time.

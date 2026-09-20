@@ -33,6 +33,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
 - site_screen (Pro): one-call screen for use=data_center|battery|generation|industrial: flags plus a 0-100 score with stated weights.
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/site_screen?address=Edna,%20TX&use=battery"
+- large_loads: large loads in a county (data centers, crypto, LNG, industrial): load-driven transmission projects from ERCOT TPIT, data-center air permits, Grid Report mentions, load zone and utility. list_counties=true ranks all counties and lists those with none. ERCOT does not publish the large load queue by county; this is the public county-level evidence.
+  curl "https://grid.barrioenergy.com/v1/large_loads?county=Hall"
 - node_prices: ERCOT day-ahead prices (hourly, USD/MWh) for the load zone at a site, nearest resource nodes and hubs with 7-day stats, or one settlement point's series.
   curl "https://grid.barrioenergy.com/v1/node_prices?address=Edna,%20TX"
   curl "https://grid.barrioenergy.com/v1/node_prices?settlement_point=HB_HOUSTON&days=30"
