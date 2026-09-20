@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /polymarket_price_viz.html
+Disallow: /polymarket_winners.html
+Disallow: /round-visualizer.html
+Disallow: /btc-v1-trading.html
+
+Sitemap: https://www.barrioenergy.com/sitemap.xml

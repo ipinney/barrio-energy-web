@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barrio Energy | Powered Land & Energy Infrastructure</title>
+    <title>Barrio Energy | Powered Land and Grid Data in Texas</title>
     <meta name="description" content="Barrio Energy - Acquiring, developing, and leasing powered industrial land for digital infrastructure, battery storage, and industrial loads in the Texas ERCOT market.">
+    <link rel="canonical" href="https://www.barrioenergy.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Barrio Energy">
+    <meta property="og:url" content="https://www.barrioenergy.com/">
+    <meta property="og:title" content="Barrio Energy | Powered Land and Grid Data in Texas">
+    <meta property="og:description" content="Houston-based developer of powered industrial land in Texas for digital infrastructure, battery storage and industrial loads. Publisher of Barrio Grid, the Texas power grid map and API.">
+    <meta property="og:image" content="https://www.barrioenergy.com/images/web/hero-site.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BarrioEnergy">
+    <meta name="twitter:title" content="Barrio Energy | Powered Land and Grid Data in Texas">
+    <meta name="twitter:description" content="Houston-based developer of powered industrial land in Texas for digital infrastructure, battery storage and industrial loads. Publisher of Barrio Grid, the Texas power grid map and API.">
+    <meta name="twitter:image" content="https://www.barrioenergy.com/images/web/hero-site.jpg">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"Barrio Energy","legalName":"Barrio Resources LLC","url":"https://www.barrioenergy.com","logo":"https://www.barrioenergy.com/images/logo-transparent.png","description":"Houston-based energy infrastructure company that acquires, develops and leases powered industrial land in Texas and publishes Texas grid siting data.","address":{"@type":"PostalAddress","addressLocality":"Houston","addressRegion":"TX","addressCountry":"US"},"email":"info@barrioenergy.com","founder":{"@type":"Person","name":"Ivan Pinney","jobTitle":"Principal"},"sameAs":["https://x.com/BarrioEnergy","https://map.barrioenergy.com"]}
+    </script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,17 +53,26 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="images/landscape-datacenter-1.jpg" alt="Powered land in Texas" class="hero-img">
+            <picture><source srcset="images/web/hero-site.webp" type="image/webp"><img src="images/web/hero-site.jpg" alt="A Barrio Energy containerized site at sunset" class="hero-img" fetchpriority="high"></picture>
             <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
-            <span class="hero-tag">Texas ERCOT Market</span>
-            <h1>Powering the Future<br>of Energy</h1>
-            <p class="hero-sub">Acquiring, developing, and leasing powered industrial land for digital infrastructure, battery storage, and industrial loads.</p>
+            <span class="hero-tag">Houston, Texas</span>
+            <h1>Powered land and grid data<br>for Texas</h1>
+            <p class="hero-sub">We buy industrial land next to the grid, bring the power to it, and lease it to digital infrastructure, battery storage and industrial tenants. We publish the Texas grid map we use to do it.</p>
             <div class="hero-btns">
-                <a href="#services" class="btn btn-primary">Our Services</a>
-                <a href="#contact" class="btn btn-outline">Contact Us</a>
+                <a href="powered-land.html" class="btn btn-primary">Powered Land</a>
+                <a href="https://map.barrioenergy.com" class="btn btn-outline">Barrio Grid</a>
             </div>
+        </div>
+    </section>
+
+    <section class="trust-strip">
+        <div class="container">
+            <div><b>2022</b><span>founded in Houston</span></div>
+            <div><b>8</b><span>sites across Texas</span></div>
+            <div><b>100+ MW</b><span>of powered capacity</span></div>
+            <div><b>4,939</b><span>substations mapped in Barrio Grid</span></div>
         </div>
     </section>
 
@@ -57,12 +81,12 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-text">
-                    <h2>Building the Foundation of Tomorrow</h2>
-                    <p>Barrio Energy is an innovative organization committed to the procurement of industrial scale energy properties and offering unparalleled advisory services to our clientele.</p>
-                    <p>Grounded in the principles of honesty and openness, our commitment is to generate value in diverse areas of the energy and real estate industries.</p>
+                    <h2>Small sites, real power, local footprint</h2>
+                    <p>Barrio Energy builds powered industrial sites of one to fifty acres in Texas towns with spare grid capacity. Our tenants run containerized computing and battery storage that can start, stop and shed load when the grid needs it, which is why ERCOT counts them as flexible demand rather than a strain on it.</p>
+                    <p>We pay property taxes in the counties we build in, we lease from local landowners, and we publish the grid data we work from so anyone can check it. Questions from neighbors and officials go to <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a> and get a reply from a person.</p>
                 </div>
                 <div class="about-image">
-                    <img src="images/datacenter-west-texas.jpg" alt="Barrio Energy powered site in West Texas">
+                    <picture><source srcset="images/web/substation.webp" type="image/webp"><img src="images/web/substation.jpg" alt="Substation serving a Barrio Energy site in Texas" loading="lazy"></picture>
                 </div>
             </div>
         </div>
@@ -72,7 +96,7 @@
     <section class="services-section" id="services">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Comprehensive energy solutions tailored to your needs.</p>
+            <p class="section-subtitle">Three things we do, and one map that ties them together.</p>
             <div class="services-grid">
                 <a href="powered-land.html" class="service-card" style="text-decoration:none;color:inherit;">
                     <div class="service-img-wrap">
@@ -122,7 +146,7 @@
             <div class="footer-subscribe">
                 <div class="footer-subscribe-text">
                     <span class="footer-subscribe-label">Newsletter</span>
-                    <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
+                    <span class="footer-subscribe-desc">The Grid Report: weekly Texas grid and power market analysis.</span>
                 </div>
                 <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
                         <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">

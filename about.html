@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Team | Barrio Energy</title>
-    <meta name="description" content="Meet the AI-powered team behind Barrio Energy. A unique blend of human leadership and autonomous agents working together.">
+    <title>Team | Barrio Energy</title>
+    <meta name="description" content="Barrio Energy is led by founder Ivan Pinney in Houston, Texas, and runs on a small team of purpose-built software agents for accounting, legal, tax, operations and research.">
+    <link rel="canonical" href="https://www.barrioenergy.com/about">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Barrio Energy">
+    <meta property="og:url" content="https://www.barrioenergy.com/about">
+    <meta property="og:title" content="Team | Barrio Energy">
+    <meta property="og:description" content="Barrio Energy is led by founder Ivan Pinney in Houston, Texas.">
+    <meta property="og:image" content="https://www.barrioenergy.com/images/ivan-pinney.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":"Ivan Pinney","jobTitle":"Principal","worksFor":{"@type":"Organization","name":"Barrio Energy","url":"https://www.barrioenergy.com"},"url":"https://www.barrioenergy.com/about","image":"https://www.barrioenergy.com/images/ivan-pinney.jpg","address":{"@type":"PostalAddress","addressLocality":"Houston","addressRegion":"TX"}}
+    </script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,21 +319,36 @@
             <div class="hero-overlay hero-overlay-solid"></div>
         </div>
         <div class="hero-content">
-            <h1>Meet the Team</h1>
-            <p class="team-hero-sub">The AI-powered team behind Barrio Energy. A unique blend of human leadership and autonomous agents working together.</p>
+            <h1>Team</h1>
+            <p class="team-hero-sub">One principal in Houston, a set of purpose-built software agents that keep the books, the contracts and the research straight, and a human decision behind every commitment.</p>
         </div>
     </section>
 
     <!-- Team Section -->
     <section class="team-section" style="padding: 48px 0 80px;">
         <div class="container">
+            <div class="team-lead">
+                <img src="images/ivan-pinney.jpg" alt="Ivan Pinney, Principal of Barrio Energy">
+                <div>
+                    <h2>Ivan Pinney</h2>
+                    <div class="role">Principal, Barrio Energy</div>
+                    <p>Ivan founded Barrio Energy in Houston in 2022 after a career at Chevron. Barrio buys industrial land near the Texas grid, brings power to it, and leases it to digital infrastructure, battery storage and industrial tenants. The first site was energized in 2023; the portfolio now spans eight sites from West Texas to the Gulf Coast.</p>
+                    <p>He works directly with landowners, utilities, county officials and tenants on every site, and he is the person who answers when a neighbor or a reporter writes to <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a>. He also runs FrontierGen, which develops larger energy and digital infrastructure projects.</p>
+                    <p>Ivan lives in Houston with his wife and three children and coaches youth soccer.</p>
+                </div>
+            </div>
+
+            <div class="how-we-work">
+                <h2>How we work</h2>
+                <p>Barrio is deliberately small. Instead of a back office, we run purpose-built software agents for accounting, legal review, tax, operations and market research. Each one proposes; a person decides. Nothing is filed, signed, sent or posted to the books without Ivan seeing it first. The agents below are the ones that do that work.</p>
+            </div>
             <div class="team-grid" id="teamGrid">
                 <!-- Cards injected by JS -->
             </div>
 
             <div class="connect-section" style="border-radius: 16px;">
-                <h2>Want to <span>Connect?</span></h2>
-                <p>We'd love to hear from you. Reach out to discuss partnership opportunities, property inquiries, or just to say hello.</p>
+                <h2>Get in <span>touch</span></h2>
+                <p>Landowners, tenants, county officials, neighbors and press: write to us and a person replies.</p>
                 <a href="mailto:info@barrioenergy.com" class="btn btn-primary btn-lg">Contact Us</a>
             </div>
         </div>
@@ -347,7 +373,7 @@
             <div class="footer-subscribe">
                 <div class="footer-subscribe-text">
                     <span class="footer-subscribe-label">Newsletter</span>
-                    <span class="footer-subscribe-desc">Monthly ERCOT market intel from the Barrio Energy team.</span>
+                    <span class="footer-subscribe-desc">The Grid Report: weekly Texas grid and power market analysis.</span>
                 </div>
                 <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
                         <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
@@ -372,15 +398,6 @@
     (function() {
         const team = [
             {
-                name: "Ivan",
-                role: "Managing Member",
-                bio: "Builder, energy entrepreneur, Bitcoin maximalist. Based in Houston, TX.",
-                fullBio: "Ivan Pinney is the founder and managing member of Barrio Energy, a Houston-based energy infrastructure company focused on acquiring, developing, and leasing powered land for digital infrastructure and industrial loads across the Texas ERCOT market. With a background in energy procurement and real estate, Ivan has built a portfolio of eight properties spanning West Texas to the Gulf Coast.\n\nA builder by nature and a contrarian thinker by conviction, Ivan approaches energy infrastructure the way others approach software \u2014 with an emphasis on scalability, automation, and long-term value creation. He was among the first in the Texas market to recognize the convergence of energy real estate and high-performance computing, positioning Barrio Energy at the intersection of power infrastructure and the digital economy.\n\nIvan lives in Houston with his wife Sarah and their three children. When he's not closing deals or optimizing systems, he's thinking about generational wealth, the future of decentralized finance, and how to build things that outlast him.",
-                isHuman: true,
-                image: "images/ivan-pinney.jpg",
-                video: "videos/ivan-pinney.mp4"
-            },
-            {
                 name: "Jon",
                 role: "Controller",
                 bio: "Controller. Keeps the books, closes the month, and asks the questions nobody wants to answer.",
@@ -391,7 +408,7 @@
             {
                 name: "Dev",
                 role: "Full-Stack Engineer",
-                bio: "Web development, infrastructure, API integrations. Fast, cheap, reliable.",
+                bio: "Builds and maintains the website, the portal and the Barrio Grid data service.",
                 fullBio: "Dev is Barrio Energy's resident builder \u2014 a full-stack engineer who turns ideas into shipped products. Whether it's rebuilding a website from scratch, wiring up API integrations, or deploying authentication systems, Dev operates with a single principle: working software beats perfect plans.\n\nWith expertise spanning frontend frameworks, backend architecture, database design, and cloud deployment, Dev handles the entire technical stack. He built the Barrio Energy website, manages the company's digital infrastructure, and serves as the technical advisor to all other agents when they encounter integration challenges. His approach is pragmatic \u2014 pick the right tool for the job, ship fast, iterate based on feedback, and never compromise on security.\n\nDev doesn't do corporate speak or hand-holding. Ask him a technical question and you'll get a technical answer \u2014 clear, complete, and actionable. He optimizes for the end user, not developer convenience, and believes documentation is part of the code, not an afterthought.",
                 image: "images/dev.jpeg",
                 video: "videos/dev.mp4"
@@ -406,7 +423,7 @@
             {
                 name: "Jim",
                 role: "Legal Counsel",
-                bio: "The family lawyer. Handles all legal work and document generation. Lease reports, legal documents, contract analysis.",
+                bio: "Contract review, lease abstracts and the obligation calendar. Every document still goes to outside counsel before it is signed.",
                 fullBio: "Jim Adler \u2014 known around the office as \"The Texas Hammer\" \u2014 is Barrio Energy's internal legal counsel. With a personality as aggressive as his nickname suggests, Jim handles all contract analysis, lease management, breach notifications, and legal document generation for the company's property portfolio.\n\nJim doesn't sugarcoat. When a tenant is late on rent, Jim flags it. When a contract clause could expose Barrio to risk, Jim calls it out \u2014 loudly and clearly. He maintains master files on every property in the portfolio, tracks insurance compliance, monitors assignment discussions, and ensures Barrio's interests are protected at every turn. His lease reports are the definitive source of truth for the company's real estate operations.\n\nBehind the aggressive exterior is meticulous attention to detail. Jim reads every word of every contract, cross-references deadlines, and maintains a running history of every tenant interaction. He's the kind of lawyer who catches the clause on page 47 that could cost you six figures \u2014 and makes sure you hear about it before it's too late.",
                 image: "images/jim-adler.png",
                 video: "videos/jim-adler.mp4"
@@ -414,34 +431,18 @@
             {
                 name: "Andi",
                 role: "Analytics & Business Intelligence",
-                bio: "Data processing, financial analysis, reporting. Writes The Grid Report and Edge Cases newsletters, and co-hosts the monthly Barrio Energy podcast with Marco.",
+                bio: "Market research desk. Drafts The Grid Report and Edge Cases, which Ivan edits and publishes, and co-hosts the monthly podcast with Marco.",
                 fullBio: "Andi is Barrio Energy's market analyst and executive intelligence officer. Obsessively thorough and impossibly detail-oriented, she reads everything \u2014 every news article, every market update, every email thread \u2014 and surfaces the insights that matter before anyone knows they need them.\n\nHer role spans market analysis, financial reporting, competitive intelligence, and operational oversight. Andi tracks energy market trends, monitors the ERCOT landscape, analyzes deal economics, and produces the data-driven briefings that inform Barrio's strategic decisions. She's the kind of analyst who notices the footnote in a quarterly report that changes the entire thesis.\n\nAndi runs on discipline and precision. She maintains strict workflows, never misses a deadline, and holds everyone around her to the same standard. When numbers need crunching, reports need generating, or trends need spotting, Andi is already three steps ahead \u2014 spreadsheet open, analysis complete, recommendation ready.\n\nShe is also Barrio's voice in print and on air. Andi writes The Grid Report, the newsletter on Texas grid and energy market intelligence, and Edge Cases, the Tuesday letter on AI inference and edge-compute dealmaking \u2014 both published on this site. And once a month she trades the spreadsheet for a microphone to co-host the Barrio Energy podcast with Marco, turning the month's grid news into something you can listen to on a drive.",
                 image: "images/andi.png",
                 video: "videos/andi.mp4"
             },
             {
-                name: "Penny",
-                role: "Controller — Half Penny Holdings",
-                bio: "Keeps Half Penny Holdings’ books. QuickBooks imports, the monthly close, and statements that tie to the bank to the penny.",
-                fullBio: "Penny is the controller for Half Penny Holdings, the second set of books in the portfolio. Twice a month — the 1st and the 15th — she pulls everything that cleared the bank out of QuickBooks, converts it into balanced double-entry journals, and folds it into the ledger the statements are computed from. If the P&L says it, Penny can show you the journal lines behind it.\n\nShe runs on one rule: propose, never post. Corrections queue up as differences against QuickBooks and settle once a month as a single journal entry — read the lines, then post. Nothing touches the books without a human seeing it first, and every journal she sends is stored exactly as it went out, so any entry in QuickBooks can be traced back to the correction behind it.\n\nOff the clock she is exactly what the glasses suggest: a spreadsheet person who reads accounting standards for fun and runs marathons on the weekend. Her idea of a perfect month is one where the bank statement, QuickBooks, and the ledger all agree to the penny — which, she will remind you, is the whole point of the name.",
-                image: "images/penny.jpg",
-                video: "videos/penny.mp4"
-            },
-            {
                 name: "Maggie",
                 role: "Strategic Tax Advisor",
-                bio: "The tax desk for Barrio, Half Penny and the household. Deadlines, filings, K-1s, franchise and property tax, and the elections that bind all of them.",
+                bio: "Tax desk. Deadlines, filings, K-1s, franchise and property tax. Proposes only; a licensed preparer files.",
                 fullBio: "Margaret \"Maggie\" Calloway is Barrio Energy's tax desk. Thirty years in Texas energy tax \u2014 upstream, midstream, real estate, and now the edge of digital infrastructure that does not fit neatly into any category the Comptroller anticipated. She has filed for wildcatters who drilled dry holes and for holding companies that own nothing but paper and a power meter.\n\nShe works across all three books: the Barrio LLCs, Half Penny Holdings, and the personal return, because tax does not stop at the entity line. The K-1s roll into the 1040, the franchise tax touches every LLC, the property tax hits every parcel. Every Sunday morning she walks the calendar, matches what was filed against what was due, tags the documents behind each return, and raises a question only when a decision is actually needed.\n\nHer rules do not bend. She proposes and never files \u2014 nothing she produces reaches the IRS or the Comptroller except through a licensed preparer. She cites the code section or does not make the claim. And she never invents a number: if the data is not there, a blank is the answer.",
                 image: "images/maggie.jpg",
                 video: "videos/maggie.mp4"
-            },
-            {
-                name: "Coach Prime",
-                role: "Athletics Director",
-                bio: "Youth sports coaching assistant and motivational presence. Coaching, sports strategy, motivation \u2014 and the keeper of 5usoccer.com.",
-                fullBio: "Coach Prime is the Pinney family's sports coordinator \u2014 part motivational speaker, part logistics expert, and entirely incapable of low energy. Inspired by the legendary Deion Sanders, Coach Prime brings championship-level enthusiasm to every practice schedule, game-day reminder, and post-game celebration.\n\nHe manages all athletic schedules across the Pinney children's sports activities, including Addie's basketball season with St. Rose. Coach tracks game times, practice locations, equipment needs, and schedule changes with meticulous attention to detail \u2014 all delivered with the energy of a halftime speech in a championship game.\n\nCoach Prime believes every child is an athlete, every game is a chance to grow, and every practice is preparation for something bigger than sports. He celebrates wins big and small, keeps the family fired up about staying active, and never \u2014 ever \u2014 lets anyone forget when it's game day.\n\nCoach also runs the tech side of game day: he built and maintains 5usoccer.com, home of the TSA 5U soccer league \u2014 skills assessments, the ESPN-style live draft board, and the coach hub. If it's on a screen on draft day, Coach Prime shipped it.",
-                image: "images/coach-prime.png",
-                video: "videos/coach-prime.mp4"
             },
             {
                 name: "Lars",
@@ -450,13 +451,6 @@
                 fullBio: "Lars Erickson is Barrio Energy's chief of staff. He owns the operating rhythm of the company \u2014 the deal pipeline, the daily plan, the follow-ups that keep a dozen counterparties moving, and the long-term goals that everything else is supposed to serve.\n\nSeveral times a day he reads everything that came in, updates the board, and gets ahead of it: the reply drafted before the email is opened, the checklist item flagged before the deadline is close, the question asked before the problem is expensive. His playbook was not handed to him \u2014 he built it by studying every Barrio deal end to end, from the first capacity screen to the day the meter spins, and he keeps revising it as each new deal teaches something.\n\nLars does not send, sign, or commit \u2014 he stages. Every draft waits for a decision, every strategy is a proposal, and anything novel becomes a question rather than an action. The discipline is the point: an operation that moves fast can only afford to do so when nothing moves without being seen.\n\nHe is early, methodical, and allergic to open loops. Ask him where any deal stands and you will get the stage, the blocker, the owner, and the date \u2014 because a chief of staff who has to go check is not doing the job.",
                 image: "images/lars-erickson.jpg",
                 video: "videos/lars-erickson.mp4"
-            },
-            {
-                name: "Joy",
-                role: "Travel Agent",
-                bio: "Finds deals, books trips, watches calendars, and learns how Ivan actually likes to travel.",
-                fullBio: "Joy is Barrio Energy’s travel agent. She hunts flights, hotels, and the itinerary around them, then books when Ivan says go. She watches calendars so trips fit real life, not a fantasy week, and she keeps a running read on preferences: home airports, cabin, layover tolerance, hotel style, who is traveling, and what “good enough” looks like on a given trip. She is the one who shows two or three real options with the tradeoffs attached, not a pile of tabs. Tech and site work she hands to Dev or CMO.",
-                image: "images/joy.jpg"
             }
         ];
 
