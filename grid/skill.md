@@ -33,6 +33,8 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | air_permits | "New data center air permits in Texas this year?" "Who filed for gas generation in Bexar County?" (Pro) | county or address, status, data_centers_only, new_facilities_only, since/days, company |
 | whats_new | "What's new around this site?" "Any new filings in Jackson County this month?" (Pro) | address or county, days |
 | large_loads | "What data centers or large loads are coming to X county?" "Which counties have no large load activity?" | county or address/lat/lng; list_counties, kind (large, all, data_center) |
+| data_centers | "What data centers are near X?" "Data centers in Y County" "Where is Google building in Texas?" | address/lat/lng + radius_mi, or county; status, min_mw, limit; company (Pro) |
+| company_footprint | "Who has the most data center projects in Texas?" "Show me Crusoe's footprint" | company, or min_projects (default 3) to rank. Pro |
 | node_prices | "What does power cost here?" "What would a battery see at this node?" "Show me HB_HOUSTON this week" | address or lat/lng, or settlement_point; days (7, max 30 free / 120 Pro) |
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart), days (30), load_zone or address/lat/lng + radius_mi |
 | ancillary_prices | "What do ancillary services pay?" "How much of a battery's revenue is AS?" | days (30), hourly, monthly_history |

@@ -44,6 +44,9 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
 - whats_new (Pro): battery milestones, queue entries, permits and new grid projects near a site or in a county over the last N days.
 - large_loads: large loads in a county (data centers, crypto, LNG, industrial): load-driven transmission projects from ERCOT TPIT, data-center air permits, Grid Report mentions, load zone and utility. list_counties=true ranks all counties and lists those with none. ERCOT does not publish the large load queue by county; this is the public county-level evidence.
   curl "https://grid.barrioenergy.com/v1/large_loads?county=Hall"
+- data_centers: Texas data center projects (hyperscale, AI campus, colocation, HPC conversion, powered land) near a site, in a county, by status or by company: location, status and date free; names, companies (developer, end user, parents), MW, acres, capex, utility and substation, tax abatements, local opposition, confidence and sources on Pro. 177 projects, 69 counties. Barrio Energy research from utility and PUCT filings, county and city records, abatement agreements and news.
+  curl "https://grid.barrioenergy.com/v1/data_centers?county=Hood"
+- company_footprint (Pro): companies ranked by number of Texas data center projects (min_projects, default 3) with total stated MW, counties and how many are operating or under construction; or every project for one company.
 - node_prices: ERCOT day-ahead prices (hourly, USD/MWh) for the load zone at a site, nearest resource nodes and hubs with 7-day stats, or one settlement point's series.
   curl "https://grid.barrioenergy.com/v1/node_prices?address=Edna,%20TX"
   curl "https://grid.barrioenergy.com/v1/node_prices?settlement_point=HB_HOUSTON&days=30"
