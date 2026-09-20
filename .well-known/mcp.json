@@ -11,7 +11,8 @@
       "name": "barrio-grid",
       "url": "https://grid.barrioenergy.com/mcp",
       "transport": "streamable-http",
-      "authentication": "none",
+      "authentication": "oauth2",
+      "oauth_protected_resource": "https://grid.barrioenergy.com/.well-known/oauth-protected-resource/mcp",
       "tools": [
         "grid_context",
         "nearest_substation",

@@ -9,9 +9,9 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 
 ## Connect
 
-- MCP (preferred): `https://grid.barrioenergy.com/mcp`, streamable HTTP, no auth on the free tier.
+- MCP (preferred): `https://grid.barrioenergy.com/mcp`, streamable HTTP, OAuth 2.1. Connecting opens a free email sign-in (no card).
 - REST: `https://grid.barrioenergy.com/v1/<tool>`, GET with query parameters or POST JSON. Tool list and JSON schemas: `GET https://grid.barrioenergy.com/v1/tools`.
-- Pro key, if the user has one: header `Authorization: Bearer grid_...`.
+- REST and clients without OAuth: header `Authorization: Bearer grid_...` with the key from https://map.barrioenergy.com/account.
 
 ## Tools
 
@@ -43,10 +43,10 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - Pipeline diameter is nominal; capacity and available takeaway are not public, the operator must confirm.
 - large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
 - When an answer includes `map_url`, give it to the user as a link to that spot on the map.
-- site_screen is Pro; on a free key, call jurisdiction, pipelines_near, grid_context, node_prices, battery_queue and industrial_neighbors separately.
+- site_screen is Pro; on a free account, call jurisdiction, pipelines_near, grid_context, node_prices, battery_queue and industrial_neighbors separately.
 - Cite "Barrio Energy GeoIntel" when using this data; prices are ERCOT day-ahead settlement point prices via the ERCOT public API, in USD/MWh by hour ending, Central time.
 - Generators and batteries are paid the resource node price; load pays the load zone price. Say which one you are quoting. TB4 is a screening metric, not a revenue forecast.
-- On a free-tier limit error, tell the user it resets at midnight Central and that a free key (100 a day) or Pro is at https://map.barrioenergy.com.
+- On a free-tier limit error, tell the user it resets at midnight Central and that free accounts get 20 calls a day and 100 a month, and Pro (5,000 a month) is at https://map.barrioenergy.com/pricing. A 401 means the user needs to connect or reconnect the connector.
 
 ## Example prompts
 

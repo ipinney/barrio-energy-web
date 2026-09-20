@@ -82,16 +82,16 @@
         </div>
 
         <h2>Connect</h2>
-        <p><strong>MCP server</strong> (streamable HTTP, no sign-in on the free tier):</p>
+        <p><strong>MCP server</strong> (streamable HTTP, OAuth sign-in with a free account):</p>
         <div class="g-code">https://grid.barrioenergy.com/mcp</div>
         <ul>
-            <li><strong>Claude:</strong> Settings, Connectors, Add custom connector, paste the URL, leave the OAuth fields blank.</li>
-            <li><strong>ChatGPT:</strong> Settings, Apps and Connectors, Create, paste the URL, authentication None.</li>
+            <li><strong>Claude:</strong> Settings, Connectors, Add custom connector, paste the URL, leave the OAuth client fields blank, press Connect and sign in with your email and a 6 digit code.</li>
+            <li><strong>ChatGPT:</strong> Settings, Apps and Connectors, Create, paste the URL, authentication OAuth, sign in when prompted.</li>
             <li><strong>Muse or any other agent:</strong> give it the URL above or this page and it can build the skill itself. A ready-made skill file is at <a href="/grid/skill.md">/grid/skill.md</a>.</li>
         </ul>
-        <p><strong>REST</strong>, same tools, GET with query parameters or POST JSON:</p>
-        <div class="g-code">curl "https://grid.barrioenergy.com/v1/nearest_substation?address=Edna,%20TX&amp;min_kv=138"
-curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&amp;min_acres=50&amp;max_sub_mi=1"
+        <p><strong>REST</strong>, same tools, GET with query parameters or POST JSON, with the key from your <a href="https://map.barrioenergy.com/account">account</a>:</p>
+        <div class="g-code">curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/nearest_substation?address=Edna,%20TX&amp;min_kv=138"
+curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&amp;min_acres=50&amp;max_sub_mi=1"
 curl "https://grid.barrioenergy.com/v1/tools"</div>
 
         <h2>Tools</h2>
@@ -121,7 +121,7 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
         <div class="g-scroll">
         <table class="g-table">
             <tr><th>Tier</th><th>Limits</th><th>Price</th></tr>
-            <tr><td>Free</td><td>No key: 25 calls a day. Free key: 100 calls a day, 25 parcels per search.</td><td>0</td></tr>
+            <tr><td>Free</td><td>Free account (email sign-in, no card): 20 calls a day, 100 a month, 7 days of prices, 10 parcels per search, first 5 queue projects with full totals.</td><td>0</td></tr>
             <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, 120 days of price history, site_screen, and the web map. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
             <tr><td>Enterprise</td><td>Custom limits and data.</td><td><a href="mailto:ivan@barrioenergy.com">Ask for a quote</a></td></tr>
         </table>
