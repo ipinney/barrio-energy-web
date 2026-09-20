@@ -27,6 +27,11 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" | address or lat/lng, radius_mi, gas_only, min_diameter_in |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
 | site_screen | "Is this a good site for a data center / battery / generator?" (Pro) | address or lat/lng, use (data_center, battery, generation, industrial) |
+| search_grid | "Where is the Hillje substation?" "What does Formosa own?" "Find 21INR0258" (no coordinates needed) | query, kinds |
+| substation_detail | "Tell me about the Lolita substation" "What is interconnecting at Hillje?" | name (+ county) or address |
+| grid_projects | "What grid upgrades are coming near here?" "What is AEP building in Jackson County?" (Pro) | address/lat/lng + radius_mi, county, utility, kind, status, min_kv |
+| air_permits | "New data center air permits in Texas this year?" "Who filed for gas generation in Bexar County?" (Pro) | county or address, status, data_centers_only, new_facilities_only, since/days, company |
+| whats_new | "What's new around this site?" "Any new filings in Jackson County this month?" (Pro) | address or county, days |
 | large_loads | "What data centers or large loads are coming to X county?" "Which counties have no large load activity?" | county or address/lat/lng; list_counties, kind (large, all, data_center) |
 | node_prices | "What does power cost here?" "What would a battery see at this node?" "Show me HB_HOUSTON this week" | address or lat/lng, or settlement_point; days (7, max 30 free / 120 Pro) |
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart), days (30), load_zone or address/lat/lng + radius_mi |

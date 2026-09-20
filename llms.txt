@@ -36,6 +36,12 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
 - site_screen (Pro): one-call screen for use=data_center|battery|generation|industrial: flags plus a 0-100 score with stated weights, and the parcel at the point with its owner and that owner's holdings within 5 miles.
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/site_screen?address=Edna,%20TX&use=battery"
+- search_grid: find anything by name (substation, owner company, ERCOT code, project, docket, battery developer/POI/INR, permit company or number, node, city, county), with coordinates.
+  curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/search_grid?query=Lolita"
+- substation_detail: one substation by name: kV, owner, lines, batteries at its POI, queue, prices; planned upgrades and landowners on Pro.
+- grid_projects (Pro): planned new substations, approved lines and upgrades by location, county or utility, with status, date, cost, docket, sources.
+- air_permits (Pro): TCEQ generation and data-center permits by location, county, status, date, fuel or company.
+- whats_new (Pro): battery milestones, queue entries, permits and new grid projects near a site or in a county over the last N days.
 - large_loads: large loads in a county (data centers, crypto, LNG, industrial): load-driven transmission projects from ERCOT TPIT, data-center air permits, Grid Report mentions, load zone and utility. list_counties=true ranks all counties and lists those with none. ERCOT does not publish the large load queue by county; this is the public county-level evidence.
   curl "https://grid.barrioenergy.com/v1/large_loads?county=Hall"
 - node_prices: ERCOT day-ahead prices (hourly, USD/MWh) for the load zone at a site, nearest resource nodes and hubs with 7-day stats, or one settlement point's series.
