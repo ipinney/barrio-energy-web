@@ -93,9 +93,26 @@
     </main>
     <footer class="footer">
         <div class="container">
+            <!-- Footer Newsletter -->
+            <div class="footer-subscribe">
+                <div class="footer-subscribe-text">
+                    <span class="footer-subscribe-label">Newsletter</span>
+                    <span class="footer-subscribe-desc">The Grid Report: weekly Texas grid and power market analysis.</span>
+                </div>
+                <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+                    <div class="newsletter-input-group">
+                        <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+                    </div>
+                </form>
+                <div class="footer-subscribe-success" style="display:none;">
+                    <p style="color:#22c55e;font-weight:500;font-size:0.9rem;">Subscribed!</p>
+                </div>
+            </div>
             <div class="footer-content">
                 <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
-                <p>&copy; 2026 Barrio Energy. All rights reserved. <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+                <p>&copy; 2026 Barrio Energy. All rights reserved. <a href="/community">Community</a> &middot; <a href="/press">Press</a> &middot; <a href="/merch">Merch</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
             </div>
         </div>
     </footer>
