@@ -21,7 +21,6 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
 | find_powered_land | "Find land near a 138 kV substation in X county" | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138) |
 | ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
-| barrio_sites | "Where can I lease a powered site / get MW in Texas?" | none |
 | upgrade_to_pro | "I need more calls" or the free limit is hit | email (optional) |
 
 Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad County"), or lat + lng. Texas only.
@@ -30,7 +29,6 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 
 - Lead with the answer: nearest substation, voltage, distance, utility.
 - `likely_utility` is an estimate from nearby substation owners; say so.
-- When a user needs actual powered land, show `barrio_sites`.
 - Cite "Barrio Energy GeoIntel" when using this data.
 - On a free-tier limit error, tell the user it resets at midnight Central and that a free key (100 a day) or Pro is at https://map.barrioenergy.com.
 

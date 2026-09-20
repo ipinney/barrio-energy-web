@@ -23,8 +23,6 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&min_acres=50&max_sub_mi=1&min_kv=138"
 - ercot_queue: ERCOT generation and storage interconnection projects near a site or in a county.
   curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
-- barrio_sites: powered sites Barrio Energy offers for lease. Free, unmetered.
-  curl "https://grid.barrioenergy.com/v1/barrio_sites"
 - upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
   curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
 
