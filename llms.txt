@@ -62,7 +62,7 @@ Locations: a street address, a Texas city or county name, or lat + lng. Texas on
 
 - Every call needs an account. MCP clients sign in with OAuth (email and 6 digit code); REST sends Authorization: Bearer grid_... from https://map.barrioenergy.com/account.
 - Free: 20 calls a day and 100 a month (then 5 a day until the 1st), 7 days of prices, 10 ranked nodes, 10 parcels within 5 miles, first 5 queue projects with full totals. Web map with substations, lines, city limits and node prices, 10 site clicks a day.
-- Pro: 249 USD a month, 5,000 calls a month, 200 parcels per search, 120 days of prices, site_screen, landowner names and mailing addresses (3,000 owner records a month), plus every web map layer (new substations and lines, battery queue, air permits, pipelines, parcel owners). Header: Authorization: Bearer grid_... Subscribe: https://map.barrioenergy.com/pricing
+- Pro: 499 USD a month (first month 249 USD for new subscribers) or 4,990 USD a year, 5,000 calls a month, 200 parcels per search, 120 days of prices, site_screen, landowner names and mailing addresses (3,000 owner records a month), plus every web map layer (new substations and lines, battery queue, air permits, pipelines, parcel owners). Header: Authorization: Bearer grid_... Subscribe: https://map.barrioenergy.com/pricing
 - Enterprise: quote, ivan@barrioenergy.com
 
 ### Data
