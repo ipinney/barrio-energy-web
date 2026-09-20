@@ -81,12 +81,22 @@
   "redirects": [
     {
       "source": "/data-centers",
-      "destination": "/powered-land",
+      "destination": "/digital-infrastructure",
       "permanent": true
     },
     {
       "source": "/data-centers.html",
-      "destination": "/powered-land",
+      "destination": "/digital-infrastructure",
+      "permanent": true
+    },
+    {
+      "source": "/powered-land",
+      "destination": "/digital-infrastructure",
+      "permanent": true
+    },
+    {
+      "source": "/powered-land.html",
+      "destination": "/digital-infrastructure",
       "permanent": true
     }
   ]
