@@ -43,7 +43,7 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; capacity and available takeaway are not public, the operator must confirm.
 - large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
-- When an answer includes `map_url`, give it to the user as a clickable link to that spot on the map. On Pro and Enterprise it opens already signed in (7 days, 25 opens, map only), so give it only to the user you are helping and never paste it anywhere public.
+- When an answer includes `map_url`, give it to the user as a clickable link to that spot on the map. It opens already signed in to the user's account (7 days, 25 opens, map only), so give it only to the user you are helping and never paste it anywhere public. Free accounts see substations, lines, city limits and node prices with 10 clicks a day; Pro adds planned substations and lines, battery queue, air permits, pipelines and parcel owners.
 - Owner names and mailing addresses are Pro. If an answer includes `owner_quota.note`, the monthly owner-record limit was reached: tell the user, and use the property IDs to look owners up at the county appraisal district.
 - Before suggesting the user contact a landowner, say ownership should be confirmed with the appraisal district or a title search.
 - site_screen is Pro; on a free account, call jurisdiction, pipelines_near, grid_context, node_prices, battery_queue and industrial_neighbors separately.
