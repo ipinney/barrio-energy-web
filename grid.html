@@ -100,12 +100,12 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
             <tr><th>Tool</th><th>What it answers</th></tr>
             <tr><td>grid_context</td><td>Everything around one site: county, likely serving utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned transmission upgrades within 25 miles.</td></tr>
             <tr><td>nearest_substation</td><td>Closest substations to an address or coordinate, with voltage, owner and distance in miles. Filter by minimum kV.</td></tr>
-            <tr><td>find_powered_land</td><td>Parcels near a qualifying substation, by county or point and radius, with acreage, owner, situs address, legal description, appraised values and distance to the substation.</td></tr>
+            <tr><td>find_powered_land</td><td>Parcels near a qualifying substation, by county or point and radius, with acreage, owner and owner type (company, individual, trust or estate, public), situs address, legal description, appraised values and distance to the substation. Set group_by_owner to rank landowners by total acres near the substation.</td></tr>
             <tr><td>parcel_owner</td><td>Who owns land at an address, around a named substation or by property ID: property ID, acres, situs address, legal description and appraisal values. Owner name and mailing address on Pro.</td></tr>
             <tr><td>jurisdiction</td><td>Who governs a site: county, inside city limits (which city), estimated ETJ, nearest city, school district, groundwater district or rule of capture, load zone and likely utility.</td></tr>
             <tr><td>pipelines_near</td><td>Gas pipelines near a site from Railroad Commission permits: operator, system, nominal diameter, interstate or intrastate, distance, miles of line in the radius. Nearest 12-inch-plus and nearest interstate line.</td></tr>
             <tr><td>industrial_neighbors</td><td>Heavy industry already operating nearby (TCEQ emissions inventory) and recent TCEQ air permit applications, including data centers and gas plants before they reach the ERCOT queue.</td></tr>
-            <tr><td>site_screen</td><td>Pro. One-call screen for a data center, battery, generator or industrial load: grid, prices, queue crowding, gas, jurisdiction and neighbors, with a flags list and a 0-100 score using stated weights.</td></tr>
+            <tr><td>site_screen</td><td>Pro. One-call screen for a data center, battery, generator or industrial load: grid, prices, queue crowding, gas, jurisdiction, neighbors and the parcel at the point with its owner and that owner's nearby holdings, with a flags list and a 0-100 score using stated weights.</td></tr>
             <tr><td>ercot_queue</td><td>ERCOT generation and storage interconnection projects near a site or in a county: fuel, MW, study status.</td></tr>
             <tr><td>battery_queue</td><td>Battery storage projects in the ERCOT GIS report by site, county or point of interconnection: developer, MW, POI substation, study stage, signed IA, projected COD.</td></tr>
             <tr><td>large_loads</td><td>Large loads planned in a county: data centers, crypto, LNG and industrial loads from the transmission projects utilities file with ERCOT, data-center air permits and Grid Report coverage. Or rank every county and list the ones with no large load activity.</td></tr>
@@ -123,7 +123,7 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
         <table class="g-table">
             <tr><th>Tier</th><th>Limits</th><th>Price</th></tr>
             <tr><td>Free</td><td>Free account (email sign-in, no card): 20 calls a day, 100 a month, 7 days of prices, 10 parcels per search, first 5 queue projects with full totals.</td><td>0</td></tr>
-            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, 120 days of price history, site_screen, and the web map. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
+            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, 120 days of price history, site_screen, landowner names and mailing addresses (3,000 owner records a month), and the web map with one-click signed-in links from your assistant. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
             <tr><td>Enterprise</td><td>Custom limits and data.</td><td><a href="mailto:ivan@barrioenergy.com">Ask for a quote</a></td></tr>
         </table>
         </div>
