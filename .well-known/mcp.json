@@ -17,6 +17,8 @@
         "nearest_substation",
         "find_powered_land",
         "ercot_queue",
+        "node_prices",
+        "volatile_nodes",
         "upgrade_to_pro"
       ]
     }

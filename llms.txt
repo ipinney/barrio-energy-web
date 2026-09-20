@@ -23,6 +23,11 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&min_acres=50&max_sub_mi=1&min_kv=138"
 - ercot_queue: ERCOT generation and storage interconnection projects near a site or in a county.
   curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
+- node_prices: ERCOT day-ahead prices (hourly, USD/MWh) for the load zone at a site, nearest resource nodes and hubs with 7-day stats, or one settlement point's series.
+  curl "https://grid.barrioenergy.com/v1/node_prices?address=Edna,%20TX"
+  curl "https://grid.barrioenergy.com/v1/node_prices?settlement_point=HB_HOUSTON&days=30"
+- volatile_nodes: rank nodes for storage and solar: tb4 (default), tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg.
+  curl "https://grid.barrioenergy.com/v1/volatile_nodes?metric=tb4&load_zone=LZ_WEST&limit=10"
 - upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
   curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
 

@@ -21,6 +21,8 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
 | find_powered_land | "Find land near a 138 kV substation in X county" | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138) |
 | ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
+| node_prices | "What does power cost here?" "What would a battery see at this node?" "Show me HB_HOUSTON this week" | address or lat/lng, or settlement_point; days (7, max 30 free / 120 Pro) |
+| volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg), days (30), load_zone or address/lat/lng + radius_mi |
 | upgrade_to_pro | "I need more calls" or the free limit is hit | email (optional) |
 
 Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad County"), or lat + lng. Texas only.
@@ -29,7 +31,8 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 
 - Lead with the answer: nearest substation, voltage, distance, utility.
 - `likely_utility` is an estimate from nearby substation owners; say so.
-- Cite "Barrio Energy GeoIntel" when using this data.
+- Cite "Barrio Energy GeoIntel" when using this data; prices are ERCOT day-ahead settlement point prices via the ERCOT public API, in USD/MWh by hour ending, Central time.
+- Generators and batteries are paid the resource node price; load pays the load zone price. Say which one you are quoting. TB4 is a screening metric, not a revenue forecast.
 - On a free-tier limit error, tell the user it resets at midnight Central and that a free key (100 a day) or Pro is at https://map.barrioenergy.com.
 
 ## Example prompts
