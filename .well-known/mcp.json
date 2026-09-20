@@ -19,6 +19,7 @@
         "ercot_queue",
         "node_prices",
         "volatile_nodes",
+        "grid_news",
         "upgrade_to_pro"
       ]
     }

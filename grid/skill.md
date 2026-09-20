@@ -23,6 +23,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
 | node_prices | "What does power cost here?" "What would a battery see at this node?" "Show me HB_HOUSTON this week" | address or lat/lng, or settlement_point; days (7, max 30 free / 120 Pro) |
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg), days (30), load_zone or address/lat/lng + radius_mi |
+| grid_news | "What's new on the Texas grid?" "Latest on Batch Zero / ERCOT large loads?" "Sources on the 765 kV build-out?" | query, since_days, limit (5), article_id for full text |
 | upgrade_to_pro | "I need more calls" or the free limit is hit | email (optional) |
 
 Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad County"), or lat + lng. Texas only.

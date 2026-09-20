@@ -28,6 +28,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/node_prices?settlement_point=HB_HOUSTON&days=30"
 - volatile_nodes: rank nodes for storage and solar: tb4 (default), tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg.
   curl "https://grid.barrioenergy.com/v1/volatile_nodes?metric=tb4&load_zone=LZ_WEST&limit=10"
+- grid_news: latest or keyword-matched articles from The Grid Report (Texas grid, ERCOT, Batch Zero, large loads, transmission). Full text with article_id. Unmetered.
+  curl "https://grid.barrioenergy.com/v1/grid_news?query=batch%20zero&limit=5"
 - upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
   curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
 
