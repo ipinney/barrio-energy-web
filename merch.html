@@ -137,10 +137,16 @@
                             <dt>Sizes</dt><dd>S &middot; M &middot; L &middot; XL &middot; 2XL &middot; 3XL</dd>
                             <dt>Shipping</dt><dd>US only</dd>
                         </dl>
-                        <div class="item-cta">
-                            <span class="btn btn-primary" style="opacity:.6;cursor:default">Checkout coming back soon</span>
+                        <div class="item-cta" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                            <select id="buyColor" aria-label="Colour" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
+                                <option>White</option><option>Black</option><option>Navy</option>
+                            </select>
+                            <select id="buySize" aria-label="Size" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
+                                <option>S</option><option>M</option><option selected>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                            </select>
+                            <button class="btn btn-primary" id="buyBtn" type="button">Buy now</button>
                         </div>
-                        <p class="item-note">We are moving checkout to card payments. To order now, email <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a>.</p>
+                        <p class="item-note" id="buyNote">Card, Apple Pay or Link through Stripe. US shipping included.</p>
                     </div>
                 </article>
 
@@ -187,6 +193,21 @@
           o.setAttribute("aria-pressed", String(o === b));
         });
       });
+    })();
+    </script>
+
+    <script>
+    (function () {
+        var btn = document.getElementById('buyBtn'), note = document.getElementById('buyNote');
+        if (/[?&]ordered=1/.test(location.search)) { note.innerHTML = '<strong>Order received.</strong> Check your email for the confirmation. Allow about a week for printing and delivery.'; }
+        btn.addEventListener('click', function () {
+            btn.disabled = true; btn.textContent = 'Opening checkout...';
+            fetch('https://grid.barrioenergy.com/shop/checkout', { method: 'POST', headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ color: document.getElementById('buyColor').value, size: document.getElementById('buySize').value }) })
+            .then(function (r) { return r.json(); })
+            .then(function (j) { if (j.url) location.href = j.url; else { note.textContent = j.error || 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; } })
+            .catch(function () { note.textContent = 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; });
+        });
     })();
     </script>
 </body>
