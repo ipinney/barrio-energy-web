@@ -54,6 +54,7 @@
     <main class="g-wrap">
         <h1>Barrio Grid Connector</h1>
         <p class="g-lead">Texas power grid siting data for AI agents and developers. Ask where the nearest substation is, what utility serves a site, what is in the ERCOT queue nearby, or which parcels sit next to high-voltage power.</p>
+        <p><a class="btn btn-primary btn-sm" href="https://map.barrioenergy.com">Get a free key or open the map</a></p>
         <p>One MCP server and a matching REST API. Works with Claude, ChatGPT, Muse and any agent that can call a URL.</p>
 
         <h2>Try it</h2>
@@ -88,7 +89,6 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
             <tr><td>ercot_queue</td><td>ERCOT generation and storage interconnection projects near a site or in a county: fuel, MW, study status.</td></tr>
             <tr><td>barrio_sites</td><td>Powered Texas sites Barrio Energy offers for lease. Free and unmetered.</td></tr>
             <tr><td>upgrade_to_pro</td><td>Pro checkout link. Muse and other agents can buy Pro for a user with Link after the user approves.</td></tr>
-            <tr><td>request_power</td><td>Send a request for MW or a powered site to Barrio Energy. Free and unmetered.</td></tr>
         </table>
         </div>
         <p>Inputs take a street address, a Texas city or county name, or <span class="g-inline">lat</span> + <span class="g-inline">lng</span>. Distances are in miles. Texas only.</p>
@@ -97,8 +97,8 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
         <div class="g-scroll">
         <table class="g-table">
             <tr><th>Tier</th><th>Limits</th><th>Price</th></tr>
-            <tr><td>Free</td><td>60 calls a day per session, 25 parcels per search, 25 mile radius. No key needed.</td><td>0</td></tr>
-            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://grid.barrioenergy.com/pro">subscribe</a></td></tr>
+            <tr><td>Free</td><td>No key: 25 calls a day. Free key: 100 calls a day, 25 parcels per search.</td><td>0</td></tr>
+            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, and the web map. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>249 USD a month, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
             <tr><td>Enterprise</td><td>Custom limits and data.</td><td><a href="mailto:ivan@barrioenergy.com">Ask for a quote</a></td></tr>
         </table>
         </div>

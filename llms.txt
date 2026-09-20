@@ -6,6 +6,8 @@
 
 Texas grid siting data for agents: nearest substations, transmission lines, likely serving utility, ERCOT generation and storage queue, planned transmission upgrades, and parcels near high-voltage substations (powered land).
 
+Accounts, keys, Pro and the map: https://map.barrioenergy.com
+
 - MCP server (streamable HTTP, no auth on the free tier): https://grid.barrioenergy.com/mcp
 - REST base: https://grid.barrioenergy.com/v1/ (tool list and schemas: https://grid.barrioenergy.com/v1/tools)
 - Human docs: https://barrioenergy.com/grid
@@ -25,14 +27,14 @@ Texas grid siting data for agents: nearest substations, transmission lines, like
   curl "https://grid.barrioenergy.com/v1/barrio_sites"
 - upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
   curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
-- request_power: send a request for MW or a powered site to Barrio Energy (POST JSON: contact_name, email, company, mw, use_case, address or site_name, timeline, notes). Free, unmetered. Only submit with the user's consent.
 
 Locations: a street address, a Texas city or county name, or lat + lng. Texas only. Distances in miles.
 
 ### Pricing
 
-- Free: 60 calls a day per session or IP, 25 parcels per search. No key.
-- Pro: 249 USD a month, 5,000 calls a month, 200 parcels per search. Header: Authorization: Bearer grid_... Subscribe: https://grid.barrioenergy.com/pro
+- No key: 25 calls a day per session or IP.
+- Free key (sign up at https://map.barrioenergy.com): 100 calls a day, 25 parcels per search.
+- Pro: 249 USD a month, 5,000 calls a month, 200 parcels per search, plus the web map. Header: Authorization: Bearer grid_... Subscribe: https://map.barrioenergy.com/pricing
 - Enterprise: quote, ivan@barrioenergy.com
 
 ### Data
