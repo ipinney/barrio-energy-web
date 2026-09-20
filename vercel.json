@@ -99,5 +99,16 @@
       "destination": "/digital-infrastructure",
       "permanent": true
     }
-  ]
+  ],
+  "crons": [
+    {
+      "path": "/api/ercot/sync",
+      "schedule": "30 19 * * *"
+    }
+  ],
+  "functions": {
+    "api/ercot/sync.js": {
+      "maxDuration": 60
+    }
+  }
 }
