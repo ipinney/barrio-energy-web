@@ -35,6 +35,8 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | large_loads | "What data centers or large loads are coming to X county?" "Which counties have no large load activity?" | county or address/lat/lng; list_counties, kind (large, all, data_center) |
 | data_centers | "What data centers are near X?" "Data centers in Y County" "Where is Google building in Texas?" | address/lat/lng + radius_mi, or county; status, min_mw, limit; company (Pro) |
 | company_footprint | "Who has the most data center projects in Texas?" "Show me Crusoe's footprint" | company, or min_projects (default 3) to rank. Pro |
+| local_sentiment | "Is Bell County friendly to data centers?" "Which Texas counties are fighting data centers?" "What has Temple voted on?" | county, city, or address/lat/lng; limit. Pro |
+| data_center_news | "What is being reported about data centers near X?" "Local news on the Hood County projects" | county, or address/lat/lng + radius_mi; since_days, limit |
 | node_prices | "What does power cost here?" "What would a battery see at this node?" "Show me HB_HOUSTON this week" | address or lat/lng, or settlement_point; days (7, max 30 free / 120 Pro) |
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart), days (30), load_zone or address/lat/lng + radius_mi |
 | ancillary_prices | "What do ancillary services pay?" "How much of a battery's revenue is AS?" | days (30), hourly, monthly_history |
@@ -50,6 +52,7 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; capacity and available takeaway are not public, the operator must confirm.
 - large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
+- local_sentiment with no record for a county or city means untested, not favorable; say so.
 - When an answer includes `map_url`, give it to the user as a clickable link to that spot on the map. It opens already signed in to the user's account (7 days, 25 opens, map only), so give it only to the user you are helping and never paste it anywhere public. Free accounts see substations, lines, city limits and node prices with 10 clicks a day; Pro adds planned substations and lines, battery queue, air permits, pipelines and parcel owners.
 - Owner names and mailing addresses are Pro. If an answer includes `owner_quota.note`, the monthly owner-record limit was reached: tell the user, and use the property IDs to look owners up at the county appraisal district.
 - Before suggesting the user contact a landowner, say ownership should be confirmed with the appraisal district or a title search.

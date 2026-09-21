@@ -29,6 +29,8 @@
         "whats_new",
         "company_footprint",
         "data_centers",
+        "local_sentiment",
+        "data_center_news",
         "ercot_queue",
         "battery_queue",
         "large_loads",
