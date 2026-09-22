@@ -30,7 +30,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/parcel_owner?substation=Hillje&radius_mi=1&min_acres=20"
 - jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility.
   curl "https://grid.barrioenergy.com/v1/jurisdiction?address=Edna,%20TX"
-- pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate.
+- pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate; within 15 mi: trunklines, compressor stations (HP), processing plants (MMcf/d), EIA capacity projects by those operators.
   curl "https://grid.barrioenergy.com/v1/pipelines_near?address=Edna,%20TX&radius_mi=5"
 - industrial_neighbors: TCEQ emissions-inventory sites and recent air permit applications (data-center flag) near a site.
   curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
@@ -74,7 +74,7 @@ Locations: a street address, a Texas city or county name, or lat + lng. Texas on
 
 ### Data
 
-HIFLD substations and transmission (owners enriched by Barrio), ERCOT GIS generation and battery queue, ERCOT public API prices, Barrio research on planned ERCOT/PUCT transmission projects, TxDOT/StratMap/Census/TWDB boundaries, RRC pipeline permits, TCEQ emissions inventory and air permits, TNRIS StratMap 2025 parcels with owner and value (statewide load in progress). Screening data; confirm with the utility. Cite "Barrio Energy GeoIntel".
+HIFLD substations and transmission (owners enriched by Barrio), ERCOT GIS generation and battery queue, ERCOT public API prices, Barrio research on planned ERCOT/PUCT transmission projects, TxDOT/StratMap/Census/TWDB boundaries, RRC pipeline permits, HIFLD/ORNL compressor stations, HIFLD/EIA-757 processing plants, EIA pipeline projects, TCEQ emissions inventory and air permits, TNRIS StratMap 2025 parcels with owner and value (statewide load in progress). Screening data; confirm with the utility. Cite "Barrio Energy GeoIntel".
 
 ## Company
 

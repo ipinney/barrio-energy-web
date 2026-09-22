@@ -68,7 +68,7 @@
         <h1>Barrio Grid Connector</h1>
         <p class="g-lead">Texas power grid siting data for AI agents and developers. Ask where the nearest substation is, what utility serves a site, whether it is inside city limits, which gas pipelines run nearby, what is in the ERCOT queue, what power sells for at the node, or which parcels sit next to high-voltage power.</p>
         <picture><source srcset="images/grid/grid-wide.webp" type="image/webp"><img src="images/grid/grid-wide.jpg" alt="Texas transmission lines and substations on the Barrio Grid map" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--color-border);margin:14px 0 8px"></picture>
-        <p style="font-size:.92rem">4,939 substations &middot; 7,033 transmission lines &middot; 1,874 ERCOT queue projects &middot; 664 planned upgrades &middot; 1,123 pricing nodes &middot; 908 battery projects &middot; 488,000 pipeline segments &middot; parcels statewide</p>
+        <p style="font-size:.92rem">4,939 substations &middot; 7,033 transmission lines &middot; 1,874 ERCOT queue projects &middot; 664 planned upgrades &middot; 1,123 pricing nodes &middot; 908 battery projects &middot; 497,000 pipeline segments &middot; 415 compressor stations and gas plants &middot; parcels statewide</p>
         <p><a class="btn btn-primary btn-sm" href="https://map.barrioenergy.com">See the map and plans</a> <a class="btn btn-sm" style="margin-left:6px;border:1px solid var(--color-border);color:var(--color-text)" href="https://map.barrioenergy.com/login">Get a free key</a></p>
         <p>One MCP server and a matching REST API. Works with Claude, ChatGPT, Muse and any agent that can call a URL.</p>
 
@@ -103,7 +103,7 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
             <tr><td>find_powered_land</td><td>Parcels near a qualifying substation, by county or point and radius, with acreage, owner and owner type (company, individual, trust or estate, public), situs address, legal description, appraised values and distance to the substation. Set group_by_owner to rank landowners by total acres near the substation.</td></tr>
             <tr><td>parcel_owner</td><td>Who owns land at an address, around a named substation or by property ID: property ID, acres, situs address, legal description and appraisal values. Owner name and mailing address on Pro.</td></tr>
             <tr><td>jurisdiction</td><td>Who governs a site: county, inside city limits (which city), estimated ETJ, nearest city, school district, groundwater district or rule of capture, load zone and likely utility.</td></tr>
-            <tr><td>pipelines_near</td><td>Gas pipelines near a site from Railroad Commission permits: operator, system, nominal diameter, interstate or intrastate, distance, miles of line in the radius. Nearest 12-inch-plus and nearest interstate line.</td></tr>
+            <tr><td>pipelines_near</td><td>Gas pipelines near a site from Railroad Commission permits: operator, system, nominal diameter, interstate or intrastate, distance, miles of line in the radius. Nearest 12-inch-plus and nearest interstate line, plus trunklines, compressor stations, processing plant capacity and EIA pipeline capacity projects within 15 miles.</td></tr>
             <tr><td>industrial_neighbors</td><td>Heavy industry already operating nearby (TCEQ emissions inventory) and recent TCEQ air permit applications, including data centers and gas plants before they reach the ERCOT queue.</td></tr>
             <tr><td>site_screen</td><td>Pro. One-call screen for a data center, battery, generator or industrial load: grid, prices, queue crowding, gas, jurisdiction, neighbors and the parcel at the point with its owner and that owner's nearby holdings, with a flags list and a 0-100 score using stated weights.</td></tr>
             <tr><td>search_grid</td><td>Find a substation, company, planned project, battery (by developer, POI or INR), air permit, queue project, pricing node, city or county by name, with coordinates.</td></tr>
@@ -132,7 +132,7 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
         <table class="g-table">
             <tr><th>Tier</th><th>Limits</th><th>Price</th></tr>
             <tr><td>Free</td><td>Free account (email sign-in, no card): 20 calls a day, 100 a month, 7 days of prices, 10 parcels per search, first 5 queue projects with full totals. The web map with substations, lines, city limits and node prices, 10 site clicks a day.</td><td>0</td></tr>
-            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, 120 days of price history, site_screen, landowner names and mailing addresses (3,000 owner records a month), and every web map layer: new substations, approved lines, battery queue, air permits, pipelines and parcel owners. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>499 USD a month (first month 249 USD) or 4,990 USD a year, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
+            <tr><td>Pro</td><td>5,000 calls a month, 200 parcels per search, 50 mile radius, 120 days of price history, site_screen, landowner names and mailing addresses (3,000 owner records a month), and every web map layer: new substations, approved lines, battery queue, air permits, pipelines, compressor stations and gas plants, and parcel owners. One API key, sent as <span class="g-inline">Authorization: Bearer grid_...</span></td><td>499 USD a month (first month 249 USD) or 4,990 USD a year, <a href="https://map.barrioenergy.com/pricing">subscribe</a></td></tr>
             <tr><td>Enterprise</td><td>Custom limits and data.</td><td><a href="mailto:ivan@barrioenergy.com">Ask for a quote</a></td></tr>
         </table>
         </div>
@@ -145,7 +145,7 @@ curl "https://grid.barrioenergy.com/v1/tools"</div>
             <li>Prices: ERCOT public API day-ahead and real-time settlement point prices and ancillary service clearing prices, refreshed hourly.</li>
             <li>Battery queue: ERCOT GIS report, monthly.</li>
             <li>Jurisdiction: TxDOT and StratMap city limits, Census school districts, TWDB groundwater districts. ETJ is an estimate from the statutory distance.</li>
-            <li>Pipelines: Railroad Commission of Texas T-4 permits. Industrial neighbors: TCEQ emissions inventory and air permits.</li>
+            <li>Pipelines: Railroad Commission of Texas T-4 permits. Compressor stations: HIFLD/ORNL and TCEQ emissions inventory. Processing plants: HIFLD/EIA-757. Pipeline capacity projects: EIA. Industrial neighbors: TCEQ emissions inventory and air permits.</li>
             <li>Parcels: TNRIS StratMap 2025 with appraisal district owner and value fields. Statewide load in progress; each answer lists the counties covered.</li>
         </ul>
         <p>Screening data. Confirm capacity and interconnection with the utility before relying on it. Questions: <a href="mailto:ivan@barrioenergy.com">ivan@barrioenergy.com</a>.</p>
