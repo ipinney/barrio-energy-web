@@ -25,6 +25,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | parcel_owner | "Who owns the land by the Hillje substation?" "Who owns this address?" (owner name and mailing address are Pro; free gets property ID and legal description) | address, lat/lng, substation name, or prop_id + county |
 | jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" | address or lat/lng |
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" "Nearest compressor station or gas plant?" | address or lat/lng, radius_mi, gas_only, min_diameter_in |
+| fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
 | site_screen | "Is this a good site for a data center / battery / generator?" (Pro) | address or lat/lng, use (data_center, battery, generation, industrial) |
 | search_grid | "Where is the Hillje substation?" "What does Formosa own?" "Find 21INR0258" (no coordinates needed) | query, kinds |
@@ -51,6 +52,7 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - `likely_utility` is an estimate from nearby substation owners; say so.
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; line capacity and available takeaway are not public, the operator must confirm. pipelines_near also returns gas_infrastructure: processing plant capacity in MMcf/d, compressor horsepower, and EIA capacity projects matched by operator name (statewide, not by location).
+- fiber_near: say whether a route is gis_published (real cable path) or carrier_on_corridor (reported on a highway corridor; path inferred, distance approximate). No mapped route does not mean no fiber: many regional and utility networks are not mapped; name the fiber-to-premises providers and nearest facility instead. Lit capacity and pricing are not public; the carrier must confirm.
 - large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
 - local_sentiment with no record for a county or city means untested, not favorable; say so.
 - When an answer includes `map_url`, give it to the user as a clickable link to that spot on the map. It opens already signed in to the user's account (7 days, 25 opens, map only), so give it only to the user you are helping and never paste it anywhere public. Free accounts see substations, lines, city limits and node prices with 10 clicks a day; Pro adds planned substations and lines, battery queue, air permits, pipelines and parcel owners.

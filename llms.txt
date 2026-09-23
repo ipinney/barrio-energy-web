@@ -32,6 +32,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/jurisdiction?address=Edna,%20TX"
 - pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate; within 15 mi: trunklines, compressor stations (HP), processing plants (MMcf/d), EIA capacity projects by those operators.
   curl "https://grid.barrioenergy.com/v1/pipelines_near?address=Edna,%20TX&radius_mi=5"
+- fiber_near: fiber near a site: routes by provider with distance and path basis (gis_published = provider GIS, carrier_on_corridor = highway corridor, path inferred), nearest carrier hotels/colo/data centers, FCC fiber-to-premises providers. Pro adds fiber count, placement, use, route and facility names, FTTP locations and speeds.
+  curl "https://grid.barrioenergy.com/v1/fiber_near?address=Goliad,%20TX&radius_mi=10"
 - industrial_neighbors: TCEQ emissions-inventory sites and recent air permit applications (data-center flag) near a site.
   curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
 - site_screen (Pro): one-call screen for use=data_center|battery|generation|industrial: flags plus a 0-100 score with stated weights, and the parcel at the point with its owner and that owner's holdings within 5 miles.
