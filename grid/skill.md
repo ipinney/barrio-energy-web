@@ -23,7 +23,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
 | battery_queue | "How crowded is this substation with batteries?" "Which storage projects near X have an IA?" | county, poi, or address/lat/lng + radius_mi; min_mw, status (all, active, ia, energized) |
 | parcel_owner | "Who owns the land by the Hillje substation?" "Who owns this address?" (owner name and mailing address are Pro; free gets property ID and legal description) | address, lat/lng, substation name, or prop_id + county |
-| jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" | address or lat/lng |
+| jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" "Is this in an opportunity zone?" | address or lat/lng |
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" "Nearest compressor station or gas plant?" | address or lat/lng, radius_mi, gas_only, min_diameter_in |
 | fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |

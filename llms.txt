@@ -28,7 +28,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/battery_queue?county=Jackson&status=ia"
 - parcel_owner: who owns land at an address, around a named substation (e.g. Hillje) or by property ID: property ID, acres, situs address, legal description, appraisal values. Owner name and mailing address on Pro.
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/parcel_owner?substation=Hillje&radius_mi=1&min_acres=20"
-- jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility.
+- jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility, Qualified Opportunity Zone now (QOZ 1.0, through 2026) and from 2027 (QOZ 2.0, nominated pending Treasury certification). Free: in a zone yes/no; Pro: tract, county, rural flag, dates.
   curl "https://grid.barrioenergy.com/v1/jurisdiction?address=Edna,%20TX"
 - pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate; within 15 mi: trunklines, compressor stations (HP), processing plants (MMcf/d), EIA capacity projects by those operators.
   curl "https://grid.barrioenergy.com/v1/pipelines_near?address=Edna,%20TX&radius_mi=5"
