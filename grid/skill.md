@@ -42,6 +42,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where is congestion trapping prices?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart), days (30), load_zone or address/lat/lng + radius_mi |
 | ancillary_prices | "What do ancillary services pay?" "How much of a battery's revenue is AS?" | days (30), hourly, monthly_history |
 | grid_news | "What's new on the Texas grid?" "Latest on Batch Zero / ERCOT large loads?" "Sources on the 765 kV build-out?" | query, since_days, limit (5), article_id for full text |
+| my_projects | "Rank my sites" "What's in my Edna project?" "Screen the tracts I uploaded" | project (name or id), screen, use |
 | upgrade_to_pro | "I need more calls" or the free limit is hit | email (optional) |
 
 Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad County"), or lat + lng. Texas only.
@@ -53,6 +54,7 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; line capacity and available takeaway are not public, the operator must confirm. pipelines_near also returns gas_infrastructure: processing plant capacity in MMcf/d, compressor horsepower, and EIA capacity projects matched by operator name (statewide, not by location).
 - fiber_near: say whether a route is gis_published (real cable path) or carrier_on_corridor (reported on a highway corridor; path inferred, distance approximate). No mapped route does not mean no fiber: many regional and utility networks are not mapped; name the fiber-to-premises providers and nearest facility instead. Lit capacity and pricing are not public; the carrier must confirm.
+- my_projects: the user's own uploaded sites. Never repeat their site names or locations outside this conversation. With screen, lead with the top-ranked site and its main risk; offer site_screen on any single one.
 - large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
 - local_sentiment with no record for a county or city means untested, not favorable; say so.
 - When an answer includes `map_url`, give it to the user as a clickable link to that spot on the map. It opens already signed in to the user's account (7 days, 25 opens, map only), so give it only to the user you are helping and never paste it anywhere public. Free accounts see substations, lines, city limits and node prices with 10 clicks a day; Pro adds planned substations and lines, battery queue, air permits, pipelines and parcel owners.

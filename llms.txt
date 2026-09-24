@@ -62,6 +62,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/ancillary_prices?days=30&monthly_history=true"
 - grid_news: latest or keyword-matched articles from The Grid Report (Texas grid, ERCOT, Batch Zero, large loads, transmission). Full text with article_id. Unmetered.
   curl "https://grid.barrioenergy.com/v1/grid_news?query=batch%20zero&limit=5"
+- my_projects: the signed-in user's saved projects from the map (sites, tracts and routes imported from KMZ/KML/GeoJSON). Lists projects, or reads one (name, type, point, acres, folder); screen=true (Pro) runs site_screen on up to 25 features and ranks them. MCP only; needs an account-linked connection. Private to the user.
 - upgrade_to_pro: Pro checkout link (Stripe, accepts Link), optional email prefill. Only buy with the user's approval.
   curl "https://grid.barrioenergy.com/v1/upgrade_to_pro?email=you@example.com"
 

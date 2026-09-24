@@ -39,6 +39,7 @@
         "volatile_nodes",
         "ancillary_prices",
         "grid_news",
+        "my_projects",
         "upgrade_to_pro"
       ]
     }
