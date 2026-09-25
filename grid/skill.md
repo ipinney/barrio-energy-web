@@ -17,7 +17,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 
 | Tool | Use when the user asks | Key inputs |
 |---|---|---|
-| grid_context | "What power is near this site?" "Who is the utility?" | address or lat/lng, radius_mi (5) |
+| grid_context | "What power is near this site?" "Who is the utility?" "Is there a railroad between the site and the substation?" | address or lat/lng, radius_mi (5), to_lat/to_lng (optional crossing target) |
 | nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
 | find_powered_land | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
 | ercot_queue | "What solar/battery projects are queued near here?" "What generation is queued at this substation?" | county, poi, fuel (SOL, WIN, GAS, etc.), or address/lat/lng + radius_mi (10) |

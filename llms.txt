@@ -15,7 +15,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
 
 ### Tools
 
-- grid_context: county, likely utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned upgrades around a Texas site.
+- grid_context: county, likely utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned upgrades around a Texas site, plus railroads (nearest lines with owner and type; crossings and same_side_of_rail between the site and its nearest substation, or a point passed as to_lat/to_lng).
   curl "https://grid.barrioenergy.com/v1/grid_context?address=Edna,%20TX&radius_mi=5"
 - nearest_substation: closest substations with voltage, owner and distance in miles.
   curl "https://grid.barrioenergy.com/v1/nearest_substation?lat=28.9&lng=-96.6&min_kv=138&limit=5"
