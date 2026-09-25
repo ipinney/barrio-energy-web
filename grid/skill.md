@@ -51,6 +51,8 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 ## Rules
 
 - Lead with the answer: nearest substation, voltage, distance, utility.
+- A planned substation is not one you can reach: check `built` and `name_warnings`, and pass on a low `pin_confidence` with its `location_caveat`.
+- Pass on `undivided_interest`, a University Lands or public `owner_class`, and any `cad_city_limits.warning`; they decide whether land is buyable and who has jurisdiction.
 - `likely_utility` is an estimate from nearby substation owners; say so. If `likely_utility_basis.disagrees_with_station_owner` is true, pass the warning on. `station_class` on substation_detail is inferred; quote its evidence, not just the class.
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; line capacity and available takeaway are not public, the operator must confirm. pipelines_near also returns gas_infrastructure: processing plant capacity in MMcf/d, compressor horsepower, and EIA capacity projects matched by operator name (statewide, not by location).

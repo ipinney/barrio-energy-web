@@ -17,7 +17,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
 
 - grid_context: county, likely utility, 3 nearest substations, transmission lines, ERCOT queue projects and planned upgrades around a Texas site, plus railroads (nearest lines with owner and type; crossings and same_side_of_rail between the site and its nearest substation, or a point passed as to_lat/to_lng).
   curl "https://grid.barrioenergy.com/v1/grid_context?address=Edna,%20TX&radius_mi=5"
-- nearest_substation: closest substations with voltage, owner and distance in miles.
+- nearest_substation: closest substations with voltage, owner and distance in miles. Also returns planned, unbuilt substations nearby (built:false, status, docket, expected date, pin confidence and the docket's location caveat) and warns when a planned and a built station share a name.
   curl "https://grid.barrioenergy.com/v1/nearest_substation?lat=28.9&lng=-96.6&min_kv=138&limit=5"
 - find_powered_land: parcels within a set distance of a qualifying substation, by county or point and radius. owner_type=company|individual|trust_estate|public|private filters landowners. group_by_owner=true ranks owners by total acres near the substation (min_total_acres, min_parcel_acres). Enterprise; Free and Pro get parcel and owner counts.
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&group_by_owner=true&min_total_acres=200&max_sub_mi=1"
@@ -27,9 +27,9 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/ercot_queue?poi=Hillje&fuel=SOL"
 - battery_queue: ERCOT GIS battery projects by site, county or POI substation: developer, MW, stage (screening, fis_started, fis_complete, ia_signed, energized), COD; totals.
   curl "https://grid.barrioenergy.com/v1/battery_queue?county=Jackson&status=ia"
-- parcel_owner: who owns land at an address, around a named substation (e.g. Hillje) or by property ID: property ID, acres, situs address, legal description, appraisal values. Owner name and mailing address on Enterprise.
+- parcel_owner: who owns land at an address, around a named substation (e.g. Hillje) or by property ID: property ID, acres, situs address, legal description, appraisal values. Owner name and mailing address on Enterprise. Each parcel carries owner_class (university_lands, state, federal, county, city, school_district, special_district, railroad, utility, company, individual, trust_estate), undivided_interest when several owners share one property ID, city_limits_per_cad from the ICL/OCL legal token, and value_status (not_published_by_county means zeros are missing data, not a $0 parcel).
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/parcel_owner?substation=Hillje&radius_mi=1&min_acres=20"
-- jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility, Qualified Opportunity Zone now (QOZ 1.0, through 2026) and from 2027 (QOZ 2.0, nominated pending Treasury certification). Free: in a zone yes/no; Pro: tract, county, rural flag, dates.
+- jurisdiction: county, inside city limits, ETJ estimate, nearest city, school district, groundwater district, load zone, likely utility, Qualified Opportunity Zone now (QOZ 1.0, through 2026) and from 2027 (QOZ 2.0, nominated pending Treasury certification). Free: in a zone yes/no; Pro: tract, county, rural flag, dates. cad_city_limits compares the appraisal roll's ICL/OCL legal token for the parcel at the point with the boundary layer and warns when they disagree.
   curl "https://grid.barrioenergy.com/v1/jurisdiction?address=Edna,%20TX"
 - pipelines_near: RRC-permitted gas pipelines near a site: operator, system, nominal diameter, interstate or intrastate, distance; nearest 12-inch-plus and interstate; within 15 mi: trunklines, compressor stations (HP), processing plants (MMcf/d), EIA capacity projects by those operators.
   curl "https://grid.barrioenergy.com/v1/pipelines_near?address=Edna,%20TX&radius_mi=5"
