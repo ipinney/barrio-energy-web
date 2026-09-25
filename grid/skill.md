@@ -19,15 +19,15 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 |---|---|---|
 | grid_context | "What power is near this site?" "Who is the utility?" | address or lat/lng, radius_mi (5) |
 | nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
-| find_powered_land | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
+| find_powered_land (Enterprise; free and Pro get counts) | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
 | ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
 | battery_queue | "How crowded is this substation with batteries?" "Which storage projects near X have an IA?" | county, poi, or address/lat/lng + radius_mi; min_mw, status (all, active, ia, energized) |
-| parcel_owner | "Who owns the land by the Hillje substation?" "Who owns this address?" (owner name and mailing address are Pro; free gets property ID and legal description) | address, lat/lng, substation name, or prop_id + county |
+| parcel_owner | "Who owns the land by the Hillje substation?" "Who owns this address?" (Enterprise; free and Pro get the parcel record without the owner) | address, lat/lng, substation name, or prop_id + county |
 | jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" "Is this in an opportunity zone?" | address or lat/lng |
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" "Nearest compressor station or gas plant?" | address or lat/lng, radius_mi, gas_only, min_diameter_in |
 | fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
-| site_screen | "Is this a good site for a data center / battery / generator?" (Pro) | address or lat/lng, use (data_center, battery, generation, industrial) |
+| site_screen | "Is this a good site for a data center / battery / generator?" (Enterprise; free and Pro get the score) | address or lat/lng, use (data_center, battery, generation, industrial) |
 | search_grid | "Where is the Hillje substation?" "What does Formosa own?" "Find 21INR0258" (no coordinates needed) | query, kinds |
 | substation_detail | "Tell me about the Lolita substation" "What is interconnecting at Hillje?" | name (+ county) or address |
 | grid_projects | "What grid upgrades are coming near here?" "What is AEP building in Jackson County?" (Pro) | address/lat/lng + radius_mi, county, utility, kind, status, min_kv |
@@ -60,9 +60,9 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - large_loads is public county-level evidence, not ERCOT's queue (ERCOT does not publish it by county); say so.
 - local_sentiment with no record for a county or city means untested, not favorable; say so.
 - When an answer includes `map_url`, give it to the user as a clickable link to that spot on the map. It opens already signed in to the user's account (7 days, 25 opens, map only), so give it only to the user you are helping and never paste it anywhere public. Free accounts see substations, lines, city limits and node prices with 10 clicks a day; Pro adds planned substations and lines, battery queue, air permits, pipelines and parcel owners.
-- Owner names and mailing addresses are Pro. If an answer includes `owner_quota.note`, the monthly owner-record limit was reached: tell the user, and use the property IDs to look owners up at the county appraisal district.
+- Owner names, mailing addresses, parcel lists and site_screen flags are Enterprise, approved account by account. When a result carries `enterprise_note`, say so once and give ivan@barrioenergy.com; do not offer Pro for these. Use property IDs to look owners up at the county appraisal district.
 - Before suggesting the user contact a landowner, say ownership should be confirmed with the appraisal district or a title search.
-- site_screen is Pro; on a free account, call jurisdiction, pipelines_near, grid_context, node_prices, battery_queue and industrial_neighbors separately.
+- site_screen flags are Enterprise; below Enterprise, call jurisdiction, pipelines_near, grid_context, node_prices, battery_queue and industrial_neighbors separately.
 - Cite "Barrio Energy GeoIntel" when using this data; prices are ERCOT day-ahead settlement point prices via the ERCOT public API, in USD/MWh by hour ending, Central time.
 - Generators and batteries are paid the resource node price; load pays the load zone price. Say which one you are quoting. TB4 is a screening metric, not a revenue forecast.
 - On a free-tier limit error, tell the user it resets at midnight Central and that free accounts get 20 calls a day and 100 a month, and Pro (5,000 a month) is at https://map.barrioenergy.com/pricing. A 401 means the user needs to connect or reconnect the connector.
