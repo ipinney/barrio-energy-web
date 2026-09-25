@@ -20,7 +20,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | grid_context | "What power is near this site?" "Who is the utility?" | address or lat/lng, radius_mi (5) |
 | nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
 | find_powered_land | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
-| ercot_queue | "What solar/battery projects are queued near here?" | county or address/lat/lng + radius_mi (10) |
+| ercot_queue | "What solar/battery projects are queued near here?" "What generation is queued at this substation?" | county, poi, fuel (SOL, WIN, GAS, etc.), or address/lat/lng + radius_mi (10) |
 | battery_queue | "How crowded is this substation with batteries?" "Which storage projects near X have an IA?" | county, poi, or address/lat/lng + radius_mi; min_mw, status (all, active, ia, energized) |
 | parcel_owner | "Who owns the land by the Hillje substation?" "Who owns this address?" (owner name and mailing address are Pro; free gets property ID and legal description) | address, lat/lng, substation name, or prop_id + county |
 | jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" "Is this in an opportunity zone?" | address or lat/lng |
@@ -29,7 +29,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
 | site_screen | "Is this a good site for a data center / battery / generator?" (Pro) | address or lat/lng, use (data_center, battery, generation, industrial) |
 | search_grid | "Where is the Hillje substation?" "What does Formosa own?" "Find 21INR0258" (no coordinates needed) | query, kinds |
-| substation_detail | "Tell me about the Lolita substation" "What is interconnecting at Hillje?" | name (+ county) or address |
+| substation_detail | "Tell me about the Lolita substation" "What is interconnecting at Hillje?" (includes generation_queue_at_poi) | name (+ county) or address |
 | grid_projects | "What grid upgrades are coming near here?" "What is AEP building in Jackson County?" (Pro) | address/lat/lng + radius_mi, county, utility, kind, status, min_kv |
 | air_permits | "New data center air permits in Texas this year?" "Who filed for gas generation in Bexar County?" (Pro) | county or address, status, data_centers_only, new_facilities_only, since/days, company |
 | whats_new | "What's new around this site?" "Any new filings in Jackson County this month?" (Pro) | address or county, days |

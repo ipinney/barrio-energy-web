@@ -22,8 +22,9 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
 - find_powered_land: parcels within a set distance of a qualifying substation, by county or point and radius. owner_type=company|individual|trust_estate|public|private filters landowners. group_by_owner=true ranks owners by total acres near the substation (min_total_acres, min_parcel_acres); names and mailing addresses on Pro.
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&group_by_owner=true&min_total_acres=200&max_sub_mi=1"
   curl "https://grid.barrioenergy.com/v1/find_powered_land?county=Jackson&min_acres=50&max_sub_mi=1&min_kv=138"
-- ercot_queue: ERCOT generation and storage interconnection projects near a site or in a county.
+- ercot_queue: ERCOT GIS report generation and storage projects near a site, in a county, or at a POI substation: INR, project name, fuel, tech, MW, county, zone, POI substation, study phase, COD, entity. Summary with mw_by_fuel and mw_by_stage. Filter by fuel (SOL, WIN, GAS, etc.). Free: fuel, county, zone, distance_mi. Pro: full project details.
   curl "https://grid.barrioenergy.com/v1/ercot_queue?county=Live%20Oak"
+  curl "https://grid.barrioenergy.com/v1/ercot_queue?poi=Hillje&fuel=SOL"
 - battery_queue: ERCOT GIS battery projects by site, county or POI substation: developer, MW, stage (screening, fis_started, fis_complete, ia_signed, energized), COD; totals.
   curl "https://grid.barrioenergy.com/v1/battery_queue?county=Jackson&status=ia"
 - parcel_owner: who owns land at an address, around a named substation (e.g. Hillje) or by property ID: property ID, acres, situs address, legal description, appraisal values. Owner name and mailing address on Pro.
@@ -40,7 +41,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/site_screen?address=Edna,%20TX&use=battery"
 - search_grid: find anything by name (substation, owner company, ERCOT code, project, docket, battery developer/POI/INR, permit company or number, node, city, county), with coordinates.
   curl -H "Authorization: Bearer $GRID_KEY" "https://grid.barrioenergy.com/v1/search_grid?query=Lolita"
-- substation_detail: one substation by name: kV, owner, lines, batteries at its POI, queue, prices; planned upgrades and landowners on Pro.
+- substation_detail: one substation by name: kV, owner, lines, batteries at its POI, generation_queue_at_poi (total projects, mw_total, projects by fuel/mw/study_phase), queue, prices; planned upgrades and landowners on Pro.
 - grid_projects (Pro): planned new substations, approved lines and upgrades by location, county or utility, with status, date, cost, docket, sources.
 - air_permits (Pro): TCEQ generation and data-center permits by location, county, status, date, fuel or company.
 - whats_new (Pro): battery milestones, queue entries, permits and new grid projects near a site or in a county over the last N days.
