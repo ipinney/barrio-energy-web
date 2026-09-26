@@ -34,6 +34,7 @@
         "data_center_news",
         "ercot_queue",
         "battery_queue",
+        "power_plants",
         "large_loads",
         "node_prices",
         "volatile_nodes",
