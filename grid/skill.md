@@ -43,6 +43,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | volatile_nodes | "Most volatile nodes in ERCOT?" "Best nodes for a 4-hour battery near X?" "Where does solar get paid best?" "Where do 15-minute spikes happen?" | metric (tb4, tb2, stdev, cv, range, spikes, negative, evening, solar, solar_ratio, basis, avg, rt_tb4, rt_spikes, dart, rt15_tb4, rt15_spikes), days (30), load_zone or address/lat/lng + radius_mi |
 | ancillary_prices | "What do ancillary services pay?" "How much of a battery's revenue is AS?" | days (30), hourly, monthly_history |
 | binding_constraints | "What constraints bind near this node?" "Why do prices spike at X?" "Is this spread caused by congestion?" | lat/lng or settlement_point, radius_mi (25), days (30), limit (20) |
+| battery_performance | "What do batteries near X actually earn?" "How much revenue per MW-month?" "Energy vs AS split for batteries in LZ_SOUTH?" | lat/lng or settlement_point, radius_mi (50), limit (20) |
 | grid_news | "What's new on the Texas grid?" "Latest on Batch Zero / ERCOT large loads?" "Sources on the 765 kV build-out?" | query, since_days, limit (5), article_id for full text |
 | my_projects | "Rank my prospects" "What's in my Edna project?" "What places did I save?" | list, project (name or id), screen, use |
 | save_place | "Save this site" "Pin 1201 Main St as the Main Street option" | address or lat/lng, name, note |
