@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugged In | The Barrio Energy Podcast</title>
+    <meta name="description" content="Plugged In with Barrio Energy: Texas energy, the grid, and the AI data center buildout. Andi and Marco on ERCOT, the interconnection queue, and the politics behind the power. Monthly. Plus how we build the show: voices, studio, hosts, lip-sync and teasers.">
+    <link rel="canonical" href="https://www.barrioenergy.com/podcast">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Barrio Energy">
+    <meta property="og:url" content="https://www.barrioenergy.com/podcast">
+    <meta property="og:title" content="Plugged In | The Barrio Energy Podcast">
+    <meta property="og:description" content="Texas energy, the grid, and the AI data center buildout. Andi and Marco on ERCOT, the interconnection queue, and the politics behind the power. Monthly.">
+    <meta property="og:image" content="https://www.barrioenergy.com/images/podcast/hero-wide.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BarrioEnergy">
+    <meta name="twitter:title" content="Plugged In | The Barrio Energy Podcast">
+    <meta name="twitter:description" content="Texas energy, the grid, and the AI data center buildout. Andi and Marco, monthly.">
+    <meta name="twitter:image" content="https://www.barrioenergy.com/images/podcast/hero-wide.jpg">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"PodcastSeries","name":"Plugged In with Barrio Energy","url":"https://www.barrioenergy.com/podcast","webFeed":"https://podcast.barrioenergy.com/feed.xml","image":"https://podcast.barrioenergy.com/images/cover-art.png","description":"Texas energy, the grid, and the AI data center buildout. Andi and Marco on ERCOT, the interconnection queue, and the politics behind the power. Monthly.","publisher":{"@type":"Organization","name":"Barrio Energy","url":"https://www.barrioenergy.com"},"sameAs":["https://open.spotify.com/show/0CpTJoXw6JibHSXt6Nt0H4"]}
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root { --pod-orange: #e49a1c; --pod-orange-soft: rgba(228,154,28,0.14); --pod-navy: #06060f; }
+        .pod-hero { min-height: 0; padding: 120px 0 64px; align-items: stretch; }
+        .pod-hero .hero-img { object-position: center 30%; filter: blur(28px) brightness(0.45) saturate(0.8); transform: scale(1.15); }
+        .pod-hero .hero-overlay { background: linear-gradient(180deg, rgba(10,10,15,0.55) 0%, rgba(10,10,15,0.75) 60%, rgba(10,10,15,1) 100%); }
+        .pod-hero .hero-content { text-align: left; max-width: var(--max-width); width: 100%; padding: 0 24px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+        .pod-hero .hero-sub { margin: 0 0 32px; }
+        .pod-hero .hero-btns { justify-content: flex-start; }
+        .hero-still { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 30px 80px rgba(0,0,0,0.6); aspect-ratio: 1/1; max-width: 560px; justify-self: end; width: 100%; }
+        .hero-still img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-still span { position: absolute; left: 14px; bottom: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.75); background: rgba(6,6,15,0.6); padding: 4px 10px; border-radius: 999px; backdrop-filter: blur(6px); }
+        @media (max-width: 900px) { .pod-hero .hero-content { grid-template-columns: 1fr; } .hero-still { justify-self: center; } .pod-hero .hero-btns { justify-content: flex-start; } }
+        .pod-wordmark { font-family: 'Bebas Neue', var(--font-heading); font-size: clamp(3.4rem, 9vw, 6.4rem); letter-spacing: 0.04em; line-height: 0.95; color: #fff; margin-bottom: 8px; }
+        .pod-wordmark .in { position: relative; display: inline-block; }
+        .pod-wordmark .in::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 6px; background: var(--pod-orange); }
+        .pod-wordmark .bolt { height: 0.82em; width: auto; margin-left: 14px; vertical-align: -0.06em; filter: drop-shadow(0 0 10px rgba(59,130,246,0.55)); }
+        .pod-with { font-family: var(--font-heading); font-size: 1rem; letter-spacing: 0.18em; text-transform: uppercase; color: #c9c9d4; margin-bottom: 22px; }
+        .hero-tag.pod { background: var(--pod-orange-soft); color: var(--pod-orange); }
+        .btn-spotify { background: #1db954; color: #06060f !important; border: 1px solid #1db954; }
+        .btn-spotify:hover { background: #22d05f; }
+        .btn-spotify svg { width: 18px; height: 18px; vertical-align: -4px; margin-right: 8px; }
+
+        /* latest episode */
+        .latest { padding: 72px 0 40px; }
+        .latest-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: start; }
+        .player-wrap { position: relative; border-radius: var(--radius); overflow: hidden; background: #000; border: 1px solid var(--color-border); aspect-ratio: 16/9; }
+        .player-wrap video, .player-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .unmute { position: absolute; left: 14px; bottom: 14px; background: rgba(6,6,15,0.78); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 999px; font: 600 0.8rem var(--font-body); cursor: pointer; backdrop-filter: blur(6px); }
+        .unmute:hover { border-color: var(--pod-orange); }
+        .ep-kicker { color: var(--pod-orange); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 12px; }
+        .ep-title { font-family: var(--font-heading); font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; margin-bottom: 10px; }
+        .ep-meta { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 18px; }
+        .ep-desc { color: #c9c9d4; line-height: 1.7; margin-bottom: 20px; }
+        .ep-desc.clamp { display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
+        .ep-more { background: none; border: none; color: var(--color-primary); cursor: pointer; font: 600 0.9rem var(--font-body); padding: 0; margin: -10px 0 20px; }
+        .ep-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+        audio { width: 100%; height: 40px; filter: invert(0.92) hue-rotate(180deg); border-radius: 8px; }
+
+        /* episode grid */
+        .episodes { padding: 40px 0 80px; }
+        .episodes-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; flex-wrap: wrap; }
+        .episodes-head .section-title { text-align: left; margin: 0; }
+        .ep-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .ep-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; display: grid; grid-template-columns: 148px 1fr; transition: border-color var(--transition), transform var(--transition); }
+        .ep-card:hover { border-color: rgba(228,154,28,0.45); transform: translateY(-2px); }
+        .ep-card .thumb { position: relative; background: #000; aspect-ratio: 1/1; align-self: start; }
+        .ep-card .thumb img, .ep-card .thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ep-card .num { position: absolute; left: 10px; top: 10px; background: var(--pod-navy); color: var(--pod-orange); font: 700 0.75rem var(--font-heading); padding: 4px 8px; border-radius: 6px; border-bottom: 2px solid var(--pod-orange); }
+        .ep-card .body { padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+        .ep-card h3 { font-family: var(--font-heading); font-size: 1.05rem; line-height: 1.3; }
+        .ep-card .meta { color: var(--color-text-muted); font-size: 0.8rem; }
+        .ep-card p { color: #b5b5c3; font-size: 0.9rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .ep-card .links { display: flex; gap: 14px; margin-top: auto; padding-top: 6px; font-size: 0.85rem; font-weight: 600; }
+        .ep-card .links a.sp { color: #1db954; }
+        .feed-note { color: var(--color-text-muted); font-size: 0.85rem; text-align: center; margin-top: 24px; }
+        .spotify-embed { margin: 36px 0 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); }
+        .spotify-embed iframe { display: block; width: 100%; height: 352px; border: 0; }
+
+        /* hosts */
+        .hosts { padding: 80px 0; background: var(--color-bg-alt); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .hosts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .host { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
+        .host .pic { aspect-ratio: 1/1; background: #000; overflow: hidden; }
+        .host .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .host .pic.voice { display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 40%, #2a1d0c 0%, #0a0a0f 70%); }
+        .host .pic.voice span { font-family: 'Bebas Neue', var(--font-heading); font-size: 6rem; color: var(--pod-orange); letter-spacing: 0.06em; }
+        .host .txt { padding: 20px 22px 24px; }
+        .host h3 { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 2px; }
+        .host .role { color: var(--pod-orange); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; }
+        .host p { color: #b5b5c3; font-size: 0.92rem; line-height: 1.6; }
+        .ai-note { max-width: 760px; margin: 32px auto 0; text-align: center; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+        /* making of */
+        .making { padding: 88px 0 40px; }
+        .making-intro { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+        .making-intro p { color: #c9c9d4; font-size: 1.08rem; line-height: 1.7; }
+        .toc { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+        .toc a { font-size: 0.82rem; font-weight: 600; color: var(--color-text-muted); border: 1px solid var(--color-border); padding: 6px 12px; border-radius: 999px; }
+        .toc a:hover { color: #fff; border-color: var(--pod-orange); }
+        .chapter { max-width: 1100px; margin: 0 auto; padding: 56px 0; border-top: 1px solid var(--color-border); }
+        .chapter-head { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; margin-bottom: 26px; }
+        .chapter-num { font-family: 'Bebas Neue', var(--font-heading); font-size: 3rem; line-height: 1; color: var(--pod-orange); }
+        .chapter h2 { font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.15; }
+        .chapter h2 small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 0.95rem; color: var(--color-text-muted); margin-top: 8px; }
+        .prose { max-width: 760px; }
+        .prose p { color: #c9c9d4; line-height: 1.75; margin-bottom: 18px; font-size: 1.02rem; }
+        .prose strong { color: #fff; font-weight: 600; }
+        .prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; color: #e8e8ec; }
+        .prose ul { color: #c9c9d4; line-height: 1.7; margin: 0 0 18px 20px; }
+        .prose li { margin-bottom: 6px; }
+        .fig { margin: 28px 0; }
+        .fig img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--color-border); display: block; }
+        .fig figcaption { color: var(--color-text-muted); font-size: 0.85rem; margin-top: 10px; line-height: 1.5; }
+        .fig-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0; }
+        .fig-row.four { grid-template-columns: repeat(4, 1fr); }
+        .fig-row .fig { margin: 0; }
+        .callout { border-left: 3px solid var(--pod-orange); background: var(--pod-orange-soft); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 24px 0; color: #e8e8ec; line-height: 1.6; }
+        .callout b { color: var(--pod-orange); }
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0; }
+        .stat { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 16px 18px; }
+        .stat b { display: block; font-family: var(--font-heading); font-size: 1.5rem; color: #fff; }
+        .stat span { color: var(--color-text-muted); font-size: 0.82rem; line-height: 1.4; display: block; margin-top: 4px; }
+        .stack { width: 100%; border-collapse: collapse; margin: 16px 0 8px; font-size: 0.95rem; }
+        .stack th, .stack td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+        .stack th { color: var(--color-text-muted); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+        .stack td:first-child { color: #fff; font-weight: 600; white-space: nowrap; }
+        .stack td { color: #c9c9d4; line-height: 1.5; }
+
+        @media (max-width: 900px) {
+            .latest-grid { grid-template-columns: 1fr; gap: 28px; }
+            .ep-grid { grid-template-columns: 1fr; }
+            .hosts-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .fig-row.four { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .fig-row { grid-template-columns: 1fr; }
+            .ep-card { grid-template-columns: 110px 1fr; }
+            .chapter-head { grid-template-columns: 44px 1fr; gap: 12px; }
+            .chapter-num { font-size: 2.2rem; }
+            .stack td:first-child { white-space: normal; }
+        }
+    </style>
+    <script>window.__blTs=Date.now();</script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link">Home</a>
+                <a href="digital-infrastructure.html" class="nav-link">Digital Infrastructure</a>
+                <a href="grid.html" class="nav-link">Grid API</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="podcast.html" class="nav-link active">Podcast</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="https://barrio-geointel.vercel.app/login" class="nav-link nav-login">Login</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero pod-hero">
+        <div class="hero-bg">
+            <img src="images/podcast/hero-wide.jpg" alt="" aria-hidden="true" class="hero-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div>
+            <span class="hero-tag pod">Monthly podcast</span>
+            <div class="pod-wordmark">PLUGGED <span class="in">IN</span><svg class="bolt" viewBox="0 0 24 40" aria-hidden="true"><path d="M14 0 2 23h8L7 40l15-24h-8z" fill="#3b82f6"/></svg></div>
+            <div class="pod-with">with Barrio Energy</div>
+            <p class="hero-sub">Texas energy, the grid, and the AI data center buildout. Andi and Marco on ERCOT, the interconnection queue, and the politics behind the power. About 20 minutes, once a month, built from the newsletters we publish here.</p>
+            <div class="hero-btns">
+                <a href="https://open.spotify.com/show/0CpTJoXw6JibHSXt6Nt0H4" target="_blank" rel="noopener" class="btn btn-spotify"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.4-.7.5-1 .3-2.8-1.7-6.4-2.1-10.6-1.2-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.6-1 8.5-.6 11.6 1.3.4.3.5.8.3 1.1zm1.5-3.3c-.3.4-.8.6-1.3.3-3.2-2-8.2-2.6-12-1.4-.5.2-1-.1-1.2-.6-.2-.5.1-1 .6-1.2 4.4-1.3 9.8-.7 13.5 1.6.5.3.6.9.4 1.3zm.1-3.4C15.3 8.3 8.9 8.1 5.2 9.2c-.6.2-1.2-.2-1.4-.8-.2-.6.2-1.2.8-1.4 4.3-1.3 11.3-1 15.7 1.6.5.3.7 1 .4 1.5-.3.6-1 .8-1.6.5z"/></svg>Listen on Spotify</a>
+                <a href="https://podcast.barrioenergy.com/feed.xml" class="btn btn-outline">RSS feed</a>
+                <a href="#making" class="btn btn-outline">How we make it</a>
+            </div>
+            </div>
+            <div class="hero-still"><img src="images/podcast/hero.jpg" alt="Andi and Marco standing at the Texas map on the Plugged In set" fetchpriority="high"><span>Andi and Marco on the Plugged In set. AI characters, see below.</span></div>
+        </div>
+    </section>
+
+    <!-- Latest episode -->
+    <section class="latest" id="latest">
+        <div class="container">
+            <div class="latest-grid">
+                <div>
+                    <div class="player-wrap" id="playerWrap">
+                        <img src="images/podcast/cover-art.jpg" alt="Plugged In cover art">
+                    </div>
+                </div>
+                <div id="latestBody">
+                    <div class="ep-kicker">Latest episode</div>
+                    <h2 class="ep-title">Loading the feed&hellip;</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All episodes -->
+    <section class="episodes" id="episodes">
+        <div class="container">
+            <div class="episodes-head">
+                <h2 class="section-title">All episodes</h2>
+                <a href="https://open.spotify.com/show/0CpTJoXw6JibHSXt6Nt0H4" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Follow on Spotify</a>
+            </div>
+            <div class="ep-grid" id="epGrid"></div>
+            <p class="feed-note" id="feedNote"></p>
+            <div class="spotify-embed">
+                <iframe title="Plugged In on Spotify" src="https://open.spotify.com/embed/show/0CpTJoXw6JibHSXt6Nt0H4?theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosts -->
+    <section class="hosts" id="hosts">
+        <div class="container">
+            <h2 class="section-title">The hosts</h2>
+            <p class="section-subtitle">Andi explains the money. Marco explains the physics. Royce, when he is on, explains the people who decide whether any of it happens.</p>
+            <div class="hosts-grid">
+                <div class="host">
+                    <div class="pic"><img src="images/podcast/andi.jpg" alt="Andi Reyes at the Plugged In table" loading="lazy"></div>
+                    <div class="txt">
+                        <h3>Andi Reyes</h3>
+                        <div class="role">Market Intelligence Analyst, lead host</div>
+                        <p>Dallas. Finance at Ole Miss, industrials M&amp;A at a Houston bulge bracket, MBA at McCombs. She writes The Grid Report and Edge Cases on this site and reads every filing, footnote and appendix so you do not have to. Dry, quick, allergic to jargon used as armor.</p>
+                    </div>
+                </div>
+                <div class="host">
+                    <div class="pic"><img src="images/podcast/marco.jpg" alt="Marco Elizondo at the Plugged In table" loading="lazy"></div>
+                    <div class="txt">
+                        <h3>Marco Elizondo</h3>
+                        <div class="role">Technical Analyst, co-host</div>
+                        <p>Corpus Christi. Electrical engineering at Texas A&amp;M, power systems at Georgia Tech, five years inside ERCOT in grid operations and transmission planning. He explains how the grid actually behaves, one analogy at a time, and he is firm that the grid does not care what your pro forma assumed.</p>
+                    </div>
+                </div>
+                <div class="host">
+                    <div class="pic voice"><span>RT</span></div>
+                    <div class="txt">
+                        <h3>Royce Tatum</h3>
+                        <div class="role">Special guest, politics</div>
+                        <p>Kilgore, then thirty years working the Texas Capitol for producers, midstream and utilities. Retired, writes the Austin tip sheet The Back Bench. He joins when a story is political rather than financial or technical, as on Ep. 8, the Governor's letter. Voice only so far.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="ai-note">Andi, Marco and Royce are AI characters. Their voices, faces and the studio are generated, and the section below shows exactly how. The stories are not: every episode is a recap of newsletters already published on this site, and the show does not add facts that are not in them.</p>
+        </div>
+    </section>
+
+    <!-- How we make it -->
+    <section class="making" id="making">
+        <div class="container">
+            <div class="making-intro">
+                <h2 class="section-title">How we make Plugged In</h2>
+                <p>Two hosts who do not exist, a studio that exists only as a 3D file, and a video pipeline that runs on one GPU box. This is the whole build, in the order we did it, including the parts that did not work. Reuse whatever is useful.</p>
+                <div class="toc">
+                    <a href="#m-script">Script</a><a href="#m-voices">Voices</a><a href="#m-studio">Studio</a><a href="#m-hosts">Hosts</a><a href="#m-wide">The wide shot</a><a href="#m-lipsync">Lip-sync</a><a href="#m-teaser">Teasers</a><a href="#m-stack">The stack</a><a href="#m-next">What is next</a>
+                </div>
+            </div>
+
+            <!-- 1 Script -->
+            <div class="chapter" id="m-script">
+                <div class="chapter-head"><div class="chapter-num">01</div><h2>The script<small>A recap of what we already published, written by two characters with their own rules</small></h2></div>
+                <div class="prose">
+                    <p>Plugged In is not a research show. Each episode covers three or four stories from The Grid Report and Edge Cases published since the previous episode. That rule does two things: the facts are already checked and sourced, and the show cannot drift into claims nobody wrote down. If a story needs background from an earlier episode, it gets one line.</p>
+                    <p>The episode is about 20 minutes and 2,700 to 3,200 words. The shape is fixed: a <strong>cold open</strong> (Andi, no intro, the most surprising fact of the month with its number), the intro and a couple of lines of real catch-up, a long first topic, a short break for the map at <a href="https://map.barrioenergy.com">map.barrioenergy.com</a>, a second topic, quick hits, and a short outro. Andi sets each story up with the facts and her read. Marco explains how it actually works and what people miss. Where they would read a story differently, they disagree on air.</p>
+                    <p>A language model writes the draft against a character document for each host: where they grew up, what they did before this, how they talk, the words they never use, how they interrupt and how they lose an argument. Every line carries a delivery tag in brackets, <code>[dry]</code>, <code>[quick]</code>, <code>[working it out]</code>, because the voice model reads them. Theatrical tags push the voices into overacting, so the list is short and plain.</p>
+                    <p>Before any audio is generated, <code>lint.py</code> runs over the script with a list of banned patterns: filler openers, podcast cliches, the phrases each host would never say, and anything that reads as written rather than spoken. It has to return zero hits. <code>stats.py</code> checks the word count and the split between hosts.</p>
+                    <div class="callout"><b>Test for every line.</b> Would a 29-year-old former banker from Dallas, or a 34-year-old former ERCOT transmission planner from Corpus Christi, say this out loud to a friend who also reads filings? If it sounds written, it gets rewritten.</div>
+                </div>
+            </div>
+
+            <!-- 2 Voices -->
+            <div class="chapter" id="m-voices">
+                <div class="chapter-head"><div class="chapter-num">02</div><h2>The voices<small>ElevenLabs Voice Design, a dialogue model, a pronunciation dictionary and a mix that never fades a voice</small></h2></div>
+                <div class="prose">
+                    <p>Both voices are designed, not cloned. The first pair, used on episodes 1 to 10, were prompted as "polished" with a "teaching cadence", and that is exactly what came back: an announcer read. The second pair, adopted in September 2026, were prompted as real people on a podcast mic. Andi is a 29-year-old from Dallas, casual, dry, light vocal fry. Marco is a 34-year-old from Corpus Christi, relaxed, a little gravel. Both prompts say "not a voiceover, not an announcer". That one change did more for the show than anything else on this page.</p>
+                    <p>Audio is generated with the <strong>eleven_v3 text-to-dialogue</strong> endpoint with timestamps. The whole conversation goes in as dialogue, in chunks of about 4,500 characters that end on a line break, so the two voices react to each other instead of reading alternate paragraphs. Each run returns the mixed conversation, per-line timing, and one stem per speaker with the other voice silenced. Those stems and timings drive the video later.</p>
+                    <p>A pronunciation dictionary fixes the words the model gets wrong. ERCOT is "ur-cot" (checked with a phoneme model against the two candidates), PUCT is spelled out, Goliad is "GO-lee-ad". New misreads get added, so they stay fixed. QA runs Whisper large-v3 on the output and aligns it to the script; lines that diverge are regenerated alone and spliced back in by timestamp.</p>
+                    <p>The mix has one rule: <strong>the voice is never faded</strong>. The cold open plays clean from 0:00, the intro music starts after it, the show resumes over the music's ducked tail, and the outro music starts after the last line. Only music fades. Loudness is normalized in two passes to -16 LUFS integrated and -1.5 dBTP. The MP3 carries ID3 chapters from the script's segment markers and a WebVTT transcript from the timestamps.</p>
+                    <p>Voice samples, old and new: <a href="https://podcast.barrioenergy.com/preview/voices/">podcast.barrioenergy.com/preview/voices</a>.</p>
+                </div>
+            </div>
+
+            <!-- 3 Studio -->
+            <div class="chapter" id="m-studio">
+                <div class="chapter-head"><div class="chapter-num">03</div><h2>The studio<small>A set built in Blender, not generated, so the room is identical in every shot of every episode</small></h2></div>
+                <div class="prose">
+                    <p>The one decision that made the video possible: the studio is a 3D scene, rendered to clean plates with Cycles, and the hosts are added on top. Image models are good at people and bad at keeping a room the same twice. A rendered set means the wall, the map, the mug and the mic arm are pixel-identical between the wide shot and each close-up, and between episodes.</p>
+                    <p>The first two versions were a generic podcast set: walnut table, white shiplap, a neon "Plugged In" on a red velvet curtain. Fine, and forgettable.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/set-v2.jpg" alt="Studio set version 2, walnut table and neon sign" loading="lazy"><figcaption>Set v2. Walnut, shiplap, a script neon on velvet. The chairs were placeholders and the mic arms looked like desk lamps.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/set-v3.jpg" alt="Studio set version 3, the West Texas room" loading="lazy"><figcaption>Set v3, the locked room. Barnwood on Andi's side, limestone and a longhorn on Marco's, the Republic of Texas map in the middle.</figcaption></figure>
+                </div>
+                <div class="prose">
+                    <p>Version 3 is a West Texas room, dim and warm. Andi's side is rough barnwood in random board widths, two industrial sconces, a shelf of books and a plant in a copper planter with verdigris. The center wall is dark vertical boards with the show sign, matching the Spotify cover, and below it John Arrowsmith's 1841 Map of Texas from the Library of Congress scan, in a hand-hewn frame with iron clavos. Marco's side is Texas limestone with one longhorn mount and a red velvet curtain on the side wall. The table is a live-edge rough-sawn slab on black iron trestles. Broadcast mics sit on gunmetal boom arms clamped to the back edge, with XLR cables running down the table, across the rug under gaffer tape and into a wall plate. The rug is a worn Southwestern weave with faded patches and a corner curling up. Two Edison pendants and tungsten keys light it, with a little haze. No blue light anywhere except the bolt on the sign.</p>
+                </div>
+                <figure class="fig"><img src="images/podcast/making/set-v3-detail.jpg" alt="Detail of the center wall: the sign, the 1841 map and the bronze mustang" loading="lazy"><figcaption>Center wall detail. The sign, the Arrowsmith map, the bronze mustang. This is where the seam of the split wide shot lands later.</figcaption></figure>
+                <div class="prose">
+                    <p>Four cameras, fixed across episodes: A is the wide two-shot, B is Andi's close-up shot across the table, C is Marco's, and H is the standing hero shot at the map used for the end card. Plates render at 512 samples, about seven minutes for the three seated cameras on the GPU box, and get a denoise pass before anything is composited onto them.</p>
+                </div>
+            </div>
+
+            <!-- 4 Hosts -->
+            <div class="chapter" id="m-hosts">
+                <div class="chapter-head"><div class="chapter-num">04</div><h2>Putting the hosts in the chairs<small>Clay mannequins for scale, an image edit model for the people, a matte and a grade to make them sit in the light</small></h2></div>
+                <div class="prose">
+                    <p>Andi's face is the avatar from the team page, approved as is. Marco was picked from a sheet of candidates: glasses, combed-back hair, short beard, denim shirt. Each host then got a character sheet, front and profiles, so the face survives when the camera moves.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/marco-candidates.jpg" alt="Sheet of Marco face candidates" loading="lazy"><figcaption>Marco candidates. Number 4 won.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/marco-sheet.jpg" alt="Marco character sheet, front and profile" loading="lazy"><figcaption>Marco's character sheet. The profile references are what keep him looking like himself in the wide shot, where he faces Andi.</figcaption></figure>
+                </div>
+                <div class="prose">
+                    <p>The first problem was scale. Image models size people by eye, so a host generated straight onto the empty plate came out a foot too tall or floating above the chair. The fix is old-fashioned: a clay mannequin, Marco at 1.78 m and Andi at about 1.68 m, is posed in the chair in the 3D scene and rendered as a guide plate. The edit model then replaces the mannequin with the host and has no choice about where the body goes.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/mannequins-wide.jpg" alt="Wide shot with clay mannequins in both chairs" loading="lazy"><figcaption>The mannequin plate for the wide. Scale and position are decided here, in 3D, not by the image model.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/mannequin-andi.jpg" alt="Andi's close-up camera with the mannequin" loading="lazy"><figcaption>Camera B with the mannequin. These plates get denoised first; left grainy, the model turns the grain into blocky fabric.</figcaption></figure>
+                </div>
+                <div class="prose">
+                    <p>The swap is <strong>Qwen-Image-Edit</strong> with an 8-step Lightning LoRA, about a minute per edit, given the mannequin plate, the host's front reference and a profile reference. The generated host is cut out with a <strong>BiRefNet</strong> matte and pasted onto the untouched plate, which is how the background stays identical across shots. The mic rigs render as a separate foreground layer and go back on top.</p>
+                    <p>A relight pass was supposed to sit the host in the room's light. It produced a halo around the hair and, when we tightened the matte to remove it, trimmed Marco's glasses. It was dropped. A grade-match pass does the job instead: it mutes saturation, matches contrast and grain to the plate, and puts one warm grade over the whole frame.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/marco-relight.jpg" alt="Marco close-up with and without the relight pass" loading="lazy"><figcaption>The halo problem. Left to right: relit with the glow, a patched matte, no relight at all. No relight won.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/grade.jpg" alt="Grade strength comparison" loading="lazy"><figcaption>Grade-match strength. The strongest setting was locked; it makes the photoreal host and the rendered room read as one photograph.</figcaption></figure>
+                </div>
+                <div class="prose">
+                    <p>Wardrobe was tested as a set of edits on the same crop. Four looks were approved for Andi; episode one is the cognac suede fringe dress with tall white boots. Marco wears a faded denim pearl-snap, indigo jeans and roper boots, no logos.</p>
+                </div>
+                <div class="fig-row four">
+                    <figure class="fig"><img src="images/podcast/making/wardrobe-1.jpg" alt="Andi wardrobe test: cognac suede fringe" loading="lazy"><figcaption>Cognac suede fringe, white boots. The episode one look.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/wardrobe-2.jpg" alt="Andi wardrobe test: cream lace prairie dress" loading="lazy"><figcaption>Cream lace prairie, tan boots with turquoise inlay.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/wardrobe-3.jpg" alt="Andi wardrobe test: black leather fringe jacket, oxblood boots" loading="lazy"><figcaption>Leather fringe jacket, oxblood boots.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/wardrobe-4.jpg" alt="Andi wardrobe test: black leather fringe jacket, black boots" loading="lazy"><figcaption>Same jacket, black boots with silver toe caps.</figcaption></figure>
+                </div>
+                <div class="prose">
+                    <p>The model has habits, and most of the prompt is there to stop them. It crosses Andi's legs unless told knees together and boots flat. It draws laced oxfords unless told roper boots with no laces and the jeans over the shafts. It gives her bangs unless the prompt says no bangs. If a close-up prompt mentions boots, it perches her on the table to show them. Given an extra face reference it makes the host look at the lens, which is useful for a close-up and wrong for the wide, where they should be looking at each other.</p>
+                    <p>Posture went through two rounds. The hosts started leaning toward the table; the locked version is upright, which puts the mics at mouth height in all three cameras. Andi's close-up got one more pass, a slimmer, fitted version of the same dress with the lighting kept.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/wide-lean.jpg" alt="Wide shot with hosts leaning in" loading="lazy"><figcaption>Leaning version, first approved wide.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/wide-upright.jpg" alt="Wide shot with hosts upright" loading="lazy"><figcaption>Upright, with a zoomed face pass. Mics now sit where mics sit.</figcaption></figure>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/boots.jpg" alt="Boot and leg fixes on the wide shot" loading="lazy"><figcaption>The boots pass: a zoomed edit on a 512 px region of the host crop, feathered back in. Crossed legs and a floating boot, then both boots on the rug.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/andi-refit.jpg" alt="Andi close-up before and after the refit pass" loading="lazy"><figcaption>Andi's refit on camera B. Same lighting, fitted dress.</figcaption></figure>
+                </div>
+            </div>
+
+            <!-- 5 Wide -->
+            <div class="chapter" id="m-wide">
+                <div class="chapter-head"><div class="chapter-num">05</div><h2>The wide shot, split down the middle<small>Two people in one 1080p frame gives each face 40 pixels. So the frame is two frames.</small></h2></div>
+                <div class="prose">
+                    <p>Generating both hosts in a single wide plate failed twice. The faces came back at about 40 px wide, too small for the identity to hold, and later too small for the lip-sync model to move a mouth. Trying to generate a host on a whole half of the frame failed differently: the model upscaled the person by about 1.6x and dropped the chair.</p>
+                    <p>The method that works: each host is generated in its own run on a tight square crop around its mannequin, inside its own half of the frame, then pasted back and the two halves are merged at the center line. The seam falls on the fixed set, the mustang and the map, so it is invisible. Each half can be graded and fixed on its own. The video version uses the same split: each host is lip-synced separately on a 360 px head-and-shoulders crop rendered at 2x, then composited back onto the locked still with the host mask and the mic layer.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/split-seam.jpg" alt="Center seam of the merged wide shot" loading="lazy"><figcaption>The seam, zoomed. It runs through the mustang and the map, which are the same pixels in both halves.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/split-locked.jpg" alt="The locked split wide shot" loading="lazy"><figcaption>The locked wide. Andi's half and Marco's half, separate runs, one frame.</figcaption></figure>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/split-crops.jpg" alt="Head and shoulders crops used for the split lip-sync" loading="lazy"><figcaption>The crops that go to the lip-sync model, one per host.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/split-frames.jpg" alt="Frames from the split wide video" loading="lazy"><figcaption>Frames from the split wide video. Both mouths move, and Andi gestures toward the mic on her lines.</figcaption></figure>
+                </div>
+            </div>
+
+            <!-- 6 Lip-sync -->
+            <div class="chapter" id="m-lipsync">
+                <div class="chapter-head"><div class="chapter-num">06</div><h2>Lip-sync<small>InfiniteTalk on the per-speaker stems, 80 milliseconds late</small></h2></div>
+                <div class="prose">
+                    <p>The first test used Wan 2.2 S2V: 4.8 seconds of Andi took 961 seconds to render, about 200 times real time. The pipeline moved to <strong>InfiniteTalk</strong> on Wan 2.1 I2V 480p with the Lightx2v LoRA, six steps. Each host shot is driven by that host's own stem, sliced to the shot's time range, so the other voice cannot move the wrong mouth.</p>
+                    <p>Close-ups render on a 640x640 crop of the locked still and get pasted back. In the wide, Andi's near-profile face with a mic partly in front of it barely moved even with the audio gain up, which produced the edit rule: <strong>Andi's lines play on her close-up or the split wide</strong>, never on a whole-frame wide render. Marco's mouth ran slightly late, so the dialogue is muxed 80 ms after the picture on every clip, chosen by ear from 0, 80 and 120.</p>
+                    <p>Render time was the constraint on everything. Building SageAttention for the GB10 and enabling it in the graph cut a 132-frame Marco close-up from 378 s to 307 s, and an fp8 variant to 281 s. Frame counts are rounded up to fixed buckets (57, 81, 105, 129, 153) so a compiled graph can be reused across shots, and the assembly step trims to the true length.</p>
+                </div>
+                <div class="stats-row">
+                    <div class="stat"><b>961 s</b><span>first S2V test for 4.8 s of video</span></div>
+                    <div class="stat"><b>~6.5 min</b><span>per 105-frame close-up with InfiniteTalk and SageAttention</span></div>
+                    <div class="stat"><b>80 ms</b><span>audio delay on every clip</span></div>
+                    <div class="stat"><b>~1.8 h</b><span>GPU time per 90 s of lip-sync</span></div>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/lipsync-frames.jpg" alt="Frames from the first InfiniteTalk wide test" loading="lazy"><figcaption>Frames from the first InfiniteTalk test on the whole wide. Marco moves, Andi does not.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/andi-mouth.jpg" alt="Andi mouth movement comparison, wide versus close-up" loading="lazy"><figcaption>Andi's mouth in the wide versus her close-up. This is why her lines live on camera B.</figcaption></figure>
+                </div>
+            </div>
+
+            <!-- 7 Teaser -->
+            <div class="chapter" id="m-teaser">
+                <div class="chapter-head"><div class="chapter-num">07</div><h2>The teaser<small>30 to 45 seconds that sell the episode and resolve nothing</small></h2></div>
+                <div class="prose">
+                    <p>Every episode gets a short video for X and LinkedIn, in 16:9 and 9:16. The script is written fresh, 70 to 110 words, and it follows one rule: every beat is a question the episode answers, and no beat resolves. Andi states the fact with its number. Marco asks the question back or starts the explanation and gets cut off. The viewer leaves knowing what the stories are and not what they mean. No ads, no pitch, the URL once on the end card.</p>
+                    <p>B-roll cues sit in the script as their own lines before the line they cover. A shot-list script turns the audio timestamps and the cues into shots: cut on every speaker change, nothing over six seconds, a long run covered in the middle by its B-roll or by the other host's reaction rendered on a silent stem. The seated wide is rationed to the open and the close; everything else is close-ups.</p>
+                    <p>The B-roll library is generated: fifteen stills so far, drone-style, golden hour, from Qwen Image at 1920x1088, each given a slow push-in in the edit. Rules: no logos, no readable signage, no Barrio site, no real person's likeness next to the hosts. The next step is real photos from a story's own source, a company newsroom or a filing exhibit, with a credit burned in while they are on screen.</p>
+                    <p>Graphics match the cover art: Bebas Neue lower thirds with the orange underline, captions on every line in a dark box inside the 9:16 safe area (most views on X play muted, so the captions carry it), and an end card over the hero still. The two aspect ratios come from fixed crop windows measured on each locked still. The whole thing is assembled in ffmpeg: cuts, dialogue 80 ms late, intro sting under the first three seconds, outro under the card, loudness normalized. The Episode 11 teaser above is 42 seconds and 14 shots.</p>
+                </div>
+                <div class="fig-row">
+                    <figure class="fig"><img src="images/podcast/making/broll.jpg" alt="Sheet of generated B-roll stills" loading="lazy"><figcaption>The generated B-roll library. Substations, gas plants, transmission, container yards, all at golden hour, none of them real places.</figcaption></figure>
+                    <figure class="fig"><img src="images/podcast/making/hero-candidates.jpg" alt="Hero shot candidate before the face pass" loading="lazy"><figcaption>Hero shot, first pass. The locked version at the top of this page is the same seed plus zoomed face passes on each host.</figcaption></figure>
+                </div>
+            </div>
+
+            <!-- 8 Stack -->
+            <div class="chapter" id="m-stack">
+                <div class="chapter-head"><div class="chapter-num">08</div><h2>The stack<small>What runs where</small></h2></div>
+                <table class="stack">
+                    <tr><th>Step</th><th>Tool</th><th>Notes</th></tr>
+                    <tr><td>Script</td><td>Claude, with per-host character docs and a banned-pattern linter</td><td>Source material is the newsletters on this site. Zero lint hits before audio.</td></tr>
+                    <tr><td>Voices</td><td>ElevenLabs Voice Design, eleven_v3 text-to-dialogue with timestamps</td><td>Per-speaker stems, pronunciation dictionary, Whisper large-v3 QA.</td></tr>
+                    <tr><td>Mix</td><td>ffmpeg, two-pass loudnorm</td><td>-16 LUFS, -1.5 dBTP, MP3 192k, ID3 chapters, WebVTT transcript.</td></tr>
+                    <tr><td>Studio</td><td>Blender 4 with Cycles, OpenCV denoise</td><td>Fixed cameras A, B, C and H. Clean plates plus mannequin guide plates.</td></tr>
+                    <tr><td>Hosts</td><td>Qwen-Image-Edit 2511 with Lightning LoRA, BiRefNet matte, grade match</td><td>Character sheets for identity. No relight pass.</td></tr>
+                    <tr><td>Lip-sync</td><td>InfiniteTalk on Wan 2.1 I2V 480p, Lightx2v LoRA, SageAttention</td><td>ComfyUI with the WanVideo wrapper. 640x640 close-ups, split wide at 720x720 per host.</td></tr>
+                    <tr><td>B-roll</td><td>Qwen Image 2512</td><td>1920x1088 stills with a push-in.</td></tr>
+                    <tr><td>Assembly</td><td>Python and ffmpeg, Pillow for graphics</td><td>Shot list from timestamps, captions, lower thirds, end card, 16:9 and 9:16.</td></tr>
+                    <tr><td>Hardware</td><td>NVIDIA DGX Spark (GB10) for all image and video work; a Vultr VPS for audio, feed and this site</td><td>One GPU, shared with the rest of Barrio's agents.</td></tr>
+                    <tr><td>Distribution</td><td>Self-hosted RSS, Spotify, X</td><td>Nothing is published without a person approving that episode or teaser.</td></tr>
+                </table>
+            </div>
+
+            <!-- 9 Next -->
+            <div class="chapter" id="m-next">
+                <div class="chapter-head"><div class="chapter-num">09</div><h2>What is next<small>Open items, in rough order</small></h2></div>
+                <div class="prose">
+                    <ul>
+                        <li>Render the set and mannequin plates at 4K so the wide shot's head crops come from native pixels, for sharper faces.</li>
+                        <li>Real B-roll first: press photos from each story's own source, then free drone and infrastructure footage graded to the set.</li>
+                        <li>Royce on camera. He has a voice and a biography and no chair yet.</li>
+                        <li>A full-length video episode rather than a teaser. The pipeline is the same; the GPU hours are not.</li>
+                    </ul>
+                    <p>Questions about any of this: <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-subscribe">
+                <div class="footer-subscribe-text">
+                    <span class="footer-subscribe-label">Newsletter</span>
+                    <span class="footer-subscribe-desc">The Grid Report: weekly Texas grid and power market analysis.</span>
+                </div>
+                <form class="footer-subscribe-form" onsubmit="return handleFooterSubscribe(event)">
+                    <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+                    <div class="newsletter-input-group">
+                        <input type="email" class="footer-subscribe-email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+                    </div>
+                </form>
+                <div class="footer-subscribe-success" style="display:none;">
+                    <p style="color:#22c55e;font-weight:500;font-size:0.9rem;">Subscribed!</p>
+                </div>
+            </div>
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved. <a href="/community">Community</a> &middot; <a href="/press">Press</a> &middot; <a href="/merch">Merch</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    (function () {
+        var FEED = "https://podcast.barrioenergy.com/feed.xml";
+        var SHOW = "https://open.spotify.com/show/0CpTJoXw6JibHSXt6Nt0H4";
+        // Teasers live in the repo. Add a line per episode when a teaser ships.
+        var TEASERS = {
+            "11": { video: "videos/plugged-in-ep11-teaser.mp4", poster: "images/podcast/ep11-poster.jpg" }
+        };
+        var esc = function (t) { var d = document.createElement("div"); d.textContent = t || ""; return d.innerHTML; };
+        var strip = function (html) { var d = document.createElement("div"); d.innerHTML = html || ""; return (d.textContent || "").replace(/\s+/g, " ").trim(); };
+        var fmtDate = function (s) { var d = new Date(s); return isNaN(d) ? "" : d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }); };
+        var fmtDur = function (s) { s = parseInt(s || 0, 10); if (!s) return ""; if (s > 3600) s = s; var m = Math.round(s / 60); return m ? m + " min" : ""; };
+        var tag = function (it, name) { var el = it.getElementsByTagName(name)[0]; return el ? (el.textContent || "").trim() : ""; };
+
+        function parse(xml) {
+            var doc = new DOMParser().parseFromString(xml, "text/xml");
+            var items = Array.prototype.slice.call(doc.querySelectorAll("item"));
+            return items.map(function (it) {
+                var enc = it.querySelector("enclosure");
+                var num = tag(it, "itunes:episode") || (tag(it, "title").match(/Ep\.\s*(\d+)/) || [])[1] || "";
+                return {
+                    num: num,
+                    title: tag(it, "title"),
+                    date: tag(it, "pubDate"),
+                    desc: strip(tag(it, "description")),
+                    audio: enc ? enc.getAttribute("url") : "",
+                    dur: tag(it, "itunes:duration"),
+                    teaser: TEASERS[num] || null
+                };
+            }).filter(function (e) { return e.title; });
+        }
+
+        function renderLatest(ep) {
+            var wrap = document.getElementById("playerWrap");
+            if (ep.teaser) {
+                wrap.innerHTML = '<video id="teaserVideo" autoplay muted loop playsinline preload="metadata" poster="' + ep.teaser.poster + '" src="' + ep.teaser.video + '"></video>' +
+                    '<button class="unmute" id="unmuteBtn" type="button">Tap for sound</button>';
+                var v = document.getElementById("teaserVideo"), b = document.getElementById("unmuteBtn");
+                b.addEventListener("click", function () {
+                    if (v.muted) { v.muted = false; v.currentTime = 0; v.play(); b.textContent = "Mute"; }
+                    else { v.muted = true; b.textContent = "Tap for sound"; }
+                });
+            } else {
+                wrap.innerHTML = '<img src="images/podcast/cover-art.jpg" alt="Plugged In cover art">';
+            }
+            var body = document.getElementById("latestBody");
+            var long = ep.desc.length > 700;
+            body.innerHTML =
+                '<div class="ep-kicker">Latest episode' + (ep.teaser ? ' &middot; teaser' : '') + '</div>' +
+                '<h2 class="ep-title">' + esc(ep.title) + '</h2>' +
+                '<div class="ep-meta">' + esc(fmtDate(ep.date)) + (ep.dur ? ' &middot; ' + esc(fmtDur(ep.dur)) : '') + '</div>' +
+                '<p class="ep-desc' + (long ? ' clamp' : '') + '" id="latestDesc">' + esc(ep.desc) + '</p>' +
+                (long ? '<button class="ep-more" id="moreBtn" type="button">Read more</button>' : '') +
+                '<div class="ep-actions"><a class="btn btn-spotify btn-sm" href="' + SHOW + '" target="_blank" rel="noopener">Listen on Spotify</a>' +
+                (ep.audio ? '<a class="btn btn-outline btn-sm" href="' + esc(ep.audio) + '" target="_blank" rel="noopener">Download MP3</a>' : '') + '</div>' +
+                (ep.audio ? '<audio controls preload="none" src="' + esc(ep.audio) + '"></audio>' : '');
+            var mb = document.getElementById("moreBtn");
+            if (mb) mb.addEventListener("click", function () {
+                var d = document.getElementById("latestDesc"); d.classList.toggle("clamp");
+                mb.textContent = d.classList.contains("clamp") ? "Read more" : "Show less";
+            });
+        }
+
+        function renderGrid(eps) {
+            var g = document.getElementById("epGrid");
+            g.innerHTML = eps.map(function (ep) {
+                var thumb = ep.teaser
+                    ? '<video muted loop playsinline preload="none" poster="' + ep.teaser.poster + '" src="' + ep.teaser.video + '" onmouseenter="this.play()" onmouseleave="this.pause()"></video>'
+                    : '<img src="images/podcast/cover-art.jpg" alt="" loading="lazy">';
+                return '<article class="ep-card">' +
+                    '<div class="thumb">' + thumb + (ep.num ? '<span class="num">EP ' + esc(ep.num) + '</span>' : '') + '</div>' +
+                    '<div class="body"><h3>' + esc(ep.title.replace(/^Ep\.\s*\d+:\s*/, "")) + '</h3>' +
+                    '<div class="meta">' + esc(fmtDate(ep.date)) + (ep.dur ? ' &middot; ' + esc(fmtDur(ep.dur)) : '') + '</div>' +
+                    '<p>' + esc(ep.desc) + '</p>' +
+                    '<div class="links"><a class="sp" href="' + SHOW + '" target="_blank" rel="noopener">Spotify</a>' +
+                    (ep.audio ? '<a href="' + esc(ep.audio) + '" target="_blank" rel="noopener">MP3</a>' : '') + '</div></div></article>';
+            }).join("");
+        }
+
+        fetch(FEED, { cache: "default" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }).then(function (xml) {
+            var eps = parse(xml);
+            if (!eps.length) throw new Error("empty");
+            renderLatest(eps[0]);
+            renderGrid(eps);
+            document.getElementById("feedNote").textContent = eps.length + " episodes. New episodes appear here from the RSS feed when they are published.";
+        }).catch(function () {
+            document.getElementById("latestBody").innerHTML = '<div class="ep-kicker">Latest episode</div><h2 class="ep-title">Plugged In with Barrio Energy</h2><p class="ep-desc">The episode list could not be loaded right now.</p><div class="ep-actions"><a class="btn btn-spotify btn-sm" href="' + SHOW + '" target="_blank" rel="noopener">Listen on Spotify</a><a class="btn btn-outline btn-sm" href="' + FEED + '">RSS feed</a></div>';
+            document.getElementById("feedNote").innerHTML = 'Episodes are on <a href="' + SHOW + '">Spotify</a> and in the <a href="' + FEED + '">RSS feed</a>.';
+        });
+    })();
+    </script>
+</body>
+</html>
