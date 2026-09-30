@@ -94,6 +94,12 @@
         .host h3 { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 2px; }
         .host .role { color: var(--pod-orange); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; }
         .host p { color: #b5b5c3; font-size: 0.92rem; line-height: 1.6; }
+        .host details { margin-top: 12px; border-top: 1px solid var(--color-border); padding-top: 10px; }
+        .host summary { cursor: pointer; color: var(--color-primary); font-size: 0.85rem; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 6px; }
+        .host summary::-webkit-details-marker { display: none; }
+        .host summary::before { content: "+"; display: inline-block; width: 16px; text-align: center; font-weight: 700; }
+        .host details[open] summary::before { content: "\2212"; }
+        .host details p { margin-top: 10px; }
         .ai-note { max-width: 760px; margin: 32px auto 0; text-align: center; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.6; }
 
         /* making of */
@@ -240,6 +246,11 @@
                         <h3>Andi Reyes</h3>
                         <div class="role">Market Intelligence Analyst, lead host</div>
                         <p>Dallas. Finance at Ole Miss, industrials M&amp;A at a Houston bulge bracket, MBA at McCombs. She writes The Grid Report and Edge Cases on this site and reads every filing, footnote and appendix so you do not have to. Dry, quick, allergic to jargon used as armor.</p>
+                        <details><summary>Backstory</summary>
+                        <p>Highland Park, Dallas. Her mother sold luxury real estate and her father ran industrial buyouts at a mid-market private equity firm, so she grew up hearing term sheets debriefed at the dinner table. Cheer captain, student council president, then Ole Miss, Chi Omega social chair and a 3.7 in finance, which is the combination people kept underestimating. She recruited into a bulge bracket in Houston and did M&amp;A in the industrials group: power, utilities, infrastructure, energy services, 90-hour weeks, pitch books at 11 PM. She was good at it and the politics wore her out.</p>
+                        <p>McCombs was the reset. A case competition on the power requirements of a hypothetical hyperscaler campus in Texas turned into an obsession with the AI data center buildout, and her short, sharp posts on ERCOT and interconnection started getting passed around energy circles. One went semi-viral. Ivan saw it, bought her a coffee, and she talked for 45 minutes straight about why the Texas grid was the most important infrastructure story in the country. He offered her the job before the check came. She took a pay cut from what banking would have paid and does not care.</p>
+                        <p>Type A, color-coded calendar, answers email in under ten minutes, watches Bravo religiously and will use a Real Housewives reunion as an analogy for an ERCOT board meeting without apologizing. Pilates, cycling, a golden retriever named Birdie. She convinced Ivan the show needed a technical co-host, and she will never tell Marco that directly.</p>
+                        </details>
                     </div>
                 </div>
                 <div class="host">
@@ -248,14 +259,24 @@
                         <h3>Marco Elizondo</h3>
                         <div class="role">Technical Analyst, co-host</div>
                         <p>Corpus Christi. Electrical engineering at Texas A&amp;M, power systems at Georgia Tech, five years inside ERCOT in grid operations and transmission planning. He explains how the grid actually behaves, one analogy at a time, and he is firm that the grid does not care what your pro forma assumed.</p>
+                        <details><summary>Backstory</summary>
+                        <p>Corpus Christi. His grandfather worked a refinery there for 35 years and his father was an industrial electrician at petrochemical plants along the Gulf Coast. Marco spent weekends in the truck watching his dad troubleshoot panels in facilities that kept the lights on for half of South Texas, and that is where the obsession started. Texas A&amp;M for electrical engineering, then a master's in power systems at Georgia Tech, where a professor told him he was brilliant and nobody could understand him. He has been working on the second half of that sentence ever since.</p>
+                        <p>Five years at ERCOT: three in grid operations, watching the system balance in real time from the control room, two in transmission planning, studying where the wires can and cannot carry the load everyone wants to add. He was good at it and the review cycles ground him down; he could see a problem developing on shift, know the fix, and watch the process move at geological speed. A year of independent consulting followed, interconnection studies and technical diligence, good work and lonely. Then Andi.</p>
+                        <p>He thinks in physical objects: transmission constraints are traffic on I-35, ancillary services are insurance, the queue is a restaurant that seats people out of order. He restores a 1982 Honda CB750, runs a Discord for about 400 ERCOT data nerds, and smokes competition-grade brisket, which he will compare to grid upgrades on air. Low and slow or you ruin it.</p>
+                        </details>
                     </div>
                 </div>
                 <div class="host">
-                    <div class="pic voice"><span>RT</span></div>
+                    <div class="pic"><img src="images/podcast/royce.jpg" alt="Royce Tatum at the Plugged In table" loading="lazy"></div>
                     <div class="txt">
                         <h3>Royce Tatum</h3>
                         <div class="role">Special guest, politics</div>
-                        <p>Kilgore, then thirty years working the Texas Capitol for producers, midstream and utilities. Retired, writes the Austin tip sheet The Back Bench. He joins when a story is political rather than financial or technical, as on Ep. 8, the Governor's letter. Voice only so far.</p>
+                        <p>Kilgore, then thirty years working the Texas Capitol for producers, midstream and utilities. Retired, writes the Austin tip sheet The Back Bench. He joins when a story is political rather than financial or technical, as on Ep. 8, the Governor's letter.</p>
+                        <details><summary>Backstory</summary>
+                        <p>Kilgore, on the World's Richest Acre, where they packed so many derricks into one downtown block you could not walk between them. His father pushed tools for a small independent out of Gladewater and made good money three years out of ten. Then 1986: oil went to nine dollars, the outfit folded in eleven weeks, and Royce watched a man who had never been out of work open mail he could not pay. What stuck was not the bust. It was that the price collapsed in Vienna and Riyadh and everything that happened to his family afterward got decided in Austin and Washington by people who had never smelled a rig, and nobody in Kilgore had a single person in either building who owed them a phone call.</p>
+                        <p>Stephen F. Austin, government degree, no law degree, which he brings up with enormous pride. Answering phones in a state rep's district office for 14,000 dollars a year, a couch in South Austin, then committee staff, a producers' association, and in 1996 his own shingle, the Tatum Group: Royce and Deb Chalmers, who ran the office and was, by his own account, the reason the firm worked. For fifteen years he was the shop you called to find out whether a bill was actually going to move, because his vote counts were never wrong. He would tell a client "you're gonna lose this one, save your money," and they paid him more for it.</p>
+                        <p>February 2021 reorganized him. He was in Austin when the grid failed and his sister sat in her house in Tyler for four days with a kerosene heater. Everything his clients cared about moved from the Railroad Commission to the PUC and ERCOT, and at 57 he learned a new building and a new acronym set, "the dumbest man in every room I walked into for about eighteen months." Sold the firm in 2022, walked when the earnout ran out, started The Back Bench six weeks later because he could not stand being quiet. Big man, hat off indoors every single time, reading glasses on a cord that embarrass him. Calls Andi "Miss Reyes" with theatrical formality, and there is a story behind that.</p>
+                        </details>
                     </div>
                 </div>
             </div>
