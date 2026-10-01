@@ -44,6 +44,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | ancillary_prices | "What do ancillary services pay?" "How much of a battery's revenue is AS?" | days (30), hourly, monthly_history, realtime (true; 15-minute real-time prices and scarcity intervals since RTC+B) |
 | binding_constraints | "What constraints bind near this node?" "Why do prices spike at X?" "Is this spread caused by congestion?" | lat/lng or settlement_point, radius_mi (25), days (30), limit (20) |
 | battery_performance | "What do batteries near X actually earn?" "How much revenue per MW-month?" "Energy vs AS split for batteries in LZ_SOUTH?" | lat/lng or settlement_point, radius_mi (50), limit (20) |
+| price_history | "How have prices at this node changed since 2020?" "Is the spread getting better?" "What is the seasonal pattern?" "What did Uri do to prices?" | lat/lng or settlement_point, months |
 | grid_news | "What's new on the Texas grid?" "Latest on Batch Zero / ERCOT large loads?" "Sources on the 765 kV build-out?" | query, since_days, limit (5), article_id for full text |
 | my_projects | "Rank my prospects" "What's in my Edna project?" "What places did I save?" | list, project (name or id), screen, use |
 | save_place | "Save this site" "Pin 1201 Main St as the Main Street option" | address or lat/lng, name, note |

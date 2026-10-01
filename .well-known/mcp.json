@@ -41,6 +41,7 @@
         "ancillary_prices",
         "binding_constraints",
         "battery_performance",
+        "price_history",
         "grid_news",
         "my_projects",
         "save_place",

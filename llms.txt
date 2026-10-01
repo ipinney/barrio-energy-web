@@ -67,6 +67,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/binding_constraints?lat=28.978&lng=-96.646&radius_mi=25&days=30"
 - battery_performance: realized battery revenue from ERCOT 60-day disclosure (NP3-966-ER). Energy and AS revenue, $/MW-month, cycles/day per ESR resource near a site. Free: counts and area averages. Pro: per-battery breakdown.
   curl "https://grid.barrioenergy.com/v1/battery_performance?lat=28.978&lng=-96.646&radius_mi=50&limit=10"
+- price_history: monthly day-ahead price history for a settlement point or the nearest node to a location, back to 2020: average, TB4/TB2 spreads, max, negative hours, hours over $100/$1,000. Free: last 12 months. Pro: full history, year-over-year, annual and seasonality tables.
+  curl "https://grid.barrioenergy.com/v1/price_history?settlement_point=HB_HOUSTON"
 - grid_news: latest or keyword-matched articles from The Grid Report (Texas grid, ERCOT, Batch Zero, large loads, transmission). Full text with article_id. Unmetered.
   curl "https://grid.barrioenergy.com/v1/grid_news?query=batch%20zero&limit=5"
 - my_projects: the signed-in user's places from the map in three lists (Properties, Prospects, Saved places): sites, tracts and routes imported from KMZ/KML/GeoJSON, points saved on the map, and lists synced from the user's own systems. Lists them (list= to narrow), or reads one project (name, type, point, acres, folder, note, details); screen=true (Pro) runs site_screen on up to 25 features and ranks them. MCP only; needs an account-linked connection. Private to the user.
