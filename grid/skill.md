@@ -19,12 +19,12 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 |---|---|---|
 | grid_context | "What power is near this site?" "Who is the utility?" "Is there a railroad between the site and the substation?" | address or lat/lng, radius_mi (5), to_lat/to_lng (optional crossing target) |
 | nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
-| find_powered_land | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
+| find_powered_land (Enterprise; free and Pro get counts) | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
 | ercot_queue | "What solar/battery projects are queued near here?" "What generation is queued at this substation?" | county, poi, fuel (SOL, WIN, GAS, etc.), or address/lat/lng + radius_mi (10) |
 | battery_queue | "How crowded is this substation with batteries?" "Which storage projects near X have an IA?" | county, poi, or address/lat/lng + radius_mi; min_mw, status (all, active, ia, energized) |
 | power_plants | "How much battery storage is already operating near X?" "What plants are near this site, and are any retiring?" | county or address/lat/lng + radius_mi; kind (storage, solar, wind, gas, coal, nuclear, hydro, other), status (operating, planned, all), min_mw |
 | parcel_owner | "Who owns the land by the Hillje substation?" "Who owns this address?" (owner name and mailing address are Enterprise; Free and Pro get property ID and legal description) | address, lat/lng, substation name, or prop_id + county |
-| jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" "Is this in an opportunity zone?" | address or lat/lng |
+| jurisdiction | "Is this inside city limits or an ETJ?" "Which school district / groundwater district?" "Is this in an opportunity zone?" "Is it in a floodplain?" "Are there wetlands or endangered species habitat?" | address or lat/lng |
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" "Nearest compressor station or gas plant?" | address or lat/lng, radius_mi, gas_only, min_diameter_in |
 | fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
