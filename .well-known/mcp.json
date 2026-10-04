@@ -42,6 +42,7 @@
         "binding_constraints",
         "battery_performance",
         "price_history",
+        "battery_revenue_estimate",
         "grid_news",
         "my_projects",
         "save_place",
