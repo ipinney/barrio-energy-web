@@ -28,6 +28,7 @@
 <style>
 :root{--bg:#0a0a0f;--card:#14141c;--line:rgba(255,255,255,.08);--text:#e8e8ec;--muted:#9a9aaf;--accent:#22d3ee;--accent-ink:#06121a}
 *{box-sizing:border-box}
+img{max-width:100%}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
@@ -36,7 +37,7 @@ header.top a{color:var(--muted);text-decoration:none;font-size:.9rem}
 header.top a:hover{color:var(--accent)}
 .thanks{display:none;margin:8px 0 0;padding:14px 18px;border:1px solid rgba(34,197,94,.4);background:rgba(34,197,94,.08);border-radius:12px;color:#bbf7d0;font-size:.95rem}
 .hero{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:56px;align-items:center;padding:36px 0 56px}
-.cover{width:100%;border-radius:6px;box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px var(--line);display:block}
+.cover{width:100%;height:auto;aspect-ratio:800/1236;border-radius:6px;box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px var(--line);display:block}
 .kicker{font-family:'Space Grotesk',sans-serif;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;color:var(--accent);font-weight:600;margin:0 0 12px}
 h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;margin:0 0 12px;color:#fff;letter-spacing:-.01em}
 .sub{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;color:#d8d8dc;margin:0 0 6px;font-weight:500}
@@ -58,7 +59,7 @@ h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,6vw,4.2rem);lin
 section.block{padding:48px 0;border-top:1px solid var(--line)}
 h2{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:#fff;margin:0 0 22px}
 .inside{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.inside img{width:100%;border-radius:4px;box-shadow:0 0 0 1px var(--line);display:block;background:#fff}
+.inside img{width:100%;height:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line);display:block;background:#fff}
 .chapters{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;padding:0;margin:0}
 .chapters li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
 .chapters b{display:block;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:4px}
@@ -79,6 +80,13 @@ footer{padding:36px 0 60px;color:#6e6e82;font-size:.82rem;line-height:1.6;border
   .chapters{grid-template-columns:1fr}
   .details{grid-template-columns:repeat(2,1fr)}
   .btn{flex:1 1 auto}
+  .buy{gap:10px}
+  .buy .btn.primary{flex:1 1 calc(100% - 140px)}
+  .buy .btn.ghost{flex:1 1 100%}
+  h1{font-size:2.6rem}
+  .long{display:none}
+  .sub{font-size:1.15rem}
+  section.block{padding:36px 0}
 }
 </style>
 </head>
@@ -104,7 +112,7 @@ footer{padding:36px 0 60px;color:#6e6e82;font-size:.82rem;line-height:1.6;border
           <span id="q">1</span>
           <button type="button" id="plus" aria-label="One more">+</button>
         </div>
-        <button class="btn primary" id="order" type="button">Order hardcover &middot; $24.99</button>
+        <button class="btn primary" id="order" type="button">Order<span class="long">&nbsp;hardcover</span> &middot; $24.99</button>
         <a class="btn ghost" href="/books/assets/the-builders/the-builders.pdf" download>Read free (PDF)</a>
       </div>
       <p class="err" id="err">Checkout didn't open. Please try again in a moment.</p>
