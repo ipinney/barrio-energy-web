@@ -98,6 +98,11 @@
       "source": "/powered-land.html",
       "destination": "/digital-infrastructure",
       "permanent": true
+    },
+    {
+      "source": "/books",
+      "destination": "/books/the-builders",
+      "permanent": false
     }
   ],
   "crons": [
