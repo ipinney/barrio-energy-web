@@ -29,6 +29,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
 | site_screen | "Is this a good site for a data center / battery / generator?" (Enterprise; Free and Pro get the score) | address or lat/lng, use (data_center, battery, generation, industrial) |
+| report_pdf | "Make me a one-page PDF of this site." "Something I can send to a lender or landowner." (Pro; Enterprise adds flags, prices, gas, flood, parcel) | address or lat/lng, use | A link to a one-page PDF with a schematic substation map, valid 30 minutes. Give the link, say it expires, and do not post it publicly. |
 | search_grid | "Where is the Hillje substation?" "What does Formosa own?" "Find 21INR0258" (no coordinates needed) | query, kinds |
 | substation_detail | "Tell me about the Lolita substation" "What is interconnecting at Hillje?" (includes generation_queue_at_poi) | name (+ county) or address |
 | grid_projects | "What grid upgrades are coming near here?" "What is AEP building in Jackson County?" (Pro) | address/lat/lng + radius_mi, county, utility, kind, status, min_kv |
