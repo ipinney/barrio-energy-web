@@ -44,6 +44,7 @@
         "battery_performance",
         "price_history",
         "battery_revenue_estimate",
+        "solar_curtailment",
         "grid_news",
         "my_projects",
         "save_place",

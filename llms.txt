@@ -73,6 +73,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/price_history?settlement_point=HB_HOUSTON"
 - battery_revenue_estimate: screening gross revenue for a battery (mw, mwh, rte, cycles_per_day, as_share) at a settlement point or the nearest node to a location over the last 12 complete months: day-ahead energy arbitrage plus AS capacity. Free: annual total. Pro: monthly table and nearby-node comparison.
   curl "https://grid.barrioenergy.com/v1/battery_revenue_estimate?settlement_point=LZ_WEST&mw=100&mwh=400"
+- solar_curtailment: hourly solar output by ERCOT region and a system-wide curtailment estimate back to January 2024 (NP4-745-CD; curtailment is a proxy, available solar minus output over hours 10-17). Free: last 30 days system-wide percent and regional output shares. Pro: monthly history by region, hourly shape, worst hours, daily series.
+  curl "https://grid.barrioenergy.com/v1/solar_curtailment?region=FarWest"
 - grid_news: latest or keyword-matched articles from The Grid Report (Texas grid, ERCOT, Batch Zero, large loads, transmission). Full text with article_id. Unmetered.
   curl "https://grid.barrioenergy.com/v1/grid_news?query=batch%20zero&limit=5"
 - my_projects: the signed-in user's places from the map in three lists (Properties, Prospects, Saved places): sites, tracts and routes imported from KMZ/KML/GeoJSON, points saved on the map, and lists synced from the user's own systems. Lists them (list= to narrow), or reads one project (name, type, point, acres, folder, note, details); screen=true (Pro) runs site_screen on up to 25 features and ranks them. MCP only; needs an account-linked connection. Private to the user.
