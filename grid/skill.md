@@ -18,7 +18,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | Tool | Use when the user asks | Key inputs |
 |---|---|---|
 | grid_context | "What power is near this site?" "Who is the utility?" "Is there a railroad between the site and the substation?" | address or lat/lng, radius_mi (5), to_lat/to_lng (optional crossing target) |
-| nearest_substation | "How far is the nearest substation?" | address or lat/lng, min_kv (69), limit (5) |
+| nearest_substation | "How far is the nearest substation?" "Which nearby station has a distribution bus?" | address or lat/lng, min_kv (69), limit (5) |
 | find_powered_land (Enterprise; free and Pro get counts) | "Find land near a 138 kV substation in X county" "Who controls 200+ acres within a mile of a 138 kV sub?" (group_by_owner) "Only company-owned tracts" (owner_type) | county or address/lat/lng + radius_mi, min_acres (5), max_sub_mi (3), min_kv (138), owner_type, group_by_owner, min_total_acres (50), min_parcel_acres (5) |
 | ercot_queue | "What solar/battery projects are queued near here?" "What generation is queued at this substation?" | county, poi, fuel (SOL, WIN, GAS, etc.), or address/lat/lng + radius_mi (10) |
 | battery_queue | "How crowded is this substation with batteries?" "Which storage projects near X have an IA?" | county, poi, or address/lat/lng + radius_mi; min_mw, status (all, active, ia, energized) |
@@ -31,7 +31,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | site_screen | "Is this a good site for a data center / battery / generator?" (Enterprise; Free and Pro get the score) | address or lat/lng, use (data_center, battery, generation, industrial) |
 | report_pdf | "Make me a one-page PDF of this site." "Something I can send to a lender or landowner." (Pro; Enterprise adds flags, prices, gas, flood, parcel) | address or lat/lng, use | A link to a one-page PDF with a schematic substation map, valid 30 minutes. Give the link, say it expires, and do not post it publicly. |
 | search_grid | "Where is the Hillje substation?" "What does Formosa own?" "Find 21INR0258" (no coordinates needed) | query, kinds |
-| substation_detail | "Tell me about the Lolita substation" "What is interconnecting at Hillje?" (includes generation_queue_at_poi) | name (+ county) or address |
+| substation_detail | "Tell me about the Lolita substation" "What is the low side voltage at Normanna?" "What is interconnecting at Hillje?" (includes generation_queue_at_poi) | name (+ county) or address |
 | grid_projects | "What grid upgrades are coming near here?" "What is AEP building in Jackson County?" (Pro) | address/lat/lng + radius_mi, county, utility, kind, status, min_kv |
 | air_permits | "New data center air permits in Texas this year?" "Who filed for gas generation in Bexar County?" (Pro) | county or address, status, data_centers_only, new_facilities_only, since/days, company |
 | whats_new | "What's new around this site?" "Any new filings in Jackson County this month?" (Pro) | address or county, days |
@@ -60,7 +60,8 @@ Locations accept a street address, a Texas city ("Edna, TX") or county ("Goliad 
 - Lead with the answer: nearest substation, voltage, distance, utility.
 - A planned substation is not one you can reach: check `built` and `name_warnings`, and pass on a low `pin_confidence` with its `location_caveat`.
 - Pass on `undivided_interest`, a University Lands or public `owner_class`, and any `cad_city_limits.warning`; they decide whether land is buyable and who has jurisdiction.
-- `likely_utility` is an estimate from nearby substation owners; say so. If `likely_utility_basis.disagrees_with_station_owner` is true, pass the warning on. `station_class` on substation_detail is inferred; quote its evidence, not just the class.
+- `likely_utility` is an estimate from nearby substation owners; say so. If `likely_utility_basis.disagrees_with_station_owner` is true, pass the warning on. `station_class` on substation_detail uses the OpenStreetMap substation tag when the station is mapped (see `basis`), otherwise it is inferred; quote its evidence, not just the class.
+- High and low side voltage: read `osm.high_side_kv` and `osm.low_side_kv` on substation_detail, nearest_substation and grid_context. Loads under about 20 MW need a station with a distribution bus (low side about 35 kV or below, or `osm.osm_class` distribution); 69 kV and up is not a distribution bus. `osm_class: not_mapped` means unknown, not absent. OpenStreetMap is volunteer-mapped: say the bus must be confirmed with the utility. `osm_only_substations` (Pro) are stations mapped in OpenStreetMap but missing from the federal layer.
 - ETJ is an estimate from the statutory distance; tell the user to confirm with the city.
 - Pipeline diameter is nominal; line capacity and available takeaway are not public, the operator must confirm. pipelines_near also returns gas_infrastructure: processing plant capacity in MMcf/d, compressor horsepower, and EIA capacity projects matched by operator name (statewide, not by location).
 - fiber_near: say whether a route is gis_published (real cable path) or carrier_on_corridor (reported on a highway corridor; path inferred, distance approximate). No mapped route does not mean no fiber: many regional and utility networks are not mapped; name the fiber-to-premises providers and nearest facility instead. Lit capacity and pricing are not public; the carrier must confirm.
