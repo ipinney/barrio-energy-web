@@ -103,6 +103,11 @@
       "source": "/books",
       "destination": "/books/the-builders",
       "permanent": false
+    },
+    {
+      "source": "/st-rose",
+      "destination": "/srl",
+      "permanent": false
     }
   ],
   "crons": [
