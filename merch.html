@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merch | Barrio Energy</title>
-    <meta name="description" content="Barrio Energy merch. Printed to order in the US, paid over Lightning.">
+    <meta name="description" content="Barrio Energy merch. Printed to order in the US.">
     <meta property="og:title" content="Merch | Barrio Energy">
-    <meta property="og:description" content="Printed to order in the US, paid over Lightning.">
+    <meta property="og:description" content="Printed to order in the US.">
     <meta property="og:image" content="https://barrioenergy.com/images/merch/cati-front.jpg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>window.__blTs=Date.now();</script>
 <style>
-/* Merch — page-scoped, so the shared stylesheet stays untouched. */
+/* Merch: page-scoped, so the shared stylesheet stays untouched. */
 .merch-hero { padding: 160px 0 48px; }
 .merch-hero h1 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; }
 .merch-hero p { color: var(--color-text-muted); max-width: 56ch; margin-top: 14px; }
@@ -107,11 +107,11 @@
         <div class="container">
             <div class="merch-grid">
 
-                <article class="item">
+                <article class="item" data-product="cati">
                     <div class="item-media">
                         <picture>
-                            <source id="src0" srcset="images/merch/cati-front.webp" type="image/webp">
-                            <img id="img0" src="images/merch/cati-front.jpg"
+                            <source class="item-src" srcset="images/merch/cati-front.webp" type="image/webp">
+                            <img class="item-img" src="images/merch/cati-front.jpg"
                                  alt="Come and Take It shirt, front" width="1200" height="800">
                         </picture>
                         <div class="item-views" role="group" aria-label="Views">
@@ -140,15 +140,71 @@
                             <dt>Shipping</dt><dd>US only</dd>
                         </dl>
                         <div class="item-cta" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-                            <select id="buyColor" aria-label="Colour" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
+                            <select class="buy-color" aria-label="Colour" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
                                 <option>White</option><option>Black</option><option>Navy</option>
                             </select>
-                            <select id="buySize" aria-label="Size" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
+                            <select class="buy-size" aria-label="Size" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
                                 <option>S</option><option>M</option><option selected>L</option><option>XL</option><option>2XL</option><option>3XL</option>
                             </select>
-                            <button class="btn btn-primary" id="buyBtn" type="button">Buy now</button>
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
                         </div>
-                        <p class="item-note" id="buyNote">Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                        <p class="item-note buy-note">Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                    </div>
+                </article>
+
+                <article class="item" data-product="st-rose-skyline-mug">
+                    <div class="item-media">
+                        <img class="item-img" src="images/merch/st-rose-skyline-mug-front.svg"
+                             alt="St. Rose Church Skyline Mug, front" width="1200" height="800">
+                        <div class="item-views" role="group" aria-label="Views">
+                            <button class="view-btn" type="button" aria-pressed="true"
+                                    data-jpg="images/merch/st-rose-skyline-mug-front.svg"
+                                    data-alt="St. Rose Church Skyline Mug, front">Front</button>
+                            <button class="view-btn" type="button" aria-pressed="false"
+                                    data-jpg="images/merch/st-rose-skyline-mug-back.svg"
+                                    data-alt="St. Rose Church Skyline Mug, back">Back</button>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-name">St. Rose Church Skyline Mug</h2>
+                        <p class="item-blurb">A hand-drawn souvenir camp mug with the skyline of St. Rose of Lima church and school, Houston. Printed to order in the US.</p>
+                        <div class="item-price">$21.76<span>11 oz</span></div>
+                        <dl class="spec">
+                            <dt>Mug</dt><dd>11 oz white glossy ceramic, red inside and handle</dd>
+                            <dt>Shipping</dt><dd>US only</dd>
+                        </dl>
+                        <div class="item-cta">
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                        </div>
+                        <p class="item-note buy-note">Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                    </div>
+                </article>
+
+                <article class="item" data-product="srl-dads-club-mug">
+                    <div class="item-media">
+                        <img class="item-img" src="images/merch/srl-dads-club-mug-front.svg"
+                             alt="SRL Dads Club Mug, front" width="1200" height="800">
+                        <div class="item-views" role="group" aria-label="Views">
+                            <button class="view-btn" type="button" aria-pressed="true"
+                                    data-jpg="images/merch/srl-dads-club-mug-front.svg"
+                                    data-alt="SRL Dads Club Mug, front">Front</button>
+                            <button class="view-btn" type="button" aria-pressed="false"
+                                    data-jpg="images/merch/srl-dads-club-mug-back.svg"
+                                    data-alt="SRL Dads Club Mug, back">Back</button>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-name">SRL Dads Club Mug</h2>
+                        <p class="item-blurb">An SRL Dads Club camp mug with dad scenes (BBQ, a football toss, a piggyback ride) over the St. Rose church outline. Printed to order in the US.</p>
+                        <div class="item-price">$21.76<span>11 oz</span></div>
+                        <dl class="spec">
+                            <dt>Mug</dt><dd>11 oz white glossy ceramic, red inside and handle</dd>
+                            <dt>Shipping</dt><dd>US only</dd>
+                        </dl>
+                        <div class="item-cta">
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                        </div>
+                        <p class="item-note buy-note">Card, Apple Pay or Link through Stripe. US shipping included.</p>
                     </div>
                 </article>
 
@@ -157,8 +213,8 @@
 
         <div class="container">
             <div class="merch-foot">
-                <p><strong>How it works.</strong> Pick a size and colour, pay by card, and enter a US shipping address. Each shirt is printed after you order, so allow time for production on top of shipping.</p>
-                <p style="margin-top:10px;">Questions about an order &mdash;
+                <p><strong>How it works.</strong> Pick a size and colour where there is one, pay by card, and enter a US shipping address. Each item is printed after you order, so allow time for production on top of shipping.</p>
+                <p style="margin-top:10px;">Questions about an order:
                    <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a>.</p>
             </div>
         </div>
@@ -175,41 +231,40 @@
 
     <script src="js/main.js"></script>
     <script>
-    /* The card is in the HTML on purpose. It was built from a JS array first,
-       which left the grid empty in the served source - fine on a dashboard,
-       wrong on a marketing page where crawlers, social previews and anyone
-       without JS would all have seen an empty shop. With one item the array
-       bought nothing that hand-written markup does not. Script is only the
-       front/back toggle now, and the page is complete without it. */
+    /* Cards are plain HTML so crawlers and no-JS visitors see the full shop.
+       Each article carries data-product; scripts are scoped per article.
+       Articles without colour/size selects (mugs) send only the product. */
     (function () {
-      var views = document.querySelector(".item-views");
-      if (!views) return;
-      views.addEventListener("click", function (e) {
-        var b = e.target.closest(".view-btn");
-        if (!b) return;
-        var img = document.getElementById("img0"), src = document.getElementById("src0");
-        if (src) src.srcset = b.dataset.webp;
-        img.src = b.dataset.jpg;
-        img.alt = b.dataset.alt;
-        views.querySelectorAll(".view-btn").forEach(function (o) {
-          o.setAttribute("aria-pressed", String(o === b));
+      var ordered = /[?&]ordered=1/.test(location.search), first = true;
+      document.querySelectorAll("article.item[data-product]").forEach(function (card) {
+        var views = card.querySelector(".item-views");
+        if (views) views.addEventListener("click", function (e) {
+          var b = e.target.closest(".view-btn");
+          if (!b) return;
+          var img = card.querySelector(".item-img"), src = card.querySelector(".item-src");
+          if (src && b.dataset.webp) src.srcset = b.dataset.webp;
+          img.src = b.dataset.jpg;
+          img.alt = b.dataset.alt;
+          views.querySelectorAll(".view-btn").forEach(function (o) {
+            o.setAttribute("aria-pressed", String(o === b));
+          });
+        });
+        var btn = card.querySelector(".buy-btn"), note = card.querySelector(".buy-note");
+        if (!btn) return;
+        if (ordered && first && note) { note.innerHTML = '<strong>Order received.</strong> Check your email for the confirmation. Allow about a week for printing and delivery.'; }
+        first = false;
+        var color = card.querySelector(".buy-color"), size = card.querySelector(".buy-size");
+        btn.addEventListener("click", function () {
+          var body = { product: card.dataset.product };
+          if (color) body.color = color.value;
+          if (size) body.size = size.value;
+          btn.disabled = true; btn.textContent = 'Opening checkout...';
+          fetch('https://grid.barrioenergy.com/shop/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (j.url) location.href = j.url; else { note.textContent = j.error || 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; } })
+          .catch(function () { note.textContent = 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; });
         });
       });
-    })();
-    </script>
-
-    <script>
-    (function () {
-        var btn = document.getElementById('buyBtn'), note = document.getElementById('buyNote');
-        if (/[?&]ordered=1/.test(location.search)) { note.innerHTML = '<strong>Order received.</strong> Check your email for the confirmation. Allow about a week for printing and delivery.'; }
-        btn.addEventListener('click', function () {
-            btn.disabled = true; btn.textContent = 'Opening checkout...';
-            fetch('https://grid.barrioenergy.com/shop/checkout', { method: 'POST', headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({ color: document.getElementById('buyColor').value, size: document.getElementById('buySize').value }) })
-            .then(function (r) { return r.json(); })
-            .then(function (j) { if (j.url) location.href = j.url; else { note.textContent = j.error || 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; } })
-            .catch(function () { note.textContent = 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; });
-        });
     })();
     </script>
 <script defer src="/_vercel/insights/script.js"></script>
