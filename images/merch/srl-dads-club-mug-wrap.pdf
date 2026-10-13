@@ -6,7 +6,7 @@ endobj
 << /Type /Pages /Kids [3 0 R] /Count 1 >>
 endobj
 3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 1837.11 857.32] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 2475 1155] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>
 endobj
 4 0 obj
 << /Type /XObject /Subtype /Image /Width 2475 /Height 1155 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter [/ASCII85Decode /FlateDecode] /Length 182676 >>
@@ -2387,9 +2387,9 @@ zzzzzzzzzzzzzzzzzzzzzz!!'f)j(?6L~>
 endstream
 endobj
 5 0 obj
-<< /Length 37 >>
+<< /Length 32 >>
 stream
-q 1837.11 0 0 857.32 0 0 cm /Im0 Do Q
+q 2475 0 0 1155 0 0 cm /Im0 Do Q
 endstream
 endobj
 xref
@@ -2398,10 +2398,10 @@ xref
 0000000009 00000 n 
 0000000058 00000 n 
 0000000115 00000 n 
-0000000252 00000 n 
-0000183119 00000 n 
+0000000247 00000 n 
+0000183114 00000 n 
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-183206
+183196
 %%EOF
