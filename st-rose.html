@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Rose Merch | Barrio Energy</title>
+    <meta name="description" content="St. Rose of Lima merch: the Dad's Club Cardinal Polo and St. Rose mugs. All profits go to St. Rose Dad's Club activities.">
+    <link rel="canonical" href="https://www.barrioenergy.com/st-rose">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.barrioenergy.com/st-rose">
+    <meta property="og:title" content="St. Rose Merch | Barrio Energy">
+    <meta property="og:description" content="Dad's Club Cardinal Polo and St. Rose mugs, printed to order in the US. All profits go to St. Rose Dad's Club activities.">
+    <meta property="og:image" content="https://www.barrioenergy.com/images/merch/st-rose-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="St. Rose Merch | Barrio Energy">
+    <meta name="twitter:description" content="All profits go to St. Rose Dad's Club activities.">
+    <meta name="twitter:image" content="https://www.barrioenergy.com/images/merch/st-rose-og.jpg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>window.__blTs=Date.now();</script>
+<style>
+/* Merch: page-scoped, so the shared stylesheet stays untouched. */
+.merch-hero { padding: 160px 0 48px; }
+.merch-hero h1 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; }
+.merch-hero p { color: var(--color-text-muted); max-width: 56ch; margin-top: 14px; }
+
+.merch-section { margin: 32px 0 16px; font-family: "Space Grotesk", sans-serif; }
+.merch-profits { margin: 8px 0 0; }
+.merch-grid { display: grid; gap: 28px; padding-bottom: 40px; }
+@media (min-width: 900px) { .merch-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); } }
+
+.item {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+}
+.item-media { position: relative; background: #f4f4f6; }
+.item-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.item-views {
+    position: absolute; left: 12px; bottom: 12px;
+    display: flex; gap: 6px;
+}
+.view-btn {
+    font: 500 11.5px/1 var(--font-body);
+    letter-spacing: .04em; text-transform: uppercase;
+    padding: 7px 11px; border-radius: 99px; cursor: pointer;
+    background: rgba(10,10,15,.72); color: #e8e8ec;
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(6px);
+    transition: background var(--transition), color var(--transition);
+}
+.view-btn[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+
+.item-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.item-name { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; }
+.item-blurb { color: var(--color-text-muted); font-size: .935rem; margin-top: 8px; }
+
+.item-price { margin-top: 18px; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; }
+.item-price span { font-family: var(--font-body); font-size: .85rem; font-weight: 400; color: var(--color-text-muted); margin-left: 8px; }
+
+.spec { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: .875rem; }
+.spec dt { color: var(--color-text-muted); }
+.spec dd { color: var(--color-text); }
+
+.swatches { display: inline-flex; gap: 7px; align-items: center; margin-right: 10px; vertical-align: -3px; }
+.sw { width: 17px; height: 17px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28); }
+
+.item-cta { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.item-note { font-size: .8rem; color: var(--color-text-muted); margin-top: 14px; }
+
+.merch-foot {
+    border-top: 1px solid var(--color-border);
+    margin-top: 8px; padding: 30px 0 70px;
+    color: var(--color-text-muted); font-size: .9rem;
+}
+.merch-foot strong { color: var(--color-text); font-weight: 600; }
+</style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="logo-img">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="digital-infrastructure.html" class="nav-link">Digital Infrastructure</a>
+                <a href="energy-advisory.html" class="nav-link">Energy Advisory</a>
+                <a href="about.html" class="nav-link">Team</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="podcast.html" class="nav-link">Podcast</a>
+                <a href="merch.html" class="nav-link active">Merch</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="https://barrio-geointel.vercel.app/login" class="nav-link nav-login">Login</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="merch-hero">
+        <div class="container">
+            <h1>St. Rose Merch</h1>
+            <p>Shirts and mugs for St. Rose of Lima, Houston. Printed to order and shipped from the US.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <p class="merch-profits"><strong>All profits go to St. Rose Dad&rsquo;s Club activities.</strong></p>
+
+            <h2 class="merch-section" id="shirts">St. Rose shirts</h2>
+            <div class="merch-grid">
+
+                <!-- Dad's Club Cardinal Polo. Design 2-black-tonal (chosen 2026-10-13).
+                     To switch concept, rerun st-rose-page/build_images.py <design>; file names stay the same. -->
+                <article class="item" data-product="srl-polo">
+                    <div class="item-media">
+                        <picture>
+                            <source class="item-src" srcset="images/merch/st-rose-dads-club-polo-bright-red.webp" type="image/webp">
+                            <img class="item-img" src="images/merch/st-rose-dads-club-polo-bright-red.jpg"
+                                 alt="Dad's Club Cardinal Polo, Bright Red" width="1200" height="800">
+                        </picture>
+                        <div class="item-views" role="group" aria-label="Colours">
+                            <button class="view-btn" type="button" aria-pressed="true"
+                                    data-webp="images/merch/st-rose-dads-club-polo-bright-red.webp"
+                                    data-jpg="images/merch/st-rose-dads-club-polo-bright-red.jpg"
+                                    data-alt="Dad's Club Cardinal Polo, Bright Red">Bright Red</button>
+                            <button class="view-btn" type="button" aria-pressed="false"
+                                    data-webp="images/merch/st-rose-dads-club-polo-deep-red.webp"
+                                    data-jpg="images/merch/st-rose-dads-club-polo-deep-red.jpg"
+                                    data-alt="Dad's Club Cardinal Polo, Deep Red">Deep Red</button>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-name">Dad&rsquo;s Club Cardinal Polo</h2>
+                        <p class="item-blurb">A cardinal with DAD&rsquo;S CLUB underneath on the left chest. Embroidered in black and orange thread. Made to order in the US.</p>
+                        <div class="item-price">$31.99<span>Bright Red S&ndash;XL &middot; 2XL $33.99 &middot; 3XL $35.99</span></div>
+                        <dl class="spec">
+                            <dt>Colours</dt>
+                            <dd><span class="swatches">
+                                <i class="sw" style="background:#df0830" title="Bright Red"></i>
+                                <i class="sw" style="background:#af0029" title="Deep Red"></i>
+                            </span>Bright Red &middot; Deep Red</dd>
+                            <dt>Prices</dt><dd>Bright Red $31.99, 2XL $33.99, 3XL $35.99<br>Deep Red $32.99, 2XL $34.99, 3XL $36.99</dd>
+                            <dt>Sizes</dt><dd>S &middot; M &middot; L &middot; XL &middot; 2XL &middot; 3XL</dd>
+                            <dt>Shipping</dt><dd>US only</dd>
+                        </dl>
+                        <div class="item-cta" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                            <select class="buy-color" aria-label="Colour" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
+                                <option>Bright Red</option><option>Deep Red</option>
+                            </select>
+                            <select class="buy-size" aria-label="Size" style="background:#16161f;color:#e8e8ec;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px">
+                                <option>S</option><option>M</option><option selected>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                            </select>
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                        </div>
+                        <p class="item-note buy-note">All profits go to St. Rose Dad&rsquo;s Club activities. Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                    </div>
+                </article>
+
+                <!-- Add future St. Rose shirts here (see TEMPLATE at the bottom of the mugs grid). -->
+
+            </div>
+
+            <h2 class="merch-section" id="mugs">St. Rose mugs</h2>
+            <div class="merch-grid">
+
+                <article class="item" data-product="st-rose-skyline-mug">
+                    <div class="item-media">
+                        <img class="item-img" src="images/merch/st-rose-skyline-mug-front.svg"
+                             alt="St. Rose Church Skyline Mug, front" width="1200" height="800">
+                        <div class="item-views" role="group" aria-label="Views">
+                            <button class="view-btn" type="button" aria-pressed="true"
+                                    data-jpg="images/merch/st-rose-skyline-mug-front.svg"
+                                    data-alt="St. Rose Church Skyline Mug, front">Front</button>
+                            <button class="view-btn" type="button" aria-pressed="false"
+                                    data-jpg="images/merch/st-rose-skyline-mug-back.svg"
+                                    data-alt="St. Rose Church Skyline Mug, back">Back</button>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-name">St. Rose Church Skyline Mug</h2>
+                        <p class="item-blurb">A hand-drawn souvenir camp mug with the skyline of St. Rose of Lima church and school, Houston. Printed to order in the US.</p>
+                        <div class="item-price">$21.76<span>11 oz</span></div>
+                        <dl class="spec">
+                            <dt>Mug</dt><dd>11 oz white glossy ceramic, red inside and handle</dd>
+                            <dt>Shipping</dt><dd>US only</dd>
+                        </dl>
+                        <div class="item-cta">
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                        </div>
+                        <p class="item-note buy-note">Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                    </div>
+                </article>
+
+                <article class="item" data-product="srl-dads-club-mug">
+                    <div class="item-media">
+                        <img class="item-img" src="images/merch/srl-dads-club-mug-front.svg"
+                             alt="SRL Dads Club Mug, front" width="1200" height="800">
+                        <div class="item-views" role="group" aria-label="Views">
+                            <button class="view-btn" type="button" aria-pressed="true"
+                                    data-jpg="images/merch/srl-dads-club-mug-front.svg"
+                                    data-alt="SRL Dads Club Mug, front">Front</button>
+                            <button class="view-btn" type="button" aria-pressed="false"
+                                    data-jpg="images/merch/srl-dads-club-mug-back.svg"
+                                    data-alt="SRL Dads Club Mug, back">Back</button>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-name">SRL Dads Club Mug</h2>
+                        <p class="item-blurb">An SRL Dads Club camp mug with dad scenes (BBQ, a football toss, a piggyback ride) over the St. Rose church outline. Printed to order in the US.</p>
+                        <div class="item-price">$21.76<span>11 oz</span></div>
+                        <dl class="spec">
+                            <dt>Mug</dt><dd>11 oz white glossy ceramic, red inside and handle</dd>
+                            <dt>Shipping</dt><dd>US only</dd>
+                        </dl>
+                        <div class="item-cta">
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                        </div>
+                        <p class="item-note buy-note">Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                    </div>
+                </article>
+
+                <!-- TODO: more St. Rose mugs from Merch go here; same card as above (no colour/size selects). -->
+                <!-- TEMPLATE for a future St. Rose shirt. Copy into the "St. Rose shirts" grid, set data-product to the
+                     shop.js PRODUCTS slug, put images at images/merch/st-rose-<slug>-<colour>.jpg/.webp, list colours/sizes.
+                     Mugs and other one-variant items: drop the two selects (the script then posts only {product}).
+                <article class="item" data-product="SLUG">
+                    <div class="item-media">
+                        <picture>
+                            <source class="item-src" srcset="images/merch/st-rose-SLUG-COLOUR.webp" type="image/webp">
+                            <img class="item-img" src="images/merch/st-rose-SLUG-COLOUR.jpg" alt="NAME, COLOUR" width="1200" height="800">
+                        </picture>
+                        <div class="item-views" role="group" aria-label="Colours">
+                            <button class="view-btn" type="button" aria-pressed="true" data-webp="..." data-jpg="..." data-alt="NAME, COLOUR">COLOUR</button>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-name">NAME</h2>
+                        <p class="item-blurb">BLURB. Made to order in the US.</p>
+                        <div class="item-price">$PRICE<span>S&ndash;XL &middot; 2XL $X &middot; 3XL $Y</span></div>
+                        <dl class="spec"><dt>Sizes</dt><dd>S &middot; M &middot; L &middot; XL &middot; 2XL &middot; 3XL</dd><dt>Shipping</dt><dd>US only</dd></dl>
+                        <div class="item-cta" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                            <select class="buy-color" aria-label="Colour"><option>COLOUR</option></select>
+                            <select class="buy-size" aria-label="Size"><option>S</option><option>M</option><option selected>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>
+                            <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                        </div>
+                        <p class="item-note buy-note">All profits go to St. Rose Dad&rsquo;s Club activities. Card, Apple Pay or Link through Stripe. US shipping included.</p>
+                    </div>
+                </article>
+                -->
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="merch-foot">
+                <p><strong>How it works.</strong> Pick a size and colour where there is one, pay by card, and enter a US shipping address. Each item is printed after you order, so allow time for production on top of shipping.</p>
+                <p style="margin-top:10px;">More from Barrio Energy: <a href="/merch">all merch</a>. Questions about an order:
+                   <a href="mailto:info@barrioenergy.com">info@barrioenergy.com</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <img src="images/logo-transparent.png" alt="Barrio Energy" class="footer-logo">
+                <p>&copy; 2026 Barrio Energy. All rights reserved. <a href="/community">Community</a> &middot; <a href="/press">Press</a> &middot; <a href="/merch">Merch</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    /* Cards are plain HTML so crawlers and no-JS visitors see the full shop.
+       Each article carries data-product; scripts are scoped per article.
+       Articles without colour/size selects (mugs) send only the product. */
+    (function () {
+      var ordered = /[?&]ordered=1/.test(location.search), first = true;
+      document.querySelectorAll("article.item[data-product]").forEach(function (card) {
+        var views = card.querySelector(".item-views");
+        if (views) views.addEventListener("click", function (e) {
+          var b = e.target.closest(".view-btn");
+          if (!b) return;
+          var img = card.querySelector(".item-img"), src = card.querySelector(".item-src");
+          if (src && b.dataset.webp) src.srcset = b.dataset.webp;
+          img.src = b.dataset.jpg;
+          img.alt = b.dataset.alt;
+          views.querySelectorAll(".view-btn").forEach(function (o) {
+            o.setAttribute("aria-pressed", String(o === b));
+          });
+        });
+        var btn = card.querySelector(".buy-btn"), note = card.querySelector(".buy-note");
+        if (!btn) return;
+        if (ordered && first && note) { note.innerHTML = '<strong>Order received.</strong> Check your email for the confirmation. Allow about a week for printing and delivery.'; }
+        first = false;
+        var color = card.querySelector(".buy-color"), size = card.querySelector(".buy-size");
+        if (color && views) color.addEventListener("change", function () {
+          views.querySelectorAll(".view-btn").forEach(function (o) { if (o.textContent.trim() === color.value) o.click(); });
+        });
+        if (color && views) views.addEventListener("click", function (e) {
+          var b = e.target.closest(".view-btn");
+          if (b && Array.prototype.some.call(color.options, function (o) { return o.text === b.textContent.trim(); })) color.value = b.textContent.trim();
+        });
+        btn.addEventListener("click", function () {
+          var body = { product: card.dataset.product };
+          if (color) body.color = color.value;
+          if (size) body.size = size.value;
+          btn.disabled = true; btn.textContent = 'Opening checkout...';
+          fetch('https://grid.barrioenergy.com/shop/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (j.url) location.href = j.url; else { note.textContent = j.error || 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; } })
+          .catch(function () { note.textContent = 'Checkout failed. Email info@barrioenergy.com.'; btn.disabled = false; btn.textContent = 'Buy now'; });
+        });
+      });
+    })();
+    </script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
