@@ -1,0 +1,20 @@
+/* SRL beer-glass fundraising meter. Page-scoped; uses site vars with fallbacks. */
+.beer-meter{display:flex;align-items:center;gap:28px;margin:8px 0 28px;padding:22px 26px;
+ background:var(--color-bg-card,#14141b);border:1px solid var(--color-border,rgba(255,255,255,.1));border-radius:var(--radius,14px)}
+.beer-meter[hidden]{display:none}
+.beer-meter svg{flex:0 0 auto;width:150px;height:auto;overflow:visible}
+.beer-meter .bm-text{min-width:0}
+.beer-meter .bm-eyebrow{font:600 11.5px/1 var(--font-body,Inter,sans-serif);letter-spacing:.08em;text-transform:uppercase;color:var(--color-primary,#e5a823)}
+.beer-meter .bm-count{font-family:var(--font-heading,"Space Grotesk",sans-serif);font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.1;margin-top:8px;color:var(--color-text,#f2f2f5)}
+.beer-meter .bm-count b{color:#f2b632}
+.beer-meter .bm-sub{color:var(--color-text-muted,#9a9aa6);margin-top:6px;font-size:.95rem}
+.beer-meter .bm-bar{height:6px;border-radius:99px;background:rgba(127,127,140,.25);margin-top:14px;overflow:hidden;max-width:360px}
+.beer-meter .bm-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#f6c445,#e0901a);transition:width .8s ease}
+.beer-meter .bm-note{font-size:.78rem;color:var(--color-text-muted,#9a9aa6);margin-top:10px}
+.beer-meter.slosh svg .bm-glass{animation:bm-slosh .9s ease-out}
+@keyframes bm-slosh{0%{transform:rotate(0)}20%{transform:rotate(-5deg)}45%{transform:rotate(4deg)}70%{transform:rotate(-2deg)}100%{transform:rotate(0)}}
+.beer-meter svg .bm-glass{transform-origin:50% 100%;transform-box:fill-box}
+@media (max-width:560px){.beer-meter{flex-direction:column;text-align:center;gap:14px;padding:20px}.beer-meter .bm-bar{margin-inline:auto}.beer-meter svg{width:120px}}
+@media (prefers-reduced-motion:reduce){.beer-meter.slosh svg .bm-glass{animation:none}.beer-meter .bm-bar i{transition:none}}
+
+.beer-meter[hidden] { display: none !important; }
