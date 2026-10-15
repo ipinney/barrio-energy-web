@@ -43,6 +43,7 @@
         "binding_constraints",
         "battery_performance",
         "price_history",
+        "land_value",
         "battery_revenue_estimate",
         "solar_revenue_estimate",
         "solar_curtailment",

@@ -46,6 +46,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | binding_constraints | "What constraints bind near this node?" "Why do prices spike at X?" "Is this spread caused by congestion?" | lat/lng or settlement_point, radius_mi (25), days (30), limit (20) |
 | battery_performance | "What do batteries near X actually earn?" "How much revenue per MW-month?" "Energy vs AS split for batteries in LZ_SOUTH?" | lat/lng or settlement_point, radius_mi (50), limit (20) |
 | price_history | "How have prices at this node changed since 2020?" "Is the spread getting better?" "What is the seasonal pattern?" "What did Uri do to prices?" | lat/lng or settlement_point, months |
+| land_value | "What is land worth around this tract?" "What should I offer per acre?" "Land comps near X" (Enterprise) | lat/lng or address, radius_mi, min_acres, acres, listings |
 | battery_revenue_estimate | "What would a 100 MW / 400 MWh battery have earned here?" "Energy arbitrage vs AS?" "Which nearby node pays best?" | lat/lng or settlement_point, mw, mwh, rte, cycles_per_day, as_share |
 | solar_revenue_estimate | "How much would a 100 MW solar farm here make?" "Solar capture price near X?" "MWh per MW of solar in West Texas?" | address or lat/lng or settlement_point, mw_ac, dc_ac, tracking, losses_pct |
 | solar_curtailment | "How much solar gets curtailed in ERCOT?" "What is the midday solar shape in West Texas?" "Worst curtailment days?" | region, months |
