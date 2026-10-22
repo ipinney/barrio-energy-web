@@ -50,6 +50,9 @@
         "grid_news",
         "my_projects",
         "save_place",
+        "save_site",
+        "list_saved_sites",
+        "remove_saved_site",
         "upgrade_to_pro"
       ]
     }
