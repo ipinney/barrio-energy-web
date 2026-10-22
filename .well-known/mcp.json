@@ -53,6 +53,9 @@
         "save_site",
         "list_saved_sites",
         "remove_saved_site",
+        "set_price_alert",
+        "list_price_alerts",
+        "remove_price_alert",
         "upgrade_to_pro"
       ]
     }
