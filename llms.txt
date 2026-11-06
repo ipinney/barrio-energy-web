@@ -37,6 +37,8 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/pipelines_near?address=Edna,%20TX&radius_mi=5"
 - fiber_near: fiber near a site: routes by provider with distance and path basis (gis_published = provider GIS, carrier_on_corridor = highway corridor, path inferred), nearest carrier hotels/colo/data centers, FCC fiber-to-premises providers. Pro adds fiber count, placement, use, route and facility names, FTTP locations and speeds.
   curl "https://grid.barrioenergy.com/v1/fiber_near?address=Goliad,%20TX&radius_mi=10"
+- water_screen: groundwater near a site from TWDB well records: aquifers under the point, groundwater district, supply wells by depth band, yields (median, 75th percentile, weighted by test method), top wells, TDS and level trends per aquifer, wells needed for demand_mgd. Free: aquifers, district, counts. Pro: the rest.
+  curl "https://grid.barrioenergy.com/v1/water_screen?lat=33.58&lng=-101.85&radius_mi=5&demand_mgd=1"
 - industrial_neighbors: TCEQ emissions-inventory sites and recent air permit applications (data-center flag) near a site.
   curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
 - site_screen (Enterprise; Free, Pro and Enterprise Lite get the score, flag counts, county, load zone and nearest substation): one-call screen for use=data_center|battery|generation|solar|industrial: flags (including railroad crossings between the site and its substation; to_lat/to_lng tests another point) plus a 0-100 score with stated weights, and the parcel at the point with its owner and that owner's holdings within 5 miles.
