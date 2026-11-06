@@ -61,6 +61,13 @@
 .sw { width: 17px; height: 17px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28); }
 
 .item-cta { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.share-btn {
+    font: 500 .85rem/1 var(--font-body); padding: 10px 14px; border-radius: 8px; cursor: pointer;
+    background: transparent; color: #e8e8ec; border: 1px solid rgba(255,255,255,.18);
+    display: inline-flex; align-items: center; gap: 7px;
+}
+.share-btn:hover { border-color: rgba(255,255,255,.4); }
+.share-btn svg { width: 15px; height: 15px; }
 .item-note { font-size: .8rem; color: var(--color-text-muted); margin-top: 14px; }
 
 .merch-foot {
@@ -107,7 +114,7 @@
         <div class="container">
             <div class="merch-grid">
 
-                <article class="item" data-product="cati">
+                <article class="item" id="cati" data-product="cati" data-share="https://www.barrioenergy.com/merch/come-and-take-it" data-share-title="Come and Take It tee | Barrio Energy">
                     <div class="item-media">
                         <picture>
                             <source class="item-src" srcset="images/merch/cati-front.webp" type="image/webp">
@@ -147,6 +154,7 @@
                                 <option>S</option><option>M</option><option selected>L</option><option>XL</option><option>2XL</option><option>3XL</option>
                             </select>
                             <button class="btn btn-primary buy-btn" type="button">Buy now</button>
+                            <button class="share-btn" type="button" aria-label="Copy link to this shirt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span>Share</span></button>
                         </div>
                         <p class="item-note buy-note">Card, Apple Pay or Link through Stripe. US shipping included.</p>
                     </div>
@@ -201,6 +209,18 @@
           views.querySelectorAll(".view-btn").forEach(function (o) {
             o.setAttribute("aria-pressed", String(o === b));
           });
+        });
+        var share = card.querySelector(".share-btn");
+        if (share && card.dataset.share) share.addEventListener("click", function () {
+          var url = card.dataset.share, label = share.querySelector("span");
+          function done(t) { label.textContent = t; setTimeout(function () { label.textContent = "Share"; }, 2200); }
+          function fallback() {
+            if (navigator.share) { navigator.share({ title: card.dataset.shareTitle || document.title, url: url }).catch(function () {}); return; }
+            window.prompt("Copy this link:", url);
+          }
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).then(function () { done("Link copied"); }, fallback);
+          } else fallback();
         });
         var btn = card.querySelector(".buy-btn"), note = card.querySelector(".buy-note");
         if (!btn) return;
