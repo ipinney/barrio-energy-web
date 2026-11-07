@@ -41,6 +41,7 @@ Accounts, keys, Pro and the map: https://map.barrioenergy.com
   curl "https://grid.barrioenergy.com/v1/water_screen?lat=33.58&lng=-101.85&radius_mi=5&demand_mgd=1"
   Pro also returns district_rules: the groundwater district's exempt-well limits, permits, spacing, per-acre caps, export rules and fees with rule numbers and pages.
 - water_well_plan: proposed groundwater well at a point: formations ranked by grade, proposed depth and screen, expected yield (p25/p50/p75), TDS, depth to water, annual yield under the district per-acre cap, wells and acres of rights for demand_mgd, analog wells, leave-one-out check, graded buy areas nearby (A/B/C). Enterprise.
+- water_report: PDF water site report for a point (geology, formation ranking, nearest graded water areas, well panel with analogs, water quality, district rules with pages). Returns a 30-minute link. Enterprise.
 - industrial_neighbors: TCEQ emissions-inventory sites and recent air permit applications (data-center flag) near a site.
   curl "https://grid.barrioenergy.com/v1/industrial_neighbors?address=Victoria,%20TX&radius_mi=5"
 - site_screen (Enterprise; Free, Pro and Enterprise Lite get the score, flag counts, county, load zone and nearest substation): one-call screen for use=data_center|battery|generation|solar|industrial: flags (including railroad crossings between the site and its substation; to_lat/to_lng tests another point) plus a 0-100 score with stated weights, and the parcel at the point with its owner and that owner's holdings within 5 miles.
