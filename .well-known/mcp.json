@@ -22,6 +22,7 @@
         "pipelines_near",
         "fiber_near",
         "water_screen",
+        "water_well_plan",
         "industrial_neighbors",
         "site_screen",
         "report_pdf",
