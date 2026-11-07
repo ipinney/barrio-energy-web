@@ -29,6 +29,7 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | water_screen | "Is there water here?" "How deep are the wells?" "Can I get 1 MGD for cooling?" "Who regulates groundwater here?" "What are the district rules?" | address or lat/lng, radius_mi (5, max 15), demand_mgd or demand_gpm |
 | water_report | "Make me a water report for this site" | address or lat/lng, radius_mi, demand_mgd, acres |
+| water_cross_section | "Show me a geologic cross section through here" | from/to lat/lng, or address or lat/lng with bearing_deg and length_mi |
 | water_well_plan | "Where should I drill?" "Which formation?" "How much will a well make?" "How many acres of water rights for 1 MGD?" | address or lat/lng, radius_mi, demand_mgd or demand_gpm, acres |
 | industrial_neighbors | "Is this an industrial area?" "What air permits were filed nearby?" | address or lat/lng, radius_mi |
 | site_screen | "Is this a good site for a data center / battery / generator?" (flags and weights are Enterprise; Free, Pro and Enterprise Lite get the score) | address or lat/lng, use (data_center, battery, generation, solar, industrial) |
