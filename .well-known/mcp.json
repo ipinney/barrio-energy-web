@@ -21,6 +21,8 @@
         "jurisdiction",
         "pipelines_near",
         "fiber_near",
+        "logistics_screen",
+        "heavy_haul",
         "water_screen",
         "water_well_plan",
         "water_report",
