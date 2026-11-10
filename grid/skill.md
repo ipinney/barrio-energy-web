@@ -28,6 +28,8 @@ Texas grid siting data from Barrio Energy. Screening data only; tell the user to
 | pipelines_near | "Is there gas near this site?" "Who operates the pipelines here?" "Nearest compressor station or gas plant?" "Interstate or intrastate gas near here?" (interstate filter, Pro) | address or lat/lng, radius_mi, gas_only, min_diameter_in, interstate |
 | fiber_near | "Is there fiber near this site?" "Who are the carriers here?" "How far to a carrier hotel?" | address or lat/lng, radius_mi (5, max 25), limit |
 | logistics_screen | "How do we get equipment and crews here?" "How far to rail, a port, an airport?" "What is the traffic on the nearest highway?" | address or lat/lng |
+| crew_access | "How many construction workers live within an hour?" "Where would a crew stay?" (Enterprise) | address or lat/lng |
+| logistics_report | "Make me a logistics report for this site" (Enterprise) | address or lat/lng; origin; weight_tons; height_ft |
 | haul_compare | "Is it cheaper to rail this in or truck it?" "How do we get 300 tons of steel here from Beaumont?" (Enterprise) | address or lat/lng; origin (nearest_port or a town); weight_tons |
 | heavy_haul | "How do we haul a 200-ton transformer in from the port?" "Any bad bridges between Houston and this site?" (Enterprise) | address or lat/lng; origin (nearest_port, nearest_intermodal, nearest_transload or a town); weight_tons, height_ft, width_ft, length_ft |
 | water_screen | "Is there water here?" "How deep are the wells?" "Can I get 1 MGD for cooling?" "Who regulates groundwater here?" "What are the district rules?" | address or lat/lng, radius_mi (5, max 15), demand_mgd or demand_gpm |

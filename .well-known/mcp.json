@@ -22,6 +22,8 @@
         "pipelines_near",
         "fiber_near",
         "logistics_screen",
+        "crew_access",
+        "logistics_report",
         "haul_compare",
         "heavy_haul",
         "water_screen",
