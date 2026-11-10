@@ -22,6 +22,7 @@
         "pipelines_near",
         "fiber_near",
         "logistics_screen",
+        "haul_compare",
         "heavy_haul",
         "water_screen",
         "water_well_plan",
